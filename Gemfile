@@ -63,5 +63,6 @@ group :test do
   gem "selenium-webdriver"
 end
 
-gem "falcon"
 gem "activerecord-postgres_pub_sub"
+gem "devise"
+gem "falcon"

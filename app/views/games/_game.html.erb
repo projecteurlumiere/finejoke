@@ -1,0 +1,41 @@
+<%= tag.div id: dom_id(game),
+            data: { 
+              id: game.id, 
+              controller: "game" 
+            } do %>
+  <p>
+    <strong>Max players:</strong>
+    <%= game.max_players %>
+  </p>
+
+  <p>
+    <strong>Max rounds:</strong>
+    <%= game.max_rounds %>
+  </p>
+
+  <p>
+    <strong>Max round time:</strong>
+    <%= game.max_round_time %>
+  </p>
+
+  <p>
+    <strong>Max points:</strong>
+    <%= game.max_points %>
+  </p>
+
+  <p>
+    <strong>Started:</strong>
+    <%= game.started %>
+  </p>
+
+  <p>
+    <strong>Ended:</strong>
+    <%= game.ended %>
+  </p>
+
+  <ul>
+    <% game.users.each do |player| %>
+      <li><%= player.id %></li>
+    <% end %>
+  </ul>
+<% end %>

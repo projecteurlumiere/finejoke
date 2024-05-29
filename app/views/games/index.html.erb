@@ -1,0 +1,9 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Games</h1>
+
+<%= turbo_stream_from "lobby" %>
+
+<%= render partial: "list", locals: { games: @games } %>
+
+<%= link_to "New game", new_game_path %>

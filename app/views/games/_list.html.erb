@@ -1,0 +1,8 @@
+<%# data controller should be disabled for unlogged users %>
+<div id="games" data-controller="<%= "lobby" if true %>">
+  <% games.each do |game| %>
+    <h2>
+      <%= link_to game.name, game %>
+    </h2>
+  <% end %>
+</div>
