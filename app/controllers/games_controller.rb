@@ -9,8 +9,7 @@ class GamesController < ApplicationController
 
   # GET /games/1 or /games/1.json
   def show
-    render :show if current_user.host?
-    @game.users << current_user
+    join_game unless current_user.host?
   end
 
   # GET /games/new
@@ -77,6 +76,12 @@ class GamesController < ApplicationController
       current_user.host = true
       @game.users << current_user
       current_user.save && @game.save
+    end
+  end
+
+  def join_game
+    ActiveRecord::Base.transaction do
+      @game.users << current_user
     end
   end
 end

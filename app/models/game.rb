@@ -5,4 +5,5 @@ class Game < ApplicationRecord
   # after_create -> { broadcast_replace_to "lobby", partial: "games/list", locals: { games: Game.all }, target: "games" }
 
   broadcasts_to ->(entry) { "lobby" }, inserts_by: :prepend, partial: "games/entry"
+  broadcasts_to ->(game) { ["game", game] }, inserts_by: :replace, partial: "games/game"
 end
