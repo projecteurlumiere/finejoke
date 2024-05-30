@@ -29,7 +29,7 @@ class GamesController < ApplicationController
     @game = Game.new(game_params)
 
     respond_to do |format|
-      if create_game 
+      if create_game
         ActionCable.server.broadcast "lobby", "game created"
         format.html { redirect_to game_url(@game), notice: "Game was successfully created." }
         format.json { render :show, status: :created, location: @game }

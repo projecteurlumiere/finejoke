@@ -1,10 +1,10 @@
 import { Controller } from "@hotwired/stimulus"
-import consumer from "channels/consumer"
+import { cable } from "@hotwired/turbo-rails"
 
 export default class extends Controller {
-  initialize() {
+  async initialize() {
     console.log("initialized")
-    this.channel = consumer.subscriptions.create({ 
+      this.channel = (await cable.getConsumer()).subscriptions.create({ 
         channel: "GameChannel",
         game: this.element.dataset.id
       }, {
