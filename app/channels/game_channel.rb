@@ -1,10 +1,10 @@
 class GameChannel < ApplicationCable::Channel
   def subscribed
-    current_game ? stream_for(current_game) : reject
+    current_game.nil? ? reject : stream_for(current_game)
   end
 
   def unsubscribed
-    if current_user.host?
+    if current_user.reload.host?
       current_game&.destroy
       current_user.update_attribute(:host, false)
     else

@@ -1,6 +1,6 @@
 class GamesController < ApplicationController
   include ActionView::RecordIdentifier
-  before_action :set_game, only: %i[ show edit update destroy ]
+  before_action :set_game, only: %i[ show update destroy ]
 
   # GET /games or /games.json
   def index
@@ -19,8 +19,8 @@ class GamesController < ApplicationController
   end
 
   # GET /games/1/edit
-  def edit
-  end
+  # def edit
+  # end
 
   # POST /games or /games.json
   def create
