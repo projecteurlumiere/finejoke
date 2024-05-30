@@ -11,8 +11,6 @@ class GamesController < ApplicationController
   def show
     render :show if current_user.host?
     @game.users << current_user
-    GameChannel.broadcast_to(@game, "someone joined")
-    # GameChannel.broadcast_to(@game, "hello")
   end
 
   # GET /games/new
@@ -30,7 +28,6 @@ class GamesController < ApplicationController
 
     respond_to do |format|
       if create_game
-        ActionCable.server.broadcast "lobby", "game created"
         format.html { redirect_to game_url(@game), notice: "Game was successfully created." }
         format.json { render :show, status: :created, location: @game }
       else

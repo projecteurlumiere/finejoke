@@ -4,6 +4,8 @@
 
 <%= turbo_stream_from "lobby", channel: LobbyChannel %>
 
-<%= render partial: "list", locals: { games: @games } %>
+<div id="games" data-controller="<%= "lobby" if true %>">
+  <%= render partial: "entry", collection: @games %>
+</div>
 
 <%= link_to "New game", new_game_path %>

@@ -14,20 +14,18 @@
 //   }
 // })
 
+// import { cable } from "@hotwired/turbo-rails"
 
+// (await cable.getConsumer()).subscriptions.create({ channel: "LobbyChannel" }, {
+//   connected() {
+//     // Called when the subscription is ready for use on the server
+//   },
 
-import { cable } from "@hotwired/turbo-rails"
+//   disconnected() {
+//     // Called when the subscription has been terminated by the server
+//   },
 
-(await cable.getConsumer()).subscriptions.create({ channel: "LobbyChannel" }, {
-  connected() {
-    // Called when the subscription is ready for use on the server
-  },
-
-  disconnected() {
-    // Called when the subscription has been terminated by the server
-  },
-
-  received(data) {
-    console.log("Lobby Channel says: " + data)
-  }
-})
+//   received(data) {
+//     console.log("Lobby Channel says: " + data)
+//   }
+// })
