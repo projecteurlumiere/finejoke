@@ -20,8 +20,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_29_090221) do
     t.integer "max_round_time"
     t.integer "max_points"
     t.string "name", null: false
-    t.boolean "started"
-    t.boolean "ended"
+    t.boolean "started", default: false
+    t.boolean "ended", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

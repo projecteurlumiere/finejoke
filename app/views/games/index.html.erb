@@ -4,7 +4,7 @@
 
 <%= turbo_stream_from "lobby", channel: LobbyChannel %>
 
-<div id="games" data-controller="<%= "lobby" if true %>">
+<div id="games">
   <%= render partial: "entry", collection: @games %>
 </div>
 

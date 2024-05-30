@@ -1,6 +1,6 @@
 class GameChannel < ApplicationCable::Channel
   def subscribed
-    current_game.nil? ? reject : stream_for(current_game)
+    current_game.present? ? stream_for(current_game) : reject
   end
 
   def unsubscribed
@@ -15,6 +15,6 @@ class GameChannel < ApplicationCable::Channel
   private
 
   def current_game
-    current_user.game
+    current_user.reload.game
   end
 end
