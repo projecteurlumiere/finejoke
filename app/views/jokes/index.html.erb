@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Jokes</h1>
+
+<div id="jokes">
+  <% @jokes.each do |joke| %>
+    <%= render joke %>
+    <p>
+      <%= link_to "Show this joke", joke %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New joke", new_joke_path %>

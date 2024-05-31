@@ -34,4 +34,8 @@
       <li><%= player.id %></li>
     <% end %>
   </ul>
+
+  <%= tag.turbo_frame(id: "current-round", src: (game_round_path(game, game.rounds.last) if game.started?)) do %>
+    <%= button_to("Start game", game_rounds_path(game), data: { turbo_frame: "current-round" }) unless game.started? %>
+  <% end %>
 <% end %>

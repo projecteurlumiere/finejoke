@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_29_090221) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_31_143754) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -26,6 +26,28 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_29_090221) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "jokes", force: :cascade do |t|
+    t.string "punchline"
+    t.string "text"
+    t.bigint "round_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["round_id"], name: "index_jokes_on_round_id"
+    t.index ["user_id"], name: "index_jokes_on_user_id"
+  end
+
+  create_table "rounds", force: :cascade do |t|
+    t.bigint "game_id", null: false
+    t.bigint "user_id", null: false
+    t.integer "stage", default: 0
+    t.string "setup"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_rounds_on_game_id"
+    t.index ["user_id"], name: "index_rounds_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -38,9 +60,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_29_090221) do
     t.boolean "online"
     t.boolean "host"
     t.boolean "lead"
+    t.boolean "was_lead"
     t.integer "current_points"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "jokes", "rounds"
+  add_foreign_key "jokes", "users"
+  add_foreign_key "rounds", "games"
+  add_foreign_key "rounds", "users"
 end

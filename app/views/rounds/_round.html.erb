@@ -1,0 +1,6 @@
+<%= round.setup if round.setup %>
+<%= form if defined? form %>
+<% round.jokes.each do |j| %>
+  <%= j.punchline %>
+  <%= hidden.to_s if defined? hidden  %>
+<% end %>

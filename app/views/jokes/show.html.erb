@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @joke %>
+
+<div>
+  <%= link_to "Edit this joke", edit_joke_path(@joke) %> |
+  <%= link_to "Back to jokes", jokes_path %>
+
+  <%= button_to "Destroy this joke", @joke, method: :delete %>
+</div>

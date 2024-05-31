@@ -6,6 +6,7 @@ class AddAttributesToUsers < ActiveRecord::Migration[7.1]
     add_column :users, :online, :boolean
     add_column :users, :host, :boolean
     add_column :users, :lead, :boolean # his/her turn
+    add_column :users, :was_lead, :boolean # his/her turn recently
     add_column :users, :current_points, :integer
   end
 end
