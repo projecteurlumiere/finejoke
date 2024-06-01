@@ -3,5 +3,6 @@
 <% round.jokes.each do |joke| %>
   <%= joke.punchline %>
   <%= hidden.to_s if defined? hidden  %>
-  <%= button_to "vote", game_round_joke_path(round.game, round, joke) if defined? vote %>
+  <%= button_to "vote", game_round_joke_path(round.game, round, joke), method: :patch if defined? vote %>
+  <%= joke.votes if joke.votes > 0 %>
 <% end %>

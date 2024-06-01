@@ -9,6 +9,6 @@ class AddAttributesToUsers < ActiveRecord::Migration[7.1]
     add_column :users, :was_lead, :boolean, default: false # his/her turn recently
     add_column :users, :finished_turn, :boolean, default: false
     add_column :users, :voted, :boolean, default: false
-    add_column :users, :current_points, :integer
+    add_column :users, :current_score, :integer, default: 0
   end
 end

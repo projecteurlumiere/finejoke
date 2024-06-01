@@ -38,9 +38,12 @@ class JokesController < ApplicationController
 
   # PATCH/PUT /jokes/1 or /jokes/1.json
   def update
+    @joke.increment(:votes)
+    current_user.update_attribute(:voted, true)
+
     respond_to do |format|
-      if @joke.update(joke_params)
-        format.html { redirect_to joke_url(@joke), notice: "Joke was successfully updated." }
+      if @joke.save
+        format.html { redirect_to game_round_url(@game, @round), notice: "Joke was successfully updated." }
         format.json { render :show, status: :ok, location: @joke }
       else
         format.html { render :edit, status: :unprocessable_entity }

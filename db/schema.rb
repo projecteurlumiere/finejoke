@@ -29,6 +29,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_31_143754) do
   create_table "jokes", force: :cascade do |t|
     t.string "punchline"
     t.string "text"
+    t.integer "votes", default: 0
     t.bigint "round_id"
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
@@ -63,7 +64,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_31_143754) do
     t.boolean "was_lead", default: false
     t.boolean "finished_turn", default: false
     t.boolean "voted", default: false
-    t.integer "current_points"
+    t.integer "current_score", default: 0
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

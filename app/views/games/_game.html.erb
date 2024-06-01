@@ -31,7 +31,7 @@
 
   <ul>
     <% game.users.each do |player| %>
-      <li><%= player.id %></li>
+      <li><%= player.id %> and his score: <%= player.current_score %></li>
     <% end %>
   </ul>
 
