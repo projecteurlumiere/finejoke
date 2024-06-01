@@ -1,4 +1,4 @@
-<%= form_with(model: round) do |form| %>
+<%= form_with(model: round, url: game_rounds_path(game, round)) do |form| %>
   <% if round.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(round.errors.count, "error") %> prohibited this round from being saved:</h2>

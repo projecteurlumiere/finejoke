@@ -10,13 +10,13 @@ module RoundsHelper
     elsif round.punchline_stage?
       if current_user.lead?
         # state (masked)
-       { hidden: true }
+        { hidden: true }
       elsif current_user.finished_turn?
         # state (masked) but with joke form
-       { hidden: true, form: render(partial: "joke/form", locals: { joke: round.jokes.build }) }
+        { hidden: true }
       else
         # state (masked)
-       { hidden: true }
+        { hidden: true, form: render(partial: "jokes/form", locals: { joke: round.jokes.build }) }
       end 
     elsif round.vote_stage?
       if current_user.voted?

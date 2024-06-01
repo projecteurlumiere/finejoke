@@ -7,18 +7,28 @@ class Game < ApplicationRecord
   broadcasts_to ->(entry) { "lobby" }, inserts_by: :prepend, partial: "games/entry"
   broadcasts_to ->(game) { ["game", game] }, inserts_by: :replace, partial: "games/game"
 
+  def current_round
+    self.rounds.last
+  end
+
   def choose_lead
-    user = self.users.find_by(was_lead: false)
-    if user.nil?
+    lead = self.users.find_by(was_lead: false)
+    if lead.nil?
       reset_lead
-      user = self.users.find_by!(was_lead: false)
+      lead = self.users.find_by!(was_lead: false)
     end
 
-    user.update(lead: true, was_lead: true)
-    user
+    self.users.update_all(lead: false)
+    lead.set_lead
+
+    lead
   end
 
   def reset_lead
     self.users.update_all(was_lead: false)
+  end
+
+  def reset_turns
+    self.users.update_all(finished_turn: false)
   end
 end

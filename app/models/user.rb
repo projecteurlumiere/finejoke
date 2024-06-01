@@ -5,4 +5,18 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   belongs_to :game, optional: true
+
+  def set_lead
+    self.update(lead: true, was_lead: true)
+  end
+
+  def reset_game_attributes
+    self.update({ 
+      host: false,
+      lead: false,
+      finished_turn: false,
+      voted: false,
+      current_points: nil
+    })
+  end
 end

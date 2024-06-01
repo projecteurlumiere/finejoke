@@ -1,4 +1,6 @@
 class JokesController < ApplicationController
+  before_action :set_game, only: %i[ show edit create update destroy ]
+  before_action :set_round, only: %i[ show edit create update destroy ]
   before_action :set_joke, only: %i[ show edit update destroy ]
 
   # GET /jokes or /jokes.json
@@ -21,11 +23,11 @@ class JokesController < ApplicationController
 
   # POST /jokes or /jokes.json
   def create
-    @joke = Joke.new(joke_params)
-
+    @joke = @round.jokes.build(user_id: current_user.id)
+    
     respond_to do |format|
       if @joke.save
-        format.html { redirect_to joke_url(@joke), notice: "Joke was successfully created." }
+        format.html { redirect_to game_round_url(@game, @round), notice: "Joke was successfully created." }
         format.json { render :show, status: :created, location: @joke }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -59,6 +61,14 @@ class JokesController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def set_game
+      @game = Game.find(params[:game_id])
+    end
+
+    def set_round
+      @round = @game.rounds.find(params[:round_id])
+    end
+
     def set_joke
       @joke = Joke.find(params[:id])
     end

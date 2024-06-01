@@ -22,7 +22,8 @@ class RoundsController < ApplicationController
 
   # POST /rounds or /rounds.json
   def create
-    @round = @game.rounds.build(user_id: @game.choose_lead.id)
+    @round = @game.rounds.build
+    @round.choose_lead
 
     respond_to do |format|
       if @round.save
@@ -40,7 +41,6 @@ class RoundsController < ApplicationController
   def update
     respond_to do |format|
       if @round.update(round_params)
-        @round.punchline_stage!
 
         format.html { redirect_to game_round_url(@game, @round), notice: "Round was successfully updated." }
         format.json { render :show, status: :ok, location: @round }

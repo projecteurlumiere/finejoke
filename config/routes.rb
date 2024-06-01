@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-  resources :jokes
   resources :games, except: %i[edit] do
-    resources :rounds
+    resources :rounds do 
+      resources :jokes
+    end
   end
   
   devise_for :users

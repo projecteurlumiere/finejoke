@@ -17,6 +17,8 @@ class GameChannel < ApplicationCable::Channel
       game.reload.users.delete(current_user)
       game.reload.touch
     end
+
+    current_user.reset_game_attributes
   end
 
   private
