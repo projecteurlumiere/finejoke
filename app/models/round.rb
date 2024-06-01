@@ -8,7 +8,8 @@ class Round < ApplicationRecord
 
   after_create :reset_turns
   after_update :move_to_punchline, if: %i[setup_stage? setup?]
-  after_update :move_to_vote, if: %i[punchline_stage? turns_finished?]
+  after_touch :move_to_vote, if: %i[punchline_stage? turns_finished?]
+  after_touch ->{ self.game.touch }
 
   def reset_turns
     self.game.reset_turns
