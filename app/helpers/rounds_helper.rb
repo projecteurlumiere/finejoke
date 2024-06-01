@@ -26,8 +26,8 @@ module RoundsHelper
         # state with vote buttons
        { vote: true }
       end
-    else
-     nil
+    elsif round.results_stage?
+      nil
     end
 
     round_partial(round, locals)

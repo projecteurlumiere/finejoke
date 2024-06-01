@@ -23,10 +23,9 @@ class RoundsController < ApplicationController
   # POST /rounds or /rounds.json
   def create
     @round = @game.rounds.build
-    @round.choose_lead
 
     respond_to do |format|
-      if @round.save
+      if @round.save(validate: false)
         @game.update_attribute(:started, true)
         format.html { redirect_to game_round_url(@game, @round), notice: "Round was successfully created." }
         format.json { render :show, status: :created, location: @round }

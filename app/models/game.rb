@@ -28,7 +28,12 @@ class Game < ApplicationRecord
     self.users.update_all(was_lead: false)
   end
 
-  def reset_turns
-    self.users.update_all(finished_turn: false)
+  def reset_players
+    self.users.update_all(
+      finished_turn: false,
+      lead: false,
+      finished_turn: false,
+      voted: false
+    )
   end
 end

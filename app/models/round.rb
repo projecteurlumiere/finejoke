@@ -6,14 +6,14 @@ class Round < ApplicationRecord
 
   enum stage: %i[setup punchline vote results], _suffix: true
 
-  after_create :reset_turns
+  before_create :reset_players, :choose_lead
   after_update :move_to_punchline, if: %i[setup_stage? setup?]
   after_touch :move_to_vote, if: %i[punchline_stage? turns_finished?]
   after_touch :count_votes, :move_to_results, if: %i[vote_stage? votes_finished?]
   after_touch -> { self.game.touch }
 
-  def reset_turns
-    self.game.reset_turns
+  def reset_players
+    self.game.reset_players
   end
 
   def choose_lead 
@@ -41,6 +41,7 @@ class Round < ApplicationRecord
 
   def move_to_results
     self.results_stage!
+    CreateNewRoundJob.set(wait: 1.second).perform_later(self.game)
   end
 
   def punchline_over?

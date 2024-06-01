@@ -16,7 +16,7 @@ class User < ApplicationRecord
       lead: false,
       finished_turn: false,
       voted: false,
-      current_points: nil
+      current_score: 0
     })
   end
 end
