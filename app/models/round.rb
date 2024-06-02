@@ -11,13 +11,17 @@ class Round < ApplicationRecord
   # tidying up and choosing lead player:
   before_create :reset_players, :choose_lead
   before_create :set_last, if: :max_rounds_achieved?
-   after_create -> { game.touch }
+   after_create :schedule_next_stage
+   after_create -> { touch }
   # when lead updated round with setup:
+   before_update :random_setup, if: %i[punchline_stage?], unless: %i[setup?]
    after_update :move_to_punchline, if: %i[setup_stage? setup?]
+   after_update -> { touch }
   # called every time joke is created:
     after_touch :move_to_vote, if: %i[punchline_stage? turns_finished?]
     after_touch :count_votes, :move_to_results, if: %i[vote_stage? votes_finished?]
     after_touch :schedule_next_round, if: :results_stage?, unless: :last?
+    after_touch :schedule_next_stage, unless: %i[results_stage? last?]
     after_touch -> { game.touch }
 
   def reset_players
@@ -38,10 +42,13 @@ class Round < ApplicationRecord
     self.last = true
   end
 
+  def random_setup
+    self.setup = "i am a random setup to be implemented later"
+  end
+
   def move_to_punchline
     user.update_attribute(:finished_turn, true)
     punchline_stage!
-    game.touch
   end
 
   def move_to_vote
@@ -69,8 +76,28 @@ class Round < ApplicationRecord
     results_stage!
   end
 
+  def schedule_next_stage
+    RoundToNextStageJob.set(wait: game.max_round_time.seconds).perform_later(id, stage)
+  end
+
+  def next_stage!
+    self.update(stage: Round.stages[stage] + 1)
+  end
+
   def schedule_next_round
     CreateNewRoundJob.set(wait: 1.second).perform_later(game)
+  end
+
+  def current?
+    game.current_round.id == id
+  end
+
+  def passed?
+    !current?
+  end
+
+  def last_stage?
+    stage == Round.stages.length
   end
 
   def turns_finished?

@@ -5,8 +5,9 @@ class Game < ApplicationRecord
   validates :name, presence: true, length: { in: 1..30 }
   validates :max_players, numericality: { only_integer: true },
                           comparison: { greater_than_or_equal_to: 3, less_than_or_equal_to: 10 }
+  # max round time must be at least 30 in prod 
   validates :max_round_time, numericality: { only_integer: true },
-                             comparison: { greater_than_or_equal_to: 30, less_than_or_equal_to: 180 }
+                             comparison: { greater_than_or_equal_to: 1, less_than_or_equal_to: 180 }
   validates :max_rounds, numericality: { only_integer: true }, comparison: { greater_than_or_equal_to: 1 },
                          if: :max_rounds, allow_nil: true
   validates :max_points, numericality: { only_integer: true },
