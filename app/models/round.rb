@@ -1,16 +1,18 @@
 class Round < ApplicationRecord
   belongs_to :game
-  belongs_to :user
+
+  belongs_to :user, optional: true
+   validates :user_id, presence: true, unless: :new_record?
   
-  has_many :jokes, dependent: :nullify
+    has_many :jokes, dependent: :nullify
 
   enum stage: %i[setup punchline vote results], _suffix: true
 
   before_create :reset_players, :choose_lead
-  after_update :move_to_punchline, if: %i[setup_stage? setup?]
-  after_touch :move_to_vote, if: %i[punchline_stage? turns_finished?]
-  after_touch :count_votes, :move_to_results, if: %i[vote_stage? votes_finished?]
-  after_touch -> { self.game.touch }
+   after_update :move_to_punchline, if: %i[setup_stage? setup?]
+    after_touch :move_to_vote, if: %i[punchline_stage? turns_finished?]
+    after_touch :count_votes, :move_to_results, if: %i[vote_stage? votes_finished?]
+    after_touch -> { self.game.touch }
 
   def reset_players
     self.game.reset_players

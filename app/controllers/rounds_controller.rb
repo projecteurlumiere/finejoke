@@ -1,62 +1,36 @@
 class RoundsController < ApplicationController
-  before_action :set_game, only: %i[ show edit create update destroy ]
-  before_action :set_round, only: %i[ show edit update destroy ]
+  before_action :set_game, only: %i[ show create update ]
+  before_action :set_round, only: %i[ show update ]
 
-  # GET /rounds or /rounds.json
-  def index
-    @rounds = Round.where(game_id: params[:game_id]).all
-  end
-
-  # GET /rounds/1 or /rounds/1.json
+  # GET /rounds/1
+  # shows round (for current round mainly)
   def show
   end
 
-  # GET /rounds/new
-  def new
-    @round = Round.new
-  end
-
-  # GET /rounds/1/edit
-  def edit
-  end
-
-  # POST /rounds or /rounds.json
+  # POST /rounds
+  # creates round
   def create
     @round = @game.rounds.build
 
     respond_to do |format|
-      if @round.save(validate: false)
+      if @round.save
         @game.update_attribute(:started, true)
         format.html { redirect_to game_round_url(@game, @round), notice: "Round was successfully created." }
-        format.json { render :show, status: :created, location: @round }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @round.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # PATCH/PUT /rounds/1 or /rounds/1.json
+  # PATCH/PUT /rounds/1
+  # updates round with setup
   def update
     respond_to do |format|
       if @round.update(round_params)
-
         format.html { redirect_to game_round_url(@game, @round), notice: "Round was successfully updated." }
-        format.json { render :show, status: :ok, location: @round }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @round.errors, status: :unprocessable_entity }
+        format.html { head :unprocessable_entity }
       end
-    end
-  end
-
-  # DELETE /rounds/1 or /rounds/1.json
-  def destroy
-    @round.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to rounds_url, notice: "Round was successfully destroyed." }
-      format.json { head :no_content }
     end
   end
 

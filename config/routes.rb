@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :games, except: %i[edit] do
-    resources :rounds do 
-      resources :jokes
+    resources :rounds, only: %i[show create update] do
+      resources :jokes, only: %i[index show create update]
     end
   end
   

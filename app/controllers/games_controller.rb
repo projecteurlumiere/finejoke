@@ -1,50 +1,31 @@
 class GamesController < ApplicationController
   include ActionView::RecordIdentifier
-  before_action :set_game, only: %i[ show update destroy ]
+  before_action :set_game, only: %i[ show destroy ]
 
   # GET /games or /games.json
   def index
     @games = Game.all
   end
 
-  # GET /games/1 or /games/1.json
+  # joins game
   def show
     join_game unless current_user.host?
   end
 
-  # GET /games/new
+  # new game form
   def new
     @game = Game.new
   end
 
-  # GET /games/1/edit
-  # def edit
-  # end
-
-  # POST /games or /games.json
+  # creates game
   def create
     @game = Game.new(game_params)
 
     respond_to do |format|
       if create_game
         format.html { redirect_to game_url(@game), notice: "Game was successfully created." }
-        format.json { render :show, status: :created, location: @game }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @game.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /games/1 or /games/1.json
-  def update
-    respond_to do |format|
-      if @game.update(game_params)
-        format.html { redirect_to game_url(@game), notice: "Game was successfully updated." }
-        format.json { render :show, status: :ok, location: @game }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @game.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -55,7 +36,6 @@ class GamesController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to games_url, notice: "Game was successfully destroyed." }
-      format.json { head :no_content }
     end
   end
 
@@ -80,8 +60,6 @@ class GamesController < ApplicationController
   end
 
   def join_game
-    ActiveRecord::Base.transaction do
-      @game.users << current_user
-    end
+    @game.users << current_user
   end
 end

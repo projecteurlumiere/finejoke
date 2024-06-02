@@ -2,7 +2,7 @@ module RoundsHelper
   def render_round_state(round)
     locals = if round.setup_stage?
       if current_user.lead?
-        { hidden: true, form: render(partial: "rounds/form_lead", locals: { game: round.game, round: round }) }
+        { hidden: true, form: render(partial: "rounds/form", locals: { game: round.game, round: round }) }
       else
         # state (masked)
        { hidden: true }

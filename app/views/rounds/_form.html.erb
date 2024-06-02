@@ -1,4 +1,6 @@
-<%= form_with(model: round, url: game_rounds_path(game, round)) do |form| %>
+<h3>Write your setup</h3>
+
+<%= form_with(model: round, url: game_round_path(game, round), method: :patch) do |form| %>
   <% if round.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(round.errors.count, "error") %> prohibited this round from being saved:</h2>
@@ -10,6 +12,11 @@
       </ul>
     </div>
   <% end %>
+
+  <div>
+    <%= form.label :setup, style: "display: block" %>
+    <%= form.text_field :setup %>
+  </div>
 
   <div>
     <%= form.submit %>
