@@ -61,6 +61,10 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
+
+  gem "rspec-rails", "~> 6.1.0"
+  gem "falcon-capybara"
+  gem "async-io" # necessary to run falcon-capybara
 end
 
 gem "activerecord-postgres_pub_sub"
