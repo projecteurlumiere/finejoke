@@ -15,7 +15,7 @@ class Game < ApplicationRecord
     lead = self.users.find_by(was_lead: false)
     if lead.nil?
       reset_lead
-      lead = self.users.find_by!(was_lead: false)
+      lead = self.users.order("RANDOM()").find_by!(was_lead: false)
     end
 
     self.users.update_all(lead: false)
