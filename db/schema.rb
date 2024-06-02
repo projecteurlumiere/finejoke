@@ -41,6 +41,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_31_143754) do
   create_table "rounds", force: :cascade do |t|
     t.bigint "game_id", null: false
     t.bigint "user_id", null: false
+    t.boolean "last", default: false
     t.integer "stage", default: 0
     t.string "setup"
     t.datetime "created_at", null: false

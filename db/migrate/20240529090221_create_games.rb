@@ -1,11 +1,12 @@
 class CreateGames < ActiveRecord::Migration[7.1]
   def change
     create_table :games do |t|
-      t.integer :max_players
+      t.integer :max_players, null: false, default: 10
+      t.integer :max_round_time, null: false, default: 90 # in seconds
       t.integer :max_rounds
-      t.integer :max_round_time
       t.integer :max_points
       t.string  :name, null: false
+      t.integer :winner_id
       t.boolean :started, default: false
       t.boolean :ended, default: false
 

@@ -61,5 +61,6 @@ class GamesController < ApplicationController
 
   def join_game
     @game.users << current_user
+    current_user.reset_game_attributes
   end
 end
