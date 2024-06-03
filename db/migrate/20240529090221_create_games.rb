@@ -7,8 +7,7 @@ class CreateGames < ActiveRecord::Migration[7.1]
       t.integer :max_points
       t.string  :name, null: false
       t.integer :winner_id
-      t.boolean :started, default: false
-      t.boolean :ended, default: false
+      t.integer :status, null: false, default: 0 
 
       t.timestamps
     end

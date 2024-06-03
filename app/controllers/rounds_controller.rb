@@ -14,7 +14,6 @@ class RoundsController < ApplicationController
 
     respond_to do |format|
       if @round.save
-        @game.update_attribute(:started, true)
         format.html { redirect_to game_round_url(@game, @round), notice: "Round was successfully created." }
       else
         format.html { render :new, status: :unprocessable_entity }

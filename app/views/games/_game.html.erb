@@ -19,14 +19,9 @@
     <%= game.max_points %>
   </p>
 
-  <p>
-    <strong>Started:</strong>
-    <%= game.started %>
-  </p>
-
-  <p>
-    <strong>Ended:</strong>
-    <%= game.ended %>
+    <p>
+    <strong>Game status:</strong>
+    <%= game.status %>
   </p>
 
   <ul>
@@ -35,7 +30,7 @@
     <% end %>
   </ul>
 
-  <%= tag.turbo_frame(id: "current-round", src: (game_round_path(game, game.current_round) if game.started?)) do %>
-    <%= button_to("Start game", game_rounds_path(game), data: { turbo_frame: "current-round" }) unless game.started? %>
+  <%= tag.turbo_frame(id: "current-round", src: (game_round_path(game, game.current_round) if game.ongoing?)) do %>
+    <%= button_to("Start game", game_rounds_path(game), data: { turbo_frame: "current-round" }) if game.waiting? || game.on_halt? %>
   <% end %>
 <% end %>

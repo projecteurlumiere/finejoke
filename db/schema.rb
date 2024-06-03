@@ -15,13 +15,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_31_143754) do
   enable_extension "plpgsql"
 
   create_table "games", force: :cascade do |t|
-    t.integer "max_players"
+    t.integer "max_players", default: 10, null: false
+    t.integer "max_round_time", default: 90, null: false
     t.integer "max_rounds"
-    t.integer "max_round_time"
     t.integer "max_points"
     t.string "name", null: false
-    t.boolean "started", default: false
-    t.boolean "ended", default: false
+    t.integer "winner_id"
+    t.integer "status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -41,6 +41,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_31_143754) do
   create_table "rounds", force: :cascade do |t|
     t.bigint "game_id", null: false
     t.bigint "user_id", null: false
+    t.boolean "current", default: true
     t.boolean "last", default: false
     t.integer "stage", default: 0
     t.string "setup"

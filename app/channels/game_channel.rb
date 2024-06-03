@@ -14,8 +14,8 @@ class GameChannel < ApplicationCable::Channel
       current_user.update_attribute(:host, false)
     elsif current_game
       game = current_game 
-      game.reload.users.delete(current_user)
-      game.reload.touch
+      game.users.delete(current_user)
+      game.touch
     end
 
     current_user.reset_game_attributes

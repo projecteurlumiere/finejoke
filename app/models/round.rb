@@ -1,5 +1,5 @@
 class Round < ApplicationRecord
-  belongs_to :game
+  belongs_to :game, touch: true
 
   belongs_to :user, optional: true
    validates :user_id, presence: true, unless: :new_record?
@@ -11,18 +11,19 @@ class Round < ApplicationRecord
   # tidying up and choosing lead player:
   before_create :reset_players, :choose_lead
   before_create :set_last, if: :max_rounds_achieved?
+  before_create :decurrent_previous_round
    after_create :schedule_next_stage
-   after_create -> { touch }
+   # after_create -> { touch }
   # when lead updated round with setup:
    before_update :random_setup, if: %i[punchline_stage?], unless: %i[setup?]
    after_update :move_to_punchline, if: %i[setup_stage? setup?]
-   after_update -> { touch }
+   # after_update -> { touch }
   # called every time joke is created:
     after_touch :move_to_vote, if: %i[punchline_stage? turns_finished?]
     after_touch :count_votes, :move_to_results, if: %i[vote_stage? votes_finished?]
     after_touch :schedule_next_round, if: :results_stage?, unless: :last?
     after_touch :schedule_next_stage, unless: %i[results_stage? last?]
-    after_touch -> { game.touch }
+    # after_touch -> { game.touch }
 
   def reset_players
     game.reset_players
@@ -30,6 +31,10 @@ class Round < ApplicationRecord
 
   def choose_lead 
     self.user_id = game.choose_lead.id
+  end
+
+  def lead
+    user
   end
 
   def max_rounds_achieved?
@@ -40,6 +45,11 @@ class Round < ApplicationRecord
 
   def set_last
     self.last = true
+  end
+
+  def decurrent_previous_round
+    previous_round = game.rounds[-2]
+    previous_round.update_attribute(:current, false) if previous_round
   end
 
   def random_setup
