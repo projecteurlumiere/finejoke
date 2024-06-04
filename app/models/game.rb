@@ -24,6 +24,11 @@ class Game < ApplicationRecord
   broadcasts_to ->(_entry) { "lobby" }, inserts_by: :prepend, partial: "games/game_entry"
   broadcasts_to ->(game) { ["game", game] }, inserts_by: :replace, partial: "games/game"
 
+  def add_user(user)
+    user.reset_game_attributes
+    self.users << user unless users.include?(user) && joinable?
+  end
+
   def current_round
     rounds.find_by(current: true)
   end
@@ -64,6 +69,13 @@ class Game < ApplicationRecord
 
   def not_enough_players?
     users.count < 2 # min players
+  end
+
+  def joinable?(by: nil) # user
+    user = by
+    return false if users.count >= max_players
+
+    true
   end
 
   def skip_round

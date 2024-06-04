@@ -9,7 +9,7 @@ class GamesController < ApplicationController
 
   # joins game
   def show
-    join_game unless current_user.host?
+    redirect_to games_path, flash: { alert: "Game is not joinable" } unless @game.joinable?(by: current_user)
   end
 
   # new game form
@@ -54,13 +54,7 @@ class GamesController < ApplicationController
   def create_game
     ActiveRecord::Base.transaction do
       current_user.host = true
-      @game.users << current_user
-      current_user.save && @game.save
+      @game.users << current_user && current_user.save
     end
-  end
-
-  def join_game
-    @game.users << current_user
-    current_user.reset_game_attributes
   end
 end

@@ -1,6 +1,6 @@
 <p style="color: green"><%= notice %></p>
 
-<%= turbo_stream_from @game, channel: GameChannel %>
+<%= turbo_stream_from @game, channel: GameChannel, data: { id: @game.id } %>
 
 <%= render @game %>
 
