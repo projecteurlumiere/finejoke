@@ -2,3 +2,7 @@
 import "@hotwired/turbo-rails"
 import "channels"
 import "controllers"
+
+Turbo.StreamActions.redirect = function() {
+  Turbo.visit(this.target, { action: "replace" })
+}
