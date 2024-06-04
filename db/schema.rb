@@ -22,6 +22,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_31_143754) do
     t.string "name", null: false
     t.integer "winner_id"
     t.integer "status", default: 0, null: false
+    t.integer "n_rounds", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

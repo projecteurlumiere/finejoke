@@ -19,7 +19,12 @@
     <%= game.max_points %>
   </p>
 
-    <p>
+  <p>
+    <strong>Current round number:</strong>
+    <%= game.n_rounds == 0 ? "Not started" : game.n_rounds %>
+  </p>
+
+  <p>
     <strong>Game status:</strong>
     <%= game.status %>
   </p>

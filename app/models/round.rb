@@ -13,6 +13,7 @@ class Round < ApplicationRecord
   before_create :reset_players, :choose_lead
   before_create :set_last, if: :max_rounds_achieved?
   before_create :decurrent_previous_round
+   after_create -> { game.increment!(:n_rounds) }
    after_create :schedule_next_stage
    # after_create -> { touch }
   # when lead updated round with setup:
