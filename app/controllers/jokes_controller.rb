@@ -19,7 +19,10 @@ class JokesController < ApplicationController
       if @joke.save
         format.html { redirect_to game_round_url(@game, @round), notice: "Joke was successfully created." }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        flash.now[:alert] = "Joke was not created."
+        format.turbo_stream {
+          render partial: "shared/flash", status: :unprocessable_entity
+        }
       end
     end
   end
@@ -30,7 +33,10 @@ class JokesController < ApplicationController
       if @joke.register_vote(by: current_user)
         format.html { redirect_to game_round_url(@game, @round), notice: "Joke was successfully updated." }
       else
-        format.html { render :edit, status: :unprocessable_entity }
+        flash.now[:alert] = "Joke was not updated."
+        format.turbo_stream { 
+          render partial: "shared/flash", status: :unprocessable_entity 
+        }
       end
     end
   end

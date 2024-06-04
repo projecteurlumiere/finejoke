@@ -1,16 +1,20 @@
 <div id="flash">
   <% if flash[:notice] %>
-    <div class="message is-info level-item">
+    <div class="notice">
       <div class="message-body">
         <%= flash[:notice] %>
       </div>
     </div>
     <% end %>
   <% if flash[:alert] %>
-    <div class="message is-warning level-item">
+    <div class="alert">
       <div class="message-body">
         <%= flash[:alert] %>
       </div>
     </div>
   <% end %>
+  <style>
+    #flash .alert { color: red; }
+    #flash .notice { color: green; }
+  </style>
 </div>
