@@ -75,6 +75,7 @@ class Round < ApplicationRecord
     jokes.each do |joke|
       author = joke.user
       author.current_score += joke.votes
+      author.total_score += joke.votes
       author.save
       unless last?
         toggle(:last) if max_points_achieved?(author)
