@@ -8,12 +8,17 @@ class GameChannel < ApplicationCable::Channel
   end
 
   def unsubscribed
-    @game.reload
+    begin
+      @game.reload
+    rescue ActiveRecord::RecordNotFound
+      @game = nil
+    end
+
     @user.reload
 
-    if current_user.host?
+    if @user.host?
       @game.destroy
-    else
+    elsif @game
       @game.users.delete(@user)
       @game.touch
     end

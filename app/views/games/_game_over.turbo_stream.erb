@@ -1,0 +1,5 @@
+<%= turbo_stream.action(:replace, dom_id(game)) do %>
+  <h2>
+    <%= "Game ##{game.id} is over" %>
+  </h2>
+<% end %>

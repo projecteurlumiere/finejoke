@@ -22,7 +22,11 @@ class Game < ApplicationRecord
   after_touch :skip_round, if: %i[ongoing? lead_left?]
 
   broadcasts_to ->(_entry) { "lobby" }, inserts_by: :prepend, partial: "games/game_entry"
-  broadcasts_to ->(game) { ["game", game] }, inserts_by: :replace, partial: "games/game"
+  # broadcasts_to ->(game) { ["game", game] }, inserts_by: :replace, partial: "games/game"
+
+  after_create_commit -> { broadcast_prepend_later_to ["game", self] }
+  after_update_commit -> { broadcast_replace_later_to ["game", self] }
+  after_destroy_commit -> { broadcast_render_to(["game", self], partial: "games/game_over", locals: { game: self }) }
 
   def add_user(user)
     user.reset_game_attributes
