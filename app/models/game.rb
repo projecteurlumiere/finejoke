@@ -25,7 +25,7 @@ class Game < ApplicationRecord
   broadcasts_to ->(game) { ["game", game] }, inserts_by: :replace, partial: "games/game"
 
   def current_round
-    rounds.where(current: true).limit(1)
+    rounds.find_by(current: true)
   end
 
   def choose_lead

@@ -3,6 +3,7 @@ class Round < ApplicationRecord
 
   belongs_to :user, optional: true
    validates :user_id, presence: true, unless: :new_record?
+    validate :enough_players?
   
     has_many :jokes, dependent: :nullify
 
@@ -35,6 +36,10 @@ class Round < ApplicationRecord
 
   def lead
     user
+  end
+
+  def enough_players? 
+    errors.add(:game_id, "must have enought players") unless game.enough_players?
   end
 
   def max_rounds_achieved?
