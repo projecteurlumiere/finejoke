@@ -1,6 +1,7 @@
 class RoundsController < ApplicationController
   before_action :set_game, only: %i[ show create update ]
   before_action :set_round, only: %i[ show update ]
+  before_action :authorize_round!, only: %i[show update]
 
   # GET /rounds/1
   # shows round (for current round mainly)
@@ -11,7 +12,8 @@ class RoundsController < ApplicationController
   # creates round
   def create
     @round = @game.rounds.build
-
+    authorize_round!
+    
     respond_to do |format|
       if @round.save
         format.html { redirect_to game_round_url(@game, @round), notice: "Round was successfully created." }
@@ -38,17 +40,22 @@ class RoundsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_game
-      @game = Game.find(params[:game_id])
-    end
 
-    def set_round
-      @round = @game.rounds.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_game
+    @game = Game.find(params[:game_id])
+  end
 
-    # Only allow a list of trusted parameters through.
-    def round_params
-      params.require(:round).permit(:setup)
-    end
+  def set_round
+    @round = @game.rounds.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def round_params
+    params.require(:round).permit(:setup)
+  end
+
+  def authorize_round!
+    authorize(@round || Round)
+  end
 end

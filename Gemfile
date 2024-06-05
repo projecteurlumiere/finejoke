@@ -70,3 +70,4 @@ end
 gem "activerecord-postgres_pub_sub"
 gem "devise"
 gem "falcon"
+gem "pundit"
