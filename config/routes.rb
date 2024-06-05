@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
-  resources :games, except: %i[edit] do
+  resources :games, except: %i[update edit] do
     resources :rounds, only: %i[show create update] do
       resources :jokes, only: %i[index show create update]
     end
+    resources :messages, only: %i[create]
   end
   
   devise_for :users

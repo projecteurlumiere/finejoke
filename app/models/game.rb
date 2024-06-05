@@ -50,6 +50,10 @@ class Game < ApplicationRecord
     lead
   end
 
+  def broadcast_message(text, from:)
+    broadcast_render_later_to(["game", self], partial: "games/chat_message", locals: { user: from, text: text })
+  end
+
   def reset_lead
     users.update_all(was_lead: false)
   end

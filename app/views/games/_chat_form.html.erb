@@ -1,0 +1,10 @@
+<%= form_with(model: Message, url: game_messages_path(@game)) do |form| %>
+  <div>
+    <%= form.label :text, style: "display: block" %>
+    <%= form.text_field :text %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

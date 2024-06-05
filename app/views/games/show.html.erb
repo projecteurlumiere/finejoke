@@ -2,6 +2,10 @@
 
 <%= render @game %>
 
+<%= render partial: "chat" %>
+
+<%= render partial: "chat_form", locals: { game: @game } %>
+
 <div>
   <%= link_to "Back to games", games_path %>
 

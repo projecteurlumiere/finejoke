@@ -20,7 +20,11 @@ class GamePolicy < ApplicationPolicy
     @user
   end
 
+  def update?
+    @user && @game.users.include?(@user)
+  end
+
   def destroy?
-    @user&.host? && @game.users.include?(user)
+    @user&.host? && @game.users.include?(@user)
   end
 end

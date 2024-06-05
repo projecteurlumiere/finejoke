@@ -1,7 +1,7 @@
 class GamesController < ApplicationController
   include ActionView::RecordIdentifier
-  before_action :set_game, only: %i[ show destroy ]
-  before_action :authorize_game!, only: %i[index show destroy]
+  before_action :set_game, only: %i[ show update destroy ]
+  before_action :authorize_game!, only: %i[index show update destroy]
 
   # GET /games or /games.json
   def index
@@ -35,6 +35,12 @@ class GamesController < ApplicationController
     end
   end
 
+  # subimts chat message
+  def update
+    @game.broadcast_chat_message(from: current_user, message: chat_params[:message])
+    head :accepted
+  end
+
   # DELETE /games/1 or /games/1.json
   def destroy
     @game.destroy!
@@ -54,6 +60,10 @@ class GamesController < ApplicationController
   # Only allow a list of trusted parameters through.
   def game_params
     params.require(:game).permit(:name, :max_players, :max_rounds, :max_round_time, :max_points)
+  end
+
+  def chat_params
+    params.require(:game).permit(:message)
   end
 
   def create_game

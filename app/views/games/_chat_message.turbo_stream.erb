@@ -1,0 +1,10 @@
+<%= turbo_stream.action(:append, "chat") do %>
+  <div class="message">
+    <h4>
+      <%= user.id %>
+    </h4>
+    <p>
+      <%= text %>
+    </p>
+  </div>
+<% end %>
