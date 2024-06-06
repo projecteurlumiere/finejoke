@@ -5,7 +5,7 @@ class GamesController < ApplicationController
 
   # GET /games or /games.json
   def index
-    current_user.reset_game_attributes
+    current_user&.reset_game_attributes
     @games = Game.includes(:users).all
     clean_up_games
   end
