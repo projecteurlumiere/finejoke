@@ -69,5 +69,6 @@ end
 
 gem "activerecord-postgres_pub_sub"
 gem "devise"
+gem "devise-guests"
 gem "falcon"
 gem "pundit"

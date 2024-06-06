@@ -2,6 +2,7 @@
 
 class AddAttributesToUsers < ActiveRecord::Migration[7.1]
   def change
+    add_column :users, :username, :string
     add_column :users, :game_id, :integer
     add_column :users, :online, :boolean
     add_column :users, :host, :boolean, default: false

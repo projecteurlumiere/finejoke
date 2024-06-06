@@ -3,7 +3,7 @@ class MessagesController < ApplicationController
 
   # creates game
   def create
-    @message = Message.new(user: current_user, game: @game, **message_params)
+    @message = Message.new(user: current_or_guest_user, game: @game, **message_params)
     authorize_message!
 
     if @message.valid?
@@ -17,7 +17,7 @@ class MessagesController < ApplicationController
         end
       end
     end
-    # @game.broadcast_chat_message(from: current_user, message: chat_params[:message])
+    # @game.broadcast_chat_message(from: current_or_guest_user, message: chat_params[:message])
   end
 
   private

@@ -14,7 +14,7 @@ class JokesController < ApplicationController
 
   # creates a joke with punchline
   def create
-    @joke = @round.jokes.build(user_id: current_user.id)
+    @joke = @round.jokes.build(user_id: current_or_guest_user.id)
     authorize_joke!
     
     respond_to do |format|
@@ -32,12 +32,12 @@ class JokesController < ApplicationController
   # registers a vote
   def update
     respond_to do |format|
-      if @joke.register_vote(by: current_user)
+      if @joke.register_vote(by: current_or_guest_user)
         format.html { redirect_to game_round_url(@game, @round), notice: "Joke was successfully updated." }
       else
         flash.now[:alert] = "Joke was not updated."
         format.turbo_stream { 
-          render partial: "shared/flash", status: :unprocessable_entity 
+          render partial: "shared/flash", status: :unprocessable_entity
         }
       end
     end

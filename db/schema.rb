@@ -60,6 +60,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_31_143754) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "username"
     t.integer "game_id"
     t.boolean "online"
     t.boolean "host", default: false
@@ -69,6 +70,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_31_143754) do
     t.boolean "voted", default: false
     t.integer "current_score", default: 0
     t.integer "total_score", default: 0
+    t.boolean "guest", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

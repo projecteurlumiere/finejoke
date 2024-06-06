@@ -5,14 +5,14 @@ class GamesController < ApplicationController
 
   # GET /games or /games.json
   def index
-    current_user&.reset_game_attributes
+    current_or_guest_user.reset_game_attributes
     @games = Game.includes(:users).all
     clean_up_games
   end
 
   # joins game
   def show
-    redirect_to games_path, flash: { alert: "Game is not joinable" } unless @game.joinable?(by: current_user)
+    redirect_to games_path, flash: { alert: "Game is not joinable" } unless @game.joinable?(by: current_or_guest_user)
   end
 
   # new game form
@@ -37,7 +37,7 @@ class GamesController < ApplicationController
 
   # subimts chat message
   def update
-    @game.broadcast_chat_message(from: current_user, message: chat_params[:message])
+    @game.broadcast_chat_message(from: current_or_guest_user, message: chat_params[:message])
     head :accepted
   end
 
@@ -51,6 +51,14 @@ class GamesController < ApplicationController
   end
 
   private
+
+  def no_authentication_required?
+    if action_name == "index"
+      true
+    else
+      false
+    end
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_game
@@ -68,8 +76,8 @@ class GamesController < ApplicationController
 
   def create_game
     ActiveRecord::Base.transaction do
-      current_user.host = true
-      @game.users << current_user && current_user.save
+      current_or_guest_user.host = true
+      @game.users << current_or_guest_user && current_or_guest_user.save
     end
   end
 

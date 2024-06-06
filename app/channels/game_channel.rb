@@ -29,7 +29,7 @@ class GameChannel < ApplicationCable::Channel
   private
 
   def set_user
-    @user = current_user
+    @user = current_or_guest_user
   end
 
   def set_game
