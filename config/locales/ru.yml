@@ -27,5 +27,27 @@
 #       "yes": yup
 #       enabled: "ON"
 
-en:
-  hello: "Hello world"
+ru:
+  activerecord:
+    attributes:
+      user:
+        username: Имя
+        email: Адрес электронной почты
+        password: Пароль
+        current_score: Счёт
+        total_score: Счёт за всё время
+      game:
+        max_players: Максимальное число игроков
+        max_round_time: Длительность раунда
+        max_round: Максимальное число раундов
+        max_points: Максимальное число очков
+        name: Название
+        status: Статус
+      round:
+        setup: Сетап (завязка шутки)
+      joke:
+        punchline: Панчалайн (развязка шутки)
+        votes: Голоса
+        user: Автор
+      message:
+        text: Сообщение
