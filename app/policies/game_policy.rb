@@ -27,4 +27,8 @@ class GamePolicy < ApplicationPolicy
   def destroy?
     @user&.host? && @game.users.include?(@user)
   end
+
+  def leave?
+    update?
+  end
 end

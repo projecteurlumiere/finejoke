@@ -1,5 +1,10 @@
 <h1>Games</h1>
 
+<% if @game %>
+  <div>You are currently in <%= link_to "game", game_path(@game) %></div>
+  <div>Care to <%= button_to "leave?", game_leave_path(@game) %></div>
+<% end %>
+
 <%= turbo_stream_from "lobby", channel: LobbyChannel %>
 
 <div id="games">

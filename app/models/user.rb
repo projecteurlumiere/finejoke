@@ -12,6 +12,7 @@ class User < ApplicationRecord
 
   def reset_game_attributes
     self.update({ 
+      game_id: nil,
       host: false,
       lead: false,
       finished_turn: false,

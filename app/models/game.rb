@@ -4,16 +4,22 @@ class Game < ApplicationRecord
 
   enum status: %i[waiting ongoing on_halt finished]
 
+     MIN_PLAYERS = 2
+     MAX_PLAYERS = 10
+  MIN_ROUND_TIME = 1 
+  MAX_ROUND_TIME = 180
+      MIN_POINTS = 2
+      MAX_POINTS = 1_000
+
   validates :name, presence: true, length: { in: 1..30 }
   validates :max_players, numericality: { only_integer: true },
-                          comparison: { greater_than_or_equal_to: 2, less_than_or_equal_to: 10 }
-  # max round time must be at least 30 in prod 
+                          comparison: { greater_than_or_equal_to: MIN_PLAYERS, less_than_or_equal_to: MAX_PLAYERS = 10 }
   validates :max_round_time, numericality: { only_integer: true },
-                             comparison: { greater_than_or_equal_to: 1, less_than_or_equal_to: 180 }
+                             comparison: { greater_than_or_equal_to: MIN_ROUND_TIME, less_than_or_equal_to: MAX_ROUND_TIME }
   validates :max_rounds, numericality: { only_integer: true }, comparison: { greater_than_or_equal_to: 1 },
                          if: :max_rounds, allow_nil: true
   validates :max_points, numericality: { only_integer: true },
-                         comparison: { greater_than_or_equal_to: 2, less_than_or_equal_to: 1_000 }, allow_nil: true
+                         comparison: { greater_than_or_equal_to: MIN_POINTS, less_than_or_equal_to: MAX_POINTS }, allow_nil: true
 
   # after_create -> { broadcast_replace_to "lobby", partial: "games/list", locals: { games: Game.all }, target: "games" }
   after_touch -> { ongoing! }, if: %i[waiting? current_round]
@@ -72,16 +78,17 @@ class Game < ApplicationRecord
   end
 
   def enough_players?
-    (2..max_players).cover?(users.count)
+    (MIN_PLAYERS..max_players).cover?(users.count)
   end
 
   def not_enough_players?
-    users.count < 2 # min players
+    users.count < MIN_PLAYERS # min players
   end
 
   def joinable?(by: nil) # user
     user = by
     return false if users.count >= max_players
+    return false if user&.game && user.game != self
 
     true
   end

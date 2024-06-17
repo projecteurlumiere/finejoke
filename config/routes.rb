@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :games, except: %i[update edit] do
+    post "leave", to: "games#leave"
     resources :rounds, only: %i[show create update] do
       resources :jokes, only: %i[index show create update]
     end

@@ -4,6 +4,16 @@ module ApplicationCable
 
     def connect
       self.current_or_guest_user = find_user
+      if current_or_guest_user.connected?
+        @already_connected = true
+        reject_unauthorized_connection
+      end 
+
+      current_or_guest_user.toggle!(:connected)
+    end
+
+    def disconnect
+      current_or_guest_user.toggle!(:connected) unless @already_connected
     end
 
     private

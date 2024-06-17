@@ -62,6 +62,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_31_143754) do
     t.datetime "updated_at", null: false
     t.string "username"
     t.integer "game_id"
+    t.boolean "connected", default: false
     t.boolean "online"
     t.boolean "host", default: false
     t.boolean "lead", default: false
