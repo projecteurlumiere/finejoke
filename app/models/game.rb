@@ -36,7 +36,18 @@ class Game < ApplicationRecord
 
   def add_user(user)
     user.reset_game_attributes
-    self.users << user unless users.include?(user) && joinable?
+    self.users << user if joinable?(by: user)
+  end
+
+  def remove_user(user)
+    if user.host?
+      self.destroy
+    else 
+      self.users.delete(user) if self.users.include?(user)
+      self.touch
+    end
+
+    user.reset_game_attributes
   end
 
   def current_round
@@ -85,10 +96,10 @@ class Game < ApplicationRecord
     users.count < MIN_PLAYERS # min players
   end
 
-  def joinable?(by: nil) # user
+  def joinable?(by:) # user
     user = by
     return false if users.count >= max_players
-    return false if user&.game && user.game != self
+    return false if user.game
 
     true
   end

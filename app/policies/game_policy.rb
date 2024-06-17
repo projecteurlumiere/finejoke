@@ -11,9 +11,7 @@ class GamePolicy < ApplicationPolicy
   end
 
   def show?
-    @user 
-    # && @game.joinable? 
-    # || game.viewable?
+    @user && @game.users.include?(@user)
   end
 
   def create?
@@ -21,11 +19,15 @@ class GamePolicy < ApplicationPolicy
   end
 
   def update?
-    @user && @game.users.include?(@user)
+    show?
   end
 
   def destroy?
     @user&.host? && @game.users.include?(@user)
+  end
+
+  def join?
+    @game.joinable?(by: @user)
   end
 
   def leave?

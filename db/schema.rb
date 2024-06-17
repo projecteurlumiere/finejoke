@@ -63,7 +63,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_31_143754) do
     t.string "username"
     t.integer "game_id"
     t.boolean "connected", default: false
-    t.boolean "online"
+    t.boolean "subscribed_to_game", default: false
     t.boolean "host", default: false
     t.boolean "lead", default: false
     t.boolean "was_lead", default: false

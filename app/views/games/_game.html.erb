@@ -1,4 +1,6 @@
 <%= tag.div id: dom_id(game) do %>
+  <%= button_to "leave", game_leave_path(game) %>
+  
   <p>
     <strong>Max players:</strong>
     <%= game.max_players %>

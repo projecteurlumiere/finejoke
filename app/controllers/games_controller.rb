@@ -13,7 +13,7 @@ class GamesController < ApplicationController
 
   # joins game
   def show
-    redirect_to games_path unless user_can_join?
+    redirect_to games_path unless user_can_view?
   end
 
   # new game form
@@ -51,14 +51,24 @@ class GamesController < ApplicationController
     end
   end
 
+  def join
+    @game = Game.includes(:users).find(params[:game_id])
+    authorize_game!
+
+    if @game.add_user(current_or_guest_user)
+      redirect_to game_path(@game), notice: "You have joined the game"
+    else
+      redirect_to games_path, alert: "Something went wrong"
+    end
+  end
+
   def leave # game
     @game = Game.includes(:users).find(params[:game_id])
     authorize_game!
 
-    if current_or_guest_user.reset_game_attributes
-      ActionCable.server.remote_connections.where(current_or_guest_user: current_or_guest_user).transmit error: "hi, this is error"
-      ActionCable.server.remote_connections.where(current_or_guest_user: current_or_guest_user).disconnect
-      @game.touch
+    if @game.remove_user(current_or_guest_user)
+      disconnect_cable if params[:cable] == "disconnect"
+      current_or_guest_user.update(connected: false)
       redirect_to games_path, notice: "You have left the game"
     else
       redirect_to games_path, alert: "Something went wrong"
@@ -68,11 +78,7 @@ class GamesController < ApplicationController
   private
 
   def no_authentication_required?
-    if action_name == "index"
-      true
-    else
-      false
-    end
+    action_name == "index"
   end
 
   # Use callbacks to share common setup or constraints between actions.
@@ -100,16 +106,18 @@ class GamesController < ApplicationController
     authorize @game || Game
   end
 
-  def user_can_join?
-    if (user_game = current_or_guest_user.game) && user_game != @game
-      flash[:alert] = "You are already in the game"
-      return false 
+  def user_can_view?
+    user_game = current_or_guest_user.game
+
+    return true if user_game.nil? || user_game == @game
+
+    if user_game != @game
+      flash[:alert] = "You have already joined another game"
     elsif !@game.joinable?(by: current_or_guest_user)
       flash[:alert] = "Game cannot be joined"
-      return false
     end
 
-    true
+    false
   end
 
   def clean_up_games
@@ -121,5 +129,9 @@ class GamesController < ApplicationController
         false
       end 
     end
+  end
+
+  def disconnect_cable
+    ActionCable.server.remote_connections.where(current_or_guest_user: current_or_guest_user).disconnect
   end
 end

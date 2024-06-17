@@ -1,5 +1,5 @@
 class RoundToNextStageJob < ApplicationJob
-  queue_as :default
+  queue_as :urgent
 
   def perform(round_id, stage)
     round = Round.find_by(id: round_id)
