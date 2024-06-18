@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   resources :games, except: %i[update edit] do
-    post "leave", to: "games#leave"
     get "join", to: "games#join"
+    post "leave", to: "games#leave"
+    post "kick", to: "games#kick"
+
     resources :rounds, only: %i[show create update] do
       resources :jokes, only: %i[index show create update]
     end

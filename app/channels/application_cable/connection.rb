@@ -6,7 +6,7 @@ module ApplicationCable
       self.current_or_guest_user = find_user
       if current_or_guest_user.connected?
         @already_connected = true
-        reject_unauthorized_connection
+        # reject_unauthorized_connection
       end 
 
       current_or_guest_user.toggle!(:connected)

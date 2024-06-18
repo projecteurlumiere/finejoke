@@ -1,6 +1,6 @@
 <%= tag.div id: dom_id(game) do %>
   <%= button_to "leave", game_leave_path(game) %>
-  
+
   <p>
     <strong>Max players:</strong>
     <%= game.max_players %>
@@ -33,7 +33,10 @@
 
   <ul>
     <% game.users.each do |player| %>
-      <li><%= player.username %> and his score: <%= player.current_score %></li>
+      <li><%= player.username %> and his score: <%= player.current_score %> 
+        /
+        <%= button_to("Kick", game_kick_path(game, params: { user_id: player.id })) %>
+      </li>
     <% end %>
   </ul>
 

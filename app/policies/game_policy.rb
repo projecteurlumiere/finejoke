@@ -18,10 +18,6 @@ class GamePolicy < ApplicationPolicy
     @user
   end
 
-  def update?
-    show?
-  end
-
   def destroy?
     @user&.host? && @game.users.include?(@user)
   end
@@ -31,6 +27,10 @@ class GamePolicy < ApplicationPolicy
   end
 
   def leave?
-    update?
+    show?
+  end
+
+  def kick?
+    destroy?
   end
 end

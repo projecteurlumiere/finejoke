@@ -1,7 +1,7 @@
 class GamesController < ApplicationController
   include ActionView::RecordIdentifier
-  before_action :set_game, only: %i[ show update destroy ]
-  before_action :authorize_game!, only: %i[ index show update destroy ]
+  before_action :set_game, only: %i[ show destroy ]
+  before_action :authorize_game!, only: %i[ index show destroy ]
 
   # GET /games or /games.json
   def index
@@ -36,12 +36,6 @@ class GamesController < ApplicationController
     end
   end
 
-  # submits chat message
-  def update
-    @game.broadcast_chat_message(from: current_or_guest_user, message: chat_params[:message])
-    head :accepted
-  end
-
   # DELETE /games/1 or /games/1.json
   def destroy
     @game.destroy!
@@ -70,13 +64,36 @@ class GamesController < ApplicationController
 
     if @game.remove_user(current_or_guest_user)
       disconnect_cable if params[:cable] == "disconnect"
-      current_or_guest_user.update(connected: false, subscribed_to_game: false)
       redirect_to games_path, notice: "You have left the game"
     else
       flash.now[:alert] = "Something went wrong"
-      format.turbo_stream {
-        render partial: "shared/flash", status: :unprocessable_entity
-      }
+      respond_to do |format|
+        format.turbo_stream {
+          render partial: "shared/flash", status: :unprocessable_entity
+        }
+      end
+    end
+  end
+
+  def kick
+    @game = Game.includes(:users).find(params[:game_id])
+    @user = User.find_by(id: params[:user_id])
+    authorize_game!
+
+    if @user && @game.kick_user(@user)
+      flash.now[:notice] = "User was kicked"
+      respond_to do |format|
+        format.turbo_stream {
+          render partial: "shared/flash", status: :ok
+        }
+      end
+    else
+      flash.now[:alert] = "User was not kicked"
+      respond_to do |format|
+        format.turbo_stream {
+          render partial: "shared/flash", status: :unprocessable_entity
+        }
+      end
     end
   end
 
@@ -94,10 +111,6 @@ class GamesController < ApplicationController
   # Only allow a list of trusted parameters through.
   def game_params
     params.require(:game).permit(:name, :max_players, :max_rounds, :max_round_time, :max_points)
-  end
-
-  def chat_params
-    params.require(:game).permit(:message)
   end
 
   def create_game
@@ -127,7 +140,7 @@ class GamesController < ApplicationController
 
   def clean_up_games
     @games = @games.select do |game|
-      if game.users.any? { |user| user.host? }
+      if game.users.any?
         true
       else
         game.destroy
@@ -138,5 +151,6 @@ class GamesController < ApplicationController
 
   def disconnect_cable
     ActionCable.server.remote_connections.where(current_or_guest_user: current_or_guest_user).disconnect
+    current_or_guest_user.update(connected: false, subscribed_to_game: false)
   end
 end

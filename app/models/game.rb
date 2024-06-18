@@ -36,18 +36,32 @@ class Game < ApplicationRecord
 
   def add_user(user)
     user.reset_game_attributes
-    self.users << user if joinable?(by: user)
+    self.users << user and return true if joinable?(by: user)
+
+    false
   end
 
   def remove_user(user)
-    if user.host?
-      self.destroy
-    else 
-      self.users.delete(user) if self.users.include?(user)
-      self.touch
-    end
+    self.users.include?(user) ? self.users.delete(user) : (return false)
+
+    self.destroy and return true if users.empty?
+
+    choose_new_host if user.host?
+
+    touch
 
     user.reset_game_attributes
+
+    true
+  end
+
+  def kick_user(user)
+    remove_user(user)
+    # render something here?
+  end
+
+  def choose_new_host
+    users.first.host = true
   end
 
   def current_round
@@ -79,7 +93,6 @@ class Game < ApplicationRecord
     users.update_all(
       finished_turn: false,
       lead: false,
-      finished_turn: false,
       voted: false
     )
   end
