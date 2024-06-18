@@ -1,0 +1,5 @@
+<li>
+  <%= user.username %> and his score: <%= user.current_score %> 
+  /
+  <%= button_to("Kick", game_kick_path(game, params: { user_id: user.id })) %>
+</li>

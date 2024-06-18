@@ -1,3 +1,7 @@
-<h2 id=<%= dom_id(game) %>>
+<li id=<%= dom_id(game) %>>
   <%= link_to game.name, game_join_path(game) %>
-</h2>
+  |
+  <%= game.host.username %>
+  |
+  <%= game.users.count %> / <%= game.max_players %>
+</li>

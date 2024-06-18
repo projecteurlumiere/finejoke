@@ -1,5 +1,6 @@
 <%= round.setup if round.setup %>
 <%= form if defined? form %>
+
 <h3>
   <%= "this was the last round" if round.last? && round.results_stage? %>
 </h3>

@@ -29,7 +29,7 @@ class GamesController < ApplicationController
 
     respond_to do |format|
       if create_game
-        format.html { redirect_to game_url(@game), notice: "Game was successfully created." }
+        format.html { redirect_to game_path(@game), notice: "Game was successfully created." }
       else
         format.html { render :new, status: :unprocessable_entity }
       end
@@ -63,7 +63,7 @@ class GamesController < ApplicationController
     authorize_game!
 
     if @game.remove_user(current_or_guest_user)
-      disconnect_cable if params[:cable] == "disconnect"
+      # disconnect_cable if params[:cable] == "disconnect"
       redirect_to games_path, notice: "You have left the game"
     else
       flash.now[:alert] = "Something went wrong"
@@ -115,8 +115,8 @@ class GamesController < ApplicationController
 
   def create_game
     ActiveRecord::Base.transaction do
-      current_or_guest_user.host = true
-      @game.users << current_or_guest_user && current_or_guest_user.save
+      @game.add_user(current_or_guest_user, host: true) &&
+        @game.save!
     end
   end
 

@@ -1,0 +1,3 @@
+<%= turbo_stream.action(:replace, "user-status") do %>
+  <%= render partial: "games/user_status", formats: %i[html], locals: { game: Game.find_by(id: game_id) } %>
+<% end %>

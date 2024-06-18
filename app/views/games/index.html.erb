@@ -1,9 +1,8 @@
 <h1>Games</h1>
 
-<% if @game %>
-  <div>You are currently in <%= link_to "game", game_path(@game) %></div>
-  <div>Care to <%= button_to "leave?", game_leave_path(@game, params: { cable: "disconnect" }) %></div>
-<% end %>
+<%= turbo_stream_from ["user", current_or_guest_user], channel: UserChannel %>
+
+<%= render partial: "games/user_status", formats: %i[html], locals: { game: @game } %>
 
 <%= turbo_stream_from "lobby", channel: LobbyChannel %>
 
@@ -11,4 +10,5 @@
   <%= render partial: "game_entry", collection: @games, as: :game %>
 </div>
 
+<br>
 <%= link_to "New game", new_game_path %>

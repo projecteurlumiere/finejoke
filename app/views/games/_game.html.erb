@@ -32,14 +32,9 @@
   </p>
 
   <ul>
-    <% game.users.each do |player| %>
-      <li><%= player.username %> and his score: <%= player.current_score %> 
-        /
-        <%= button_to("Kick", game_kick_path(game, params: { user_id: player.id })) %>
-      </li>
-    <% end %>
+    <%= render partial: "games/game_user", collection: game.users,  as: :user, locals: { game: game } %>
   </ul>
-
+  
   <%= tag.turbo_frame(id: "current-round", src: (game_round_path(game, game.current_round) if game.ongoing?)) do %>
     <%= button_to("Start game", game_rounds_path(game), data: { turbo_frame: "current-round" }) if game.waiting? || game.on_halt? %>
   <% end %>

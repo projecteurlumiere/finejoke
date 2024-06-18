@@ -1,0 +1,6 @@
+<div id="user-status">
+  <% if game %>
+    <div>You are currently in <%= link_to "game", game_path(game) %></div>
+    <div>Care to <%= button_to "leave?", game_leave_path(game, params: { cable: "disconnect" }) %></div>
+  <% end %>
+</div>

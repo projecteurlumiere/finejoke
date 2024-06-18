@@ -32,25 +32,34 @@ class Game < ApplicationRecord
 
   after_create_commit -> { broadcast_prepend_later_to ["game", self] }
   after_update_commit -> { broadcast_replace_later_to ["game", self] }
-  after_destroy_commit -> { broadcast_render_to(["game", self], partial: "games/game_over", locals: { game: self }) }
+  after_destroy_commit -> { 
+    broadcast_render_to(["game", self], partial: "games/game_over", locals: { game: self })
+    users.each(&:broadcast_status_change) 
+  }
 
-  def add_user(user)
+  def add_user(user, host: false)
     user.reset_game_attributes
-    self.users << user and return true if joinable?(by: user)
+    return false unless joinable?(by: user)
 
-    false
+    self.users << user
+
+    user.update(host: true) if host
+    user.broadcast_status_change
+
+    true
   end
 
   def remove_user(user)
     self.users.include?(user) ? self.users.delete(user) : (return false)
+
+    user.reset_game_attributes
+    user.broadcast_status_change
 
     self.destroy and return true if users.empty?
 
     choose_new_host if user.host?
 
     touch
-
-    user.reset_game_attributes
 
     true
   end
@@ -60,8 +69,12 @@ class Game < ApplicationRecord
     # render something here?
   end
 
+  def host
+    users.find_by(host: true)
+  end
+
   def choose_new_host
-    users.first.host = true
+    users.first.update(host: true)
   end
 
   def current_round
@@ -82,7 +95,7 @@ class Game < ApplicationRecord
   end
 
   def broadcast_message(text, from:)
-    broadcast_render_later_to(["game", self], partial: "games/chat_message", locals: { user: from, text: text })
+    broadcast_render_later_to(["game", self], partial: "messages/chat_message", locals: { user: from, text: text })
   end
 
   def reset_lead
