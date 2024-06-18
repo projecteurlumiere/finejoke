@@ -11,7 +11,7 @@ class GameChannel < ApplicationCable::Channel
   def unsubscribed
     @user.toggle!(:subscribed_to_game)
     
-    RemoveUserFromGameJob.set(wait: 5.seconds).perform_later(@user.id, @game.id) if @rejected
+    RemoveUserFromGameJob.set(wait: 5.seconds).perform_later(@user.id, @game.id) unless @rejected
   end
 
   private

@@ -53,6 +53,8 @@ class GamesController < ApplicationController
 
   def join
     @game = Game.includes(:users).find(params[:game_id])
+    redirect_to game_path(@game) and return if @game.users.include?(current_or_guest_user)
+
     authorize_game!
 
     if @game.add_user(current_or_guest_user)
@@ -68,10 +70,13 @@ class GamesController < ApplicationController
 
     if @game.remove_user(current_or_guest_user)
       disconnect_cable if params[:cable] == "disconnect"
-      current_or_guest_user.update(connected: false)
+      current_or_guest_user.update(connected: false, subscribed_to_game: false)
       redirect_to games_path, notice: "You have left the game"
     else
-      redirect_to games_path, alert: "Something went wrong"
+      flash.now[:alert] = "Something went wrong"
+      format.turbo_stream {
+        render partial: "shared/flash", status: :unprocessable_entity
+      }
     end
   end
 
