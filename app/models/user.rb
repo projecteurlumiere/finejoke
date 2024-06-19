@@ -6,6 +6,8 @@ class User < ApplicationRecord
 
   belongs_to :game, optional: true
 
+  validates :username, presence: true
+
   def set_lead
     self.update(lead: true, was_lead: true)
   end

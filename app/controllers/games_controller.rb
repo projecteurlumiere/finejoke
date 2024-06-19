@@ -1,7 +1,9 @@
 class GamesController < ApplicationController
   include ActionView::RecordIdentifier
+  # before_action :welcome_new_guest, if: :new_guest?, only: %i[ index show join ]
   before_action :set_game, only: %i[ show destroy ]
   before_action :authorize_game!, only: %i[ index show destroy ]
+
 
   # GET /games or /games.json
   def index
@@ -47,7 +49,8 @@ class GamesController < ApplicationController
 
   def join
     @game = Game.includes(:users).find(params[:game_id])
-    redirect_to game_path(@game) and return if @game.users.include?(current_or_guest_user)
+    
+    skip_authorization and redirect_to game_path(@game) and return if @game.users.include?(current_or_guest_user)
 
     authorize_game!
 
