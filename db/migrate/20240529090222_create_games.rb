@@ -6,9 +6,10 @@ class CreateGames < ActiveRecord::Migration[7.1]
       t.integer :max_rounds
       t.integer :max_points
       t.string  :name, null: false
+      t.boolean :viewable, null: false, default: true
       t.integer :winner_id
       t.integer :status, null: false, default: 0
-      t.integer :n_rounds, null: false, default: 0 
+      t.integer :n_rounds, null: false, default: 0
 
       t.timestamps
     end

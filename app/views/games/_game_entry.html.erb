@@ -1,7 +1,11 @@
 <li id=<%= dom_id(game) %>>
-  <%= link_to game.name, game_join_path(game) %>
+  <%= game.name %>
   |
   <%= game.host.username %>
   |
   <%= game.users.count %> / <%= game.max_players %>
+  |
+  <%= link_to "Join", game_join_path(game) if game.joinable? %>
+  /
+  <%= link_to "View", game_path(game) if game.viewable? %>
 </li>

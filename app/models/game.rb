@@ -122,10 +122,10 @@ class Game < ApplicationRecord
     users.count < MIN_PLAYERS # min players
   end
 
-  def joinable?(by:) # user
+  def joinable?(by: nil) # user
     user = by
     return false if users.count >= max_players
-    return false if user.game
+    return false if user&.game
 
     true
   end

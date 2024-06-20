@@ -1,6 +1,6 @@
 class GamesController < ApplicationController
   include ActionView::RecordIdentifier
-  # before_action :welcome_new_guest, if: :new_guest?, only: %i[ index show join ]
+  before_action :welcome_new_guest, if: :new_guest?, only: %i[ index show join ]
   before_action :set_game, only: %i[ show destroy ]
   before_action :authorize_game!, only: %i[ index show destroy ]
 
@@ -113,7 +113,7 @@ class GamesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def game_params
-    params.require(:game).permit(:name, :max_players, :max_rounds, :max_round_time, :max_points)
+    params.require(:game).permit(:name, :viewable, :max_players, :max_rounds, :max_round_time, :max_points)
   end
 
   def create_game

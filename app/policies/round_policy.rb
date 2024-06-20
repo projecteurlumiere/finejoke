@@ -8,8 +8,8 @@ class RoundPolicy < ApplicationPolicy
   end
 
   def show?
-    @game.users.include?(@user) && 
-    @game.current_round == @round
+    @game.current_round == @round &&
+      (@game.viewable? || @game.users.include?(@user))
   end
 
   def create?

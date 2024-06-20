@@ -20,6 +20,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_31_143754) do
     t.integer "max_rounds"
     t.integer "max_points"
     t.string "name", null: false
+    t.boolean "viewable", default: true, null: false
     t.integer "winner_id"
     t.integer "status", default: 0, null: false
     t.integer "n_rounds", default: 0, null: false

@@ -7,11 +7,12 @@ class GamePolicy < ApplicationPolicy
   end
 
   def index?
-    true
+    @user
   end
 
   def show?
-    @user && @game.users.include?(@user)
+    @user && 
+      (@game.viewable? || @game.users.include?(@user))
   end
 
   def create?
@@ -23,11 +24,12 @@ class GamePolicy < ApplicationPolicy
   end
 
   def join?
-    @game.joinable?(by: @user)
+    @user &&
+      @game.joinable?(by: @user)
   end
 
   def leave?
-    show?
+    @user && @game.users.include?(@user)
   end
 
   def kick?

@@ -10,8 +10,6 @@ class GameChannel < ApplicationCable::Channel
 
   def unsubscribed
     @user.toggle!(:subscribed_to_game)
-    
-    # RemoveUserFromGameJob.set(wait: 5.seconds).perform_later(@user.id, @game.id) unless @rejected
   end
 
   private
@@ -23,9 +21,8 @@ class GameChannel < ApplicationCable::Channel
   def set_game
     @game = Game.find_by(id: params[:id])
     # if rejection happens turbo_stream tag in html doesn't get connected attribute
-    if @game&.users.none?(@user)
-      @rejected = true
-      reject
-    end
+    reject if @game.nil?
+    return if @game.viewable?
+    reject if @game.users.none?(@user)
   end
 end

@@ -18,6 +18,11 @@
     <%= form.text_field :name %>
   </div>
 
+    <div>
+    <%= form.label :viewable, style: "display: block" %>
+    <%= form.check_box :viewable %>
+  </div>
+
   <div>
     <%= form.label :max_players, style: "display: block" %>
     <%= form.number_field :max_players, value: 2 %>
