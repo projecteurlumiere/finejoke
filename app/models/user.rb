@@ -24,6 +24,6 @@ class User < ApplicationRecord
   end
 
   def broadcast_status_change
-    broadcast_render_later_to(["user", self], partial: "games/user_status", formats: %i[turbo_stream], locals: { game_id: game&.id || 0 }) 
+    broadcast_render_later_to(["user", self], partial: "layouts/user_status", formats: %i[turbo_stream], locals: { game_id: game&.id || 0 }) 
   end
 end

@@ -1,5 +1,12 @@
     <nav class="navbar">
-      <div class="navbar-end">
+      <div class="start">
+        <%= turbo_stream_from ["user", current_or_guest_user], channel: UserChannel %>
+        <%= render partial: "layouts/user_status", formats: %i[html], locals: { game: current_or_guest_user.game } %>
+      </div>
+      <div class="center">
+        Logo here
+      </div>
+      <div class="end">
       <% if user_signed_in? %>
           <div class="navbar-item">Logged in as <strong><%= current_user.username %></strong></div>
           <%= link_to "Edit profile", edit_user_registration_path, class: "navbar-item" %>

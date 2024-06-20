@@ -16,7 +16,7 @@ class GamePolicy < ApplicationPolicy
   end
 
   def create?
-    @user
+    index?
   end
 
   def destroy?

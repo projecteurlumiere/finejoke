@@ -1,15 +1,3 @@
 <%= turbo_stream_from @game, channel: GameChannel, data: { id: @game.id } %>
 
 <%= render @game %>
-
-<%= render partial: "chat" %>
-
-<%= render partial: "chat_form", locals: { game: @game } %>
-
-<div>
-  <%= link_to "Join game", game_join_path(@game) if @game.users.exclude?(current_or_guest_user) %>
-
-  <%= link_to "Back to games", games_path %>
-
-  <%= button_to "Destroy this game", @game, method: :delete %>
-</div>

@@ -51,13 +51,14 @@ class Game < ApplicationRecord
 
   def remove_user(user)
     self.users.include?(user) ? self.users.delete(user) : (return false)
+    user_was_host = user.host?
 
     user.reset_game_attributes
     user.broadcast_status_change
 
     self.destroy and return true if users.empty?
 
-    choose_new_host if user.host?
+    choose_new_host if user_was_host
 
     touch
 

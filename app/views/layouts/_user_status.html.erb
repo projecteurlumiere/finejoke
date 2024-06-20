@@ -1,0 +1,10 @@
+<div id="user-status">
+  <% if game&.persisted? %>
+    <% unless current_page?(game_path(game)) %>
+      <p>Вы сейчас в <%= link_to "игре", game_path(game) %></p>
+    <% end %>
+    <%= button_to "Покинуть", game_leave_path(game, params: { cable: "disconnect" }) %></div>
+  <% else %>
+    <%= yield(:join) %>
+  <% end %>
+</div>

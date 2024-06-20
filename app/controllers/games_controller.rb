@@ -7,7 +7,7 @@ class GamesController < ApplicationController
 
   # GET /games or /games.json
   def index
-    @game = current_or_guest_user.game
+    @game = Game.new
 
     @games = Game.includes(:users).all
     clean_up_games
@@ -31,9 +31,12 @@ class GamesController < ApplicationController
 
     respond_to do |format|
       if create_game
-        format.html { redirect_to game_path(@game), notice: "Game was successfully created." }
+        flash[:notice] = "Игра создана"
+        format.turbo_stream { 
+          render partial: "shared/redirect_to", locals: { path: game_path(@game) }, status: :found
+        }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { render :index, status: :unprocessable_entity }
       end
     end
   end
@@ -63,6 +66,8 @@ class GamesController < ApplicationController
 
   def leave # game
     @game = Game.includes(:users).find(params[:game_id])
+    skip_authorization and redirect_to games_path and return if @game.users.exclude?(current_or_guest_user)
+
     authorize_game!
 
     if @game.remove_user(current_or_guest_user)
@@ -121,6 +126,8 @@ class GamesController < ApplicationController
       @game.add_user(current_or_guest_user, host: true) &&
         @game.save!
     end
+  rescue ActiveRecord::RecordInvalid
+    false
   end
 
   def authorize_game!

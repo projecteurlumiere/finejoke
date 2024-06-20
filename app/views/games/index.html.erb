@@ -1,14 +1,14 @@
-<h1>Games</h1>
-
-<%= turbo_stream_from ["user", current_or_guest_user], channel: UserChannel %>
-
-<%= render partial: "games/user_status", formats: %i[html], locals: { game: @game } %>
-
 <%= turbo_stream_from "lobby", channel: LobbyChannel %>
 
-<div id="games">
-  <%= render partial: "game_entry", collection: @games, as: :game %>
+<div id="catalogue">
+  <h1>Игры</h1>
+  
+  <div id="games">
+    <%= render partial: "game_entry", collection: @games, as: :game %>
+  </div>
 </div>
 
-<br>
-<%= link_to "New game", new_game_path %>
+<turbo-frame id="new-game" target="_top">
+  <h1>Новая игра</h1>
+  <%= render partial: "form", locals: { game: @game } %>
+</turbo-frame>

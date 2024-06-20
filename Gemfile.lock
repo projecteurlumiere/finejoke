@@ -161,6 +161,7 @@ GEM
       capybara (~> 3.37)
       falcon (~> 0.34)
       selenium-webdriver
+    ffi (1.17.0-x86_64-linux-gnu)
     fiber-annotation (0.2.0)
     fiber-local (1.1.0)
       fiber-storage
@@ -212,6 +213,7 @@ GEM
     nio4r (2.7.3)
     nokogiri (1.16.5-x86_64-linux)
       racc (~> 1.4)
+    normalize-rails (8.0.1)
     openssl (3.2.0)
     orm_adapter (0.5.0)
     pg (1.5.6)
@@ -311,6 +313,14 @@ GEM
     samovar (2.3.0)
       console (~> 1.0)
       mapping (~> 1.0)
+    sassc (2.4.0)
+      ffi (~> 1.9)
+    sassc-rails (2.1.2)
+      railties (>= 4.0.0)
+      sassc (>= 2.0)
+      sprockets (> 3.0)
+      sprockets-rails
+      tilt
     selenium-webdriver (4.21.1)
       base64 (~> 0.2)
       rexml (~> 3.2, >= 3.2.5)
@@ -328,6 +338,7 @@ GEM
     stringio (3.1.0)
     strscan (3.1.0)
     thor (1.3.1)
+    tilt (2.3.0)
     timeout (0.4.1)
     timers (4.3.5)
     traces (0.11.1)
@@ -371,12 +382,14 @@ DEPENDENCIES
   falcon-capybara
   importmap-rails
   jbuilder
+  normalize-rails
   pg (~> 1.1)
   pundit
   rails (~> 7.1.3, >= 7.1.3.2)
   rails-i18n
   redis (>= 4.0.1)
   rspec-rails (~> 6.1.0)
+  sassc-rails
   selenium-webdriver
   sprockets-rails
   stimulus-rails

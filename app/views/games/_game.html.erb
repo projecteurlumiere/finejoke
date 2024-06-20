@@ -1,41 +1,24 @@
-<%= tag.div id: dom_id(game) do %>
-  <%= button_to "leave", game_leave_path(game) %>
+<%= tag.div id: dom_id(game), class: "game" do %>
+  <%= content_for(:join) do %>
+    <%= link_to "Назад в лобби", games_path %>
+    <%= button_to "Присоединиться", game_join_path(game) if game.joinable? %>
+  <% end %>
 
-  <p>
-    <strong>Max players:</strong>
-    <%= game.max_players %>
-  </p>
-
-  <p>
-    <strong>Max rounds:</strong>
-    <%= game.max_rounds %>
-  </p>
-
-  <p>
-    <strong>Max round time:</strong>
-    <%= game.max_round_time %>
-  </p>
-
-  <p>
-    <strong>Max points:</strong>
-    <%= game.max_points %>
-  </p>
-
-  <p>
-    <strong>Current round number:</strong>
-    <%= game.n_rounds == 0 ? "Not started" : game.n_rounds %>
-  </p>
-
-  <p>
-    <strong>Game status:</strong>
-    <%= game.status %>
-  </p>
-
-  <ul>
-    <%= render partial: "games/game_user", collection: game.users,  as: :user, locals: { game: game } %>
-  </ul>
+  <div class="game-data">
+    <ul class="user-list">
+      <%= render partial: "games/game_user", collection: game.users,  as: :user, locals: { game: game } %>
+    </ul>
+    <div class="settings">
+      <%= render partial: "games/game_settings", locals: { game: game } %>
+    </div>
+  </div>
   
   <%= tag.turbo_frame(id: "current-round", src: (game_round_path(game, game.current_round) if game.ongoing?)) do %>
     <%= button_to("Start game", game_rounds_path(game), data: { turbo_frame: "current-round" }) if game.waiting? || game.on_halt? %>
   <% end %>
+
+  <div id="chat-container">
+    <%= render partial: "games/chat" %>
+    <%= render partial: "games/chat_form", locals: { game: game } %>
+  </div>
 <% end %>

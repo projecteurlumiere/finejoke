@@ -1,0 +1,33 @@
+<p>
+  <strong>Max players:</strong>
+  <%= game.max_players %>
+</p>
+
+<p>
+  <strong>Max rounds:</strong>
+  <%= game.max_rounds %>
+</p>
+
+<p>
+  <strong>Max round time:</strong>
+  <%= game.max_round_time %>
+</p>
+
+<p>
+  <strong>Max points:</strong>
+  <%= game.max_points %>
+</p>
+
+<p>
+  <strong>Current round number:</strong>
+  <%= game.n_rounds == 0 ? "Not started" : game.n_rounds %>
+</p>
+
+<p>
+  <strong>Game status:</strong>
+  <%= game.status %>
+</p>
+
+<div>
+  <%= button_to "Destroy this game", game, method: :delete %>
+</div>
