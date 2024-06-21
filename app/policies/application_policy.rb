@@ -36,6 +36,10 @@ class ApplicationPolicy
     false
   end
 
+  def turbo_redirect_to?
+    true
+  end
+
   class Scope
     def initialize(user, scope)
       @user = user

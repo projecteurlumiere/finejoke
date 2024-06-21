@@ -1,10 +1,12 @@
 class ApplicationController < ActionController::Base
   include Pundit::Authorization
   include ErrorHandling
+  include TurboRendering
   
   before_action :store_referrer, :authenticate_user!, if: :new_guest?, unless: :devise_controller?
   before_action :configure_permitted_parameters, if: :devise_controller?
   after_action :verify_authorized, unless: :devise_controller?
+  after_action :remove_referrer, unless: %i[devise_controller? new_guest?] 
 
   def render_turbo_flash(notice: nil, alert: nil)
     flash.now[:notice] = notice if notice
@@ -30,7 +32,11 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    session.delete(:referrer) || root_path
+    turbo_redirect_to_path(params: { path: session[:referrer]})
+  end
+
+  def remove_referrer
+    session.delete(:referrer)
   end
 
   def new_guest?

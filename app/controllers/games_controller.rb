@@ -32,9 +32,7 @@ class GamesController < ApplicationController
     respond_to do |format|
       if create_game
         flash[:notice] = "Игра создана"
-        format.turbo_stream { 
-          render partial: "shared/redirect_to", locals: { path: game_path(@game) }, status: :found
-        }
+        format.turbo_stream { turbo_redirect_to game_path(@game) }
       else
         format.html { render :index, status: :unprocessable_entity }
       end
@@ -76,9 +74,7 @@ class GamesController < ApplicationController
     else
       flash.now[:alert] = "Something went wrong"
       respond_to do |format|
-        format.turbo_stream {
-          render partial: "shared/flash", status: :unprocessable_entity
-        }
+        format.turbo_stream { render_turbo_flash }
       end
     end
   end
@@ -91,16 +87,12 @@ class GamesController < ApplicationController
     if @user && @game.kick_user(@user)
       flash.now[:notice] = "User was kicked"
       respond_to do |format|
-        format.turbo_stream {
-          render partial: "shared/flash", status: :ok
-        }
+        format.turbo_stream { render_turbo_flash(status: :ok) }
       end
     else
       flash.now[:alert] = "User was not kicked"
       respond_to do |format|
-        format.turbo_stream {
-          render partial: "shared/flash", status: :unprocessable_entity
-        }
+        format.turbo_stream { render_turbo_flash }
       end
     end
   end

@@ -19,7 +19,7 @@ class RoundsController < ApplicationController
         format.html { redirect_to game_round_url(@game, @round), notice: "Round was successfully created." }
       else
         flash.now[:alert] = "Round was not created"
-        format.turbo_stream { render partial: "shared/flash",  status: :unprocessable_entity }
+        format.turbo_stream { render_turbo_flash(status: :unprocessable_entity) }
       end
     end
   end
@@ -32,9 +32,7 @@ class RoundsController < ApplicationController
         format.html { redirect_to game_round_url(@game, @round), notice: "Round was successfully updated." }
       else
         flash.now[:alert] = "Round was not updated"
-        format.turbo_stream { 
-          render partial: "shared/flash",  status: :unprocessable_entity
-        }
+        format.turbo_stream { render_turbo_flash(status: :unprocessable_entity) }
       end
     end
   end

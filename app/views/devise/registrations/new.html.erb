@@ -2,11 +2,11 @@
   <div class="container">
     <div id="guest-form">
       <h2>
-        <%= link_to "Continue as a guest", session.delete(:referrer) || root_path %>
+        <%= link_to "Continue as a guest", session[:referrer] || root_path %>
       </h2>
     </div>
     
-    <turbo-frame id="authentication-form">
+    <turbo-frame id="authentication-form" data-controller="turbo-form-redirect">
       <%= link_to "Войти", new_user_session_path, data: { turbo_action: :advance } %>
       <%= tag.h2 "Зарегистрироваться" %>
     

@@ -12,9 +12,7 @@ class MessagesController < ApplicationController
     else
       flash.now[:alert] = "Message was not created"
       respond_to do |format| 
-        format.turbo_stream do
-          render partial: "shared/flash", status: :unprocessable_entity
-        end
+        format.turbo_stream { render_turbo_flash(status: :unprocessable_entity) }
       end
     end
     # @game.broadcast_chat_message(from: current_or_guest_user, message: chat_params[:message])

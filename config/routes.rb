@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :games, except: %i[update edit] do
-    get "join", to: "games#join"
+    post "join", to: "games#join"
     post "leave", to: "games#leave"
     post "kick", to: "games#kick"
 
@@ -11,11 +11,9 @@ Rails.application.routes.draw do
   end
   
   devise_for :users
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
+  
+  get "turbo_redirect_to", controller: "application"
 
   root "games#index"
 end

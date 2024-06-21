@@ -1,11 +1,15 @@
 module ErrorHandling
-  extend ActiveSupport::Concern 
+  extend ActiveSupport::Concern
+  
   included do 
-    rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
-    rescue_from ActionController::RoutingError, with: :render_not_found
+    private 
 
-    def render_not_found
-      render file: "#{Rails.root}/public/404.html", status: :not_found, alert: "not found!"
+    def turbo_redirect_to(path)
+      render partial: "shared/redirect_to", locals: { path: path }, status: :found
+    end
+
+    def render_turbo_flash(status:)
+      render partial: "shared/flash", status: status
     end
   end
 end

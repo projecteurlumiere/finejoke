@@ -15,6 +15,6 @@
  *= require_self
  */
 
-#main-container {
-  display: flex;
+main {
+display: flex;
 }
