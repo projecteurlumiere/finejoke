@@ -1,0 +1,4 @@
+<div class="joke">
+  <p><%= joke.punchline %></p>
+  <%= button_to "Проголосовать", game_round_joke_path(round.game, round, joke), method: :patch if voting %>
+</div>

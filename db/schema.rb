@@ -29,6 +29,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_31_143754) do
   end
 
   create_table "jokes", force: :cascade do |t|
+    t.string "setup"
     t.string "punchline"
     t.string "text"
     t.integer "votes", default: 0

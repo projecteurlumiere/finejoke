@@ -4,15 +4,15 @@
     <%= button_to "Присоединиться", game_join_path(game) if game.joinable? %>
   <% end %>
 
-  <div class="game-data">
-    <ul class="user-list">
-      <%= render partial: "games/game_user", collection: game.users,  as: :user, locals: { game: game } %>
+  <div id="game-data">
+    <ul id="user-list">
+      <%= render partial: "games/game_user", collection: game.users.order(current_score: :desc),  as: :user, locals: { game: game } %>
     </ul>
-    <div class="settings">
+    <div id="settings">
       <%= render partial: "games/game_settings", locals: { game: game } %>
     </div>
   </div>
-  
+
   <%= tag.turbo_frame(id: "current-round", src: (game_round_path(game, game.current_round) if game.ongoing?)) do %>
     <%= button_to("Start game", game_rounds_path(game), data: { turbo_frame: "current-round" }) if game.waiting? || game.on_halt? %>
   <% end %>

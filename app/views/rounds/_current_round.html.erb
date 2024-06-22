@@ -1,0 +1,18 @@
+<turbo-frame id="current-round">
+  <h3 class="stage">
+    <%= round.stage %>
+  </h3>
+  <div class="task">
+    <p>
+      <%= round_task_for(current_or_guest_user, round) %>
+    </p>
+    <% if round.setup %>
+      Завязка:
+      <br>
+      <%= round.setup %>
+    <% end %>
+  </div>
+  <div class="action">
+    <%= render_action_for(current_or_guest_user, round) %>
+  </div>
+</turbo-frame>

@@ -30,8 +30,8 @@ class Game < ApplicationRecord
   broadcasts_to ->(_entry) { "lobby" }, inserts_by: :prepend, partial: "games/game_entry"
   # broadcasts_to ->(game) { ["game", game] }, inserts_by: :replace, partial: "games/game"
 
-  after_create_commit -> { broadcast_prepend_later_to ["game", self] }
-  after_update_commit -> { broadcast_replace_later_to ["game", self] }
+  # after_create_commit -> { broadcast_prepend_later_to ["game", self] }
+  # after_update_commit -> { broadcast_replace_later_to ["game", self] }
   after_destroy_commit -> { 
     broadcast_render_to(["game", self], partial: "games/game_over", locals: { game: self })
     users.each(&:broadcast_status_change) 
@@ -45,6 +45,7 @@ class Game < ApplicationRecord
 
     user.update(host: true) if host
     user.broadcast_status_change
+    broadcast_user_change
 
     true
   end
@@ -59,10 +60,15 @@ class Game < ApplicationRecord
     self.destroy and return true if users.empty?
 
     choose_new_host if user_was_host
-
+    
     touch
+    broadcast_user_change
 
     true
+  end
+
+  def broadcast_user_change
+    broadcast_render_to(["game", self], partial: "games/game_users", formats: %i[turbo_stream], locals: { game_id: self.id })
   end
 
   def kick_user(user)

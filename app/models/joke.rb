@@ -2,12 +2,13 @@ class Joke < ApplicationRecord
   belongs_to :round, touch: true, optional: true
   belongs_to :user
 
+  before_create :compose_full_joke
   after_create :finish_user_turn
-  before_update :compose_full_joke
+  after_create -> { round.touch if round&.turns_finished? }
   # after_commit { self.round.touch }
 
   def compose_full_joke
-    self.text = [round.setup, punchline].join(" ")
+    self.text = [setup, punchline].join(" ")
   end
 
   def finish_user_turn
