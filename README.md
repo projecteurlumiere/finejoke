@@ -1,24 +1,26 @@
 # README
+## Dependencies
+- Ruby 3.3.1
+- PostgreSQL
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Development
+### First launch
+- Install Ruby dependencies:
+```sh
+  bundle i
+```
 
-Things you may want to cover:
+- Migrate database:
+```sh
+  rails db:migrate
+```
 
-* Ruby version
+- Seed database:
+```sh
+  rails db:seed
+```
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### Launching dev server
+```sh
+  rails s
+```
