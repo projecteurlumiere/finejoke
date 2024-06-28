@@ -3,7 +3,10 @@
 <% if game %>
   <%= turbo_stream.action(:replace, "user-list") do %>
     <ul id="user-list">
-      <%= render partial: "games/game_user", collection: game.users.order(current_score: :desc), as: :user, locals: { game: game } %>
+      <%= render partial: "games/game_user", 
+                 collection: game.users.order(current_score: :desc), 
+                 as: :user, 
+                 locals: { game: game, votes_change: votes_change.transform_keys(&:to_i) } %>
     </ul>  
   <% end %>
 <% end %>

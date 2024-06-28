@@ -2,7 +2,7 @@ class GameChannel < ApplicationCable::Channel
   # it is not possible to disconnect user from chanenl or stream from controller or model
   # therefore the channel periodically checks whether user is in game
   # to ensure he was not kicked and still has the right to receive game and game chat updates
-  periodically :check_user_is_in_game, every: 1.minute do
+  periodically every: 1.minute do
     stop_stream_for @game unless user_in_game?
   end
 

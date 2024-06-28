@@ -8,6 +8,7 @@ class Round < ApplicationRecord
     has_many :jokes, dependent: :nullify
 
   enum stage: %i[setup punchline vote results], _suffix: true
+  attr_accessor :votes_change
 
   # tidying up and choosing lead player:
   before_create :reset_players, :choose_lead
@@ -79,7 +80,7 @@ class Round < ApplicationRecord
   end
 
   def count_votes
-    jokes.each do |joke|
+    self.votes_change = jokes.map do |joke|
       author = joke.user
       author.current_score += joke.votes
       author.total_score += joke.votes
@@ -87,7 +88,8 @@ class Round < ApplicationRecord
       unless last?
         toggle(:last) if max_points_achieved?(author)
       end
-    end
+      [author.id, joke.votes]
+    end.to_h
   end
 
   def max_points_achieved?(user)
@@ -99,6 +101,7 @@ class Round < ApplicationRecord
   def move_to_results
     results_stage!
     broadcast_current_round
+    game.broadcast_user_change(votes_change: votes_change)
   end
 
   def schedule_next_stage
@@ -110,7 +113,7 @@ class Round < ApplicationRecord
   end
 
   def schedule_next_round
-    CreateNewRoundJob.set(wait: 5.seconds).perform_later(game)
+    CreateNewRoundJob.set(wait: Game::RESULTS_STAGE_TIME).perform_later(game)
   end
 
   def current?

@@ -4,12 +4,13 @@ class Game < ApplicationRecord
 
   enum status: %i[waiting ongoing on_halt finished]
 
-     MIN_PLAYERS = 2
-     MAX_PLAYERS = 10
-  MIN_ROUND_TIME = 1 
-  MAX_ROUND_TIME = 180
-      MIN_POINTS = 2
-      MAX_POINTS = 1_000
+         MIN_PLAYERS = 2
+         MAX_PLAYERS = 10
+      MIN_ROUND_TIME = 1 
+      MAX_ROUND_TIME = 180
+  RESULTS_STAGE_TIME = 5
+          MIN_POINTS = 2
+          MAX_POINTS = 1_000
 
   validates :name, presence: true, length: { in: 1..30 }
   validates :max_players, numericality: { only_integer: true },
@@ -32,9 +33,9 @@ class Game < ApplicationRecord
 
   # after_create_commit -> { broadcast_prepend_later_to ["game", self] }
   # after_update_commit -> { broadcast_replace_later_to ["game", self] }
-  after_destroy_commit -> { 
+  after_destroy_commit -> {
     broadcast_render_to(["game", self], partial: "games/game_over", locals: { game: self })
-    users.each(&:broadcast_status_change) 
+    users.each(&:broadcast_status_change)
   }
 
   def add_user(user, host: false)
@@ -67,13 +68,14 @@ class Game < ApplicationRecord
     true
   end
 
-  def broadcast_user_change
-    broadcast_render_to(["game", self], partial: "games/game_users", formats: %i[turbo_stream], locals: { game_id: self.id })
-  end
+  alias_method :kick_user, :remove_user
 
-  def kick_user(user)
-    remove_user(user)
-    # render something here?
+  def broadcast_user_change(votes_change: {})
+    broadcast_render_later_to(["game", self], partial: "games/game_users", formats: %i[turbo_stream],
+                                              locals: { 
+                                                game_id: self.id, 
+                                                votes_change: votes_change.transform_keys(&:to_s)
+                                              })
   end
 
   def host

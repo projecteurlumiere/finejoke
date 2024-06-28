@@ -31,7 +31,7 @@ class ApplicationController < ActionController::Base
   end
 
   def remove_referrer
-    session.delete(:referrer)
+    session[:referrer] = nil
   end
 
   def new_guest?

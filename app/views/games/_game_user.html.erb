@@ -1,5 +1,7 @@
-<li>
-  <%= user.username %> and his score: <%= user.current_score %> 
+<%= tag.li data: { vote_change: (votes_change[user.id] if defined? votes_change) } do %>
+  <%= user.username %> and his score: <%= user.current_score %>
+  / 
+  <%= votes_change[user.id] if defined? votes_change %>
   /
   <%= button_to("Kick", game_kick_path(game, params: { user_id: user.id })) %>
-</li>
+<% end %>
