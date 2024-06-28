@@ -8,11 +8,6 @@ class ApplicationController < ActionController::Base
   after_action :verify_authorized, unless: :devise_controller?
   after_action :remove_referrer, unless: %i[devise_controller? new_guest?] 
 
-  def render_turbo_flash(notice: nil, alert: nil)
-    flash.now[:notice] = notice if notice
-    flash.now[:alert] = alert if alert
-  end
-
   def no_authentication_required?
     false
   end
