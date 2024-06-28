@@ -40,6 +40,8 @@ class ApplicationController < ActionController::Base
     true
   end
 
+  helper_method :new_guest?
+
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:username])
   end

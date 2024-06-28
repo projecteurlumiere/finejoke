@@ -10,6 +10,7 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <%= turbo_stream_from ["user", current_or_guest_user], channel: UserChannel unless new_guest? %>
   </head>
 
   <body>

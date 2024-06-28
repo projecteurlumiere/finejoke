@@ -1,6 +1,5 @@
     <nav class="navbar">
       <div class="start">
-        <%= turbo_stream_from ["user", current_or_guest_user], channel: UserChannel %>
         <%= render partial: "layouts/user_status", formats: %i[html], locals: { game: current_or_guest_user.game } %>
       </div>
       <div class="center">
