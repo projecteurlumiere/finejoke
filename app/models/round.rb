@@ -17,6 +17,7 @@ class Round < ApplicationRecord
    after_create -> { game.increment!(:n_rounds) }
    after_create :schedule_next_stage
    after_create :broadcast_current_round
+   after_create -> { game.broadcast_user_change }
    # after_create -> { touch }
   # when lead updated round with setup:
    before_update :random_setup, if: %i[punchline_stage?], unless: %i[setup?]
@@ -30,7 +31,7 @@ class Round < ApplicationRecord
     # after_touch -> { game.touch }
 
   def broadcast_current_round
-    broadcast_render_later_to(["game", game], partial: "rounds/current_round", formats: %i[turbo_stream], locals: { game_id: game.id })
+    game.broadcast_current_round
   end
 
   def reset_players
@@ -69,7 +70,7 @@ class Round < ApplicationRecord
   end
 
   def move_to_punchline
-    user.update_attribute(:finished_turn, true)
+    user.finished_turn!
     punchline_stage!
     broadcast_current_round
   end

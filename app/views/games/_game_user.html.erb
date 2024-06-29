@@ -1,4 +1,10 @@
-<%= tag.li data: { vote_change: (votes_change[user.id] if defined? votes_change), host: user.host? } do %>
+<%= tag.li id: dom_id(user), 
+           data: { 
+             host: user.host?,
+             vote_change: (votes_change[user.id] if defined? votes_change), 
+             lead: user.lead?,
+             finished_turn: user.finished_turn?,
+             voted: user.voted? } do %>
   <%= user.username %> and his score: <%= user.current_score %>
   / 
   <%= votes_change[user.id] if defined? votes_change %>

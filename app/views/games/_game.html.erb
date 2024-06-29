@@ -1,4 +1,4 @@
-<%= tag.div id: dom_id(game), class: "game", data: { user_id: current_or_guest_user.id } do %>
+<%= tag.div id: dom_id(game), class: "game", data: game_data_attributes(game).merge({ user_id: current_or_guest_user.id }) do %>
   <%= content_for(:join) do %>
     <%= link_to "Назад в лобби", games_path %>
     <%= button_to "Присоединиться", game_join_path(game) if game.joinable? %>
@@ -13,9 +13,7 @@
     </div>
   </div>
 
-  <%= tag.turbo_frame(id: "current-round", src: (game_round_path(game, game.current_round) if game.ongoing?)) do %>
-    <%= button_to("Start game", game_rounds_path(game), data: { turbo_frame: "current-round" }) if game.waiting? || game.on_halt? %>
-  <% end %>
+  <%= render partial: "rounds/current_round_request", formats: %i[html], locals: { game: game } %>
 
   <div id="chat-container">
     <%= render partial: "games/chat" %>

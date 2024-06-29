@@ -12,13 +12,14 @@ class Joke < ApplicationRecord
   end
 
   def finish_user_turn
-    self.user.update_attribute(:finished_turn, true)
+    self.user.finished_turn!
   end
 
   def register_vote(by:) # user
+    user = by
     ActiveRecord::Base.transaction do
       self.increment(:votes) 
-      self.save && by.update_attribute(:voted, true)
+      self.save && user.voted!
     end
   end
 end

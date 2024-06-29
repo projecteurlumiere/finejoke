@@ -2,8 +2,6 @@
 
 <% if game %>
   <%= turbo_stream.action(:replace, "current-round") do %>
-    <%= tag.turbo_frame(id: "current-round", src: (game_round_path(game, game.current_round) if game.ongoing?)) do %>
-      <%= button_to("Start game", game_rounds_path(game), data: { turbo_frame: "current-round" }) if game.waiting? || game.on_halt? %>
-    <% end %>
+    <%= render partial: "rounds/current_round_request", formats: %i[html], locals: { game: game } %>
   <% end %>
 <% end %>

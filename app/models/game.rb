@@ -25,7 +25,7 @@ class Game < ApplicationRecord
   # after_create -> { broadcast_replace_to "lobby", partial: "games/list", locals: { games: Game.all }, target: "games" }
   after_touch -> { ongoing! }, if: %i[waiting? current_round]
   after_touch -> { waiting! }, if: %i[on_halt? enough_players?]
-  after_touch -> { on_halt! }, if: %i[ongoing? not_enough_players?] 
+  after_touch -> { on_halt!; broadcast_current_round }, if: %i[ongoing? not_enough_players?] 
   after_touch :skip_round, if: %i[ongoing? lead_left?]
 
   broadcasts_to ->(_entry) { "lobby" }, inserts_by: :prepend, partial: "games/game_entry"
@@ -69,6 +69,10 @@ class Game < ApplicationRecord
   end
 
   alias_method :kick_user, :remove_user
+
+  def broadcast_current_round
+    broadcast_render_later_to(["game", self], partial: "rounds/current_round", formats: %i[turbo_stream], locals: { game_id: id })
+  end
 
   def broadcast_user_change(votes_change: {})
     broadcast_render_later_to(["game", self], partial: "games/game_users", formats: %i[turbo_stream],
