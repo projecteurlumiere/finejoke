@@ -30,13 +30,8 @@ class Round < ApplicationRecord
     after_touch :schedule_next_stage, unless: %i[results_stage? last?]
     # after_touch -> { game.touch }
 
-  def broadcast_current_round
-    game.broadcast_current_round
-  end
-
-  def reset_players
-    game.reset_players
-  end
+  delegate :broadcast_current_round, to: :game
+  delegate :reset_players, to: :game
 
   def choose_lead 
     self.user_id = game.choose_lead.id

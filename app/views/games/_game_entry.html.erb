@@ -1,3 +1,5 @@
+<% game = Game.find_by(id: game_id) if defined? game_id %>
+
 <li id=<%= dom_id(game) %>>
   <%= game.name %>
   |

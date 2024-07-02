@@ -1,4 +1,6 @@
 class Game < ApplicationRecord
+  include GameBroadcasting
+
   has_many :users # players
   has_many :rounds, dependent: :destroy
 
@@ -22,21 +24,13 @@ class Game < ApplicationRecord
   validates :max_points, numericality: { only_integer: true },
                          comparison: { greater_than_or_equal_to: MIN_POINTS, less_than_or_equal_to: MAX_POINTS }, allow_nil: true
 
-  # after_create -> { broadcast_replace_to "lobby", partial: "games/list", locals: { games: Game.all }, target: "games" }
   after_touch -> { ongoing! }, if: %i[waiting? current_round]
   after_touch -> { waiting! }, if: %i[on_halt? enough_players?]
   after_touch -> { on_halt!; broadcast_current_round }, if: %i[ongoing? not_enough_players?] 
   after_touch :skip_round, if: %i[ongoing? lead_left?]
 
-  broadcasts_to ->(_entry) { "lobby" }, inserts_by: :prepend, partial: "games/game_entry"
-  # broadcasts_to ->(game) { ["game", game] }, inserts_by: :replace, partial: "games/game"
-
-  # after_create_commit -> { broadcast_prepend_later_to ["game", self] }
-  # after_update_commit -> { broadcast_replace_later_to ["game", self] }
-  after_destroy_commit -> {
-    broadcast_render_to(["game", self], partial: "games/game_over", locals: { game: self })
-    users.each(&:broadcast_status_change)
-  }
+  after_create_commit :broadcast_game_start
+  after_destroy_commit :broadcast_game_over
 
   def add_user(user, host: false)
     user.reset_game_attributes
@@ -70,22 +64,6 @@ class Game < ApplicationRecord
 
   alias_method :kick_user, :remove_user
 
-  def broadcast_current_round
-    broadcast_render_later_to(["game", self], partial: "rounds/current_round", formats: %i[turbo_stream], locals: { game_id: id })
-  end
-
-  def broadcast_user_change(votes_change: {})
-    broadcast_render_later_to(["game", self], partial: "games/game_users", formats: %i[turbo_stream],
-                                              locals: { 
-                                                game_id: self.id, 
-                                                votes_change: votes_change.transform_keys(&:to_s)
-                                              })
-  end
-
-  def broadcast_message(text, from:)
-    broadcast_render_later_to(["game", self], partial: "messages/chat_message", locals: { user: from, text: text })
-  end
-
   def host
     users.find_by(host: true)
   end
@@ -111,7 +89,7 @@ class Game < ApplicationRecord
     lead
   end
 
-    def reset_lead
+  def reset_lead
     users.update_all(was_lead: false)
   end
 

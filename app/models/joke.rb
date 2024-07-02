@@ -1,6 +1,7 @@
 class Joke < ApplicationRecord
   belongs_to :round, touch: true, optional: true
   belongs_to :user
+  belongs_to :punchline_author, class_name: "User"
 
   before_create :compose_full_joke
   after_create :finish_user_turn

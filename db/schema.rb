@@ -35,8 +35,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_31_143754) do
     t.integer "votes", default: 0
     t.bigint "round_id"
     t.bigint "user_id", null: false
+    t.bigint "punchline_author_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["punchline_author_id"], name: "index_jokes_on_punchline_author_id"
     t.index ["round_id"], name: "index_jokes_on_round_id"
     t.index ["user_id"], name: "index_jokes_on_user_id"
   end
@@ -80,6 +82,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_31_143754) do
 
   add_foreign_key "jokes", "rounds"
   add_foreign_key "jokes", "users"
+  add_foreign_key "jokes", "users", column: "punchline_author_id"
   add_foreign_key "rounds", "games"
   add_foreign_key "rounds", "users"
 end
