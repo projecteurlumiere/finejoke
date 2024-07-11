@@ -7,8 +7,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :finished_jokes, dependent: :nullify, class_name: :Joke
-  has_many :started_jokes, dependent: :nullify, class_name: :Joke, foreign_key: :punchline_author
+  has_many :finished_jokes, dependent: :nullify, class_name: :Joke, foreign_key: :punchline_author
+  has_many :started_jokes, dependent: :nullify, class_name: :Joke, foreign_key: :setup_author
 
   validates :username, presence: true
 

@@ -6,8 +6,8 @@ class CreateJokes < ActiveRecord::Migration[7.1]
       t.string :text
       t.integer :votes, default: 0
       t.references :round, foreign_key: true
-      t.references :user, null: false, foreign_key: true
-      t.references :punchline_author, null: false
+      t.references :punchline_author
+      t.references :setup_author
 
       t.timestamps
     end
