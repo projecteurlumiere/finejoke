@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  include UserPlaying
   include UserBroadcasting
 
   # Include default devise modules. Others available are:
@@ -6,34 +7,12 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  belongs_to :game, optional: true
+  has_many :finished_jokes, dependent: :nullify, class_name: :Joke
+  has_many :started_jokes, dependent: :nullify, class_name: :Joke, foreign_key: :punchline_author
 
   validates :username, presence: true
 
-  def set_lead
-    self.update(lead: true, was_lead: true)
+  def jokes
+    finished_jokes.or(started_jokes)
   end
-
-  def finished_turn!
-    update_attribute(:finished_turn, true)
-    broadcast_turn_finished
-  end
-
-  def voted!
-    update_attribute(:voted, true)
-    broadcast_vote_finished
-  end
-
-  def reset_game_attributes
-    self.update({ 
-      game_id: nil,
-      host: false,
-      lead: false,
-      finished_turn: false,
-      voted: false,
-      current_score: 0
-    })
-  end
-
-  alias_method :broadcast_vote_finished, :broadcast_turn_finished
 end

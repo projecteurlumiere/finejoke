@@ -7,12 +7,12 @@
       </div>
       <div class="end">
       <% if user_signed_in? %>
-          <div class="navbar-item">Logged in as <strong><%= current_user.username %></strong></div>
+          <div class="navbar-item">Logged in as <strong><%= link_to current_user.username, profile_path %></strong></div>
           <%= link_to "Edit profile", edit_user_registration_path, class: "navbar-item" %>
           <%= link_to "Logout", destroy_user_session_path, class: "navbar-item", 
                                                             data: { turbo_method: :delete }  %>
       <% else %>
-          <p>You are guest user <%= guest_user.username %></p>
+          <p>You are guest user <%= link_to guest_user.username, profile_path %></p>
           <%= link_to "Sign up", new_user_registration_path, class: "navbar-item" %>
           <%= link_to "Login", new_user_session_path, class: "navbar-item"  %>
         <% end %>

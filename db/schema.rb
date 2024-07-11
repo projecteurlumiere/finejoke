@@ -75,6 +75,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_31_143754) do
     t.boolean "voted", default: false
     t.integer "current_score", default: 0
     t.integer "total_score", default: 0
+    t.boolean "show_jokes_allowed", default: true
+    t.boolean "show_presents_allowed", default: true
     t.boolean "guest", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

@@ -1,0 +1,30 @@
+<%= link_to "Настройки профиля", edit_profile_path if current_or_guest_user == @user %>
+<h1><%= @user.username %></h1>
+<h2>Всего очков: 
+  <%= @user.total_score %>
+</h2>
+<% if @jokes %>
+  <h3>Шутки</h3>
+
+  <turbo-frame id="jokes-list">
+    <ul>
+      <% @jokes.each do |joke| %>
+        <li>
+          <p>
+            <%= joke.text %>
+          </p>
+        </li>
+      <% end %>
+    </ul>
+  </turbo-frame>
+
+  <% if @jokes.last_page? %>
+    <p>Шутки кончились</p>
+  <% else %>
+    <%= link_to_next_page @jokes, "Загрузить ещё шуточек" %>
+  <% end %>
+<% else %>
+  <h3>
+    <%= @user.username %> скрыл свои шутки!
+  </h3>
+<% end %>

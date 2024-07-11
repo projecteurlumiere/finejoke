@@ -1,6 +1,8 @@
 module Sanitizable
   extend ActiveSupport::Concern
 
+  # NOT IN USE!
+
   # add the following code to ApplicationRecord:
 
   # include Sanitizable

@@ -5,7 +5,7 @@
              lead: user.lead?,
              finished_turn: user.finished_turn?,
              voted: user.voted? } do %>
-  <%= user.username %> and his score: <%= user.current_score %>
+  <%= link_to user.username, profile_path(user) %> and his score: <%= user.current_score %>
   / 
   <%= votes_change[user.id] if defined? votes_change %>
   /

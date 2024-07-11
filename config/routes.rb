@@ -9,6 +9,9 @@ Rails.application.routes.draw do
     end
     resources :messages, only: %i[create]
   end
+
+  resource :profile, only: %i[show edit update]
+  resources :profiles, only: %i[show]
   
   devise_for :users
   get "up" => "rails/health#show", as: :rails_health_check
