@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  include UserMergeable
   include UserPlaying
   include UserBroadcasting
 
@@ -7,8 +8,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :finished_jokes, dependent: :nullify, class_name: :Joke, foreign_key: :punchline_author
-  has_many :started_jokes, dependent: :nullify, class_name: :Joke, foreign_key: :setup_author
+  has_many :finished_jokes, dependent: :nullify, class_name: :Joke, foreign_key: :punchline_author_id
+  has_many :started_jokes, dependent: :nullify, class_name: :Joke, foreign_key: :setup_author_id
 
   validates :username, presence: true
 

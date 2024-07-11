@@ -46,28 +46,10 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up, keys: [:username])
   end
 
-  # def transfer_guest_to_user
-  #   # At this point you have access to:
-  #   #   * current_user - the user they've just logged in as
-  #   #   * guest_user - the guest user they were previously identified by
-  #   # 
-  #   # After this block runs, the guest_user will be destroyed!
-
-  #   if current_user.cart
-  #     guest_user.cart.line_items.update_all(cart_id: current_user.cart.id)
-  #   else
-  #     guest_user.cart.update!(user: current_user)
-  #   end
-
-  #   # In this example we've moved `LineItem` records from the guest
-  #   # user's cart to the logged-in user's cart.
-  #   #
-  #   # To prevent these being deleted when the guest user & cart are
-  #   # destroyed, we need to reload the guest record:
-  #   guest_user.reload
-  # end
-
-  def skip_destroy_guest_user
-    true
+  def transfer_guest_to_user
+    ActiveRecord::Base.transaction do
+      current_user.merge(guest_user)
+      guest_user.reload
+    end
   end
 end
