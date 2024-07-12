@@ -2,9 +2,9 @@
       <div class="start">
         <%= render partial: "layouts/user_status", formats: %i[html], locals: { game: current_or_guest_user.game } %>
       </div>
-      <div class="center">
-        Logo here
-      </div>
+      <h1 class="center">
+        Название или Лого
+      </h1>
       <div class="end">
       <% if user_signed_in? %>
           <div class="navbar-item">Logged in as <strong><%= link_to current_user.username, self_profile_path %></strong></div>

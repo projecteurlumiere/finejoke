@@ -11,10 +11,26 @@
  * It is generally better to create a new file per style scope.
  *
  *= require normalize-rails
- *= require_tree .
  *= require_self
+ *= default_override
+ *= require fonts
+ *= require_direcoty ./utility
+ *= require_directory ./components
+ *= require_directory ./layouts
+ *= require_directory ./views
  */
 
-main {
-display: flex;
+body {
+  background: linear-gradient(270.00deg, rgb(83, 217, 216),rgb(31, 182, 199) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+header,
+main,
+footer {
+  max-width: 1600px;
+  width: 80vw;
 }

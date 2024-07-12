@@ -36,9 +36,12 @@ module Finejoke
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
-
-    config.active_support.isolation_level = :fiber
     
+    config.assets.paths << Rails.root.join("app", "assets", "fonts") 
+
+    config.assets.enabled = true
+    config.active_support.isolation_level = :fiber
+
     config.action_view.sanitized_allowed_tags = []
     config.action_view.sanitized_allowed_attributes = []
   end

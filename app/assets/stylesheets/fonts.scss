@@ -1,0 +1,20 @@
+@font-face {
+  font-family: "Press Start 2P";
+  src: font-url("PressStart2P-Regular.ttf"), format("truetype");
+}
+
+
+@font-face {
+  font-family: "Nunito Sans";
+  src: url("NunitoSans-VariableFont_YTLC,opsz,wdth,wght.ttf"), format("truetype");
+}
+
+
+* {
+  font-family: "Nunito Sans", system-ui;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Press Start 2P", system-ui;
+}
+
