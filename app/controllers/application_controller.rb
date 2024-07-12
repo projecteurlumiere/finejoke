@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
     session[:referrer] = request.path
   end
 
-  def after_sign_in_path_for(resource)
+  def after_sign_in_path_for(_resource)
     turbo_redirect_to_path(params: { path: session[:referrer]})
   end
 

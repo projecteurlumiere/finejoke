@@ -1,4 +1,4 @@
-<%= form_with(model: user, url: profile_path) do |form| %>
+<%= form_with(model: user, url: self_profile_path) do |form| %>
   <% if user.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
@@ -17,8 +17,8 @@
   </div>
 
   <div>
-    <%= form.label :show_presents_allowed, style: "display: block" %>
-    <%= form.check_box :show_presents_allowed %>
+    <%= form.label :show_awards_allowed, style: "display: block" %>
+    <%= form.check_box :show_awards_allowed %>
   </div>
 
   <div>

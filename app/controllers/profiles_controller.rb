@@ -1,11 +1,15 @@
 class ProfilesController < ApplicationController
-  before_action :set_user
+  before_action :set_user, except: %i[show]
   before_action :authorize_user_profile!, except: %i[update]
 
   def show
-    @user = params[:id] ? User.find(params[:id]) : set_user
+    redirect_to profile_path(set_user) and return if params[:id].nil?
 
+    @user = User.find(params[:id]) 
     @jokes = @user.jokes.page(params[:page]) if @user.show_jokes_allowed?
+    @awards = @user.awards.page(params[:page]) if @user.show_awards_allowed?
+
+    @award = @user.awards.build
   end
 
   def edit
@@ -28,7 +32,7 @@ class ProfilesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def profile_params
-    params.require(:user).permit(:show_jokes_allowed, :show_presents_allowed)
+    params.require(:user).permit(:show_jokes_allowed, :show_awards_allowed)
   end
 
   def set_user

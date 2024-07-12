@@ -20,6 +20,6 @@ class AddAttributesToUsers < ActiveRecord::Migration[7.1]
 
     # profile related
     add_column :users, :show_jokes_allowed, :boolean, default: true
-    add_column :users, :show_presents_allowed, :boolean, default: true
+    add_column :users, :show_awards_allowed, :boolean, default: true
   end
 end

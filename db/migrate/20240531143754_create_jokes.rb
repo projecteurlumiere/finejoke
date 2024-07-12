@@ -6,12 +6,10 @@ class CreateJokes < ActiveRecord::Migration[7.1]
       t.string :text
       t.integer :votes, default: 0
       t.references :round, foreign_key: true
-      t.references :punchline_author
-      t.references :setup_author
+      t.references :punchline_author, foreign_key: { to_table: :users }
+      t.references :setup_author, foreign_key: { to_table: :users }
 
       t.timestamps
     end
-
-     add_foreign_key :jokes, :users, column: :punchline_author_id, primary_key: :id
   end
 end

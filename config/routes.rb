@@ -10,8 +10,10 @@ Rails.application.routes.draw do
     resources :messages, only: %i[create]
   end
 
-  resource :profile, only: %i[show edit update]
   resources :profiles, only: %i[show]
+  resource :profile, only: %i[show edit update], as: :self_profile
+
+  post "award", to: "awards#gift"
   
   devise_for :users
   get "up" => "rails/health#show", as: :rails_health_check

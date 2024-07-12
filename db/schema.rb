@@ -10,9 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_31_143754) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_12_085349) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "awards", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "present_id", null: false
+    t.string "signature"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["present_id"], name: "index_awards_on_present_id"
+    t.index ["user_id"], name: "index_awards_on_user_id"
+  end
 
   create_table "games", force: :cascade do |t|
     t.integer "max_players", default: 10, null: false
@@ -41,6 +51,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_31_143754) do
     t.index ["punchline_author_id"], name: "index_jokes_on_punchline_author_id"
     t.index ["round_id"], name: "index_jokes_on_round_id"
     t.index ["setup_author_id"], name: "index_jokes_on_setup_author_id"
+  end
+
+  create_table "presents", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.string "icon"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "rounds", force: :cascade do |t|
@@ -76,14 +94,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_31_143754) do
     t.integer "current_score", default: 0
     t.integer "total_score", default: 0
     t.boolean "show_jokes_allowed", default: true
-    t.boolean "show_presents_allowed", default: true
+    t.boolean "show_awards_allowed", default: true
     t.boolean "guest", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "awards", "presents"
+  add_foreign_key "awards", "users"
   add_foreign_key "jokes", "rounds"
   add_foreign_key "jokes", "users", column: "punchline_author_id"
+  add_foreign_key "jokes", "users", column: "setup_author_id"
   add_foreign_key "rounds", "games"
   add_foreign_key "rounds", "users"
 end

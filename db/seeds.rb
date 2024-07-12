@@ -11,3 +11,5 @@
 user = User.new(email: "abc@abc.com", username: "Joker-1", password: "12345678")
 user_2 = User.new(email: "def@def.com", username: "Joker-2", password: "12345678")
 [user, user_2].each { |u| u.save(validate: false) }
+
+Present.create(name: "Present 1", description: "This is the very first present", icon: "this is an svg icon to be implemented soon")

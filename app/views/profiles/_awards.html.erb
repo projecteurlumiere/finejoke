@@ -1,0 +1,25 @@
+<% if @awards %>
+  <h3>Награды</h3>
+
+  <turbo-frame id="awards-list">
+    <ul>
+      <% @awards.each do |award| %>
+        <li>
+          <p>
+            <%= award.name %> | <%= award.description %> | <%= award.icon %> | <%= award.signature %>
+          </p>
+        </li>
+      <% end %>
+    </ul>
+  </turbo-frame>
+
+  <% if @awards.last_page? %>
+    <p>Наград больше нет</p>
+  <% else %>
+    <%= link_to_next_page @awards, "Загрузить ещё наград" %>
+  <% end %>
+<% else %>
+  <h3>
+    <%= @user.username %> скрыл свои награды!
+  </h3>
+<% end %>
