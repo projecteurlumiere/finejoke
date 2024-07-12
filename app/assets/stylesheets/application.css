@@ -14,7 +14,7 @@
  *= require_self
  *= default_override
  *= require fonts
- *= require_direcoty ./utility
+ *= require_directory ./utility
  *= require_directory ./components
  *= require_directory ./layouts
  *= require_directory ./views

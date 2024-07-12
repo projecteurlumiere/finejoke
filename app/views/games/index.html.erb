@@ -1,14 +1,18 @@
+<% content_for(:main_class, :lobby) %>
+
 <%= turbo_stream_from "lobby", channel: LobbyChannel %>
 
-<div id="catalogue">
-  <h1>Игры</h1>
-  
-  <div id="games">
-    <%= render partial: "game_entry", collection: @games, as: :game %>
+<div id="lobby" class="two-columns">
+  <div id="catalogue">
+    <h1>Игры</h1>
+    
+    <div id="games">
+      <%= render partial: "game_entry", collection: @games, as: :game %>
+    </div>
   </div>
+  
+  <turbo-frame id="new-game" target="_top">
+    <h1>Новая игра</h1>
+    <%= render partial: "form", locals: { game: @game } %>
+  </turbo-frame>
 </div>
-
-<turbo-frame id="new-game" target="_top">
-  <h1>Новая игра</h1>
-  <%= render partial: "form", locals: { game: @game } %>
-</turbo-frame>

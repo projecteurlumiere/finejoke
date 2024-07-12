@@ -1,3 +1,5 @@
+<% content_for(:main_class, :game) %>
+
 <%= turbo_stream_from @game, channel: GameChannel, data: { id: @game.id } %>
 
 <%= render @game %>

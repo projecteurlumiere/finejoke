@@ -18,8 +18,8 @@
       <%= render partial: "layouts/navbar" %>
       <%= render partial: "layouts/flash" %>
     </header>
-    <main>
-      <%= yield %>  
-    </main>
+    <%= tag.main class: yield(:main_class) do %>
+      <%= yield %>
+    <% end %>
   </body>
 </html>

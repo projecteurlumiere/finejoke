@@ -1,0 +1,30 @@
+.three-columns {
+  display: flex;
+  column-gap: 1rem;
+
+  > * {
+    flex: 1 1 250px;
+    text-align: left;
+  }
+
+  > *:nth-child(2) {
+    flex: 1 1 500px;
+    text-align: center;
+  }
+
+  >*:nth-child(3) {
+    text-align: right;
+  }
+}
+
+.two-columns {
+  display: flex;
+
+  > *:first-child {
+    flex: 1 1 600px;
+  }
+
+  > *:last-child {
+    flex: 1 1 400px;
+  }
+}
