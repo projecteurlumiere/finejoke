@@ -12,7 +12,7 @@
  *
  *= require normalize-rails
  *= require_self
- *= default_override
+ *= require defaults_override
  *= require fonts
  *= require_directory ./utility
  *= require_directory ./components
@@ -20,12 +20,25 @@
  *= require_directory ./views
  */
 
+:root {
+  --red: rgb(239, 60, 92);
+  --white: rgb(255, 255, 255);
+  --white-dim: rgba(255, 255, 255, 0.7);
+  --black: rgb(50, 56, 118);
+  --teal: rgb(0, 255, 221);
+  --background-gradient: linear-gradient(270.00deg, rgb(83, 217, 216),rgb(31, 182, 199) 100%);
+}
+
 body {
-  background: linear-gradient(270.00deg, rgb(83, 217, 216),rgb(31, 182, 199) 100%);
+  background: var(--background-gradient);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  padding: 2rem;
+  padding-bottom: 0rem;
+
+  max-height: 100dvh;
 }
 
 header,
@@ -33,4 +46,8 @@ main,
 footer {
   max-width: 1600px;
   width: 80vw;
+}
+
+main {
+  padding-bottom: 2rem;
 }

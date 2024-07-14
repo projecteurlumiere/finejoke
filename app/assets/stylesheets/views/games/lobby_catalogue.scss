@@ -1,0 +1,29 @@
+#catalogue {
+  overflow-y: scroll;
+
+  h2 {
+    margin-left: 1rem;
+  }
+
+  li {
+    display: flex;
+    column-gap: 1rem;
+    padding: 1rem 1rem;
+    border: solid 1px var(--white);
+    margin-bottom: 1rem;
+
+    font-weight: 600;
+
+    span {
+      display: block;
+    }
+
+    span:last-child {
+      margin-left: auto;
+    }
+  }
+
+  li:last-child {
+    margin-bottom: 0rem;
+  }
+}

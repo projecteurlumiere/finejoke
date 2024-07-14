@@ -12,9 +12,10 @@
           <%= link_to "Logout", destroy_user_session_path, class: "navbar-item", 
                                                             data: { turbo_method: :delete }  %>
       <% else %>
-          <p>You are guest user <%= link_to guest_user.username, self_profile_path %></p>
-          <%= link_to "Sign up", new_user_registration_path, class: "navbar-item" %>
-          <%= link_to "Login", new_user_session_path, class: "navbar-item"  %>
-        <% end %>
+          <div><%= link_to guest_user.username, self_profile_path %></div>
+          <div class="notice">Вы гость. 
+            <%= link_to "Войти?", new_user_registration_path %>
+          </div>
+      <% end %>
       </div>
     </nav>

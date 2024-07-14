@@ -1,4 +1,4 @@
-<%= form_with(model: game) do |form| %>
+<%= form_with(model: game, id: "new-game") do |form| %>
   <% if game.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(game.errors.count, "error") %> prohibited this game from being saved:</h2>
@@ -12,36 +12,57 @@
   <% end %>
 
   <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+    <%= form.text_field :name, placeholder: "Название", aria_label: "Введите название" %>
   </div>
 
+  <fieldset class="settings">
+    <legend>Настройка</legend>
     <div>
-    <%= form.label :viewable, style: "display: block" %>
-    <%= form.check_box :viewable %>
-  </div>
+      <%= form.select :max_players, (2..10), value: 2 %>
+      <%= form.label :max_players, "Кол-во игроков, чел", style: "display: block" %>
+    </div>
+    
+    <div>
+      <%= form.select :max_round_time, [60, 90, 120, 150, 180], value: 90 %>
+      <%= form.label :max_round_time, "Длительность раунда, сек", style: "display: block" %>
+    </div>
+  </fieldset>
 
-  <div>
-    <%= form.label :max_players, style: "display: block" %>
-    <%= form.number_field :max_players, value: 2 %>
-  </div>
+  <fieldset class="conditions">
+    <legend>Условия победы</legend>
+    <div>
+      <%# form.check_box :max_rounds_enabled, aria_label: "Включить условие победы по раундам" %>
+      <div class="circle"></div>
+      <%= form.label :max_rounds, "Кол-во раундов", style: "display: block" %>
+      <%# form.number_field :max_rounds, min: 1, max: 42, value: nil, placeholder: "Нет" %>
+      <%= form.select :max_rounds, [["Нет", nil], 1, 5, 10, 15, 20, 25, 30, 35, 40, 42], value: "Нет", placeholder: "Нет" %>
+    </div>
+    
+    <div>
+      <%# form.check_box :max_points_enabled aria_label: "Включить условие победы по очкам %>
+      <div class="circle"></div>
+      <%= form.label :max_points, "Кол-во очков", aria_label: "Включить условие победы по очкам", style: "display: block" %>
+      <%# form.number_field :max_points, min: 10, max: 999, value: nil, placeholder: "Нет" %>
+      <%= form.select :max_points, [["Нет", nil], 10, 50, 100, 150, 200, 400, 600, 800, 999], value: "Нет", placeholder: "Нет" %>
+    </div>
+  </fieldset>
 
-  <div>
-    <%= form.label :max_rounds, style: "display: block" %>
-    <%= form.number_field :max_rounds %>
-  </div>
+  <fieldset class="privacy">
+    <legend>Доступ</legend>
+    
+    <div>
+      <div>Открыта для зрителей</div>
+      <div class="switch">
+        <%= form.label :viewable, aria_label: "Открыта для зрителей" do %>
+          <%= form.check_box :viewable %>
+          <span class="slider"></span>
+        <% end %>
+      </div>
+    </div>
 
-  <div>
-    <%= form.label :max_round_time, style: "display: block" %>
-    <%= form.number_field :max_round_time, value: 90 %>
-  </div>
+  </fieldset>
 
-  <div>
-    <%= form.label :max_points, style: "display: block" %>
-    <%= form.number_field :max_points %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
+  <%# <div> %>
+    <%# form.submit %>
+  <%# </div> %>
 <% end %>

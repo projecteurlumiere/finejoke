@@ -1,3 +1,11 @@
+* {
+  font-size: 1.5rem;
+}
+
+a {
+  font-size: inherit;
+}
+
 :root {
   font-size: 16px;
 }
@@ -18,7 +26,14 @@
   font-family: "Nunito Sans", system-ui;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6,
+button,
+input[type=submit],
+input[type=text] {
   font-family: "Press Start 2P", system-ui;
+}
+
+* {
+  color: var(--white);
 }
 

@@ -1,0 +1,43 @@
+button,
+input[type=submit] {
+  background-color: transparent;
+  color: var(--white);
+  border: solid 1px;
+  padding: 1em;
+}
+
+ul, ol, li {
+  list-style: none;
+  margin: unset;
+  padding: unset;
+}
+
+input[type=text] {
+  background-color: transparent;
+  border: none;
+  border-bottom: solid 1px var(--white);
+  padding: 1em;
+
+  font-size: 1.5rem;
+  width: 100%;
+}
+
+fieldset {
+  margin: 0;
+  padding: 0;
+  border: unset;
+}
+
+fieldset > legend {
+  border: unset;
+  font-weight: 600;
+}
+
+input[type=number],
+select {
+  font-size: 1.2rem;
+  background-color: transparent;
+  border: solid 1px var(--white);
+  padding: 0.5rem;
+  padding-right: 0;
+}

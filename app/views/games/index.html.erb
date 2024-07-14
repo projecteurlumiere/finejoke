@@ -3,16 +3,27 @@
 <%= turbo_stream_from "lobby", channel: LobbyChannel %>
 
 <div id="lobby" class="two-columns">
-  <div id="catalogue">
-    <h1>Игры</h1>
+  <div id="catalogue" class="red">
+    <h2>Комнаты</h2>
     
-    <div id="games">
+    <ul id="games">
       <%= render partial: "game_entry", collection: @games, as: :game %>
-    </div>
+    </ul>
   </div>
   
-  <turbo-frame id="new-game" target="_top">
-    <h1>Новая игра</h1>
+    
+  <div>
+    <h2>Новая игра</h2>
+
     <%= render partial: "form", locals: { game: @game } %>
-  </turbo-frame>
+  </div>
+
+  <div class="buttons">
+    <button>Подключиться</button>
+    <button>Смотреть</button>
+  </div>
+
+  <div class="buttons">
+    <input type="submit" form="new-game" value="Update"/>
+  </div>
 </div>
