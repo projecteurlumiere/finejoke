@@ -14,6 +14,9 @@
 
     font-weight: 600;
 
+    height: 90%;
+    overflow-y: auto;
+
     span {
       display: block;
     }
@@ -25,5 +28,15 @@
 
   li:last-child {
     margin-bottom: 0rem;
+  }
+
+  @media(max-width: 950px) {
+    h2 {
+      display: none;
+    }
+
+    ul {
+      padding-top: 1rem;
+    }
   }
 }

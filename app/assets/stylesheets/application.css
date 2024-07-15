@@ -29,6 +29,11 @@
   --background-gradient: linear-gradient(270.00deg, rgb(83, 217, 216),rgb(31, 182, 199) 100%);
 }
 
+html, body {
+  max-height: 100dvh;
+  overflow: hidden;
+}
+
 body {
   background: var(--background-gradient);
   display: flex;
@@ -37,17 +42,28 @@ body {
   align-items: center;
   padding: 2rem;
   padding-bottom: 0rem;
+}
 
-  max-height: 100dvh;
+@media(max-height: 550px) {
+  html, body {
+    overflow-y: auto;
+    max-height: unset;
+  }
 }
 
 header,
 main,
 footer {
   max-width: 1600px;
-  width: 80vw;
+  width: 90vw;
 }
 
 main {
-  padding-bottom: 2rem;
+  margin-bottom: 2rem;
+}
+
+@media(max-height: 600px) {
+  body {
+    padding-top: 0.5rem;
+  }
 }

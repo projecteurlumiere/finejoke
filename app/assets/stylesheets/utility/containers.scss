@@ -28,9 +28,35 @@
 
 .two-columns {
   grid-template-columns: 3fr 2fr;
+  grid-template-rows: 66vh;
 
   > * {
     border: solid 1px var(--white);
+  }
+
+  @media(max-width: 950px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 65vh auto;
+
+    > *:nth-child(even) {
+      display: none !important;
+    }
+
+    @media(max-height: 850px) {
+      grid-template-rows: auto 60vh auto;
+    }
+
+    @media(max-height: 700px) {
+      grid-template-rows: auto 55vh auto;
+    }
+
+    @media (max-height: 600px) {
+      grid-template-rows: auto 50vh auto;
+    }
+
+    @media(max-height: 500px) {
+      grid-template-rows: auto 45vh auto;
+    }
   }
 }
 

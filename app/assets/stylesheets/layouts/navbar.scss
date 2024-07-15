@@ -16,6 +16,14 @@ header {
       padding: 0;
     }
 
+    .start {
+      @media(max-width: 950px) {
+        > * {
+          display: none;
+        }
+      }
+    }
+
     .end {
       display: grid;
       grid-template-rows: 1fr 1fr 1fr;
@@ -25,11 +33,35 @@ header {
         grid-row: 2 / 3;
       }
 
+      .profile-short {
+        display: none;
+      }
+
+      @media(max-width: 950px) {
+        .profile {
+          display: none;
+        }
+
+        .profile-short {
+          display: block;
+        }
+
+        .notice {
+          display: none;
+        }
+      }
+
       .notice {
         font-size: 1rem;
 
         grid-row: 3 / 4;
-      } 
+      }
+    }
+  }
+
+  @media(max-width: 950px) {
+    * {
+      font-size: 1.25rem;
     }
   }
 }

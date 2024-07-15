@@ -3,19 +3,9 @@
         <%= render partial: "layouts/user_status", formats: %i[html], locals: { game: current_or_guest_user.game } %>
       </div>
       <h1 class="center">
-        Название или Лого
+        Лого
       </h1>
       <div class="end">
-      <% if user_signed_in? %>
-          <div>Logged in as <strong><%= link_to current_user.username, self_profile_path %></strong></div>
-          <%= link_to "Edit profile", edit_user_registration_path, class: "navbar-item" %>
-          <%= link_to "Logout", destroy_user_session_path, class: "navbar-item", 
-                                                            data: { turbo_method: :delete }  %>
-      <% else %>
-          <div><%= link_to guest_user.username, self_profile_path %></div>
-          <div class="notice">Вы гость. 
-            <%= link_to "Войти?", new_user_registration_path %>
-          </div>
-      <% end %>
+        <%= render partial: "layouts/user_profile" %>
       </div>
     </nav>

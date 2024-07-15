@@ -1,9 +1,11 @@
 button,
-input[type=submit] {
+input[type=submit],
+.button {
   background-color: transparent;
   color: var(--white);
   border: solid 1px;
   padding: 1em;
+  white-space: nowrap;
 }
 
 ul, ol, li {
@@ -18,7 +20,7 @@ input[type=text] {
   border-bottom: solid 1px var(--white);
   padding: 1em;
 
-  font-size: 1.5rem;
+  font-size: inherit;
   width: 100%;
 }
 
@@ -35,9 +37,15 @@ fieldset > legend {
 
 input[type=number],
 select {
-  font-size: 1.2rem;
+  font-size: inherit;
   background-color: transparent;
   border: solid 1px var(--white);
-  padding: 0.5rem;
+  padding: 0.5em;
   padding-right: 0;
+}
+
+select {
+  -moz-appearance: none; /* Firefox */
+  -webkit-appearance: none; /* Safari and Chrome */
+  appearance: none;
 }

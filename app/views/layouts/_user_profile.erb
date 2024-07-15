@@ -1,0 +1,12 @@
+<% if user_signed_in? %>
+    <div>Logged in as <strong><%= link_to current_user.username, self_profile_path %></strong></div>
+    <%= link_to "Edit profile", edit_user_registration_path, class: "navbar-item" %>
+    <%= link_to "Logout", destroy_user_session_path, class: "navbar-item", 
+                                                      data: { turbo_method: :delete }  %>
+<% else %>
+    <div class="profile"><%= link_to guest_user.username, self_profile_path %></div>
+    <div class="profile-short"><%= link_to guest_user.username[0], self_profile_path %></div>
+    <div class="notice">Вы гость. 
+      <%= link_to "Войти?", new_user_registration_path %>
+    </div>
+<% end %>

@@ -16,15 +16,15 @@
   </div>
 
   <fieldset class="settings">
-    <legend>Настройка</legend>
+    <legend>Доп настройки</legend>
     <div>
       <%= form.select :max_players, (2..10), value: 2 %>
-      <%= form.label :max_players, "Кол-во игроков, чел", style: "display: block" %>
+      <%= form.label :max_players, "Макс игроков", style: "display: block" %>
     </div>
     
     <div>
       <%= form.select :max_round_time, [60, 90, 120, 150, 180], value: 90 %>
-      <%= form.label :max_round_time, "Длительность раунда, сек", style: "display: block" %>
+      <%= form.label :max_round_time, "Время раунда, сек", style: "display: block" %>
     </div>
   </fieldset>
 

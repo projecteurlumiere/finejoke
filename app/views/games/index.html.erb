@@ -2,7 +2,7 @@
 
 <%= turbo_stream_from "lobby", channel: LobbyChannel %>
 
-<div id="lobby" class="two-columns">
+<div id="lobby" class="two-columns">  
   <div id="catalogue" class="red">
     <h2>Комнаты</h2>
     
@@ -14,7 +14,6 @@
     
   <div>
     <h2>Новая игра</h2>
-
     <%= render partial: "form", locals: { game: @game } %>
   </div>
 
@@ -24,6 +23,11 @@
   </div>
 
   <div class="buttons">
-    <input type="submit" form="new-game" value="Update"/>
+    <input type="submit" form="new-game" value="Создать"/>
+  </div>
+
+  <div class="buttons">
+    <button>Комнаты</button>
+    <button>Создать</button>
   </div>
 </div>
