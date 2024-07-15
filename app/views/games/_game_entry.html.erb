@@ -2,6 +2,7 @@
 
 <%= tag.li id: dom_id(game),
            data: {
+            action: "click->catalogue#select",
             join_path: (game_join_path(game) if game.joinable?),
             view_path: (game_path(game) if game.viewable) 
            } do %>

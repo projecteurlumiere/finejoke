@@ -2,8 +2,8 @@
 
 <%= turbo_stream_from "lobby", channel: LobbyChannel %>
 
-<div id="lobby" class="two-columns">  
-  <div id="catalogue" class="red">
+<div id="lobby" class="two-columns" data-controller="catalogue new-game lobby">  
+  <div id="catalogue" class="red" data-lobby-target="catalogue">
     <h2>Комнаты</h2>
     
     <ul id="games">
@@ -12,22 +12,22 @@
   </div>
   
     
-  <div>
+  <div class="hidden-when-mobile" data-lobby-target="form">
     <h2>Новая игра</h2>
     <%= render partial: "form", locals: { game: @game } %>
   </div>
 
-  <div class="buttons">
-    <button>Подключиться</button>
-    <button>Смотреть</button>
+  <div class="buttons" data-lobby-target="catalogue">
+    <a class="button disabled" data-catalogue-target="connect">Подключиться</a>
+    <a class="button disabled" data-catalogue-target="view">Смотреть</a>
+  </div>
+
+  <div class="buttons hidden-when-mobile" data-lobby-target="form">
+    <input type="submit" form="new-game" value="Создать" data-action="click->new-game#validate">
   </div>
 
   <div class="buttons">
-    <input type="submit" form="new-game" value="Создать"/>
-  </div>
-
-  <div class="buttons">
-    <button>Комнаты</button>
-    <button>Создать</button>
+    <a class="button selected" data-lobby-target="roomsButton" data-action="click->lobby#showCatalogue">Комнаты</a>
+    <a class="button" data-lobby-target="formButton" data-action="click->lobby#showForm">Создать</a>
   </div>
 </div>

@@ -1,0 +1,23 @@
+button,
+input[type=submit],
+.button {
+  background-color: transparent;
+  color: var(--white);
+  border: solid 1px var(--white);
+  padding: 1em;
+  white-space: nowrap;
+  text-align: center;
+  text-decoration: none;
+}
+
+input[type=submit].disabled,
+button.disabled,
+.button.disabled {
+  color: var(--white-dim);
+  pointer-events: none;
+}
+
+.button.selected {
+  background-color: var(--red);
+  border-color: var(--red);
+}

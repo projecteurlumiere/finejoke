@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :games, except: %i[update edit] do
-    post "join", to: "games#join"
+    get "join", to: "games#join"
     post "leave", to: "games#leave"
     post "kick", to: "games#kick"
 

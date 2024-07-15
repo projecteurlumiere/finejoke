@@ -38,7 +38,7 @@
     grid-template-columns: 1fr;
     grid-template-rows: auto 65vh auto;
 
-    > *:nth-child(even) {
+    > .hidden-when-mobile {
       display: none !important;
     }
 
