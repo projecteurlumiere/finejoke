@@ -58,6 +58,7 @@ header {
 
 main {
   height: 100%;
+  min-height: 300px;
   padding-bottom: 2rem;
 }
 
