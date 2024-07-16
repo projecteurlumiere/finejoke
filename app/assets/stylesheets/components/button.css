@@ -1,6 +1,7 @@
 button,
 input[type=submit],
 .button {
+  display: block;
   background-color: transparent;
   color: var(--white);
   border: solid 1px var(--white);

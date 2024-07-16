@@ -1,0 +1,15 @@
+.message-input {
+  display: flex;
+  gap: 1ch;
+  border-bottom: solid 1px var(--white);
+  
+  input[type=text] {
+    font-size: 1rem;
+    padding: 0.5rem;
+    border: none;
+  }
+
+  input[type=image] {
+    margin-right: 1ch;
+  }
+}

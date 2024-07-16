@@ -1,8 +1,7 @@
 <div id="user-status">
   <% if game&.persisted? %>
     <% if current_page?(game_path(game)) %>
-      <%= link_to "Назад в лобби", games_path %>
-      <p>Вы сейчас в <%= link_to "игре", game_path(game) %></p>
+      <%= link_to "Выход", game_leave_path(game), class: "button" %>
     <% else %>
       <%= link_to "В игре", game_path(game), class: "button" %>
     <% end %>

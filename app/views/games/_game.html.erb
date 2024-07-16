@@ -17,7 +17,5 @@
 
   <%= render partial: "rounds/current_round_request", formats: %i[html], locals: { game: game } %>
 
-  <div class="chat-container">
-    <%= render partial: "games/chat", locals: { game: game } %>
-  </div>
+  <%= render partial: "games/chat", locals: { game: game } %>
 <% end %>

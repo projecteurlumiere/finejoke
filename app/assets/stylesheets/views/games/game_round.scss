@@ -2,9 +2,13 @@
   .task {
     height: 100%;
     padding: 2rem;
-    padding-left: 4rem;
+    padding-left: 2rem;
     box-sizing: border-box;
     text-align: left;
+    
+    h2 {
+      margin-left: 1em;
+    }
   }
 
   .task.rules {

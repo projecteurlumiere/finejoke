@@ -1,10 +1,6 @@
 <%= form_with(model: Message, url: game_messages_path(game)) do |form| %>
-  <div>
-    <%= form.label :text, style: "display: block" %>
-    <%= form.text_field :text %>
-  </div>
-
-  <div>
-    <%= form.submit "M" %>
+  <div class="message-input">
+    <%= form.text_field :text, class: "nunito-font", aria_label: "Текст сообщения" %> 
+    <%= form.submit type: :image, src: asset_path("icons/send-message.svg"), aria_label: "Отправить сообщение" %>
   </div>
 <% end %>
