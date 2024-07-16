@@ -1,0 +1,17 @@
+#current-round {
+  .task {
+    height: 100%;
+    padding: 2rem;
+    padding-left: 4rem;
+    box-sizing: border-box;
+    text-align: left;
+  }
+
+  .task.rules {
+    background-color: var(--red);
+
+    * {
+      color: var(--white);
+    }
+  }
+}

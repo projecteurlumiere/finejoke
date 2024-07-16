@@ -1,4 +1,6 @@
 #lobby {
+   height: 100%;
+
    h2 {
       white-space: nowrap;
    }
@@ -11,6 +13,7 @@
 
     > * {
       padding: 1rem 0.25rem;
+      width: unset;
     }
   }
 

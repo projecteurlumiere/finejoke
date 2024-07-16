@@ -10,7 +10,7 @@ class GamesController < ApplicationController
     @game = Game.new
 
     @games = Game.includes(:users).all
-    clean_up_games
+    # clean_up_games
   end
 
   # joins game

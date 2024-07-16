@@ -1,4 +1,4 @@
-<%= tag.div id: dom_id(game), class: "game three-columns", data: game_data_attributes(game).merge({ user_id: current_or_guest_user.id }) do %>
+<%= tag.div id: dom_id(game), class: "game-container three-columns", data: game_data_attributes(game).merge({ user_id: current_or_guest_user.id }) do %>
   <%= content_for(:join) do %>
     <%= link_to "Назад в лобби", games_path %>
     <%# button_to "Присоединиться", game_join_path(game) if game.joinable? %>
@@ -7,18 +7,17 @@
   <div class="data-container">
     <%= render partial: "games/game_users", formats: %i[html], locals: { game: game } %>
     <div id="settings">
-      <div class="hidden">
-        <%= render partial: "games/game_settings", locals: { game: game } %>  
+      <div>
+        <%= button_to "Настройки" %>
+
+        <%# render partial: "games/game_settings", locals: { game: game } %>  
       </div>
     </div>
   </div>
 
-  <div class="round-container">
-    <%= render partial: "rounds/current_round_request", formats: %i[html], locals: { game: game } %>
-  </div>
+  <%= render partial: "rounds/current_round_request", formats: %i[html], locals: { game: game } %>
 
   <div class="chat-container">
-    <%= render partial: "games/chat" %>
-    <%= render partial: "games/chat_form", locals: { game: game } %>
+    <%= render partial: "games/chat", locals: { game: game } %>
   </div>
 <% end %>

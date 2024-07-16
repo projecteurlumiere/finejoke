@@ -3,9 +3,19 @@
     margin-left: 1em;
   }
 
+  .form {
+    flex: 1 1 45vh;
+    overflow: hidden;
+  }
+
   #new-game {
     height: 90%;
     overflow-y: auto;
+    
+    * {
+      min-height: 0;
+      overflow: hidden;
+    }
     
     > * {
       margin-bottom: 1rem;
@@ -60,5 +70,8 @@
         grid-template-columns: auto var(--slider-width);
       }
     }
+  }
+
+  @media(max-width: 950px) {
   }
 }

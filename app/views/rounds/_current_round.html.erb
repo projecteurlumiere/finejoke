@@ -1,10 +1,9 @@
 <%= tag.turbo_frame id: "current-round" do %>
   <%= tag.div data: round_data_attributes(round) %>
-
-  <h3 class="stage">
-    <%= round.stage %>
-  </h3>
   <div class="task">
+    <p>
+      <%= round.stage %>
+    </p>
     <p>
       <%= round_task_for(current_or_guest_user, round) %>
     </p>
