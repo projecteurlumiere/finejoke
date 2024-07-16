@@ -4,18 +4,20 @@
     <%# button_to "Присоединиться", game_join_path(game) if game.joinable? %>
   <% end %>
 
-  <div id="game-data">
-    <ul id="user-list">
-      <%= render partial: "games/game_user", collection: game.users.order(current_score: :desc),  as: :user, locals: { game: game } %>
-    </ul>
+  <div class="data-container">
+    <%= render partial: "games/game_users", formats: %i[html], locals: { game: game } %>
     <div id="settings">
-      <%= render partial: "games/game_settings", locals: { game: game } %>
+      <div class="hidden">
+        <%= render partial: "games/game_settings", locals: { game: game } %>  
+      </div>
     </div>
   </div>
 
-  <%= render partial: "rounds/current_round_request", formats: %i[html], locals: { game: game } %>
+  <div class="round-container">
+    <%= render partial: "rounds/current_round_request", formats: %i[html], locals: { game: game } %>
+  </div>
 
-  <div id="chat-container">
+  <div class="chat-container">
     <%= render partial: "games/chat" %>
     <%= render partial: "games/chat_form", locals: { game: game } %>
   </div>

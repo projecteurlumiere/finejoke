@@ -12,10 +12,6 @@ header {
   > nav.three-columns {
     align-items: center;
 
-    > * {
-      padding: 0;
-    }
-
     .start {
       @media(max-width: 950px) {
         > * {

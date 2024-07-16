@@ -1,13 +1,30 @@
-<%= tag.li id: dom_id(user), 
-           data: { 
-             host: user.host?,
-             vote_change: (votes_change[user.id] if defined? votes_change), 
-             lead: user.lead?,
-             finished_turn: user.finished_turn?,
-             voted: user.voted? } do %>
-  <%= link_to user.username, profile_path(user) %> and his score: <%= user.current_score %>
-  / 
-  <%= votes_change[user.id] if defined? votes_change %>
-  /
-  <%= button_to("Kick", game_kick_path(game, params: { user_id: user.id })) %>
+<% if user %>
+  <%= tag.li id: dom_id(user),
+             data: { 
+               host: user.host?,
+               vote_change: (votes_change[user.id] if defined? votes_change), 
+               lead: user.lead?,
+               finished_turn: user.finished_turn?,
+               voted: user.voted? } do %>
+    <div class="score press-font">
+      <%= user.current_score %>    
+    </div>
+    <div>
+     <%= link_to user.username.truncate(15), profile_path(user) %>
+    </div>
+    <div class="settings hidden">
+      <%= button_to("Kick", game_kick_path(game, params: { user_id: user.id })) %>
+    </div>
+  <% end %>
+<% else %> 
+  <%= tag.li class: "slot" do %>
+    <div class="score press-font">
+      <%= user_counter + 1 %>
+    </div>
+    <div>
+      Пусто
+    </div>
+    <div class="settings hidden">
+    </div>
+  <% end %>
 <% end %>

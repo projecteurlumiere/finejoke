@@ -12,7 +12,7 @@ class Game < ApplicationRecord
       MAX_ROUND_TIME = 180
   RESULTS_STAGE_TIME = 5
           MIN_POINTS = 2
-          MAX_POINTS = 1_000
+          MAX_POINTS = 999
 
   validates :name, presence: true, length: { in: 1..30 }
   validates :max_players, numericality: { only_integer: true },
@@ -36,7 +36,10 @@ class Game < ApplicationRecord
     user.reset_game_attributes
     return false unless joinable?(by: user)
 
-    self.users << user
+    transaction do
+      self.users << user
+      self.increment!(:n_players)
+    end
 
     user.update(host: true) if host
     user.broadcast_status_change
@@ -46,7 +49,11 @@ class Game < ApplicationRecord
   end
 
   def remove_user(user)
-    self.users.include?(user) ? self.users.delete(user) : (return false)
+    transaction do 
+      self.users.include?(user) ? self.users.delete(user) : (return false)
+      self.decrement!(:n_players)
+    end
+
     user_was_host = user.host?
 
     user.reset_game_attributes
