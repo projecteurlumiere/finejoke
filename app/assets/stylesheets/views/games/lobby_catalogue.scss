@@ -1,4 +1,5 @@
 #catalogue {
+  flex: 1 1 auto;
   overflow-y: scroll;
 
   h2 {
@@ -7,7 +8,6 @@
 
   ul {
     overflow-y: auto;
-    padding-right: 2rem;
   }
 
   li {

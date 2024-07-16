@@ -31,7 +31,7 @@
 }
 
 html, body {
-  max-height: 100dvh;
+  height: 100dvh;
   overflow: hidden;
 }
 
@@ -41,15 +41,7 @@ body {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  padding: 2rem;
-  padding-bottom: 0rem;
-}
-
-@media(max-height: 550px) {
-  html, body {
-    overflow-y: auto;
-    max-height: unset;
-  }
+  padding: 0 2rem;
 }
 
 header,
@@ -59,12 +51,19 @@ footer {
   width: 90vw;
 }
 
-main {
-  margin-bottom: 2rem;
+header {
+  margin: min(2%, 2rem) 0;
+  height: min(10%, 5rem);
 }
 
-@media(max-height: 600px) {
-  body {
-    padding-top: 0.5rem;
+main {
+  height: 100%;
+  padding-bottom: 2rem;
+}
+
+@media(max-height: 725px) {
+  html, body {
+    overflow-y: auto;
+    max-height: unset;
   }
 }

@@ -1,4 +1,6 @@
 #lobby {
+  height: 100%;
+
    h2 {
       white-space: nowrap;
    }
@@ -46,8 +48,9 @@
 
     // mobile buttons on top
     div.buttons:nth-of-type(5) {
+      // grid-row: 1 / 2;
+      order: -1;
       display: grid;
-      grid-row: 1 / 2;
       grid-template-columns: 2fr 3fr;
     }
   }
