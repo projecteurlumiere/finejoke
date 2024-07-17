@@ -1,7 +1,7 @@
 <div id="user-status">
   <% if game&.persisted? %>
     <% if current_page?(game_path(game)) %>
-      <%= link_to "Выход", game_leave_path(game), class: "button" %>
+      <%= button_to "Выход", game_leave_path(game) %>
     <% else %>
       <%= link_to "В игре", game_path(game), class: "button" %>
     <% end %>

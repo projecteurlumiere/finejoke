@@ -4,7 +4,8 @@ ul, ol, li {
   padding: unset;
 }
 
-input[type=text] {
+input[type=text],
+textarea {
   background-color: transparent;
   border: none;
   border-bottom: solid 1px var(--white);
@@ -12,6 +13,8 @@ input[type=text] {
 
   font-size: inherit;
   width: 100%;
+
+  resize: none;
 }
 
 input[type=text]:invalid {

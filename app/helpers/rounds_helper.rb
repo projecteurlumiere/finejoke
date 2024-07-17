@@ -10,61 +10,91 @@ module RoundsHelper
   end
 
   def round_task_for(user, round)
-    case @round.stage
-    when "setup"
+    array = case round.stage.to_sym
+    when :setup
       if user.lead?
-        "Придумайте завязку для самой смешной шутки в мире"
+        [
+          "Придумайте завязку",
+          "С чего бы могла начаться хорошая шутка?"
+        ]
       else
-        "Игрок придумывает завязку"
+        [
+          "Игрок придумывает завязку",
+          "Надо подождать"
+        ]
       end
-    when "punchline"
+    when :punchline
       unless user.lead?
-        "Придумайте развязку к следующей завязке"
+        [
+          "Придумайте развязку к следующей завязке",
+          round.setup
+        ]
       else
-        "Другие игроки придумают развязки"
+        [
+          "Другие игроки придумывают развязки",
+          "Надо подождать"
+        ]
       end
-    when "vote"
+    when :vote
       unless user.voted?
-        "Проголосуйте за понравившуюся шутку"
+        [
+          "Выберите лучший ответ",
+          round.setup
+        ]
       else
-        "Игроки голосуют"
+        [
+          "Игроки голосуют",
+          "Надо подождать"
+        ]
       end
-    when "result"
-      "Наслаждайтесь результатами"
+    when :results
+      [
+        "Наслаждайтесь результатами",
+        "Новый раунд скоро начнётся"
+      ]
     end
+
+    return if array.nil?
+
+    [
+      tag.h2(array[0]),
+      tag.p(array[1])
+    ].join("").html_safe
   end
 
-  def render_action_for(user, round)
-    render_form_for(user, round) || 
-      render_votes_for(user, round) ||
+  def render_input_for(user, round)
+    render_turns_form_for(user, round) || 
+      render_votes_form_for(user, round) ||
       render_results_for(user, round)
   end
 
-  def render_form_for(user, round)
+  def render_turns_form_for(user, round)
     return if user.finished_turn?
 
     if user.lead? && round.setup_stage?
-      render partial: "rounds/form", locals: { game: round.game, round: round }
+      render partial: "rounds/setup_form", locals: { game: round.game, round: round }
     elsif !user.lead? && round.punchline_stage?
       render partial: "jokes/form", locals: { joke: round.jokes.build }
     end
   end
 
-  def render_votes_for(user, round)
+  def render_votes_form_for(user, round)
     return unless round.vote_stage?
 
-    render partial: "rounds/joke", collection: round.jokes, locals: { round: round, voting: !user.voted?}
+    jokes = round.jokes.order("RANDOM()")
+
+    render partial: "rounds/voting", locals: { round: round, jokes: jokes, user: user}
   end
 
   def render_results_for(user, round)
     return unless round.results_stage?
 
-    jokes = round.jokes.order(votes: :desc).to_a
+    jokes = round.jokes.order(votes: :desc)
 
-    [
-      render(partial: "rounds/results", locals: { joke: jokes.shift }),
-      render(partial: "rounds/joke", collection: jokes, locals: { round: round, voting: false })
-    ].join(" ").html_safe
-   
+    render partial: "rounds/voting", locals: { round: round, jokes: jokes, user: user }   
+  end
+
+  def render_wait
+    tag.button("Ждём", class: "disabled", disabled: true).html_safe
   end
 end

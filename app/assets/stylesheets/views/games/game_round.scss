@@ -1,14 +1,78 @@
 #current-round {
   .task {
+    --task-padding: 2rem;
+
     height: 100%;
-    padding: 2rem;
-    padding-left: 2rem;
+    padding: var(--task-padding);
     box-sizing: border-box;
     text-align: left;
-    
-    h2 {
-      margin-left: 1em;
+
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+
+    background-color: var(--white);
+
+    * {
+      color: var(--black);
     }
+    
+    // upper div with h2
+    > .description,
+      .jokes-container {
+      margin-left: 1em;
+      margin-right: 1em;
+      
+      > h2 {
+        color: var(--red);
+      }
+    }
+
+    > .jokes-container {
+      display: flex;
+      flex-direction: column;
+      flex-basis: 100%;
+
+      .joke {
+        flex-basis: 100%;
+
+        .user {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+      }
+
+      .buttons {
+        display: flex;
+        justify-content: space-between;
+        color: var(--black);
+
+        > * {
+          path {
+            color: var(--black);
+          }
+        }
+      
+
+        > *.disabled {
+          path {
+            color: var(--white-dim);
+          }
+        }
+      } 
+    }
+
+    form {
+      flex-basis: 100%;
+      display: flex;
+
+      textarea {
+        width: calc(100% - (var(--task-padding) * 2));
+      }
+    }
+
+
   }
 
   .task.rules {
@@ -17,5 +81,11 @@
     * {
       color: var(--white);
     }
+  }
+
+  .action {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
   }
 }

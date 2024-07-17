@@ -26,6 +26,8 @@
   --white-dimmer: rgba(255, 255, 255, 0.7);
   --white-dim: rgba(255, 255, 255, 0.5);
   --black: rgb(50, 56, 118);
+  --black-dimmer: rgba(50, 56, 118, 0.7);
+  --black-dim: rgba(50, 56, 118, 0.5);
   --teal: rgb(0, 255, 221);
   --background-gradient: linear-gradient(270.00deg, rgb(83, 217, 216),rgb(31, 182, 199) 100%);
 }

@@ -1,0 +1,26 @@
+<div class="jokes-container" data-controller="jokes">
+  <%= render partial: "rounds/joke", collection: jokes, as: :joke, locals: { round: round } %>
+  <div class="buttons">
+    <%= tag.div style: "-webkit-transform: scaleX(-1); transform: scaleX(-1);", 
+          data: { vote_target: "previous", action: "click->vote#previous"} do %>
+      <%= inline_svg("icons/next.svg") %>
+    <% end %>
+    <%= tag.div data: { vote_target: "next", action: "click->vote#next"} do %>
+      <%= inline_svg("icons/next.svg") %>      
+    <% end %>
+  </div>
+</div>
+<% content_for(:action) do %>
+  <% if round.results_stage? %>
+    <%= "" %>
+  <% elsif not user.voted? %>
+    <%= button_to "Проголосовать", 
+          game_round_joke_path(round.game, round, jokes.first), 
+          method: :patch, 
+          form: { 
+            data: { 
+              vote_target: "submit" 
+            } 
+          } %>
+  <% end %>
+<% end %>

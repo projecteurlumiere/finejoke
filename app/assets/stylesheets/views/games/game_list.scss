@@ -19,8 +19,14 @@
       }
     }
 
-    >*:last-child {
+    > *:last-child {
       margin-bottom: 0;
+    }
+
+    > .slot {
+      * {
+        color: var(--white-dimmer);
+      }
     }
   }
 }

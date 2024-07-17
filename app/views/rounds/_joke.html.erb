@@ -1,4 +1,19 @@
-<div class="joke">
-  <p><%= joke.punchline %></p>
-  <%= button_to "Проголосовать", game_round_joke_path(round.game, round, joke), method: :patch if voting %>
-</div>
+<%= tag.div class: [:joke, (:hidden if joke_counter > 0)].compact.join(" "), 
+            data: { 
+              vote_path: game_round_joke_path(round.game, round, joke),
+              vote_target: :joke
+            } do %>
+  <% if round.results_stage? %>
+    <div class="user">
+      <%= tag.div(joke.punchline_author.username) %>
+      <%= tag.div("+#{joke.votes}", class: "press-font red") %>
+    </div>
+    <p class="setup press-font">
+      <%= joke.setup %>
+    </p>
+  <% end %>
+
+  <p>
+    <%= joke.punchline %>
+  </p>
+<% end %>

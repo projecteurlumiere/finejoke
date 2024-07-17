@@ -1,19 +1,12 @@
-<%= tag.turbo_frame id: "current-round" do %>
-  <%= tag.div data: round_data_attributes(round) %>
+<%= tag.turbo_frame id: "current-round", data: { controller: "vote" } do %>
+  <%= tag.div data: round_data_attributes(round), class: "hidden" %>
   <div class="task">
-    <p>
-      <%= round.stage %>
-    </p>
-    <p>
+    <div class="description">
       <%= round_task_for(current_or_guest_user, round) %>
-    </p>
-    <% if round.setup %>
-      Завязка:
-      <br>
-      <%= round.setup %>
-    <% end %>
+    </div>
+    <%= render_input_for(current_or_guest_user, round) %>
   </div>
   <div class="action">
-    <%= render_action_for(current_or_guest_user, round) %>
+    <%= content_for?(:action) ? yield(:action) : render_wait %>
   </div>
 <% end %>

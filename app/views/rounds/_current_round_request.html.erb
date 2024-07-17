@@ -1,12 +1,14 @@
-<%= tag.turbo_frame(id: "current-round", src: (game_round_path(game, game.current_round) if game.ongoing?)) do %>
+<%= tag.turbo_frame(
+      id: "current-round", 
+      src: (game_round_path(game, game.current_round) if game.ongoing?), 
+      data: { 
+        controller: "vote" 
+      }) do %>
   <div class="task rules">
     <h2>Правила</h2>
   </div>
   <div class="action">
-    <% if current_or_guest_user.host? %>
-      <%= button_to("Start game", game_rounds_path(game), data: { turbo_frame: "current-round" }) if game.waiting? || game.on_halt? %>
-    <% else %>
-      <%= button_to("Ждём", class: "disabled", disabled: true) %>
-    <% end %>
+    <%= button_to("Start game", game_rounds_path(game), data: { turbo_frame: "current-round" }) if game.waiting? || game.on_halt? %>
+    <%= render_wait %>
   </div>
 <% end %>
