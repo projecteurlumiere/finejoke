@@ -6,6 +6,7 @@ class RoundsController < ApplicationController
   # GET /rounds/1
   # shows round (for current round mainly)
   def show
+    render layout: false, formats: %i[turbo_stream], locals: { game: @game, round: @round }
   end
 
   # POST /rounds
@@ -36,6 +37,8 @@ class RoundsController < ApplicationController
       end
     end
   end
+
+
 
   private
 

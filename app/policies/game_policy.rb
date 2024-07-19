@@ -35,4 +35,8 @@ class GamePolicy < ApplicationPolicy
   def kick?
     destroy?
   end
+
+  def show_rules?
+    show?
+  end
 end

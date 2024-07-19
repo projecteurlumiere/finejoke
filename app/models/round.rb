@@ -15,8 +15,9 @@ class Round < ApplicationRecord
   before_create :set_last, if: :max_rounds_achieved?
   before_create :decurrent_previous_round
    after_create -> { game.increment!(:n_rounds) }
+   after_create -> { game.ongoing! if game.waiting? }
    after_create :schedule_next_stage
-   after_create :broadcast_current_round
+   after_create -> { broadcast_round(self) }
    after_create -> { game.broadcast_user_change }
    # after_create -> { touch }
   # when lead updated round with setup:
@@ -31,6 +32,8 @@ class Round < ApplicationRecord
     # after_touch -> { game.touch }
 
   delegate :broadcast_current_round, to: :game
+  delegate :broadcast_round, to: :game
+  delegate :current_round, to: :game
   delegate :reset_players, to: :game
 
   def choose_lead 

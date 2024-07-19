@@ -24,7 +24,7 @@ class Game < ApplicationRecord
   validates :max_points, numericality: { only_integer: true },
                          comparison: { greater_than_or_equal_to: MIN_POINTS, less_than_or_equal_to: MAX_POINTS }, allow_nil: true
 
-  after_touch -> { ongoing! }, if: %i[waiting? current_round]
+  # after_touch -> { ongoing! }, if: %i[waiting? current_round]
   after_touch -> { waiting! }, if: %i[on_halt? enough_players?]
   after_touch -> { on_halt!; broadcast_current_round }, if: %i[ongoing? not_enough_players?] 
   after_touch :skip_round, if: %i[ongoing? lead_left?]
@@ -80,6 +80,8 @@ class Game < ApplicationRecord
   end
 
   def current_round
+    return nil if waiting? || on_halt?
+     
     rounds.find_by(current: true)
   end
 

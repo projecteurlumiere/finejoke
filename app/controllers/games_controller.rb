@@ -1,6 +1,6 @@
 class GamesController < ApplicationController
   include ActionView::RecordIdentifier
-  before_action :welcome_new_guest, if: :new_guest?, only: %i[ index show join ]
+  before_action :welcome_new_guest, if: :new_guest?, only: %i[ index show show_rules join ]
   before_action :set_game, only: %i[ show destroy ]
   before_action :authorize_game!, only: %i[ index show destroy ]
 
@@ -70,7 +70,9 @@ class GamesController < ApplicationController
 
     if @game.remove_user(current_or_guest_user)
       # disconnect_cable if params[:cable] == "disconnect"
-      redirect_to games_path, notice: "You have left the game"
+      respond_to do |format|
+        format.turbo_stream { render :leave, formats: %i[turbo_stream] }
+      end
     else
       flash.now[:alert] = "Something went wrong"
       respond_to do |format|
@@ -95,6 +97,14 @@ class GamesController < ApplicationController
         format.turbo_stream { render_turbo_flash }
       end
     end
+  end
+
+  # when there's no current round  
+  def show_rules
+    @game = Game.find(params[:game_id])
+    authorize_game!
+
+    render "rounds/show", layout: false, formats: %i[turbo_stream], locals: { game: @game, round: nil }
   end
 
   private

@@ -1,9 +1,16 @@
 module GameBroadcasting
   extend ActiveSupport::Concern
+  include Rails.application.routes.url_helpers
   
   included do 
     def broadcast_current_round
-      broadcast_render_later_to(["game", self], partial: "rounds/current_round", formats: %i[turbo_stream], locals: { game_id: id })
+      broadcast_round(current_round)
+    end
+
+    def broadcast_round(round)
+      path = round ? game_round_path(self, round) : game_rules_path(self)
+
+      broadcast_render_later_to(["game", self], partial: "shared/redirect_to", formats: %i[turbo_stream], locals: { path: path })
     end
 
     def broadcast_user_change(votes_change: {})

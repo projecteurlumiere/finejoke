@@ -1,0 +1,2 @@
+<%= turbo_stream.action(:remove, "game-stream") %>
+<%= render partial: "shared/redirect_to", formats: %i[turbo_stream], locals: { path: games_path } %>

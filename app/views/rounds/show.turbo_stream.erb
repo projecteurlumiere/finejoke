@@ -1,0 +1,7 @@
+<%# game = Game.find_by(id: game_id) %>
+
+<%# if game %>
+  <%= turbo_stream.action(:replace, "current-round") do %>
+    <%= render partial: "rounds/current_round", formats: %i[html], locals: { game: game, round: round } %>
+  <% end %>
+<%# end %>

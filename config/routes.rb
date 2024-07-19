@@ -4,9 +4,12 @@ Rails.application.routes.draw do
     post "leave", to: "games#leave"
     post "kick", to: "games#kick"
 
+    get "rules", to: "games#show_rules"
     resources :rounds, only: %i[show create update] do
       resources :jokes, only: %i[index show create update]
     end
+
+
     resources :messages, only: %i[create]
   end
 

@@ -15,7 +15,7 @@
     </div>
   </div>
 
-  <%= render partial: "rounds/current_round_request", formats: %i[html], locals: { game: game } %>
+  <%= render partial: "rounds/current_round", formats: %i[html], locals: { game: game, round: game.current_round } %>
 
   <%= render partial: "games/chat", locals: { game: game } %>
 <% end %>
