@@ -9,7 +9,7 @@ class GamesController < ApplicationController
   def index
     @game = Game.new
 
-    @games = Game.includes(:users).all
+    @games = Game.order(created_at: :desc).all
     # clean_up_games
   end
 
@@ -124,12 +124,7 @@ class GamesController < ApplicationController
   end
 
   def create_game
-    ActiveRecord::Base.transaction do
-      @game.add_user(current_or_guest_user, host: true) &&
-        @game.save!
-    end
-  rescue ActiveRecord::RecordInvalid
-    false
+    @game.add_user(current_or_guest_user, is_host: true)
   end
 
   def authorize_game!

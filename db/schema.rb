@@ -35,8 +35,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_12_085349) do
     t.integer "status", default: 0, null: false
     t.integer "n_rounds", default: 0, null: false
     t.integer "n_players", default: 0, null: false
+    t.string "host_username", null: false
+    t.bigint "host_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["host_id"], name: "index_games_on_host_id"
   end
 
   create_table "jokes", force: :cascade do |t|
@@ -103,6 +106,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_12_085349) do
 
   add_foreign_key "awards", "presents"
   add_foreign_key "awards", "users"
+  add_foreign_key "games", "users", column: "host_id"
   add_foreign_key "jokes", "rounds"
   add_foreign_key "jokes", "users", column: "punchline_author_id"
   add_foreign_key "jokes", "users", column: "setup_author_id"

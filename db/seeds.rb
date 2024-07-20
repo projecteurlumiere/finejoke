@@ -18,6 +18,6 @@ Present.create(name: "Present 1", description: "This is the very first present",
 10.times do |i|
   user = User.create!(email: "email@#{i}.com", username: "user_#{i}", password: "12345678")
   game = Game.new(name: "game_#{i}}")
-  game.add_user(user, host: true)
+  game.add_user(user, is_host: true)
   game.save!
 end

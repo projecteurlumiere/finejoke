@@ -2,6 +2,8 @@ class Game < ApplicationRecord
   include GameBroadcasting
 
   has_many :users # players
+  belongs_to :host, class_name: :User
+
   has_many :rounds, dependent: :destroy
 
   enum status: %i[waiting ongoing on_halt finished]
@@ -32,16 +34,21 @@ class Game < ApplicationRecord
   after_create_commit :broadcast_game_start
   after_destroy_commit :broadcast_game_over
 
-  def add_user(user, host: false)
+  def add_user(user, is_host: false)
     user.reset_game_attributes
     return false unless joinable?(by: user)
 
-    transaction do
+    success = transaction do
+      self.host = user if is_host
       self.users << user
       self.increment!(:n_players)
+      save!
+
+      true
     end
 
-    user.update(host: true) if host
+    return false unless success
+
     user.broadcast_status_change
     broadcast_user_change
 
@@ -54,14 +61,14 @@ class Game < ApplicationRecord
       self.decrement!(:n_players)
     end
 
-    user_was_host = user.host?
+    was_host = user.host?
 
     user.reset_game_attributes
     user.broadcast_status_change
 
-    self.destroy and return true if users.empty?
+    self.destroy and return true if n_players == 0
 
-    choose_new_host if user_was_host
+    host = users.first if was_host
     
     touch
     broadcast_user_change
@@ -71,12 +78,12 @@ class Game < ApplicationRecord
 
   alias_method :kick_user, :remove_user
 
-  def host
-    users.find_by(host: true)
-  end
-
-  def choose_new_host
-    users.first.update(host: true)
+  def host=(user)
+    transaction do
+      user.update(host: true)
+      self.host_username = user.username
+      super(user)
+    end
   end
 
   def current_round
@@ -124,7 +131,7 @@ class Game < ApplicationRecord
 
   def joinable?(by: nil) # user
     user = by
-    return false if users.count >= max_players
+    return false if n_players >= max_players
     return false if user&.game
 
     true

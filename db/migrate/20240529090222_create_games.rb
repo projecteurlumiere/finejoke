@@ -11,6 +11,8 @@ class CreateGames < ActiveRecord::Migration[7.1]
       t.integer :status, null: false, default: 0
       t.integer :n_rounds, null: false, default: 0
       t.integer :n_players, null: false, default: 0
+      t.string :host_username, null: false
+      t.references :host, foreign_key: { to_table: :users }
 
       t.timestamps
     end
