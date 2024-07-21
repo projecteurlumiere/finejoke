@@ -5,7 +5,7 @@
   <% end %>
 
   <div class="data-container">
-    <%= render partial: "games/game_users", formats: %i[html], locals: { game: game } %>
+    <%= render partial: "games/game_users", formats: %i[html], locals: { game: game, votes_change: {} } %>
     <div id="settings">
       <div>
         <%= button_to "Настройки" %>

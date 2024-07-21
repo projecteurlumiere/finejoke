@@ -1,6 +1,5 @@
 <ul id="user-list">
-  <% locals = { game: game } %>
-  <% locals.merge!({votes_change: votes_change.transform_keys(&:to_i)}) if defined? votes_change %>
+  <% locals = { game: game, votes_change: votes_change.transform_keys(&:to_i) } %>
 
   <%= render partial: "games/game_user", 
              formats: %i[html],

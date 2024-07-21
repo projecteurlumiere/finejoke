@@ -22,5 +22,7 @@
               vote_target: "submit" 
             } 
           } %>
+  <% elsif user.voted? %>
+    <%= render_wait %>
   <% end %>
 <% end %>

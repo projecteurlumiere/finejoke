@@ -8,11 +8,11 @@ module TurboRendering
       skip_authorization if controller_name == "application"
 
       path ||= params[:path] || root_path
-      render partial: "shared/redirect_to", locals: { path: path }, status: :found
+      render partial: "shared/redirect_to", formats: %i[turbo_stream], locals: { path: path }, status: :found
     end
 
     def render_turbo_flash(status: response.status)
-      render partial: "shared/flash", status: status
+      render partial: "shared/flash", formats: %i[turbo_stream], status: status
     end
   end
 end

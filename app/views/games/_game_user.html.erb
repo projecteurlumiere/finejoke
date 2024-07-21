@@ -2,12 +2,16 @@
   <%= tag.li id: dom_id(user),
              data: { 
                host: user.host?,
-               vote_change: (votes_change[user.id] if defined? votes_change), 
+               vote_change: votes_change.any? ? (votes_change[user.id] || 0) : nil, 
                lead: user.lead?,
                finished_turn: user.finished_turn?,
                voted: user.voted? } do %>
     <div class="score press-font">
-      <%= user.current_score %>    
+      <% if votes_change.any? %>
+        +<%= votes_change[user.id] || 0 %>
+      <% else %>
+        <%= user.current_score %>
+      <% end %>
     </div>
     <div>
      <%= link_to user.username.truncate(15), profile_path(user) %>

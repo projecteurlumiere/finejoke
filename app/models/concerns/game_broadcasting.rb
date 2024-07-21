@@ -10,7 +10,7 @@ module GameBroadcasting
     def broadcast_round(round)
       path = round ? game_round_path(self, round) : game_rules_path(self)
 
-      broadcast_render_later_to(["game", self], partial: "shared/redirect_to", formats: %i[turbo_stream], locals: { path: path })
+      broadcast_render_later_to(["game", self], partial: "shared/fetch", formats: %i[turbo_stream], locals: { path: path })
     end
 
     def broadcast_user_change(votes_change: {})

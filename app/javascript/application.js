@@ -6,3 +6,12 @@ import "controllers"
 Turbo.StreamActions.redirect = function() {
   Turbo.visit(this.target, { action: "replace" })
 }
+
+Turbo.StreamActions.fetch = function() {
+  fetch(this.target, {
+      headers: {
+        Accept: "text/vnd.turbo-stream.html",
+      },
+    }).then(r => r.text())
+      .then(html => Turbo.renderStreamMessage(html))
+}
