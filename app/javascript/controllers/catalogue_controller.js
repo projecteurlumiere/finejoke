@@ -5,19 +5,19 @@ export default class extends Controller {
   static targets = [ "connect", "view", "entry" ]
 
   select(e) {
-    if (e.target.classList.contains("select")) { this.#deselect(e); return }
+    if (e.currentTarget.classList.contains("select")) { this.#deselect(e); return }
     this.#deselectTheRest();
 
-    this.connectTarget.href = e.target.dataset.joinPath;
-    this.viewTarget.href = e.target.dataset.viewPath;
-    e.target.classList.add("select")
+    this.connectTarget.href = e.currentTarget.dataset.joinPath;
+    this.viewTarget.href = e.currentTarget.dataset.viewPath;
+    e.currentTarget.classList.add("select")
 
     this.#removeDisabled();
   }
 
   #deselect(e) {
     this.#addDisabled();
-    e.target.classList.remove("select")
+    e.currentTarget.classList.remove("select")
 
     this.connectTarget.href = "";
     this.viewTarget.href = "";
@@ -30,11 +30,6 @@ export default class extends Controller {
   }
 
   #removeDisabled() {
-    if (this.connectTarget.href === "" || this.viewTarget.href === "") { 
-      this.#addDisabled;
-      return 
-    }
-
     this.connectTarget.classList.remove("disabled");
     this.viewTarget.classList.remove("disabled");
   }
