@@ -112,7 +112,7 @@ class Round < ApplicationRecord
   end
 
   def schedule_next_round
-    CreateNewRoundJob.set(wait: Game::RESULTS_STAGE_TIME).perform_later(game)
+    CreateNewRoundJob.set(wait: Game::RESULTS_STAGE_TIME).perform_later(game.id)
   end
 
   def current?
