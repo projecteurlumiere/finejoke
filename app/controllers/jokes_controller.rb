@@ -18,27 +18,29 @@ class JokesController < ApplicationController
     authorize_joke!
     
     if @joke.save
-      response.status = :accepted
+      response.status = :ok
       flash.now[:notice] = "Шутка создана"
+      render "rounds/show", layout: false, formats: %i[turbo_stream], locals: { game: @game, round: @round }
     else
       response.status = :unprocessable_entity
       flash.now[:alert] = "Шутка не создана"
+      render_turbo_flash
     end
 
-    render_turbo_flash
   end
 
   # registers a vote
   def update
     if @joke.register_vote(by: current_or_guest_user)
-      response.status = :accepted
+      response.status = :ok
       flash.now[:notice] = "Голос учтён"
+      render "rounds/show", layout: false, formats: %i[turbo_stream], locals: { game: @game, round: @round }
     else
       response.status = :unprocessable_entity
       flash.now[:alert] = "Голос не был учтён"
+      render_turbo_flash
     end
 
-    render_turbo_flash
   end
 
   private
