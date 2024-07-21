@@ -30,6 +30,11 @@ export default class extends Controller {
   }
 
   #removeDisabled() {
+    if (this.connectTarget.href === "" || this.viewTarget.href === "") { 
+      this.#addDisabled;
+      return 
+    }
+
     this.connectTarget.classList.remove("disabled");
     this.viewTarget.classList.remove("disabled");
   }
