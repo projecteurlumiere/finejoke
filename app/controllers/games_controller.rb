@@ -4,8 +4,7 @@ class GamesController < ApplicationController
   before_action :set_game, only: %i[ show destroy ]
   before_action :authorize_game!, only: %i[ index show destroy ]
 
-
-  # GET /games or /games.json
+  # GET /games
   def index
     @game = Game.new
 
@@ -29,55 +28,49 @@ class GamesController < ApplicationController
     @game = Game.new(game_params)
     authorize_game!
 
-    respond_to do |format|
-      if create_game
-        flash[:notice] = "Игра создана"
-        format.turbo_stream { turbo_redirect_to game_path(@game) }
-      else
-        format.html { render :index, status: :unprocessable_entity }
-      end
+    if create_game
+      flash[:notice] = "Игра создана"
+      turbo_redirect_to game_path(@game)
+    else
+      flash.now[:alert] = "Игра не была создана"
+      render :index, status: :unprocessable_entity
     end
   end
 
-  # DELETE /games/1 or /games/1.json
+  # DELETE /games/1
   def destroy
     @game.destroy!
 
-    respond_to do |format|
-      format.html { redirect_to games_url, notice: "Game was successfully destroyed." }
-    end
+    redirect_to games_url, notice: "Игра удалена"
   end
 
   def join
     @game = Game.includes(:users).find(params[:game_id])
     
-    skip_authorization and redirect_to game_path(@game) and return if @game.users.include?(current_or_guest_user)
+    skip_authorization and redirect_to(game_path(@game)) and return if @game.users.include?(current_or_guest_user)
 
     authorize_game!
 
     if @game.add_user(current_or_guest_user)
-      redirect_to game_path(@game), notice: "You have joined the game"
+      redirect_to game_path(@game), notice: "Вы присоединились к игре"
     else
-      redirect_to games_path, alert: "Something went wrong"
+      redirect_to games_path, alert: "Не получилось присоединиться к игре"
     end
   end
 
   def leave # game
     @game = Game.includes(:users).find(params[:game_id])
-    skip_authorization and redirect_to games_path and return if @game.users.exclude?(current_or_guest_user)
+    skip_authorization and redirect_to(games_path) and return if @game.users.exclude?(current_or_guest_user)
 
     authorize_game!
 
     if @game.remove_user(current_or_guest_user)
-      # disconnect_cable if params[:cable] == "disconnect"
-      respond_to do |format|
-        format.turbo_stream { render :leave, formats: %i[turbo_stream] }
-      end
+      flash[:notice] = "Вы успешно покинули игру"
+      render :leave, formats: %i[turbo_stream] # removes turbo_stream that streams the game and then issues a redirect!
     else
-      flash.now[:alert] = "Something went wrong"
-      respond_to do |format|
-        format.turbo_stream { render_turbo_flash }
-      end
+      flash[:alert] = "Не удалось покинуть игру"
+      response.status = :unprocessable_entity
+      render_turbo_flash
     end
   end
 
@@ -87,19 +80,17 @@ class GamesController < ApplicationController
     authorize_game!
 
     if @user && @game.kick_user(@user)
-      flash.now[:notice] = "User was kicked"
-      respond_to do |format|
-        format.turbo_stream { render_turbo_flash(status: :ok) }
-      end
+      response.status = :ok
+      flash.now[:notice] = "Игрок кикнут"
     else
-      flash.now[:alert] = "User was not kicked"
-      respond_to do |format|
-        format.turbo_stream { render_turbo_flash }
-      end
+      response.status = :unprocessable_entity
+      flash.now[:alert] = "Игрок не был кикнут"
     end
+
+    render_turbo_flash
   end
 
-  # when there's no current round  
+  # when there's no current round
   def show_rules
     @game = Game.find(params[:game_id])
     authorize_game!

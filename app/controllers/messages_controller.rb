@@ -6,16 +6,15 @@ class MessagesController < ApplicationController
     @message = Message.new(user: current_or_guest_user, game: @game, **message_params)
     authorize_message!
 
-    if @message.valid?
-      @message.broadcast
-      head :accepted
+    if @message.valid? && @message.broadcast
+      response.status = :accepted   
+      flash.now[:notice] = "Сообщение отправлено"
     else
-      flash.now[:alert] = "Message was not created"
-      respond_to do |format| 
-        format.turbo_stream { render_turbo_flash(status: :unprocessable_entity) }
-      end
+      response.status = :unprocessable_entity
+      flash.now[:alert] = "Сообщение не было отправлено"
     end
-    # @game.broadcast_chat_message(from: current_or_guest_user, message: chat_params[:message])
+    
+    render_turbo_flash
   end
 
   private

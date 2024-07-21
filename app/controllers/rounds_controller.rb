@@ -15,30 +15,30 @@ class RoundsController < ApplicationController
     @round = @game.rounds.build
     authorize_round!
     
-    respond_to do |format|
-      if @round.save
-        format.html { redirect_to game_round_url(@game, @round), notice: "Round was successfully created." }
-      else
-        flash.now[:alert] = "Round was not created"
-        format.turbo_stream { render_turbo_flash(status: :unprocessable_entity) }
-      end
+    if @round.save
+      response.status = :accepted
+      flash.now[:notice] = "Раунд создан"
+    else
+      response.status = :unprocessable_entity
+      flash.now[:alert] = "Раунд не создан"
     end
+
+    render_turbo_flash
   end
 
   # PATCH/PUT /rounds/1
   # updates round with setup
   def update
-    respond_to do |format|
-      if @round.update(round_params)
-        format.html { redirect_to game_round_url(@game, @round), notice: "Round was successfully updated." }
-      else
-        flash.now[:alert] = "Round was not updated"
-        format.turbo_stream { render_turbo_flash(status: :unprocessable_entity) }
-      end
+    if @round.update(round_params)
+      response.status = :accepted
+      flash.now[:notice] = "Завязка создана"
+    else
+      response.status = :unprocessable_entity
+      flash.now[:alert] = "Завязка не создана"
     end
+
+    render_turbo_flash
   end
-
-
 
   private
 

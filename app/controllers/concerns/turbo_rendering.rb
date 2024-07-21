@@ -11,7 +11,7 @@ module TurboRendering
       render partial: "shared/redirect_to", locals: { path: path }, status: :found
     end
 
-    def render_turbo_flash(status:)
+    def render_turbo_flash(status: response.status)
       render partial: "shared/flash", status: status
     end
   end

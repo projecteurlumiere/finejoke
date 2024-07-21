@@ -17,26 +17,28 @@ class JokesController < ApplicationController
     @joke = @round.jokes.build(punchline_author_id: current_or_guest_user.id, setup_author_id: @round.user.id, setup: @round.setup, **joke_params)
     authorize_joke!
     
-    respond_to do |format|
-      if @joke.save
-        format.html { redirect_to game_round_url(@game, @round), notice: "Joke was successfully created." }
-      else
-        flash.now[:alert] = "Joke was not created."
-        format.turbo_stream { render_turbo_flash(status: :unprocessable_entity) }
-      end
+    if @joke.save
+      response.status = :accepted
+      flash.now[:notice] = "Шутка создана"
+    else
+      response.status = :unprocessable_entity
+      flash.now[:alert] = "Шутка не создана"
     end
+
+    render_turbo_flash
   end
 
   # registers a vote
   def update
-    respond_to do |format|
-      if @joke.register_vote(by: current_or_guest_user)
-        format.html { redirect_to game_round_url(@game, @round), notice: "Joke was successfully updated." }
-      else
-        flash.now[:alert] = "Joke was not updated."
-        format.turbo_stream { render_turbo_flash(status: :unprocessable_entity) }
-      end
+    if @joke.register_vote(by: current_or_guest_user)
+      response.status = :accepted
+      flash.now[:notice] = "Голос учтён"
+    else
+      response.status = :unprocessable_entity
+      flash.now[:alert] = "Голос не был учтён"
     end
+
+    render_turbo_flash
   end
 
   private
