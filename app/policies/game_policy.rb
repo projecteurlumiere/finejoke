@@ -12,7 +12,7 @@ class GamePolicy < ApplicationPolicy
 
   def show?
     @user && 
-      (@game.viewable? || @game.users.include?(@user))
+      (@game.viewable? || @user.playing?(@game))
   end
 
   def create?
@@ -29,7 +29,7 @@ class GamePolicy < ApplicationPolicy
   end
 
   def leave?
-    @user && @game.users.include?(@user)
+    @user && @user.playing?(@game)
   end
 
   def kick?

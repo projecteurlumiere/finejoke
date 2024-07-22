@@ -9,18 +9,18 @@ class RoundPolicy < ApplicationPolicy
 
   def show?
     @game.current_round == @round &&
-      (@game.viewable? || @game.users.include?(@user))
+      (@game.viewable? || @user.playing?(@game))
   end
 
   def create?
-    @game.users.include?(@user) &&
-    %w[waiting on_halt].include?(@game.status) &&
-    @user.host?
+   @user.playing?(@game) &&
+      %w[waiting on_halt].include?(@game.status) &&
+      @user.host?
   end
 
   def update?
-    @game.users.include?(@user) && 
-    @game.current_round == @round &&
-    @user.lead?
+    @user.playing?(@game) &&
+      @game.current_round == @round &&
+      @user.lead?
   end
 end

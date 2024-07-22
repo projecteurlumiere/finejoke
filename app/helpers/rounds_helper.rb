@@ -72,7 +72,7 @@ module RoundsHelper
     end
   end
 
-  def round_task_for_viewer(user, round)
+  def round_task_for_viewer(_user, round)
     case round.stage.to_sym
     when :setup
       [
