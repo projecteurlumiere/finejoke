@@ -11,6 +11,7 @@ class AddAttributesToUsers < ActiveRecord::Migration[7.1]
 
     # game related
     add_column :users, :host, :boolean, default: false
+    add_column :users, :hot_join, :boolean, default: false # when user joins in the middle of the game
     add_column :users, :lead, :boolean, default: false # his/her turn
     add_column :users, :was_lead, :boolean, default: false # his/her turn recently
     add_column :users, :finished_turn, :boolean, default: false

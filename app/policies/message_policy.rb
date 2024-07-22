@@ -7,6 +7,6 @@ class MessagePolicy < ApplicationPolicy
   end
 
   def create?
-    @user && @message.game.users.include?(@user)
+    @user&.joined?(@message.game)
   end
 end 

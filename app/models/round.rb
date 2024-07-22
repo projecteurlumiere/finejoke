@@ -20,6 +20,7 @@ class Round < ApplicationRecord
    after_create :schedule_next_stage
    after_create -> { broadcast_round(self) }
    after_create -> { game.broadcast_user_change }
+   after_create -> { game.integrate_hot_joined }
    # after_create -> { touch }
   # when lead updated round with setup:
    before_update :random_setup, if: %i[punchline_stage?], unless: %i[setup?]
@@ -132,10 +133,10 @@ class Round < ApplicationRecord
   end
 
   def turns_finished?
-    game.users.find_by(finished_turn: false) ? false : true
+    game.users.find_by(finished_turn: false, hot_join: false) ? false : true
   end
 
   def votes_finished?
-    game.users.find_by(voted: false) ? false : true
+    game.users.find_by(voted: false, hot_join: false) ? false : true
   end
 end

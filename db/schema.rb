@@ -93,6 +93,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_22_113326) do
     t.boolean "connected", default: false
     t.boolean "subscribed_to_game", default: false
     t.boolean "host", default: false
+    t.boolean "hot_join", default: false
     t.boolean "lead", default: false
     t.boolean "was_lead", default: false
     t.boolean "finished_turn", default: false

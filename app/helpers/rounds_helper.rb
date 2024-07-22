@@ -153,6 +153,8 @@ module RoundsHelper
   def render_wait_or_join_for(user, game)
     if game.joinable?(by: user)
       render_join(game)
+    elsif user.hot_joined?(game)
+      tag.button("Вы в игре со следующего раунда", class: "disabled", disabled: true).html_safe 
     else
       tag.button("Ждём", class: "disabled", disabled: true).html_safe
     end

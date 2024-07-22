@@ -9,13 +9,12 @@ class RoundPolicy < ApplicationPolicy
 
   def show?
     @game.current_round == @round &&
-      (@game.viewable? || @user.playing?(@game))
+      (@game.viewable? || @user.joined?(@game))
   end
 
   def create?
-   @user.playing?(@game) &&
-      %w[waiting on_halt].include?(@game.status) &&
-      @user.host?
+   @game.host == @user &&
+      %w[waiting on_halt].include?(@game.status)
   end
 
   def update?

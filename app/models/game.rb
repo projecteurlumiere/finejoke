@@ -41,6 +41,7 @@ class Game < ApplicationRecord
 
     success = transaction do
       self.host = user if is_host
+      user.update_attribute(:hot_join, true) if ongoing?
       self.users << user
       self.increment!(:n_players)
       save!
@@ -78,6 +79,10 @@ class Game < ApplicationRecord
   end
 
   alias_method :kick_user, :remove_user
+
+  def integrate_hot_joined
+    users.update_all(hot_join: false)
+  end
 
   def host=(user)
     transaction do

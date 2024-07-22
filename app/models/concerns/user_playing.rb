@@ -5,6 +5,14 @@ module UserPlaying
     belongs_to :game, optional: true
 
     def playing?(given_game_or_round)
+       joined?(given_game_or_round) && !hot_join?
+    end
+
+    def hot_joined?(given_game_or_round)
+      joined?(given_game_or_round) && hot_join?
+    end
+
+    def joined?(given_game_or_round)
       case given_game_or_round
       when Game
         game == given_game_or_round
@@ -44,6 +52,7 @@ module UserPlaying
       self.update({ 
         game_id: nil,
         host: false,
+        hot_join: false,
         lead: false,
         voted: false,
         finished_turn: false,
