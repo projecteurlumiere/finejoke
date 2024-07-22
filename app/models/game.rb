@@ -25,6 +25,7 @@ class Game < ApplicationRecord
                          if: :max_rounds, allow_nil: true
   validates :max_points, numericality: { only_integer: true },
                          comparison: { greater_than_or_equal_to: MIN_POINTS, less_than_or_equal_to: MAX_POINTS }, allow_nil: true
+  validate -> { errors.add(:viewers_vote, "cannot be set when game is not viewable") if !viewable? && viewers_vote? }
 
   # after_touch -> { ongoing! }, if: %i[waiting? current_round]
   after_touch -> { waiting! }, if: %i[on_halt? enough_players?]
