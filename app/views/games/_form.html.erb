@@ -60,6 +60,16 @@
       </div>
     </div>
 
+    <div>
+      <div>Зрители голосуют</div>
+      <div class="switch">
+        <%= form.label :viewers_vote, aria_label: "Зрители голосуют" do %>
+          <%= form.check_box :viewers_vote %>
+          <span class="slider"></span>
+        <% end %>
+      </div>
+    </div>
+
   </fieldset>
 
   <%# <div> %>

@@ -9,10 +9,25 @@ module RoundsHelper
     }
   end
 
-  def round_task_for(user, round)
-    return render_rules_for(user) if round.nil?
+  def round_task_for(user, round, game)
+    messages = if round.nil?
+                 return render_rules_for(game)
+               elsif user.playing?(game)
+                 round_task_for_player(user, round)
+               else
+                 round_task_for_viewer(user, round)
+               end
 
-    array = case round.stage.to_sym
+    raise "why is it nil?" if messages.nil?
+
+    [
+      tag.h2(messages[0]),
+      tag.p(messages[1])
+    ].join(" ").html_safe
+  end
+
+  def round_task_for_player(user, round)
+    case round.stage.to_sym
     when :setup
       if user.lead?
         [
@@ -38,7 +53,7 @@ module RoundsHelper
         ]
       end
     when :vote
-      unless user.voted?
+      if user.can_vote?(round)
         [
           "Выберите лучший ответ",
           round.setup
@@ -55,17 +70,36 @@ module RoundsHelper
         "Новый раунд скоро начнётся"
       ]
     end
-
-    return if array.nil?
-
-    [
-      tag.h2(array[0]),
-      tag.p(array[1])
-    ].join("").html_safe
   end
 
-  def render_input_for(user, round)
-    return render_rules_action_for(user) if round.nil?
+  def round_task_for_viewer(user, round)
+    case round.stage.to_sym
+    when :setup
+      [
+        "Игрок придумывает завязку",
+        "Ждём, что она будет забавной"
+      ]
+
+    when :punchline
+      [
+        "Игроки придумывают развязки к завязке:",
+        round.setup
+      ]
+    when :vote
+      [
+        "Игроки голосуют",
+        "Надо подождать"
+      ]
+    when :results
+      [
+        "Наслаждайтесь результатами",
+        "Новый раунд скоро начнётся"
+      ]
+    end
+  end
+
+  def render_input_for(user, round, game)
+    return render_rules_action_for(user, game) if round.nil?
 
     render_turns_form_for(user, round) || 
       render_votes_form_for(user, round) ||
@@ -73,6 +107,7 @@ module RoundsHelper
   end
 
   def render_turns_form_for(user, round)
+    return unless user.playing?(round)
     return if user.finished_turn?
 
     if user.lead? && round.setup_stage?
@@ -87,35 +122,43 @@ module RoundsHelper
 
     jokes = round.jokes.order("RANDOM()")
 
-    render partial: "rounds/voting", locals: { round: round, jokes: jokes, user: user}
+    render partial: "rounds/vote", locals: { round: round, jokes: jokes, user: user }
   end
 
   def render_results_for(user, round)
     return unless round.results_stage?
 
-    jokes = round.jokes.order(votes: :desc)
+    jokes = round.jokes.order(n_votes: :desc)
 
-    render partial: "rounds/voting", locals: { round: round, jokes: jokes, user: user }   
+    render partial: "rounds/vote", locals: { round: round, jokes: jokes, user: user }   
   end
   
-  def render_rules_for(user)
+  def render_rules_for(_game)
     [
       tag.h2("Правила"),
       tag.p("Какие-то правила")
     ].join(" ").html_safe
   end
 
-  def render_rules_action_for(user)
+  def render_rules_action_for(user, game)
     content_for(:action) do 
-      if user.host?
-        button_to("Start game", game_rounds_path(user.game))
+      if game.host == user
+        button_to("Start game", game_rounds_path(game))
       else 
-        render_wait
+        render_wait_or_join_for(user, game)
       end
     end
   end
 
-  def render_wait
-    tag.button("Ждём", class: "disabled", disabled: true).html_safe
+  def render_wait_or_join_for(user, game)
+    if game.joinable?(by: user)
+      render_join(game)
+    else
+      tag.button("Ждём", class: "disabled", disabled: true).html_safe
+    end
+  end
+
+  def render_join(game)
+    link_to("Присоединиться", game_join_path(game), class: "button").html_safe
   end
 end

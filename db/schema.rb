@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_12_085349) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_22_113326) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -31,12 +31,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_12_085349) do
     t.integer "max_points"
     t.string "name", null: false
     t.boolean "viewable", default: true, null: false
+    t.boolean "viewers_vote", default: false, null: false
     t.integer "winner_id"
     t.integer "status", default: 0, null: false
     t.integer "n_rounds", default: 0, null: false
     t.integer "n_players", default: 0, null: false
-    t.string "host_username", null: false
+    t.integer "n_viewers", default: 0, null: false
     t.bigint "host_id"
+    t.string "host_username", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["host_id"], name: "index_games_on_host_id"
@@ -46,7 +48,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_12_085349) do
     t.string "setup"
     t.string "punchline"
     t.string "text"
-    t.integer "votes", default: 0
+    t.integer "n_votes", default: 0
     t.bigint "round_id"
     t.bigint "punchline_author_id"
     t.bigint "setup_author_id"
@@ -102,6 +104,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_12_085349) do
     t.boolean "guest", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "votes", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "joke_id", null: false
+    t.bigint "round_id"
+    t.integer "weight", default: 1, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["joke_id"], name: "index_votes_on_joke_id"
+    t.index ["round_id"], name: "index_votes_on_round_id"
+    t.index ["user_id"], name: "index_votes_on_user_id"
   end
 
   add_foreign_key "awards", "presents"

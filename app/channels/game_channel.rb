@@ -11,12 +11,11 @@ class GameChannel < ApplicationCable::Channel
     set_game
 
     stream_for @game
-    @game.touch unless @user.host?
-    @user.toggle!(:subscribed_to_game)
+    @game.increment!(:n_viewers)
   end
 
   def unsubscribed
-    @user.toggle!(:subscribed_to_game)
+    @game.decrement!(:n_viewers)
   end
 
   private
@@ -27,6 +26,7 @@ class GameChannel < ApplicationCable::Channel
 
   def set_game
     @game = Game.find_by(id: params[:id])
+
     # if rejection happens turbo_stream tag in html doesn't get connected attribute
     reject if @game.nil?
     return if @game.viewable?

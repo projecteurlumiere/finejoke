@@ -2,11 +2,11 @@
   <%= tag.div data: round_data_attributes(round), class: "hidden" %>
   <div class="task">
     <div class="description">
-      <%= round_task_for(current_or_guest_user, round) %>
+      <%= round_task_for(current_or_guest_user, round, game) %>
     </div>
-    <%= render_input_for(current_or_guest_user, round) %>
+    <%= render_input_for(current_or_guest_user, round, game) %>
   </div>
   <div class="action">
-    <%= content_for?(:action) ? yield(:action) : render_wait %>
+    <%= content_for?(:action) ? yield(:action) : render_wait_or_join_for(current_or_guest_user, game) %>
   </div>
 <% end %>

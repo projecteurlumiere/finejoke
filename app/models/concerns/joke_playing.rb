@@ -18,10 +18,7 @@ module JokePlaying
 
     def register_vote(by:) # user
       user = by
-      ActiveRecord::Base.transaction do
-        self.increment(:votes) 
-        self.save && user.voted!
-      end
+      Vote.create(user_id: user.id, round_id: round.id, joke_id: id)
     end
   end
 end

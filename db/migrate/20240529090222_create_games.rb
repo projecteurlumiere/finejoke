@@ -7,12 +7,14 @@ class CreateGames < ActiveRecord::Migration[7.1]
       t.integer :max_points
       t.string  :name, null: false
       t.boolean :viewable, null: false, default: true
+      t.boolean :viewers_vote, null: false, default: false
       t.integer :winner_id
       t.integer :status, null: false, default: 0
       t.integer :n_rounds, null: false, default: 0
       t.integer :n_players, null: false, default: 0
-      t.string :host_username, null: false
+      t.integer :n_viewers, null: false, default: 0
       t.references :host, foreign_key: { to_table: :users }
+      t.string :host_username, null: false
 
       t.timestamps
     end

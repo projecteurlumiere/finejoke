@@ -9,14 +9,14 @@ class JokePolicy < ApplicationPolicy
   end
 
   def create?
-    @game.users.include?(@user) && 
-    @game.current_round == @round &&
-    !@user.lead?
+    @user.playing?(@game) && 
+      @round.current? &&
+      !@user.lead?
   end
 
   def update?
-    @game.users.include?(@user) && 
-    @game.current_round == @round &&
-    !@user.voted?
+    (@user.playing?(@game) || @game.viewers_vote?) &&
+      @round.current? &&
+      @user.can_vote?(@round)
   end
 end

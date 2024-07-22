@@ -6,6 +6,7 @@ class Round < ApplicationRecord
     validate :enough_players?
   
     has_many :jokes, dependent: :nullify
+    has_many :votes, dependent: :nullify
 
   enum stage: %i[setup punchline vote results], _suffix: true
   attr_accessor :votes_change
@@ -80,14 +81,16 @@ class Round < ApplicationRecord
 
   def count_votes
     self.votes_change = jokes.map do |joke|
-      author = joke.user
-      author.current_score += joke.votes
-      author.total_score += joke.votes
+      author = joke.punchline_author
+      author.current_score += joke.n_votes
+      author.total_score += joke.n_votes
       author.save
+
       unless last?
         toggle(:last) if max_points_achieved?(author)
       end
-      [author.id, joke.votes]
+
+      [author.id, joke.n_votes]
     end.to_h
   end
 
@@ -108,7 +111,8 @@ class Round < ApplicationRecord
   end
 
   def next_stage!
-    self.update(stage: Round.stages[stage] + 1)
+    stage_number = Round.stages[stage]
+    self.send("move_to_#{Round.stages.to_a[stage_number + 1][0]}")
   end
 
   def schedule_next_round
@@ -116,7 +120,7 @@ class Round < ApplicationRecord
   end
 
   def current?
-    game.current_round.id == id
+    game.current_round == self
   end
 
   def passed?

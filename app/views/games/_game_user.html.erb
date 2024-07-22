@@ -5,7 +5,7 @@
                vote_change: votes_change.any? ? (votes_change[user.id] || 0) : nil, 
                lead: user.lead?,
                finished_turn: user.finished_turn?,
-               voted: user.voted? } do %>
+               voted: (user.voted?(game.current_round) if game.current_round) } do %>
     <div class="score press-font">
       <% if votes_change.any? %>
         +<%= votes_change[user.id] || 0 %>

@@ -6,7 +6,7 @@
   <% if round.results_stage? %>
     <div class="user">
       <%= tag.div(joke.punchline_author.username) %>
-      <%= tag.div("+#{joke.votes}", class: "press-font red") %>
+      <%= tag.div("+#{joke.n_votes}", class: "press-font red") %>
     </div>
     <p class="setup press-font">
       <%= joke.setup %>
