@@ -1,9 +1,7 @@
 <% game = Game.find_by(id: game_id) %>
 
 <% if game %>
-  <%= turbo_stream.action(:replace, dom_id(game)) do %>
-  <h2>
-    <%= "Game ##{game.id} is over" %>
-  </h2>
+  <%= turbo_stream.action(:replace, :current_round) do %>
+    <h2>Game is over</h2>
   <% end %>
 <% end %>

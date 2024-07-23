@@ -34,6 +34,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_22_113326) do
     t.boolean "viewers_vote", default: false, null: false
     t.integer "winner_id"
     t.integer "status", default: 0, null: false
+    t.integer "afk_rounds", default: 0, null: false
     t.integer "n_rounds", default: 0, null: false
     t.integer "n_players", default: 0, null: false
     t.integer "n_viewers", default: 0, null: false

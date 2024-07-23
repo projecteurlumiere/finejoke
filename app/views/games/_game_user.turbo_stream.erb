@@ -1,6 +1,6 @@
 <% if (user = User.find_by(id: user_id)) && (game = Game.find_by(id: game_id)) %>
   <%# ideally, it should be action :morph but it hasn't been released yet... %>
   <%= turbo_stream.action(:replace, dom_id(user)) do %>
-    <%= render partial: "games/game_user", formats: %i[html], locals: { user: user, game: game } %>
+    <%= render partial: "games/game_user", formats: %i[html], locals: { user: user, game: game, votes_change: {} } %>
   <% end %>
 <% end %>

@@ -13,7 +13,7 @@ class Round < ApplicationRecord
 
   # tidying up and choosing lead player:
   before_create :reset_players, :choose_lead
-  before_create :set_last, if: :max_rounds_achieved?
+  before_create :last!, if: :max_rounds_achieved?, unless: :last?
   before_create :decurrent_previous_round
    after_create -> { game.increment!(:n_rounds) }
    after_create -> { game.ongoing! if game.waiting? }
@@ -31,6 +31,7 @@ class Round < ApplicationRecord
     after_touch :count_votes, :move_to_results, if: %i[vote_stage? votes_finished?]
     after_touch :schedule_next_round, if: :results_stage?, unless: :last?
     after_touch :schedule_next_stage, unless: %i[results_stage? last?]
+    after_touch :schedule_game_finish, if: %i[results_stage? last?]
     # after_touch -> { game.touch }
 
   delegate :broadcast_current_round, to: :game
@@ -56,13 +57,14 @@ class Round < ApplicationRecord
     game.max_rounds == game.rounds.count + 1 # one being this new round
   end
 
-  def set_last
+  def last!
     self.last = true
   end
 
   def decurrent_previous_round
-    previous_round = game.rounds[-2]
-    previous_round.update_attribute(:current, false) if previous_round
+    # why not -1?
+    previous_round = game.rounds.find_by(current: true) # searches only persistent records
+    previous_round&.update_attribute(:current, false)
   end
 
   def random_setup
@@ -76,8 +78,27 @@ class Round < ApplicationRecord
   end
 
   def move_to_vote
+    handle_no_jokes and return if jokes.none?
+
     vote_stage!
     broadcast_current_round
+  end
+
+  def move_to_results
+    results_stage!
+    broadcast_current_round
+    game.broadcast_user_change(votes_change: votes_change)
+  end
+
+  def handle_no_jokes
+    transaction do
+      game.increment!(:afk_rounds)
+      last! if game.afk_rounds >= Game::AFK_ROUNDS_THRESHOLD
+    end
+
+    self.votes_change = {}
+
+    move_to_results
   end
 
   def count_votes
@@ -88,7 +109,7 @@ class Round < ApplicationRecord
       author.save
 
       unless last?
-        toggle(:last) if max_points_achieved?(author)
+        last! if max_points_achieved?(author)
       end
 
       [author.id, joke.n_votes]
@@ -101,23 +122,22 @@ class Round < ApplicationRecord
     user.current_score >= game.max_points
   end
 
-  def move_to_results
-    results_stage!
-    broadcast_current_round
-    game.broadcast_user_change(votes_change: votes_change)
-  end
-
   def schedule_next_stage
     RoundToNextStageJob.set(wait: game.max_round_time.seconds).perform_later(id, stage)
   end
 
   def next_stage!
     stage_number = Round.stages[stage]
+    raise "cannot go past the last stage" if stage_number.nil?
     self.send("move_to_#{Round.stages.to_a[stage_number + 1][0]}")
   end
 
   def schedule_next_round
     CreateNewRoundJob.set(wait: Game::RESULTS_STAGE_TIME).perform_later(game.id)
+  end
+
+  def schedule_game_finish
+    FinishGameJob.set(wait: Game::RESULTS_STAGE_TIME).perform_later(game.id)
   end
 
   def current?

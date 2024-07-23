@@ -31,7 +31,7 @@ module GameBroadcasting
     end
 
     def broadcast_game_over
-      broadcast_render_later_to(["game", self], partial: "games/game_over", locals: { game_id: id })
+      broadcast_render_to(["game", self], partial: "games/game_over", locals: { game_id: id })
       users.each(&:broadcast_status_change)
       broadcast_remove_to_lobby
     end
