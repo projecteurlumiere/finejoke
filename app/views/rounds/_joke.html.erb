@@ -3,7 +3,7 @@
               vote_path: game_round_joke_path(round.game, round, joke),
               vote_target: :joke
             } do %>
-  <% if round.results_stage? %>
+  <% if round.results_stage? || round.game.finished? %>
     <div class="user">
       <%= tag.div(joke.punchline_author.username) %>
       <%= tag.div("+#{joke.n_votes}", class: "press-font red") %>

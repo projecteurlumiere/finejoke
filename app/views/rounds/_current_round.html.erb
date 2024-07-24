@@ -7,6 +7,6 @@
     <%= render_input_for(current_or_guest_user, round, game) %>
   </div>
   <div class="action">
-    <%= content_for?(:action) ? yield(:action) : render_wait_or_join_for(current_or_guest_user, game) %>
+    <%= content_for?(:action) ? yield(:action) : render_default_action_for(current_or_guest_user, game) %>
   </div>
 <% end %>

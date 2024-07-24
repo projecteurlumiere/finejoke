@@ -32,7 +32,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_22_113326) do
     t.string "name", null: false
     t.boolean "viewable", default: true, null: false
     t.boolean "viewers_vote", default: false, null: false
-    t.integer "winner_id"
+    t.bigint "winner_id"
+    t.integer "winner_score"
     t.integer "status", default: 0, null: false
     t.integer "afk_rounds", default: 0, null: false
     t.integer "n_rounds", default: 0, null: false
@@ -43,6 +44,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_22_113326) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["host_id"], name: "index_games_on_host_id"
+    t.index ["winner_id"], name: "index_games_on_winner_id"
   end
 
   create_table "jokes", force: :cascade do |t|
@@ -123,6 +125,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_22_113326) do
   add_foreign_key "awards", "presents"
   add_foreign_key "awards", "users"
   add_foreign_key "games", "users", column: "host_id"
+  add_foreign_key "games", "users", column: "winner_id"
   add_foreign_key "jokes", "rounds"
   add_foreign_key "jokes", "users", column: "punchline_author_id"
   add_foreign_key "jokes", "users", column: "setup_author_id"

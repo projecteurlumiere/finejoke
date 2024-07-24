@@ -2,9 +2,12 @@ class Game < ApplicationRecord
   include GameBroadcasting
 
   has_many :users # players
+  belongs_to :winner, required: false, class_name: :User
+
   belongs_to :host, class_name: :User
 
   has_many :rounds, dependent: :destroy
+  has_many :jokes, through: :rounds
 
   enum status: %i[waiting ongoing on_halt finished]
 
@@ -138,6 +141,7 @@ AFK_ROUNDS_THRESHOLD = 1
 
   def joinable?(by: nil) # user
     user = by
+    return false if finished?
     return false if n_players >= max_players
     return false if user&.game
 
@@ -147,5 +151,20 @@ AFK_ROUNDS_THRESHOLD = 1
   def skip_round
     current_round.results_stage!
     current_round.touch
+  end
+
+  def conclude
+    finished!
+    decide_winner
+    broadcast_game_over
+  end
+
+  def decide_winner
+    return if max_rounds.nil? && max_points.nil?
+    transaction do
+      binding.irb
+      self.winner = users.order(current_score: :desc).limit(1)[0]
+      self.winner_score = winner.current_score
+    end
   end
 end

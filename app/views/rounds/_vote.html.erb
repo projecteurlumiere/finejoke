@@ -11,7 +11,7 @@
   </div>
 </div>
 <% content_for(:action) do %>
-  <% if round.vote_stage? && (user.can_vote?(round) && user.not_voted?(round)) %>
+  <% if !round.game.finished? && round.vote_stage? && (user.can_vote?(round) && user.not_voted?(round)) %>
     <%= button_to "Проголосовать", 
           game_round_joke_path(round.game, round, jokes.first), 
           method: :patch, 

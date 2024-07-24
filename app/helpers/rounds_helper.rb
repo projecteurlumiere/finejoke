@@ -10,7 +10,9 @@ module RoundsHelper
   end
 
   def round_task_for(user, round, game)
-    messages = if round.nil?
+    messages = if game.finished?
+                 game_over_task_for(game)
+               elsif round.nil?
                  return render_rules_for(game)
                elsif user.playing?(game)
                  round_task_for_player(user, round)
@@ -24,6 +26,22 @@ module RoundsHelper
       tag.h2(messages[0]),
       tag.p(messages[1])
     ].join(" ").html_safe
+  end
+
+  def game_over_task_for(game)
+    congrat_message = game.winner ? "Поздравляем #{game.winner.username}!" : "Поздравляем!"  
+
+    if game.winner
+      [
+        "Победил #{game.winner.username}",
+        "Его счёт #{game.winner_score}"
+      ]
+    else
+      [
+        "Игра окончена",
+        "Поздравляем!"
+      ]
+    end
   end
 
   def round_task_for_player(user, round)
@@ -99,6 +117,7 @@ module RoundsHelper
   end
 
   def render_input_for(user, round, game)
+    return render_game_over_for(user, round, game) if game.finished?
     return render_rules_action_for(user, game) if round.nil?
 
     render_turns_form_for(user, round) || 
@@ -106,6 +125,7 @@ module RoundsHelper
       render_results_for(user, round)
   end
 
+  # only for players
   def render_turns_form_for(user, round)
     return unless user.playing?(round)
     return if user.finished_turn?
@@ -117,6 +137,7 @@ module RoundsHelper
     end
   end
 
+  # for players and viewers and those who hot joined if voting is allowed for viewers 
   def render_votes_form_for(user, round)
     return unless round.vote_stage?
 
@@ -125,14 +146,20 @@ module RoundsHelper
     render partial: "rounds/vote", locals: { round: round, jokes: jokes, user: user }
   end
 
+  # for everyone
   def render_results_for(user, round)
     return unless round.results_stage?
 
     jokes = round.jokes.order(n_votes: :desc)
+    render partial: "rounds/vote", locals: { round: round, jokes: jokes, user: user }
+  end
 
-    render partial: "rounds/vote", locals: { round: round, jokes: jokes, user: user }   
+  def render_game_over_for(user, round, game)
+    jokes = game.jokes.order(n_votes: :desc).limit(10)
+    render partial: "rounds/vote", locals: { round: round, jokes: jokes, user: user }
   end
   
+  # for everyone
   def render_rules_for(_game)
     [
       tag.h2("Правила"),
@@ -140,27 +167,32 @@ module RoundsHelper
     ].join(" ").html_safe
   end
 
+  # only for host
   def render_rules_action_for(user, game)
+    return unless game.host == user
+
     content_for(:action) do 
-      if game.host == user
-        button_to("Start game", game_rounds_path(game))
-      else 
-        render_wait_or_join_for(user, game)
-      end
+      button_to("Start game", game_rounds_path(game))
     end
   end
 
-  def render_wait_or_join_for(user, game)
-    if game.joinable?(by: user)
-      render_join(game)
-    elsif user.hot_joined?(game)
-      tag.button("Вы в игре со следующего раунда", class: "disabled", disabled: true).html_safe 
-    else
-      tag.button("Ждём", class: "disabled", disabled: true).html_safe
-    end
+  def render_default_action_for(user, game)
+    return render_join(game) if game.joinable?(by: user)
+    return render_game_over_button if game.finished?
+
+    render_wait_for(user, game)
   end
 
   def render_join(game)
     link_to("Присоединиться", game_join_path(game), class: "button").html_safe
+  end
+
+  def render_game_over_button
+    tag.button("Игра окончена", class: "disabled", disabled: true).html_safe
+  end
+
+  def render_wait_for(user, game)
+    message = user.hot_joined?(game) ? "Вы в игре со следующего раунда" : "Ждём"
+    tag.button(message, class: "disabled", disabled: true).html_safe
   end
 end

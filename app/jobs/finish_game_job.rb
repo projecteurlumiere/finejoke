@@ -1,11 +1,11 @@
 class FinishGameJob < ApplicationJob
-  queue_as :default
+  queue_as :urgent
 
   def perform(game_id)
     game = Game.find_by(id: game_id)
 
     return if game.nil?
 
-    game.destroy
+    game.conclude
   end
 end

@@ -8,7 +8,8 @@ class CreateGames < ActiveRecord::Migration[7.1]
       t.string  :name, null: false
       t.boolean :viewable, null: false, default: true
       t.boolean :viewers_vote, null: false, default: false
-      t.integer :winner_id
+      t.references :winner, foreign_key: { to_table: :users }
+      t.integer :winner_score
       t.integer :status, null: false, default: 0
       t.integer :afk_rounds, null: false, default: 0
       t.integer :n_rounds, null: false, default: 0
