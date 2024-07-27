@@ -4,15 +4,13 @@ ul, ol, li {
   padding: unset;
 }
 
-input[type=text],
-textarea {
+input {
   background-color: transparent;
   border: none;
   border-bottom: solid 1px var(--white);
   padding: 1em;
 
   font-size: inherit;
-  width: 100%;
 
   resize: none;
 }

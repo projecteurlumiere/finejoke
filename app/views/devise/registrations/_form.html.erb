@@ -1,0 +1,22 @@
+<turbo-frame id="authentication-form">
+  <%= form_for(resource, url: registration_path(resource_name), html: { id: "new-registration", class: "new-registration" }) do |f| %>
+    <%# render "devise/shared/error_messages", resource: resource %>
+
+    
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Эмейл", aria_label: "Электронный адрес" %>
+    
+    
+      <%= f.text_field :username, autocomplete: "username", placeholder: "Имя", aria_label: "Имя пользователя" %>
+    
+
+    
+      <%= f.password_field :password, autocomplete: "new-password", placeholder: "Пароль", aria_label: "Пароль (минимум #{@minimum_password_length} знаков)" %>
+    
+    
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Пароль ещё раз", aria_label: "Подтвердите пароль" %>
+  <% end %>
+
+   <input type="submit" form="new-registration" value="Создать">
+
+  <%= render "devise/shared/links" %>
+</turbo-frame>

@@ -1,9 +1,37 @@
 #authentication {
-  display: flex;
-  justify-content: center;
 
-  .container {
-    border: solid 1px aliceblue;
+  #authentication-form {
     display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0;
+    border: none;
+    grid-row: 2 / 3;
+
+    form {
+      display: flex;
+      flex-direction: column;
+      padding: 2rem;
+      border: solid 1px var(--white);
+      gap: 1rem;
+    }
+  }
+
+  #authentication-form:has(> .new-session) {
+    grid-column: 1 / 2;
+  }
+
+  #authentication-form:has(> .new-registration) {
+    grid-column: 2 / 3;
+  }
+
+  .welcome {
+    grid-row: 2 / 3;
+
+    border: none;
+
+    @media(max-width: 950px) {
+      display: none;
+    }
   }
 }

@@ -1,0 +1,6 @@
+<%= link_to "Вход", new_user_session_path, 
+      class: ["button", ("selected" if controller_name == "sessions")].compact.join(" "), 
+      data: { turbo_frame: "authentication-form", turbo_action: :advance } %>
+<%= link_to "Регистрация", new_user_registration_path, 
+      class: ["button", ("selected" if controller_name == "registrations")].compact.join(" "), 
+        data: { turbo_frame: "authentication-form", turbo_action: :advance }  %>

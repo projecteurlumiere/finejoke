@@ -29,8 +29,6 @@ module RoundsHelper
   end
 
   def game_over_task_for(game)
-    congrat_message = game.winner ? "Поздравляем #{game.winner.username}!" : "Поздравляем!"  
-
     if game.winner
       [
         "Победил #{game.winner.username}",

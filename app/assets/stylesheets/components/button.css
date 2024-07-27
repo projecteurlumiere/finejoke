@@ -10,7 +10,6 @@ input[type=button],
   white-space: nowrap;
   text-align: center;
   text-decoration: none;
-  width: 100%;
 }
 
 input[type=submit].disabled,
