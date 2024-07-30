@@ -1,0 +1,41 @@
+#profile {
+  height: 100%;
+
+  #summary {
+    display: flex;
+    flex-direction: column;
+
+    // username
+    .value:first-of-type {
+      margin-bottom: 1.5em;
+    }
+
+    * {
+      margin-bottom: 1em;
+    }
+
+    *:last-child {
+      margin-bottom: 0;
+    }
+
+    > .button-container  {
+      justify-self: flex-end;
+      flex: 1;
+
+      display: flex;
+      align-items: flex-end;
+
+      > button {
+        width: 100%;
+      }
+    } 
+  }
+
+  #catalogue {
+    li {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}
+

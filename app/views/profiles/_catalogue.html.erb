@@ -1,0 +1,24 @@
+<div id="catalogue" class="bg-red" data-controller="profile-catalogue">
+    <h2>
+      <%= form_with(url: profile_path(@user), method: :get, data: { turbo_stream: true, profile_catalogue_target: "form" }) do |form| %>
+        <%= form.select :order_by, 
+              options_for_select([["Лучшие", "n_votes"], ["Недавние", "created_at"]], params[:order_by] || "created_at"),
+              {},
+              { data: { action: "profile-catalogue#submit" } } %>
+        <br>
+        <%= form.select :property, 
+              options_for_select([["Шутки", "jokes"], ["Завязки", "started_jokes"], ["Развязки", "finished_jokes"]], params[:property] || "finished_jokes"),
+              {}, 
+              { data: { action: "profile-catalogue#submit" } } %>
+        <%= form.hidden_field :turbo_action, value: :replace %>
+      <% end %>
+    </h2>
+
+    <ul>
+    </ul>
+    <div class="pagination">
+      <p>
+        Загружаем шуточки
+      </p>
+    </div>
+</div>

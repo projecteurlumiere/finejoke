@@ -6,3 +6,7 @@
 .red {
   color: var(--red) !important;
 }
+
+.black {
+  color: var(--black) !important;
+}

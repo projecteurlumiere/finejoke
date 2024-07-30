@@ -1,10 +1,4 @@
-<%= link_to "Настройки профиля", edit_self_profile_path if current_or_guest_user == @user %>
-<%= render partial: "awards/form", locals: { award: @award } if current_or_guest_user != @user %>
-
-<h1><%= @user.username %></h1>
-<h2>Всего очков: 
-  <%= @user.total_score %>
-</h2>
-
-<%= render partial: "jokes" %>
-<%= render partial: "awards" %>
+<div id="profile" class="two-columns">
+  <%= render partial: "catalogue", locals: { user: @user, jokes: @jokes } %>
+  <%= render partial: "summary", locals: { user: @user } %>
+</div>

@@ -1,0 +1,29 @@
+<% if @action == :replace %>
+  <%= turbo_stream.replace_all("#catalogue > ul") do %>
+    <ul>
+      <%= render partial: "joke", collection: @jokes %>    
+    </ul>
+  <% end %>
+<% else %>
+  <%= turbo_stream.append_all("#catalogue > ul") do %>
+    <ul>
+      <%= render partial: "joke", collection: @jokes %>
+    </ul>
+  <% end %>
+<% end %>
+  
+<%= turbo_stream.replace_all(".pagination") do %>
+    <div class="pagination">
+      <% if not @user.show_jokes_allowed? %>
+        <p>
+          Игрок <%= @user.username %> скрыл свои шутки!
+        </p>
+      <% elsif @jokes.nil? || @jokes.none? %>
+        <p>Шуток нет</p>
+      <% elsif @jokes.last_page? %>
+        <p>Шутки кончились</p>
+      <% else %>
+        <%= link_to_next_page @jokes, "Загрузить ещё шуточек", data: { turbo_stream: true } %>
+      <% end %>
+    </div>
+<% end %>

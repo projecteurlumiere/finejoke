@@ -24,3 +24,16 @@ button.disabled,
   background-color: var(--red);
   border-color: var(--red);
 }
+
+form.button_to > * {
+  width: 100%;
+}
+
+input[type=submit].highlighted,
+input[type=button].highlighted,
+button.highlighted,
+.button.highlighted {
+  border: none;
+  background-color: var(--teal);
+  color: var(--black);
+}

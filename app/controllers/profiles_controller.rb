@@ -6,10 +6,12 @@ class ProfilesController < ApplicationController
     redirect_to profile_path(set_user) and return if params[:id].nil?
 
     @user = User.find(params[:id]) 
-    @jokes = @user.jokes.page(params[:page]) if @user.show_jokes_allowed?
-    @awards = @user.awards.page(params[:page]) if @user.show_awards_allowed?
+    set_jokes
 
-    @award = @user.awards.build
+    respond_to do |format|
+      format.html
+      format.turbo_stream
+    end
   end
 
   def edit
@@ -41,5 +43,53 @@ class ProfilesController < ApplicationController
 
   def authorize_user_profile!
     authorize @user || User, policy_class: ProfilePolicy
+  end
+
+  def set_jokes
+    return unless @user.show_jokes_allowed?
+
+    @jokes = process_joke_params
+  end
+
+  def process_joke_params
+    set_turbo_action
+
+    property = set_property
+    ordered_property = set_order(property)
+    
+    ordered_property.page(params[:page])
+  end
+
+  def set_turbo_action
+    @action = case params[:turbo_action]
+              when "replace"
+                :replace
+              else
+                :append
+              end
+  end
+
+  def set_property
+    case params[:property]
+    when "finished_jokes"
+      @user.finished_jokes
+    when "started_jokes"
+      @user.started_jokes
+    else 
+      params[:property] = nil
+      @user.jokes
+    end
+  end
+
+  def set_order(property)
+    case params[:order_by]
+    when "n_votes"
+      property.order(n_votes: :desc)
+    when "created_at"
+      property.order(created_at: :desc)
+    else
+      params[:order_by] = nil
+      property
+    end
   end
 end

@@ -1,0 +1,34 @@
+<div id="summary">
+  <h2 class="black">Профиль</h2>
+  <div class="value">
+    <%= user.username.truncate(16) %>
+  </div>
+  <div>
+    <div class="label">В игре с</div>
+    <div class="value black">
+      <% date = user.created_at %>
+      <%= [date.year, date.month, date.day].join("-") %>
+    </div>
+  </div>
+  <div>
+    <div class="label">Игр сыграно</div>
+    <div class="value red">
+      <%= user.total_score %>
+    </div>
+  </div>
+  <div>
+    <div class="label">Завязок придумано</div>
+    <div class="value red">
+      0
+    </div>
+  </div>
+  <div>
+    <div class="label">Ответов придумано</div>
+    <div class="value red">
+      0
+    </div>
+  </div>
+  <div class="button-container">
+    <button class="highlighted">Подарок</button>
+  </div>
+</div>
