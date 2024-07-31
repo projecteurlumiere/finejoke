@@ -3,19 +3,18 @@
   overflow-y: scroll;
 
   h2 {
-    margin-left: 1rem;
-
     select {
       font-family: "Press Start 2P";
       border: none;
       background-image: url("icons/dropdown.svg");
       background-repeat: no-repeat;
-      background-position: right 0.7rem top 50%;
+      background-position: right 0 top 26%;
       padding-right: 2ch;
+      padding-top: 0;
+      padding-bottom: 1rem;
     }
   }
 
-  h2, 
   li {
     margin-bottom: 1rem;
   }

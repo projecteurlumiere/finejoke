@@ -32,6 +32,10 @@
   }
 
   #catalogue {
+    h2 {
+      padding-bottom: 0;
+    }
+
     li {
       display: flex;
       justify-content: space-between;
