@@ -21,5 +21,9 @@ module UserMergeable
     def merge_presents(user)
       user.awards.update_all(user_id: id)
     end
+
+    def merge_awards(user)
+      # to be done
+    end
   end
 end

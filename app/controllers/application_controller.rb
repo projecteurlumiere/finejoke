@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   include ErrorHandling
   include TurboRendering
   
-  before_action :store_referrer, :authenticate_user!, if: :new_guest?, unless: :devise_controller?
+  before_action :welcome_guest, if: :new_guest?, unless: :guest_welcomed?
   before_action :configure_permitted_parameters, if: :devise_controller?
   after_action :verify_authorized, unless: :devise_controller?
   after_action :remove_referrer, unless: %i[devise_controller? new_guest?] 
@@ -21,6 +21,20 @@ class ApplicationController < ActionController::Base
   end
 
   private
+  
+  def guest_welcomed?
+    session[:guest_welcomed]
+  end
+
+
+  def welcome_guest
+    session[:guest_welcomed] = true if devise_controller?
+
+    unless devise_controller?
+      store_referrer
+      authenticate_user!
+    end
+  end
 
   def store_referrer
     session[:referrer] = request.path

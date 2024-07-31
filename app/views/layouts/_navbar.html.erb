@@ -1,11 +1,11 @@
-    <nav class="three-columns">
-      <div class="start">
-        <%= render partial: "layouts/user_status", formats: %i[html], locals: { game: current_or_guest_user.game } %>
-      </div>
-      <h1 class="center">
-        Лого
-      </h1>
-      <div class="end">
-        <%= render partial: "layouts/user_profile" %>
-      </div>
-    </nav>
+<nav class="three-columns">
+  <div class="start">
+    <%= render partial: "layouts/user_status", formats: %i[html], locals: { game: current_or_guest_user.game } unless new_guest? %>
+  </div>
+  <h1 class="center">
+    Лого
+  </h1>
+  <div class="end">
+    <%= render partial: "layouts/user_profile" %>
+  </div>
+</nav>

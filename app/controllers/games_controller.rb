@@ -1,6 +1,5 @@
 class GamesController < ApplicationController
   include ActionView::RecordIdentifier
-  before_action :welcome_new_guest, if: :new_guest?, only: %i[ index show show_rules join ]
   before_action :set_game, only: %i[ show destroy ]
   before_action :authorize_game!, only: %i[ index show destroy ]
 
