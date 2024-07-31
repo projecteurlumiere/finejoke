@@ -13,9 +13,12 @@ input {
   font-size: inherit;
 
   resize: none;
+  
+  box-sizing: border-box;
+  width: 100%;
 }
 
-input[type=text]:invalid {
+input:invalid {
   border-color: var(--red);
 }
 

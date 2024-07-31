@@ -1,4 +1,4 @@
 <div id="profile" class="two-columns">
   <%= render partial: "catalogue", locals: { user: @user, jokes: @jokes } %>
-  <%= render partial: "summary", locals: { user: @user } %>
+  <%= render partial: "summary", locals: { user: @user, current_or_guest_user: current_or_guest_user } %>
 </div>

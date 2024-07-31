@@ -1,0 +1,18 @@
+#profile {
+  // #summary {
+    .form-large {    
+      .switch-container > div > div:first-child {
+        margin-left: 1rem;
+      }
+
+      .delete-account {
+        display: flex;
+        justify-content: right;
+
+        * {
+          font-size: 0.75em
+        }
+      }
+    }
+  // }
+}

@@ -58,6 +58,7 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:username])
+    devise_parameter_sanitizer.permit(:account_update, keys: %i[email show_awards_allowed show_jokes_allowed])
   end
 
   def transfer_guest_to_user

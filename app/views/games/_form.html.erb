@@ -1,4 +1,4 @@
-<%= form_with(model: game, id: "new-game") do |form| %>
+<%= form_with(model: game, id: "new-game", class: "form-large") do |form| %>
   <% if game.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(game.errors.count, "error") %> prohibited this game from being saved:</h2>
@@ -47,9 +47,8 @@
     </div>
   </fieldset>
 
-  <fieldset class="privacy">
+  <fieldset class="switch-container">
     <legend>Доступ</legend>
-    
     <div>
       <div>Открыта для зрителей</div>
       <div class="switch">

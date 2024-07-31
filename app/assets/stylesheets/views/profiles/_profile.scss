@@ -2,33 +2,63 @@
   height: 100%;
 
   #summary {
+    overflow: hidden;
     display: flex;
     flex-direction: column;
 
-    // username
-    .value:first-of-type {
-      margin-bottom: 1.5em;
-    }
-
-    * {
-      margin-bottom: 1em;
-    }
-
-    *:last-child {
-      margin-bottom: 0;
-    }
-
-    > .button-container  {
-      justify-self: flex-end;
-      flex: 1;
-
-      display: flex;
-      align-items: flex-end;
-
-      > button {
-        width: 100%;
+    h2 {
+      padding-bottom: 0;      
+      
+      .label {
+        margin-bottom: 1rem;
       }
-    } 
+
+      .value {
+        margin-left: 0;
+        margin-bottom: 1rem;
+      }
+    }
+
+    .statistics-container {
+      flex: 1;
+      overflow: auto;
+      
+      display: flex;
+      flex-direction: column;
+
+      * {
+        margin-bottom: 0.75rem;
+      }
+
+      > .button-container  {
+        justify-self: flex-end;
+        flex: 1;
+
+        display: flex;
+        align-items: flex-end;
+
+        > div {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+        }
+
+        .button,
+        button {
+          width: 100%;
+        }
+      }
+    }
+
+    .buttons-container {
+      > * { 
+        margin-bottom: 1rem;
+      }
+
+      > *:last-child {
+        margin-bottom: 0;
+      }
+    }
   }
 
   #catalogue {

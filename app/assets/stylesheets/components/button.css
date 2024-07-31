@@ -10,6 +10,40 @@ input[type=button],
   white-space: nowrap;
   text-align: center;
   text-decoration: none;
+
+  box-sizing: border-box;
+  width: 100%;
+}
+
+button.unstyled,
+input[type=submit].unstyled,
+input[type=button].unstyled,
+.button.unstyled {
+  border: none;
+  border-bottom: solid 1px var(--white);
+  
+  padding: 0;
+  white-space: normal;
+  text-decoration: underline;
+  width: unset;
+}
+
+input[type=submit].highlighted,
+input[type=button].highlighted,
+button.highlighted,
+.button.highlighted {
+  border: none;
+  background-color: var(--teal);
+  color: var(--black);
+}
+
+input[type=submit].danger,
+input[type=button].danger,
+button.danger,
+.button.danger {
+  color: var(--red);
+  border-color: var(--red);
+  background-color: transparent;
 }
 
 input[type=submit].disabled,
@@ -29,11 +63,3 @@ form.button_to > * {
   width: 100%;
 }
 
-input[type=submit].highlighted,
-input[type=button].highlighted,
-button.highlighted,
-.button.highlighted {
-  border: none;
-  background-color: var(--teal);
-  color: var(--black);
-}

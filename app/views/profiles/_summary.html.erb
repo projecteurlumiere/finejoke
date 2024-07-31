@@ -1,34 +1,58 @@
-<div id="summary">
-  <h2 class="black">Профиль</h2>
-  <div class="value">
-    <%= user.username.truncate(16) %>
-  </div>
-  <div>
-    <div class="label">В игре с</div>
-    <div class="value black">
-      <% date = user.created_at %>
-      <%= [date.year, date.month, date.day].join("-") %>
+<turbo-frame id="summary" data-controller="profile-form">
+  <h2>
+    <div class="label black">Профиль</div>
+    <div class="value">
+      <%= user.username.truncate(16) %>
+    </div>
+  </h2>
+  <div class="statistics-container">
+    <div>
+      <div class="label">В игре с</div>
+      <div class="value black">
+        <% date = user.created_at %>
+        <%= [date.year, date.month, date.day].join("-") %>
+      </div>
+    </div>
+    <div>
+      <div class="label">Наград получено</div>
+      <div class="value red">
+        0
+      </div>
+    </div>
+    <div>
+      <div class="label">Очков набрано</div>
+      <div class="value red">
+        <%= user.total_score %>
+      </div>
+    </div>
+    <div>
+      <div class="label">Игр сыграно</div>
+      <div class="value red">
+        0
+      </div>
+    </div>
+    <div>
+      <div class="label">Завязок придумано</div>
+      <div class="value red">
+        0
+      </div>
+    </div>
+    <div>
+      <div class="label">Ответов придумано</div>
+      <div class="value red">
+        0
+      </div>
     </div>
   </div>
-  <div>
-    <div class="label">Игр сыграно</div>
-    <div class="value red">
-      <%= user.total_score %>
-    </div>
+  <div class="buttons-container">
+    <% if user == current_user %>
+        <%= link_to "Настройки", edit_self_profile_path, class: "button highlighted", data: { turbo_action: :advance } %>
+        <% unless user.guest? %>
+          <%= button_to "Выход", destroy_user_session_path, method: :delete, class: "danger" %>
+        <% end %>
+    <% elsif user == current_or_guest_user %>
+      <%= link_to "Зарегистрироваться", new_user_registration_path, class: "button highlighted", data: { turbo_frame: "_top"} %>
+      <%# <button class="highlighted">Подарок</button> %>
+    <% end %>
   </div>
-  <div>
-    <div class="label">Завязок придумано</div>
-    <div class="value red">
-      0
-    </div>
-  </div>
-  <div>
-    <div class="label">Ответов придумано</div>
-    <div class="value red">
-      0
-    </div>
-  </div>
-  <div class="button-container">
-    <button class="highlighted">Подарок</button>
-  </div>
-</div>
+</turbo-frame>

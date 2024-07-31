@@ -3,9 +3,8 @@ class ProfilesController < ApplicationController
   before_action :authorize_user_profile!, except: %i[update]
 
   def show
-    redirect_to profile_path(set_user) and return if params[:id].nil?
-
-    @user = User.find(params[:id]) 
+    @user = params[:id].nil? ? set_user : User.find(params[:id])
+    
     set_jokes
 
     respond_to do |format|

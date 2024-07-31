@@ -1,0 +1,81 @@
+<turbo-frame id="summary" data-controller="profile-edit">
+  <h2 class="black">Редактировать</h2>
+  
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), 
+        html: { 
+          id: "edit-registration", 
+          class: "form-large", 
+          method: :put,
+          data: { profile_edit_target: "editForm" }
+        }) do |f| %>
+    <%# render "devise/shared/error_messages", resource: resource %>
+    
+    <fieldset>
+      <legend>Важные (можно не заполнять)</legend>
+      <%= f.email_field :email, value: nil, placeholder: "Новый эмейл?", aria_label: "Введите новйы эмейл, если желаете изменить", autocomplete: "off" %>
+    
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <div>Ждём подтверждения <%= resource.unconfirmed_email %></div>
+      <% end %>
+    
+      <%= f.password_field :password, placeholder: "Новый пароль?", aria_label: "Введите новый пароль, если желаете изменить", autocomplete: "new-password" %>
+
+      <%= f.password_field :password_confirmation, placeholder: "Ещё раз", aria_label: "Повторите новый пароль, если желаете изменить", autocomplete: "new-password" %>
+
+      <div class="delete-account">
+        <input type="submit" class="unstyled red" form="delete-account" value="Удалить аккаунт?" data-confirm="Удалить аккаунт? Вся статистика и трофеи будут потеряны навсегда!" data-turbo-confirm="Удалить аккаунт? Вся статистика и трофеи будут потеряны навсегда!">
+      </div>
+    </fieldset>
+
+    <fieldset class="switch-container">
+      <legend>
+        Приватность профиля
+      </legend>
+      <div>
+        <div>Показывать шутки</div>
+         <div class="switch">
+          <%= f.label :show_jokes_allowed, aria_label: "Показывать шутки", style: "display: block" do %>
+            <%= f.check_box :show_jokes_allowed %>
+            <span class="slider"></span>
+          <% end %>
+        </div>
+      </div>
+
+      <div>
+        <div>Показывать награды</div>
+         <div class="switch">
+          <%= f.label :show_awards_allowed, aria_label: "Показывать награды", style: "display: block" do %>
+            <%= f.check_box :show_awards_allowed %>
+            <span class="slider"></span>
+          <% end %>
+        </div>
+      </div>
+
+    </fieldset>
+    <fieldset>
+      <legend>
+      Подтвеждение
+    </legend>
+    </fieldset>
+    <%= f.password_field :current_password, 
+          required: true,
+          minlength: 6,
+          placeholder: "Старый пароль", 
+          autocomplete: "password", 
+          data: { profile_edit_target: "passwordField", action: "profile-edit#copyPassword" } %>
+  <% end %>
+
+  <%= form_with(url: registration_path(resource_name), 
+        method: :delete, 
+        html: { 
+          id: "delete-account",
+          data: { profile_edit_target: "deleteForm", action: "profile-edit#submitDeleteForm" } 
+        }) do |f| %>
+    <%= f.hidden_field :current_password, name: "user[current_password]", data: { profile_edit_target: "passwordHiddenField" } %>
+  <% end %>
+
+  <div class="buttons-container">
+    <input type="submit" form="edit-registration" value="Сохранить" class="highlighted">
+    <%= link_to "Назад", profile_path(current_or_guest_user), class: "button", data: { turbo_action: :advance } %>
+  </div>
+</turbo-frame>
