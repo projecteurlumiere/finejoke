@@ -68,11 +68,9 @@
       display: flex;
 
       textarea {
-        width: calc(100% - (var(--task-padding) * 2));
+        // width: calc(100% - (var(--task-padding) * 2));
       }
     }
-
-
   }
 
   .task.rules {

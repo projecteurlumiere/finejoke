@@ -27,6 +27,14 @@ input[type=image] {
   width: unset;
 }
 
+textarea {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  resize: none;
+  padding: 0.5ch;
+}
+
 fieldset {
   margin: 0;
   padding: 0;
