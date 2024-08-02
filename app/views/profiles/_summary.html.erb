@@ -1,4 +1,4 @@
-<turbo-frame id="summary" data-controller="profile-form">
+<turbo-frame id="summary" data-controller="profile-form" data-two-containers-target="rightContainer">
   <h2>
     <div class="label black">Профиль</div>
     <div class="value">
@@ -48,10 +48,10 @@
     <% if user == current_user %>
         <%= link_to "Настройки", edit_self_profile_path, class: "button highlighted", data: { turbo_action: :advance } %>
         <% unless user.guest? %>
-          <%= button_to "Выход", destroy_user_session_path, method: :delete, class: "danger" %>
+          <%= button_to "Выход", destroy_user_session_path, method: :delete,  class: "danger", data: { turbo_confirm: "Вы уверены, что хотите выйти из аккаунта?" } %>
         <% end %>
     <% elsif user == current_or_guest_user %>
-      <%= link_to "Зарегистрироваться", new_user_registration_path, class: "button highlighted", data: { turbo_frame: "_top"} %>
+      <%= link_to "Регистрация", new_user_registration_path, class: "button highlighted", data: { turbo_frame: "_top"} %>
       <%# <button class="highlighted">Подарок</button> %>
     <% end %>
   </div>

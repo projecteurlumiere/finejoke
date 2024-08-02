@@ -15,6 +15,20 @@
       padding: 1.5em 1em 0.5rem 1em;
     }
   }
+
+    // mobile buttons on top
+  .mobile-navigation {
+    display: none;
+  }
+
+  @media(max-width: 950px) {
+    .mobile-navigation {
+      // grid-row: 1 / 2;
+      order: -1;
+      display: grid;
+      grid-template-columns: 2fr 3fr;
+    }
+  }
 }
 
 .three-columns {
@@ -50,8 +64,8 @@
     display: flex;
     flex-direction: column;
 
-    > .hidden-when-mobile {
-      display: none !important;
+    > *:has(> .hidden-when-mobile) {
+      padding-top: 2rem;
     }
   }
 }

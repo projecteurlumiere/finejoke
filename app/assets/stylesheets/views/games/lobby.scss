@@ -5,18 +5,6 @@ main.lobby {
 #lobby {
    height: 100%;
 
-  .buttons {
-    display: grid;
-    column-gap: 1rem;
-    border: none;
-    padding: 0;
-
-    > * {
-      // padding: 1rem 0.25rem;
-      width: unset;
-    }
-  }
-
   // left buttons
   > div:nth-of-type(3) {
     grid-template-columns: 2fr 1fr;
@@ -28,7 +16,7 @@ main.lobby {
   }
 
   // mobile buttons on top
-  div.buttons:nth-of-type(5) {
+  div.buttons.mobile-navigation {
     display: none;
   }
 
@@ -45,20 +33,6 @@ main.lobby {
       display: flex;
       flex-direction: column-reverse;
       row-gap: 1rem;
-    }
-
-    // mobile buttons on top
-    div.buttons:nth-of-type(5) {
-      // grid-row: 1 / 2;
-      order: -1;
-      display: grid;
-      grid-template-columns: 2fr 3fr;
-    }
-  }
-
-  @media(min-height: 950px) and (max-width: 1100px) {
-    .buttons {
-      font-size: 1.25rem;
     }
   }
 

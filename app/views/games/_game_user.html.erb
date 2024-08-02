@@ -14,7 +14,7 @@
       <% end %>
     </div>
     <div>
-     <%= link_to user.username.truncate(15), profile_path(user) %>
+     <%= link_to user.username.truncate(16), profile_path(user) %>
     </div>
     <div class="settings hidden">
       <%= button_to("Kick", game_kick_path(game, params: { user_id: user.id })) %>

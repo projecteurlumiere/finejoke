@@ -24,6 +24,7 @@ input:invalid {
 
 input[type=image] {
   border: none;
+  width: unset;
 }
 
 fieldset {

@@ -63,3 +63,19 @@ form.button_to > * {
   width: 100%;
 }
 
+.buttons-container {
+  display: grid;
+  column-gap: 1rem;
+  border: none;
+  padding: 0;
+}
+
+.buttons-contanier > * {
+  width: unset;
+}
+
+@media(min-height: 950px) and (max-width: 1100px) {
+  .buttons-container {
+    font-size: 1.25rem;
+  }
+}
