@@ -12,6 +12,8 @@
     
     <fieldset>
       <legend>Важные (можно не заполнять)</legend>
+      <%= f.text_field :username, value: nil, placeholder: "Новое имя?", aria_label: "Введите новое имя пользователя, если желаете изменить", autocomplete: "off" %>
+
       <%= f.email_field :email, value: nil, placeholder: "Новый эмейл?", aria_label: "Введите новйы эмейл, если желаете изменить", autocomplete: "off" %>
     
       <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>

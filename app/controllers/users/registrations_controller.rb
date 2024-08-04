@@ -23,7 +23,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def update
     skip_authorization
 
-    params[:user].delete(:email) if params[:user][:email]&.strip == "" 
+    remove_empty_params(%i[email username])
 
     if resource.update_with_password(devise_parameter_sanitizer.sanitize(:account_update))
       flash[:notice] = "Аккаунт обновлён"
@@ -76,4 +76,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+
+  private 
+
+  # array of symbols corresponding to params
+  def remove_empty_params(params_arr)
+    params_arr.each do |param|
+      params[:user].delete(param) if params[:user][param]&.strip == ""
+    end
+  end
 end
