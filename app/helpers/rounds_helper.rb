@@ -24,7 +24,7 @@ module RoundsHelper
 
     [
       tag.h2(messages[0]),
-      tag.p(messages[1])
+      tag.div(tag.p(messages[1]))
     ].join(" ").html_safe
   end
 
@@ -48,7 +48,7 @@ module RoundsHelper
       if user.lead?
         [
           "Придумайте завязку",
-          "С чего бы могла начаться хорошая шутка?"
+          "Как начать хорошую шутку?"
         ]
       else
         [
@@ -59,7 +59,7 @@ module RoundsHelper
     when :punchline
       unless user.lead?
         [
-          "Придумайте развязку к следующей завязке",
+          "Придумайте смешную развязку",
           round.setup
         ]
       else
@@ -161,7 +161,7 @@ module RoundsHelper
   def render_rules_for(_game)
     [
       tag.h2("Правила"),
-      tag.p("Какие-то правила")
+      tag.div(tag.p("Какие-то правила"))
     ].join(" ").html_safe
   end
 

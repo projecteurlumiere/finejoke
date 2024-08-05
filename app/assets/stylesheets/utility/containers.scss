@@ -14,9 +14,9 @@
       margin-bottom: 1rem;
       padding: 1.5em 1em 0.5rem 1em;
     }
-  }
+  }    
 
-    // mobile buttons on top
+  // mobile buttons on top
   .mobile-navigation {
     display: none;
   }
@@ -38,6 +38,7 @@
 
   > * {
     text-align: left;
+    overflow: hidden;
   }
 
   > *:nth-child(2) {
@@ -47,6 +48,25 @@
 
   >*:nth-child(3) {
     text-align: right;
+  }
+
+  @media(max-width: 950px) {
+    display: flex;
+    flex-direction: column;
+
+    > * {
+      flex: 1;
+    }
+
+    .mobile-navigation {
+      // grid-row: 1 / 2;
+
+      flex: 0 0 auto;
+
+      order: -1;
+      display: grid;
+      grid-template-columns: 1fr 3fr 1fr;
+    }
   }
 }
 

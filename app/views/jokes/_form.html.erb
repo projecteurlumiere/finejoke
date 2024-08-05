@@ -11,10 +11,10 @@
     </div>
   <% end %>
 
-  <%= form.text_area :punchline, placeholder: "Введите текст...", aria_label: "Придумайте развязку к шутке" %>
+  <%= form.text_area :punchline, placeholder: "Введите текст...", aria_label: "Придумайте развязку к шутке", minrows: 1, rows: 1 %>
 
   <% content_for(:action) do %>
     <input type="button" form="new-joke" value="Придумать">
-    <input type="submit" form="new-joke" value="Отправить">
+    <input type="submit" form="new-joke" value="Готово">
   <% end %>
 <% end %>

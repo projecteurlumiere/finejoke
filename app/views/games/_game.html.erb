@@ -4,6 +4,12 @@
     <%# button_to "Присоединиться", game_join_path(game) if game.joinable? %>
   <% end %>
 
+  <div class="mobile-navigation">
+    <div class="button">Игроки</div>
+    <div class="button">Игра</div>
+    <div class="button">Чат</div>
+  </div>
+
   <div class="data-container">
     <%= render partial: "games/game_users", formats: %i[html], locals: { game: game, votes_change: {} } %>
     <div id="settings">

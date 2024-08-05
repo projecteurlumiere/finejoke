@@ -10,4 +10,14 @@
       flex: 1 1 300px;
     }
   }
+
+  @media(max-width: 950px) {
+    .data-container {
+      display: none;
+    }
+
+    .chat-container {
+      display: none;
+    }
+  }
 }

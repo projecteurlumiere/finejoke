@@ -10,6 +10,7 @@ header {
   }
 
   > nav.three-columns {
+    display: grid;
     align-items: center;
 
     .start {
@@ -64,5 +65,9 @@ header {
     * {
       font-size: 1.25rem;
     }
+  }
+
+  @media(max-height: 650px), (max-width: 500px) {
+    margin-bottom: 1rem;
   }
 }

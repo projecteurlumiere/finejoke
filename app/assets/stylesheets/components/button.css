@@ -79,3 +79,13 @@ form.button_to > * {
     font-size: 1.25rem;
   }
 }
+
+@media(max-height: 850px), (max-width: 600px) {
+  button,
+  input[type=submit],
+  input[type=button],
+  .button {
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+  }
+}
