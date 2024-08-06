@@ -4,7 +4,7 @@
     @media(max-height: 850px), (max-width: 600px) { --task-padding: 1.5rem; }
 
     height: 100%;
-    padding: var(--task-padding);
+    padding: 0 var(--task-padding);
     box-sizing: border-box;
     text-align: left;
 
@@ -14,46 +14,94 @@
 
     background-color: var(--white);
 
-    overflow: hidden;
+    overflow: auto;
+    container-type: size;
+    container-name: task;
 
     * {
       color: var(--black);
+    }
+
+    > *:last-child  {
+      margin-bottom: var(--task-padding);
     }
     
     // upper div with h2
     > .description {
       display: flex;
       flex-direction: column;
-      max-height: 75%;
 
       flex: 1;
+
+      * {
+        font-family: "Press Start 2P", system-ui;
+      }
+    }
+
+    > .description {
+      @container task (max-width: 300px) {
+        p {
+          font-size: clamp(0.75rem, Min(4cqh, 4cqw), 1.75rem);
+        }
+      }
     }
 
     > .description,
       .jokes-container {
       margin-left: 1em;
       margin-right: 1em;
+
+      // tall
+      @container task (aspect-ratio < 1/1) {
+        * {
+          font-size: clamp(1rem, Min(4cqh, 4cqw), 1.75rem);
+        }
+
+        @container task (min-height: 650px) and (max-width: 300px) {
+          * {
+            font-size: clamp(1rem, Min(4.5cqh, 4.5cqw), 1.75rem);
+          }
+        }
+      }
+
+      // wide
+      @container task (aspect-ratio > 1/1) {
+        * {
+          font-size: clamp(1rem, Min(4cqh, 4cqw), 1.75rem);
+        }
+      }
       
+
+
       > h2 {
-        font-size: clamp(1rem, var(--adaptive-font-size), 1.25rem);
-        // padding-top: 0;
-        // padding-bottom: 0;
+        font-size: clamp(1rem, var(--adaptive-font-size), 1.75rem);
         color: var(--red);
+
+        position: sticky;
+        background: var(--white);
+        padding-top: calc(1.5em + var(--task-padding));
+      }
+
+      @media(max-height: 600px) {
+        > h2 {
+          padding-top: var(--task-padding);
+        }
       }
 
       @media(max-height: 850px) and (max-width: 600px) {
         > h2 {
-          padding-top: 0;
+           padding-top: var(--task-padding);
           margin-bottom: 0;
         }
       }
 
       // p-wrapper
       > div {
-        overflow-y: auto;
+        // overflow-y: auto;
+
         > p {
-          font-size: clamp(0.75rem, var(--adaptive-font-size), 1.25rem);
           margin-top: 0;
+          margin-bottom: 0;
         }
       }
     }
@@ -62,9 +110,13 @@
       display: flex;
       flex-direction: column;
       flex-basis: 100%;
+      // overflow-y: auto;
+      gap: 1rem;
 
       .joke {
         flex-basis: 100%;
+        display: flex;
+        align-items: center;
 
         .user {
           display: flex;
@@ -77,6 +129,17 @@
         display: flex;
         justify-content: space-between;
         color: var(--black);
+        overflow: hidden;
+
+        background: var(--white);
+        position: sticky;
+        bottom: 0;
+        padding-bottom: var(--task-padding);
+        margin-bottom: 0;
+
+        svg {
+          height: 100%;
+        }
 
         > * {
           path {
@@ -94,10 +157,11 @@
     }
 
     form {
-      flex: 0 1 8rem;
+      flex: 0 1 50%;
       display: flex;
 
       textarea {
+        border: none;
         // width: calc(100% - (var(--task-padding) * 2));
       }
     }
@@ -114,10 +178,12 @@
   .action {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 1rem;
 
     @media(max-height: 550px) {
-      flex-direction: row;
+      gap: 0.5rem;
+
+        // flex-direction: row;
     } 
   }
 }
