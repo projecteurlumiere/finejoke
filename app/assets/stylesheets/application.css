@@ -25,10 +25,12 @@
   --white: rgb(255, 255, 255);
   --white-dimmer: rgba(255, 255, 255, 0.7);
   --white-dim: rgba(255, 255, 255, 0.5);
+  --white-dimmest: rgba(255, 255, 255, 0.4);
   --black: rgb(50, 56, 118);
   --black-dimmer: rgba(50, 56, 118, 0.7);
   --black-dim: rgba(50, 56, 118, 0.5);
   --teal: rgb(0, 255, 221);
+  --teal-dim: rgba(0, 255, 221, 0.4);
   --background-gradient: linear-gradient(270.00deg, rgb(83, 217, 216),rgb(31, 182, 199) 100%);
 
   --slider-width: 72px;

@@ -1,6 +1,10 @@
 <div class="chat-container">
+  <style>
+    <%# coloring self messages with user's unique id %>
+    <%= ".message.user_#{user.id} > p { background-color: var(--white-dimmest) }".html_safe %>
+  </style>
+  <h2>Чат</h2>
   <div id="chat">
-    <h2>Чат</h2>
   </div>
   <div class="form">
     <%= render partial: "games/chat_form", locals: { game: game } %>

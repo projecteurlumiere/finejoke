@@ -23,5 +23,5 @@
 
   <%= render partial: "rounds/current_round", formats: %i[html], locals: { game: game, round: game.current_round } %>
 
-  <%= render partial: "games/chat", locals: { game: game } %>
+  <%= render partial: "games/chat", locals: { game: game, user: current_or_guest_user } %>
 <% end %>

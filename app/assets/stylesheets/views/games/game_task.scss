@@ -1,10 +1,5 @@
 #current-round {
   .task {
-    --task-padding: 1.75rem;
-    
-    @media(max-height: 850px), (max-width: 600px) { 
-      --task-padding: 1.25rem; 
-    }
 
     height: 100%;
     padding: 0 var(--task-padding);
@@ -69,25 +64,11 @@
 
         position: sticky;
         background: var(--white);
-        padding-top: calc(1.5em + var(--task-padding));
         margin-bottom: 0;
       }
 
       > h2:has(+ *) {
         margin-bottom: inherit;
-      }
-
-      @media(max-height: 600px) {
-        > h2 {
-          padding-top: var(--task-padding);
-        }
-      }
-
-      @media(max-height: 850px) and (max-width: 600px) {
-        > h2 {
-           padding-top: var(--task-padding);
-          margin-bottom: 0;
-        }
       }
 
       // p-wrapper

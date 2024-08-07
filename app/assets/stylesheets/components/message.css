@@ -1,0 +1,17 @@
+.message * {
+  font-family: "Nunito sans", system-ui;
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  color: var(--black);
+}
+
+.message > .username {
+  margin-bottom: 0.5ch;
+}
+
+.message > p {
+  border: 1px solid var(--white);
+  background: var(--teal-dim);
+  padding: 1ch;
+}
