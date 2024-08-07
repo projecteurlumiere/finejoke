@@ -1,0 +1,72 @@
+.data-container {
+  #user-list {
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    > li {
+      display: flex;
+      align-items: center;
+      padding-left: 0.5ch;
+      padding-right: 0.5ch;
+      margin-bottom: 1rem;
+      border: solid 1px var(--white);
+      column-gap: 0.5ch;
+      * {
+        font-size: clamp(1rem, calc(1vw + 1vh), 1.5rem);
+      }
+
+      .score {
+        text-align: right;
+        flex-basis: 3ch;
+        flex-shrink: 0;
+        font-size: clamp(0.75rem, calc(1vw + 1vh), 1.5rem);
+      }
+
+      @media(max-width: 1500px) {
+        flex-direction: column;
+        row-gap: 0.5ch;
+
+        .score { 
+          flex-basis: auto 
+        }
+      }
+    }
+
+    > li:hover:has(> .settings.hidden),
+    > li.clicked:has(> .settings.hidden) {
+      .username {
+        display: none;
+      }
+
+      .settings.hidden * {
+        display: block;
+        background: none;
+        border: none;
+        font-size: inheirt;
+        font-family: "Nunito Sans";
+        padding: 0;
+        text-decoration: underline;
+        cursor: pointer;
+      }
+
+      .settings.hidden {
+        display: flex !important;
+        justify-content: space-around;
+        align-items: center;
+        gap: 0.5ch;
+        width: 100%;
+      }
+    }
+
+    > *:last-child {
+      margin-bottom: 0;
+    }
+
+    > .slot {
+      * {
+        color: var(--white-dimmer);
+      }
+    }
+  }
+}

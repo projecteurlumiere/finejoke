@@ -9,4 +9,8 @@
     border: none;
     width: 100%;
   }
+
+  input[type=image] {
+    padding: 0.5rem;
+  }
 }

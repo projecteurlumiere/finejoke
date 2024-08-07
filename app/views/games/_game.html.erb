@@ -10,7 +10,7 @@
     <div class="button">Чат</div>
   </div>
 
-  <div class="data-container">
+  <div class="data-container" data-controller="game-data" data-game-data-id-value="<%= current_or_guest_user.id %>">
     <%= render partial: "games/game_users", formats: %i[html], locals: { game: game, votes_change: {} } %>
     <div id="settings">
       <div>

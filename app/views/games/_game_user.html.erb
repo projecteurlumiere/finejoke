@@ -1,6 +1,9 @@
 <% if user %>
   <%= tag.li id: dom_id(user),
+             class: "button",
              data: { 
+               game_data_target: "user",
+               id: user.id,
                host: user.host?,
                vote_change: votes_change.any? ? (votes_change[user.id] || 0) : nil, 
                lead: user.lead?,
@@ -13,22 +16,21 @@
         <%= user.current_score %>
       <% end %>
     </div>
-    <div>
-     <%= link_to user.username.truncate(16), profile_path(user) %>
+    <div class="username" data-action="click->game-data#showSettings">
+      <%= user.username.truncate(16) %>
     </div>
     <div class="settings hidden">
-      <%= button_to("Kick", game_kick_path(game, params: { user_id: user.id })) %>
+      <%= link_to "В профиль", profile_path(user) %>
+      <%= button_to("Кик", game_kick_path(game, params: { user_id: user.id }), class: "hidden") %>
     </div>
   <% end %>
 <% else %> 
-  <%= tag.li class: "slot" do %>
+  <%= tag.li class: "slot button" do %>
     <div class="score press-font">
       <%= user_counter + 1 %>
     </div>
     <div>
       Пусто
-    </div>
-    <div class="settings hidden">
     </div>
   <% end %>
 <% end %>

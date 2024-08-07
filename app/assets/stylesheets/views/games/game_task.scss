@@ -17,7 +17,9 @@
 
     background-color: var(--white);
 
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+
     container-type: size;
     container-name: task;
 
