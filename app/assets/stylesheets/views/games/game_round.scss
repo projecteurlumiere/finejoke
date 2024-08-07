@@ -1,7 +1,10 @@
 #current-round {
   .task {
-    --task-padding: 2rem;
-    @media(max-height: 850px), (max-width: 600px) { --task-padding: 1.5rem; }
+    --task-padding: 1.75rem;
+    
+    @media(max-height: 850px), (max-width: 600px) { 
+      --task-padding: 1.25rem; 
+    }
 
     height: 100%;
     padding: 0 var(--task-padding);
@@ -38,12 +41,8 @@
       }
     }
 
-    > .description {
-      @container task (max-width: 300px) {
-        p {
-          font-size: clamp(0.75rem, Min(4cqh, 4cqw), 1.75rem);
-        }
-      }
+    > .description:has(+ .jokes-container) {
+      flex: 0;
     }
 
     > .description,
@@ -51,35 +50,29 @@
       margin-left: 1em;
       margin-right: 1em;
 
-      // tall
-      @container task (aspect-ratio < 1/1) {
+      @container task (min-height: 0) {
         * {
-          font-size: clamp(1rem, Min(4cqh, 4cqw), 1.75rem);
+          font-size: clamp(1rem, calc(1.6cqw + 1.6cqh), 1.75rem)
         }
 
-        @container task (min-height: 650px) and (max-width: 300px) {
-          * {
-            font-size: clamp(1rem, Min(4.5cqh, 4.5cqw), 1.75rem);
-          }
-        }
-      }
-
-      // wide
-      @container task (aspect-ratio > 1/1) {
-        * {
-          font-size: clamp(1rem, Min(4cqh, 4cqw), 1.75rem);
+        *.press-font > *,
+        *.press-font {
+          font-size: clamp(0.75rem, calc(1.6cqw + 1.6cqh), 1.5rem);
         }
       }
       
-
-
       > h2 {
-        font-size: clamp(1rem, var(--adaptive-font-size), 1.75rem);
+        font-size: clamp(1rem, var(--adaptive-font-size), 1.5rem);
         color: var(--red);
 
         position: sticky;
         background: var(--white);
         padding-top: calc(1.5em + var(--task-padding));
+        margin-bottom: 0;
+      }
+
+      > h2:has(+ *) {
+        margin-bottom: inherit;
       }
 
       @media(max-height: 600px) {
@@ -97,8 +90,6 @@
 
       // p-wrapper
       > div {
-        // overflow-y: auto;
-
         > p {
           margin-top: 0;
           margin-bottom: 0;
@@ -109,19 +100,42 @@
     > .jokes-container {
       display: flex;
       flex-direction: column;
-      flex-basis: 100%;
+      flex-basis: auto;
       // overflow-y: auto;
-      gap: 1rem;
+      margin-bottom: 0;
+      flex: 1;
 
       .joke {
-        flex-basis: 100%;
+        flex-basis: auto;
         display: flex;
-        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        flex: 1;
+        row-gap: 0.5rem;
+
+        .setup {
+          flex: 1;
+          display: flex;
+          align-items: last baseline;
+        }
+
+        .punchline:only-child {
+          display: flex;
+          align-items: center;
+        }
+
+        .punchline {
+          flex: 1;
+        }
 
         .user {
+          flex: 1;
+          flex-grow: 0.5;
+          width: 100%;
           display: flex;
+          align-items: first baseline;
           justify-content: space-between;
-          align-items: center;
+          margin-bottom: 0.5rem;
         }
       }
 
@@ -135,10 +149,11 @@
         position: sticky;
         bottom: 0;
         padding-bottom: var(--task-padding);
+        padding-top: 1rem;
         margin-bottom: 0;
 
         svg {
-          height: 100%;
+          height: clamp(1rem, var(--adaptive-font-size), 1.75rem);
         }
 
         > * {

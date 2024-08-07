@@ -1,4 +1,5 @@
-.press-font {
+.press-font,
+.press-font * {
   font-family: "Press Start 2P", system-ui !important;
 }
 

@@ -77,13 +77,13 @@ module RoundsHelper
       else
         [
           "Игроки голосуют",
-          "Надо подождать"
+          round.setup
         ]
       end
     when :results
       [
-        "Наслаждайтесь результатами",
-        "Новый раунд скоро начнётся"
+        "Результаты раунда",
+        ""
       ]
     end
   end
@@ -104,12 +104,12 @@ module RoundsHelper
     when :vote
       [
         "Игроки голосуют",
-        "Надо подождать"
+        round.setup
       ]
     when :results
       [
-        "Наслаждайтесь результатами",
-        "Новый раунд скоро начнётся"
+        "Результаты раунда",
+        ""
       ]
     end
   end
@@ -174,11 +174,11 @@ module RoundsHelper
     end
   end
 
-  def render_default_action_for(user, game)
+  def render_default_action_for(user, round, game)
     return render_join(game) if game.joinable?(by: user)
     return render_game_over_button if game.finished?
 
-    render_wait_for(user, game)
+    render_wait_for(user, round, game)
   end
 
   def render_join(game)
@@ -189,8 +189,21 @@ module RoundsHelper
     tag.button("Игра окончена", class: "disabled", disabled: true).html_safe
   end
 
-  def render_wait_for(user, game)
-    message = user.hot_joined?(game) ? "Вы в игре со следующего раунда" : "Ждём"
+  def render_wait_for(user, round, game)
+    message = user.hot_joined?(game) && !round.last? ? "Вы в игре со следующего раунда" : "Ждём"
     tag.button(message, class: "disabled", disabled: true).html_safe
+  end
+
+  def format_shorter(string)
+    str_modified = if string.end_with?(*%w[. ! ?])
+                     string.concat(".")
+                     true
+                   end
+    
+    sentences = string.scan(/[^\.!?]+[\.!?]/).map(&:strip)
+    last_sentence = sentences.pop
+    last_sentence.slice!(0, -1) if str_modified
+
+    [tag.span(sentences.join(" "), class: "hidden"), tag.span([tag.span("..."), last_sentence].join(" ").html_safe)].join(" ") 
   end
 end

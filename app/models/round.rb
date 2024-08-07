@@ -11,6 +11,8 @@ class Round < ApplicationRecord
   enum stage: %i[setup punchline vote results], _suffix: true
   attr_accessor :votes_change
 
+  validates :setup, length: { in: 1..200 }, on: :update
+
   # tidying up and choosing lead player:
   before_create :reset_players, :choose_lead
   before_create :last!, if: :max_rounds_achieved?, unless: :last?
