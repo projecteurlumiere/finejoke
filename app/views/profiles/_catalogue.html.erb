@@ -1,15 +1,15 @@
-<div id="catalogue" class="bg-red hidden-when-mobile" data-controller="profile-catalogue" data-two-containers-target="leftContainer">
+<div id="catalogue" class="bg-red hidden-when-mobile" data-controller="catalogue" data-two-containers-target="leftContainer">
     <h2>
-      <%= form_with(url: profile_path(@user), method: :get, data: { turbo_stream: true, profile_catalogue_target: "form" }) do |form| %>
+      <%= form_with(url: profile_path(@user), method: :get, data: { turbo_stream: true, catalogue_target: "form" }) do |form| %>
         <%= form.select :order_by, 
               options_for_select([["Лучшие", "n_votes"], ["Недавние", "created_at"]], params[:order_by] || "created_at"),
               {},
-              { data: { action: "profile-catalogue#submit" } } %>
+              { data: { action: "catalogue#submit" } } %>
         <br>
         <%= form.select :property, 
               options_for_select([["Шутки", "jokes"], ["Завязки", "started_jokes"], ["Развязки", "finished_jokes"]], params[:property] || "finished_jokes"),
               {}, 
-              { data: { action: "profile-catalogue#submit" } } %>
+              { data: { action: "catalogue#submit" } } %>
         <%= form.hidden_field :turbo_action, value: :replace %>
       <% end %>
     </h2>

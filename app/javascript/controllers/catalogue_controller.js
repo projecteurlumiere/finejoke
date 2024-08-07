@@ -2,7 +2,18 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="catalogue"
 export default class extends Controller {
-  static targets = [ "connect", "view", "entry" ]
+  static targets = [ "connect", "view", "entry", "form" ]
+
+  connect() {
+    if (this.hasFormTarget) {
+      this.submit();
+    }
+  }
+
+  // for forms
+  submit() {
+    this.formTarget.requestSubmit();
+  }
 
   select(e) {
     if (e.currentTarget.classList.contains("select")) { this.#deselect(e); return }
