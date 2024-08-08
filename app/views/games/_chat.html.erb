@@ -1,4 +1,4 @@
-<div class="chat-container">
+<div class="chat-container hidden-when-mobile" data-containers-target="container" data-container-name="chat">
   <style>
     <%# coloring self messages with user's unique id %>
     <%= ".message.user_#{user.id} > p { background-color: var(--white-dimmest) }".html_safe %>

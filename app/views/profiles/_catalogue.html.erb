@@ -1,4 +1,4 @@
-<div id="catalogue" class="bg-red hidden-when-mobile" data-controller="catalogue" data-two-containers-target="leftContainer">
+<div id="catalogue" class="bg-red hidden-when-mobile" data-controller="catalogue" data-containers-target="container" data-container-name="catalogue">
     <h2>
       <%= form_with(url: profile_path(@user), method: :get, data: { turbo_stream: true, catalogue_target: "form" }) do |form| %>
         <%= form.select :order_by, 

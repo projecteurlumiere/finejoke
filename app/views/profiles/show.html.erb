@@ -1,9 +1,9 @@
-<div id="profile" class="two-columns" data-controller="two-containers">
+<div id="profile" class="two-columns" data-controller="containers">
   <%= render partial: "catalogue", locals: { user: @user, jokes: @jokes } %>
   <%= render partial: "summary", locals: { user: @user, current_or_guest_user: current_or_guest_user } %>
 
   <div class="buttons-container mobile-navigation">
-    <a class="button" data-two-containers-target="leftContainerButton" data-action="click->two-containers#showLeftContainer">Шутки</a>
-    <a class="button selected" data-two-containers-target="rightContainerButton" data-action="click->two-containers#showRightContainer">Профиль</a>
+    <a class="button" data-containers-target="button" data-container-name="catalogue" data-action="click->containers#show">Шутки</a>
+    <a class="button selected" data-containers-target="button" data-container-name="form" data-action="click->containers#show">Профиль</a>
   </div>
 </div>

@@ -2,8 +2,8 @@
 
 <%= turbo_stream_from "lobby", channel: LobbyChannel %>
 
-<div id="lobby" class="two-columns" data-controller="catalogue new-game two-containers">  
-  <div id="catalogue" class="bg-red" data-two-containers-target="leftContainer">
+<div id="lobby" class="two-columns" data-controller="catalogue new-game containers">  
+  <div id="catalogue" class="bg-red" data-containers-target="container" data-container-name="catalogue">
     <h2 class="hidden-when-mobile">Комнаты</h2>
     
     <ul id="games">
@@ -12,22 +12,22 @@
   </div>
   
     
-  <div class="hidden-when-mobile form" data-two-containers-target="rightContainer">
+  <div class="hidden-when-mobile form" data-containers-target="container" data-container-name="form">
     <h2 class="hidden-when-mobile">Новая игра</h2>
     <%= render partial: "form", locals: { game: @game } %>
   </div>
 
-  <div class="buttons-container" data-two-containers-target="leftContainer">
+  <div class="buttons-container" data-containers-target="container" data-container-name="catalogue">
     <a class="button disabled" data-catalogue-target="connect">Подключиться</a>
     <a class="button disabled" data-catalogue-target="view">Смотреть</a>
   </div>
 
-  <div class="buttons-container hidden-when-mobile" data-two-containers-target="rightContainer">
+  <div class="buttons-container hidden-when-mobile" data-containers-target="container" data-container-name="form">
     <input type="submit" form="new-game" value="Создать" data-action="click->new-game#validate">
   </div>
 
   <div class="buttons-container mobile-navigation">
-    <a class="button selected" data-two-containers-target="leftContainerButton" data-action="click->two-containers#showLeftContainer">Комнаты</a>
-    <a class="button" data-two-containers-target="rightContainerButton" data-action="click->two-containers#showRightContainer">Создать</a>
+    <a class="button selected" data-containers-target="button" data-container-name="catalogue" data-action="click->containers#show">Комнаты</a>
+    <a class="button" data-containers-target="button" data-container-name="form" data-action="click->containers#show">Новая</a>
   </div>
 </div>
