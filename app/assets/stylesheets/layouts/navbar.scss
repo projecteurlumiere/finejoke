@@ -1,6 +1,4 @@
 header {
-  margin-bottom: 2rem;
-
   * {
     color: var(--black);
   }
@@ -65,9 +63,5 @@ header {
     * {
       font-size: 1.25rem;
     }
-  }
-
-  @media(max-height: 650px), (max-width: 500px) {
-    margin-bottom: 1rem;
   }
 }
