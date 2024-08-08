@@ -23,7 +23,7 @@
       <% elsif @jokes.last_page? %>
         <p>Шутки кончились</p>
       <% else %>
-        <%= link_to_next_page @jokes, "Загрузить ещё шуточек", data: { turbo_stream: true } %>
+        <%= link_to_next_page @jokes, "Загрузить ещё шуточек", data: { turbo_stream: true }, params: { turbo_action: :append } %>
       <% end %>
     </div>
 <% end %>
