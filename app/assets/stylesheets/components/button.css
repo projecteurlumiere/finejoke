@@ -15,6 +15,7 @@ input[type=button],
   width: 100%;
 
   cursor: pointer;
+  user-select: none;
 }
 
 button.unstyled,
