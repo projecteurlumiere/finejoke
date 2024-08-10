@@ -5,6 +5,8 @@ class CreateRounds < ActiveRecord::Migration[7.1]
       t.references :user, null: false, foreign_key: true
       t.boolean :current, default: true
       t.boolean :last, default: false
+      t.datetime :change_scheduled_at
+      t.datetime :change_deadline
       t.integer :stage, default: 0
       t.string :setup
       t.timestamps

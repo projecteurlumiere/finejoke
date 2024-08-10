@@ -6,6 +6,9 @@ module RoundsHelper
       game_status: round.game.status,
       n_rounds: round.game.n_rounds,
       stage: round.stage,
+      change_scheduled_at: round.change_scheduled_at.to_f * 1000,
+      change_deadline: round.change_deadline.to_f * 1000,
+      timer_target: :timings
     }
   end
 

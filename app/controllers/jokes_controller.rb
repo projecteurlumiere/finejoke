@@ -40,7 +40,6 @@ class JokesController < ApplicationController
       flash.now[:alert] = "Голос не был учтён"
       render_turbo_flash
     end
-
   end
 
   private

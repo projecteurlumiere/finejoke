@@ -151,7 +151,7 @@
             color: var(--white-dim);
           }
         }
-      } 
+      }
     }
 
     form {
@@ -162,6 +162,24 @@
         border: none;
         // width: calc(100% - (var(--task-padding) * 2));
       }
+    }
+
+
+    @property --progress-value {
+      syntax: "<integer>";
+      initial-value: 50;
+      inherits: false;
+    }
+
+    @keyframes progress {
+      to { --progress-value: 75; }
+    }
+
+    .timer {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      z-index: 1;
     }
   }
 

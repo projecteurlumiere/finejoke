@@ -3,7 +3,7 @@
       class: "game-container three-columns", 
         data: game_data_attributes(game).merge(
           { user_id: current_or_guest_user.id,
-            controller: "containers"
+            controller: "containers timer"
           })) do %>
   <%= content_for(:join) do %>
     <%= link_to "Назад в лобби", games_path %>

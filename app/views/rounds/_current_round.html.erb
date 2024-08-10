@@ -1,6 +1,7 @@
 <%= tag.turbo_frame id: "current-round", data: { controller: "vote", containers_target: "container", container_name: "round" } do %>
   <%= tag.div data: round_data_attributes(round), class: "hidden" %>
   <div class="task">
+    <div class="timer press-font" data-timer-target="digits"></div>
     <div class="description press-font">
       <%= round_task_for(current_or_guest_user, round, game) %>
     </div>

@@ -75,6 +75,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_22_113326) do
     t.bigint "user_id", null: false
     t.boolean "current", default: true
     t.boolean "last", default: false
+    t.datetime "change_scheduled_at"
+    t.datetime "change_deadline"
     t.integer "stage", default: 0
     t.string "setup"
     t.datetime "created_at", null: false

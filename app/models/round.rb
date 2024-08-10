@@ -27,6 +27,7 @@ class Round < ApplicationRecord
   # when lead updated round with setup:
    before_update :random_setup, if: %i[punchline_stage?], unless: %i[setup?]
    after_update :move_to_punchline, if: %i[setup_stage? setup?]
+   after_update :schedule_next_stage
    # after_update -> { touch }
   # called every time joke is created:
     after_touch :move_to_vote, if: %i[punchline_stage? turns_finished?]
@@ -124,8 +125,14 @@ class Round < ApplicationRecord
     user.current_score >= game.max_points
   end
 
+  def store_change_timings(change_deadline, change_scheduled_at = Time.current)
+    update_columns(change_deadline:, change_scheduled_at:)
+  end
+
   def schedule_next_stage
-    RoundToNextStageJob.set(wait: game.max_round_time.seconds).perform_later(id, stage)
+    deadline = Time.current + game.max_round_time
+    RoundToNextStageJob.set(wait_until: deadline).perform_later(id, stage)
+    store_change_timings(deadline)
   end
 
   def next_stage!
@@ -135,11 +142,15 @@ class Round < ApplicationRecord
   end
 
   def schedule_next_round
-    CreateNewRoundJob.set(wait: Game::RESULTS_STAGE_TIME).perform_later(game.id)
+    deadline = Time.current + Game::RESULTS_STAGE_TIME
+    CreateNewRoundJob.set(wait_until: deadline).perform_later(game.id)
+    store_change_timings(deadline)
   end
 
   def schedule_game_finish
-    FinishGameJob.set(wait: Game::RESULTS_STAGE_TIME).perform_later(game.id)
+    deadline = Time.current + Game::RESULTS_STAGE_TIME
+    FinishGameJob.set(wait_until: deadline).perform_later(game.id)
+    store_change_timings(deadline)
   end
 
   def current?
