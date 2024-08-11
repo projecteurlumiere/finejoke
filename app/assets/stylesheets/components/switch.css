@@ -11,12 +11,12 @@
 /* source: */
 /* https://www.w3schools.com/howto/howto_css_switch.asp */
 
-/* The switch - the box around the slider */
+ /* The switch - the box around the slider */
 .switch {
   position: relative;
   display: inline-block;
-  width: 72px;
-  height: 40.8px;
+  width: var(--slider-width);
+  height: calc(var(--slider-width) * 0.5666666);
 }
 
 /* Hide default HTML checkbox */
@@ -42,10 +42,10 @@
 .slider:before {
   position: absolute;
   content: "";
-  height: 31.2px;
-  width: 31.2px;
-  left: 4px;
-  bottom: 4px;
+  height: calc(var(--slider-width) * 0.4333333);
+  width: calc(var(--slider-width) * 0.4333333);
+  left: calc(var(--slider-width) / 15);
+  bottom: calc(var(--slider-width) / 15);
   background-color: white;
   -webkit-transition: .4s;
   transition: .4s;
@@ -60,7 +60,16 @@ input:focus + .slider {
 }
 
 input:checked + .slider:before {
-  -webkit-transform: translateX(31.2px);
-  -ms-transform: translateX(31.2px);
-  transform: translateX(31.2px);
+  -webkit-transform: translateX(calc(var(--slider-width) * 0.4333333));
+  -ms-transform: translateX(calc(var(--slider-width) * 0.4333333));
+  transform: translateX(calc(var(--slider-width) * 0.4333333));
 }
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: calc(var(--slider-width) * 0.5666666);
+}
+
+.slider.round:before {
+  border-radius: 50%;
+} 
