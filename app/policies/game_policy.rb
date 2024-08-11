@@ -20,8 +20,8 @@ class GamePolicy < ApplicationPolicy
   end
 
   def destroy?
-    false
     # @user&.host? && @user.playing?(@game)
+    false
   end
 
   def join?
@@ -34,7 +34,8 @@ class GamePolicy < ApplicationPolicy
   end
 
   def kick?
-    destroy?
+    # destroy? 
+    @user&.host? && @user.playing?(@game)
   end
 
   def show_rules?
