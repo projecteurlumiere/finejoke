@@ -15,11 +15,12 @@ export default class extends Controller {
 
   #setTimings() {
     // date in ms
-    const newChangeScheduledAt = this.timingsTarget.dataset.changeScheduledAt
+    const newChangeScheduledAt = Math.abs(this.timingsTarget.dataset.changeScheduledAt / 1000)
     if (newChangeScheduledAt === this.changeScheduledAt) { return false }
 
     this.changeScheduledAt = newChangeScheduledAt;
-    this.changeDeadline = this.timingsTarget.dataset.changeDeadline
+    this.changeDeadline = Math.abs(this.timingsTarget.dataset.changeDeadline / 1000)
+    this.interval = this.changeDeadline - this.changeScheduledAt
 
     return true
   }
@@ -33,7 +34,8 @@ export default class extends Controller {
 
   #timerTick() {
     // Math abs to new Date returns date in ms
-    const remainingTime = Math.round((Math.abs(this.changeDeadline) - Math.abs(new Date)) / 1000) // in seconds
+    const timeNow = Math.abs(new Date) / 1000
+    const remainingTime = Math.round((this.changeDeadline) - timeNow) // in seconds
     const timeIsUp = remainingTime <= 0 ? true : false
 
     if (timeIsUp) { 
@@ -66,12 +68,12 @@ export default class extends Controller {
 
   #updateDigits(time) {
     for (var i = this.digitsTargets.length - 1; i >= 0; i--) {
-      if (time < 10) {
+      if (time < 10 && this.interval > 15) {
         this.digitsTargets[i].classList.add("red")
       } else {
         this.digitsTargets[i].classList.remove("red")
       }
-      
+
       this.digitsTargets[i].innerText = time;
     }
   }

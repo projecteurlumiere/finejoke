@@ -9,7 +9,7 @@
                lead: user.lead?,
                finished_turn: user.finished_turn?,
                voted: (user.voted?(game.current_round) if game.current_round) } do %>
-    <div class="score press-font">
+    <div class="<%= game_user_score_class(votes_change) %>">
       <% if votes_change.any? %>
         +<%= votes_change[user.id] || 0 %>
       <% else %>
