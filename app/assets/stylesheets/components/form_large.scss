@@ -1,6 +1,8 @@
 .form-large {
   height: 90%;
   overflow-y: auto;
+  container-name: form-large;
+  container-type: size;
   
   * {
     min-height: 0;
@@ -42,6 +44,17 @@
       aspect-ratio: 1 / 1;
       border: solid 1px var(--white);
       border-radius: 50%;
+    }
+
+    @container form-large (max-width: 290px) {
+      > * {
+        grid-template-columns: auto var(--slider-width);
+      }
+
+      .circle {
+        display: none;
+      }
+
     }
   }
 }

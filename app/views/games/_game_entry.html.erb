@@ -1,6 +1,7 @@
 <% game = Game.find_by(id: game_id) if defined? game_id %>
 
 <%= tag.li id: dom_id(game),
+           class: :button,
            data: {
             action: "click->catalogue#select",
             catalogue_target: "entry",
