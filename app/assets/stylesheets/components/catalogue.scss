@@ -41,7 +41,11 @@
   }
 
   li.select {
-    border-color: var(--red);
+    background-color: var(--teal);
+    border-color: var(--black);
+    * {
+      color: var(--black)
+    }
   }
 
   .pagination {
