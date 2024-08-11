@@ -1,6 +1,6 @@
 <% if user %>
   <%= tag.li id: dom_id(user),
-             class: "button",
+             class: game_user_class(user, game&.current_round),
              data: { 
                game_data_target: "user",
                id: user.id,

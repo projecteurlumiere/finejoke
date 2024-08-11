@@ -52,7 +52,7 @@
 
       .settings.hidden {
         display: flex !important;
-        justify-content: space-around;
+        justify-content: space-between;
         align-items: center;
         gap: 0.5ch;
         width: 100%;
@@ -64,6 +64,7 @@
     }
 
     > .slot {
+      border-color: var(--white-dimmer);
       * {
         color: var(--white-dimmer);
       }

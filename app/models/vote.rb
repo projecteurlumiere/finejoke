@@ -7,4 +7,5 @@ class Vote < ApplicationRecord
 
   after_create -> { user.update_attribute(:voted, true) if user.playing?(round) }
   after_create -> { joke.increment!(:n_votes) }
+  after_create -> { user.broadcast_turn_finished if user.playing?(round) }
 end
