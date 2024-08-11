@@ -33,7 +33,7 @@ AFK_ROUNDS_THRESHOLD = 1
 
   # after_touch -> { ongoing! }, if: %i[waiting? current_round]
   after_touch -> { waiting! }, if: %i[on_halt? enough_players?]
-  after_touch -> { on_halt!; broadcast_current_round }, if: %i[ongoing? not_enough_players?] 
+  after_touch :on_halt!, if: %i[ongoing? not_enough_players?] # modified method 
   after_touch :skip_round, if: %i[ongoing? lead_left?]
 
   after_create_commit :broadcast_game_start
@@ -97,9 +97,7 @@ AFK_ROUNDS_THRESHOLD = 1
     end
   end
 
-  def current_round
-    return nil if waiting? || on_halt?
-     
+  def current_round 
     rounds.find_by(current: true)
   end
 
@@ -163,9 +161,14 @@ AFK_ROUNDS_THRESHOLD = 1
   def decide_winner
     return if max_rounds.nil? && max_points.nil?
     transaction do
-      binding.irb
       self.winner = users.order(current_score: :desc).limit(1)[0]
       self.winner_score = winner.current_score
     end
+  end
+
+  def on_halt!
+    current_round.update_attribute(:current, false)
+    broadcast_current_round
+    super
   end
 end
