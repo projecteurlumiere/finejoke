@@ -74,7 +74,7 @@ AFK_ROUNDS_THRESHOLD = 1
 
     self.destroy and return true if n_players == 0
 
-    host = users.first if was_host
+    self.host = users.first if was_host
     
     touch
     broadcast_user_change
@@ -93,6 +93,7 @@ AFK_ROUNDS_THRESHOLD = 1
       user.update(host: true)
       self.host_username = user.username
       super(user)
+      save
     end
   end
 
