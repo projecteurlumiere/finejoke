@@ -66,6 +66,12 @@ export default class extends Controller {
 
   #updateDigits(time) {
     for (var i = this.digitsTargets.length - 1; i >= 0; i--) {
+      if (time < 10) {
+        this.digitsTargets[i].classList.add("red")
+      } else {
+        this.digitsTargets[i].classList.remove("red")
+      }
+      
       this.digitsTargets[i].innerText = time;
     }
   }

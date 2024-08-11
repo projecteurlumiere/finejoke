@@ -11,6 +11,7 @@
   @media(max-height: 600px) {
     h2 {
       padding-top: var(--task-padding);
+      padding-right: 3rem; // to accomodate for timer
     }
   }
 
