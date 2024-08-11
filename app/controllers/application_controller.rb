@@ -63,6 +63,7 @@ class ApplicationController < ActionController::Base
 
   def transfer_guest_to_user
     ActiveRecord::Base.transaction do
+      guest_user.game&.remove_user(guest_user)
       current_user.merge(guest_user)
       guest_user.reload
     end

@@ -6,9 +6,11 @@
   <div id="catalogue" class="bg-red" data-containers-target="container" data-container-name="catalogue">
     <h2 class="hidden-when-mobile">Комнаты</h2>
     
-    <ul id="games">
-      <%= render partial: "game_entry", collection: @games, as: :game %>
-    </ul>
+    <div class="scrollable">
+      <ul id="games" class="list">
+        <%= render partial: "game_entry", collection: @games, as: :game %>
+      </ul>
+    </div>
   </div>
   
     

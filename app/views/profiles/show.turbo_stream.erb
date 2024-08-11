@@ -1,14 +1,12 @@
 <% if @action == :replace %>
-  <%= turbo_stream.replace_all("#catalogue > ul") do %>
-    <ul>
+  <%= turbo_stream.replace_all("#catalogue .list") do %>
+    <ul class="list">
       <%= render partial: "joke", collection: @jokes %>    
     </ul>
   <% end %>
 <% else %>
-  <%= turbo_stream.append_all("#catalogue > ul") do %>
-    <ul>
-      <%= render partial: "joke", collection: @jokes %>
-    </ul>
+  <%= turbo_stream.append_all("#catalogue .list") do %>
+    <%= render partial: "joke", collection: @jokes %>
   <% end %>
 <% end %>
   

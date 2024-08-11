@@ -2,6 +2,8 @@
   .form {
     flex: 1 1 45vh;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
   }
 
   @media(max-width: 950px) {
