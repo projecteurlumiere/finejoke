@@ -12,6 +12,15 @@ export default class extends Controller {
     this.#highlightButton(e.target);
   }
 
+  containerTargetConnected(element) {
+    for (var i = this.containerTargets.length - 1; i >= 0; i--) {
+      if (!this.containerTargets[i].classList.contains("hidden-when-mobile") && element != this.containerTargets[i]) {
+        element.classList.add("hidden-when-mobile");
+        break;
+      }
+    }
+  }
+
   #showContainer(name) {
     for (var i = this.containerTargets.length - 1; i >= 0; i--) {
       const classList = this.containerTargets[i].classList
