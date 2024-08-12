@@ -7,7 +7,6 @@ export default class extends Controller {
   show(e) {
     const name = e.target.dataset.containerName;
 
-    console.log(name)
     this.#showContainer(name);
     this.#highlightButton(e.target);
   }
@@ -24,7 +23,6 @@ export default class extends Controller {
   #showContainer(name) {
     for (var i = this.containerTargets.length - 1; i >= 0; i--) {
       const classList = this.containerTargets[i].classList
-      console.log(this.containerTargets[i].dataset.containerName)
 
       if (this.containerTargets[i].dataset.containerName == name) {
         classList.remove("hidden-when-mobile")

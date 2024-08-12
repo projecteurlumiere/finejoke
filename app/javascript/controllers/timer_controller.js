@@ -51,7 +51,6 @@ export default class extends Controller {
     if (this.hasCircleTarget) { this.#updateCircles(time) }
     if (this.hasBorderTarget) { this.#updateBorders(time) }
     if (this.hasDigitsTarget) { this.#updateDigits(time) }
-    console.log(time)
   }
 
   #updateCircles(time) {
