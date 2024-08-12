@@ -3,12 +3,16 @@
   padding: 2rem 1rem;
   padding-top: 0;
   row-gap: 0;
+  container-name: chat;
+  container-type: size;
 
   h2 {
     margin-left: 1em;
     flex: 0 !important;
     font-size: clamp(1rem, var(--adaptive-font-size), 1.5rem);
+    @container chat (max-width: 200px) { margin-left: 0 }
   }
+
 
   > * {
     text-align: left;
