@@ -25,16 +25,13 @@ class Round < ApplicationRecord
    after_create -> { game.integrate_hot_joined }
    # after_create -> { touch }
   # when lead updated round with setup:
-   before_update :random_setup, if: %i[punchline_stage?], unless: %i[setup?]
    after_update :move_to_punchline, if: %i[setup_stage? setup?]
-   after_update :schedule_next_stage
    # after_update -> { touch }
   # called every time joke is created:
     after_touch :move_to_vote, if: %i[punchline_stage? turns_finished?]
     after_touch :count_votes, :move_to_results, if: %i[vote_stage? votes_finished?]
     after_touch :schedule_next_round, if: :results_stage?, unless: :last?
     after_touch :schedule_next_stage, unless: %i[results_stage? last?]
-    after_touch :schedule_game_finish, if: %i[results_stage? last?]
     # after_touch -> { game.touch }
 
   delegate :broadcast_current_round, to: :game
@@ -76,8 +73,10 @@ class Round < ApplicationRecord
 
   def move_to_punchline
     user.finished_turn!
+    random_setup if setup.nil?
     punchline_stage!
     broadcast_current_round
+    schedule_next_stage
   end
 
   def move_to_vote
@@ -91,17 +90,20 @@ class Round < ApplicationRecord
     results_stage!
     broadcast_current_round
     game.broadcast_user_change(votes_change: votes_change)
+    schedule_game_finish if last?
   end
 
   def handle_no_jokes
     transaction do
       game.increment!(:afk_rounds)
-      last! if game.afk_rounds >= Game::AFK_ROUNDS_THRESHOLD
+      update_attribute(:last, true)  if game.afk_rounds >= Game::AFK_ROUNDS_THRESHOLD
     end
 
     self.votes_change = {}
 
     move_to_results
+
+    true
   end
 
   def count_votes
