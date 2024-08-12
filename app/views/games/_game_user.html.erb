@@ -2,6 +2,7 @@
   <%= tag.li id: dom_id(user),
              class: game_user_class(user, game&.current_round),
              data: { 
+               action: "click->game-data#showSettings",
                game_data_target: "user",
                id: user.id,
                host: user.host?,
@@ -9,19 +10,18 @@
                lead: user.lead?,
                finished_turn: user.finished_turn?,
                voted: (user.voted?(game.current_round) if game.current_round) } do %>
-    <div class="<%= game_user_score_class(votes_change) %>">
+    <div class="score press-font" >
+      <span class="current"><%= user.current_score %></span>
       <% if votes_change.any? %>
-        +<%= votes_change[user.id] || 0 %>
-      <% else %>
-        <%= user.current_score %>
+        <span class="change red">+<%= votes_change[user.id] || 0 %></span>
       <% end %>
     </div>
-    <div class="username" data-action="click->game-data#showSettings">
+    <div class="username">
       <%= user.username.truncate(16) %>
     </div>
     <div class="settings hidden">
       <%= link_to "В профиль", profile_path(user) %>
-      <%= button_to("Кик", game_kick_path(game, params: { user_id: user.id }), class: "hidden") %>
+      <%= button_to("Кик", game_kick_path(game, params: { user_id: user.id }), class: :hidden, form_class: :hidden ) %>
     </div>
   <% end %>
 <% else %> 

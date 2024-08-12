@@ -34,13 +34,4 @@ module GamesHelper
     default_classes << color_class
     default_classes.compact.join(" ")
   end
-
-  def game_user_score_class(votes_change)
-    default_classes = ["score", "press-font"]
-
-    color_class = votes_change.any? ? "red" : nil
-
-    default_classes << color_class
-    default_classes.compact.join(" ")
-  end
 end

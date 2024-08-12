@@ -47,10 +47,11 @@ export default class extends Controller {
   }
 
   showSettings(e) {
-    e.target.parentNode.classList.add("clicked");
+    let node = e.currentTarget;
+    node.classList.add("clicked");
 
     setTimeout(() => {
-      e.target.parentNode.classList.remove("clicked");
+      node.classList.remove("clicked");
     }, "2000");
 
   }

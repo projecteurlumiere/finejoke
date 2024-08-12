@@ -21,6 +21,13 @@
         flex-basis: 3ch;
         flex-shrink: 0;
         font-size: clamp(0.75rem, calc(1vw + 1vh), 1.5rem);
+        span {
+          display: none;
+        }
+
+        span:last-child {
+          display: block;
+        }
       }
 
       @media(max-width: 1500px) {
@@ -35,6 +42,16 @@
 
     > li:hover:has(> .settings.hidden),
     > li.clicked:has(> .settings.hidden) {
+      .score {
+        span {
+          display: none;
+        }
+
+        span:first-child {
+          display: block;
+        }
+      }      
+
       .username {
         display: none;
       }
@@ -52,10 +69,14 @@
 
       .settings.hidden {
         display: flex !important;
-        justify-content: space-between;
         align-items: center;
         gap: 0.5ch;
         width: 100%;
+
+        justify-content: space-around;
+        :has(> *:only-child) {
+          justify-content: center;
+        }
       }
     }
 
