@@ -5,20 +5,27 @@ export default class extends Controller {
   static targets = [ "container", "button"]
 
   show(e) {
-    const name = e.target.dataset.containerName;
+    this.#showByName(e.target.dataset.containerName);
+  }
 
+  #showByName(name) {
     this.#showContainer(name);
-    this.#highlightButton(e.target);
+    this.#highlightButton(name);
   }
 
   containerTargetConnected(element) {
+    const name = element.dataset.containerName
+
     for (var i = this.containerTargets.length - 1; i >= 0; i--) {
-      if (!this.containerTargets[i].classList.contains("hidden-when-mobile") && element != this.containerTargets[i]) {
-        element.classList.add("hidden-when-mobile");
-        break;
+      if (!this.containerTargets[i].classList.contains("hidden-when-mobile") && this.containerTargets[i] != element) {
+        this.#showByName(this.containerTargets[i].dataset.containerName)
+        return
       }
     }
+
+    this.#showByName(name)
   }
+
 
   #showContainer(name) {
     for (var i = this.containerTargets.length - 1; i >= 0; i--) {
@@ -33,11 +40,11 @@ export default class extends Controller {
     }
   }
 
-  #highlightButton(node) {
+  #highlightButton(name) {
     for (var i = this.buttonTargets.length - 1; i >= 0; i--) {
       const classList = this.buttonTargets[i].classList
 
-      if (this.buttonTargets[i] != node) {
+      if (this.buttonTargets[i].dataset.containerName != name) {
         classList.remove("selected")
       } else {
         classList.add("selected")
