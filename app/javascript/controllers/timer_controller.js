@@ -54,15 +54,17 @@ export default class extends Controller {
   }
 
   #updateCircles(time) {
-    for (var i = this.circleTargets.length - 1; i >= 0; i--) {
-      this.circleTargets[i]
-    }
+    throw "not implemented"
+    // for (var i = this.circleTargets.length - 1; i >= 0; i--) {
+    //   this.circleTargets[i]
+    // }
   }
 
   #updateBorders(time) {
-    for (var i = this.BorderTargets.length - 1; i >= 0; i--) {
-      this.BorderTargets[i]
-    }
+    throw "not implemented"
+    // for (var i = this.BorderTargets.length - 1; i >= 0; i--) {
+    //   this.BorderTargets[i]
+    // }
   }
 
   #updateDigits(time) {

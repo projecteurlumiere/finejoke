@@ -1,6 +1,12 @@
 <%= form_with(model: Message, 
               url: game_messages_path(game), 
-              autocomplete: :off
+              autocomplete: :off,
+              html: {
+                data: {
+                  chat_target: :form,
+                  action: "turbo:submit-end->chat#resetForm"
+                }
+              }
               ) do |form| %>
   <div class="message-input">
     <%= form.text_field :text, class: "nunito-font", aria_label: "Текст сообщения", autocomplete: :off %> 
