@@ -14,7 +14,9 @@
       margin-bottom: 1rem;
       border: solid 1px var(--white);
       column-gap: 0.5ch;
+
       * {
+        color: var(--white);
         font-size: clamp(1rem, calc(1vw + 1vh), 1.5rem);
       }
 

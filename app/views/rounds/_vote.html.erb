@@ -1,14 +1,18 @@
 <div class="jokes-container" data-controller="jokes">
-  <%= render partial: "rounds/joke", collection: jokes, as: :joke, locals: { round: round } %>
-  <div class="buttons">
-    <%= tag.div style: "-webkit-transform: scaleX(-1); transform: scaleX(-1);", 
-          data: { vote_target: "previous", action: "click->vote#previous"} do %>
-      <%= inline_svg("icons/next.svg") %>
-    <% end %>
-    <%= tag.div data: { vote_target: "next", action: "click->vote#next"} do %>
-      <%= inline_svg("icons/next.svg") %>      
-    <% end %>
-  </div>
+  <% if jokes.any? %>
+    <%= render partial: "rounds/joke", collection: jokes, as: :joke, locals: { round: round } %>
+    <div class="buttons">
+      <%= tag.div style: "-webkit-transform: scaleX(-1); transform: scaleX(-1);", 
+            data: { vote_target: "previous", action: "click->vote#previous"} do %>
+        <%= inline_svg("icons/next.svg") %>
+      <% end %>
+      <%= tag.div data: { vote_target: "next", action: "click->vote#next"} do %>
+        <%= inline_svg("icons/next.svg") %>      
+      <% end %>
+    </div>
+  <% else %>
+    <%= render partial: "rounds/no_jokes" %>
+  <% end %>
 </div>
 <% content_for(:action) do %>
   <% if !round.game.finished? && round.vote_stage? && (user.can_vote?(round) && user.not_voted?(round)) %>

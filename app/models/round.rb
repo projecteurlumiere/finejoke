@@ -30,7 +30,6 @@ class Round < ApplicationRecord
   # called every time joke is created:
     after_touch :move_to_vote, if: %i[punchline_stage? turns_finished?]
     after_touch :count_votes, :move_to_results, if: %i[vote_stage? votes_finished?]
-    after_touch :schedule_next_round, if: :results_stage?, unless: :last?
     after_touch :schedule_next_stage, unless: %i[results_stage? last?]
     # after_touch -> { game.touch }
 
@@ -90,7 +89,12 @@ class Round < ApplicationRecord
     results_stage!
     broadcast_current_round
     game.broadcast_user_change(votes_change: votes_change)
-    schedule_game_finish if last?
+
+    if last? 
+      schedule_game_finish
+    else
+      schedule_next_round
+    end
   end
 
   def handle_no_jokes
