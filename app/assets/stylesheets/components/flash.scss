@@ -23,7 +23,8 @@
   }
 
   .message {
-    height: 4rem;
+    height: 5rem;
+    @media(max-width: 950px) { height: 4rem; }
     width: 240px;
     padding: 1rem;
 
