@@ -96,7 +96,7 @@
     }
   }
 
-  > button {
+  > button.settings {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -115,10 +115,8 @@
       padding-top: 0.25rem;
       padding-bottom: 0.25rem;
     }
-  }
 
-  @container(max-width: 280px) {
-    > button {
+    @container(max-width: 280px) {     
       .text {
         display: none;
       }
@@ -126,6 +124,16 @@
       .icon {
         display: inline-block;
       }
+    }
+  }
+
+  > button.viewers {
+    display: flex;
+    gap: 0.5ch;
+    justify-content: center;
+    align-items: center;
+    > svg {
+      flex: 0 0 2.5rem;
     }
   }
 }

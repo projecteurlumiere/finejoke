@@ -18,11 +18,16 @@
 
   <div class="data-container hidden-when-mobile" data-controller="game-data" data-containers-target="container" data-container-name="data" data-game-data-id-value="<%= current_or_guest_user.id %>">
     <%= render partial: "games/game_users", formats: %i[html], locals: { game: game, votes_change: {} } %>
-      <button class="black">
-        <span class="icon">
-          <%= inline_svg("icons/gear.svg") %>
-        </span>
-        <span class="text">Настройки</span>
+      <%# <button class="black"> %>
+        <%# <span class="icon"> %>
+          <%# inline_svg("icons/gear.svg") %>
+        <%# </span> %>
+        <%# <span class="text">Настройки</span> %>
+      <%# </button> %>
+
+      <button class="viewers black">
+        <%= inline_svg("icons/eye.svg") %>
+        <%= game.n_viewers %>
       </button>
 
         <%# render partial: "games/game_settings", locals: { game: game } %>  
