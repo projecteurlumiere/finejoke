@@ -1,4 +1,6 @@
 .data-container {
+  container-type: size;
+
   #user-list {
     height: 100%;
     overflow-y: auto;
@@ -88,6 +90,39 @@
       border-color: var(--white-dimmer);
       * {
         color: var(--white-dimmer);
+      }
+    }
+  }
+
+  > button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .text {
+      display: inline-block;
+    }
+
+    .icon {
+      display: none;
+      height: 150%;
+      aspect-ratio: 1 / 1;
+    }
+
+    :has(span.icon:only-child) {
+      padding-top: 0.25rem;
+      padding-bottom: 0.25rem;
+    }
+  }
+
+  @container(max-width: 280px) {
+    > button {
+      .text {
+        display: none;
+      }
+
+      .icon {
+        display: inline-block;
       }
     }
   }

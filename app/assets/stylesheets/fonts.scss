@@ -14,10 +14,6 @@
   }
 }
 
-a {
-  font-size: inherit;
-}
-
 :root {
   font-size: 16px;
 }
@@ -46,6 +42,12 @@ input,
 .value,
 textarea {
   font-family: "Press Start 2P", system-ui;
+}
+
+span, 
+a {
+  font-size: inherit;
+  font-family: inherit;
 }
 
 * {

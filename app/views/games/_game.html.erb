@@ -18,13 +18,14 @@
 
   <div class="data-container hidden-when-mobile" data-controller="game-data" data-containers-target="container" data-container-name="data" data-game-data-id-value="<%= current_or_guest_user.id %>">
     <%= render partial: "games/game_users", formats: %i[html], locals: { game: game, votes_change: {} } %>
-    <div id="settings">
-      <div>
-        <%= button_to "Настройки" %>
+      <button class="black">
+        <span class="icon">
+          <%= inline_svg("icons/gear.svg") %>
+        </span>
+        <span class="text">Настройки</span>
+      </button>
 
         <%# render partial: "games/game_settings", locals: { game: game } %>  
-      </div>
-    </div>
   </div>
 
   <%= render partial: "rounds/current_round", formats: %i[html], locals: { game: game, round: game.current_round } %>

@@ -1,0 +1,88 @@
+button,
+input[type=submit],
+input[type=button],
+.button {
+  display: block;
+  background-color: transparent;
+  color: var(--white);
+  border: solid 1px var(--white);
+  padding: 1em;
+  white-space: nowrap;
+  text-align: center;
+  text-decoration: none;
+
+  box-sizing: border-box;
+  width: 100%;
+
+  cursor: pointer;
+  user-select: none;
+
+  &.unstyled {
+    border: none;
+    border-bottom: solid 1px var(--white);
+    
+    padding: 0;
+    white-space: normal;
+    text-decoration: underline;
+    width: unset;
+  }
+
+  &.highlighted {
+    border: none;
+    background-color: var(--teal);
+    color: var(--black);
+  }
+
+  &.danger {
+    color: var(--red);
+    border-color: var(--red);
+    background-color: transparent;
+  }
+
+  &.disabled {
+    color: var(--white-dim);
+    border-color: var(--white-dim);
+    pointer-events: none;
+  }
+
+  &.selected {
+    background-color: var(--red);
+    border-color: var(--red);
+  }
+
+  &.black {
+    background-color: transparent;
+    border-color: var(--black);
+    color: var(--black);
+  }
+
+  * {
+    color: inherit;
+  }
+
+  @media(max-height: 850px), (max-width: 600px) {
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+  }
+}
+
+form.button_to > * {
+  width: 100%;
+}
+
+.buttons-container {
+  display: grid;
+  column-gap: 1rem;
+  border: none;
+  padding: 0;
+}
+
+.buttons-contanier > * {
+  width: unset;
+}
+
+@media(min-height: 950px) and (max-width: 1100px) {
+  .buttons-container {
+    font-size: 1.25rem;
+  }
+}

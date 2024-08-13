@@ -36,8 +36,6 @@ export default class extends Controller {
   #highlightButton(node) {
     for (var i = this.buttonTargets.length - 1; i >= 0; i--) {
       const classList = this.buttonTargets[i].classList
-      console.log(this.buttonTargets[i])
-
 
       if (this.buttonTargets[i] != node) {
         classList.remove("selected")
