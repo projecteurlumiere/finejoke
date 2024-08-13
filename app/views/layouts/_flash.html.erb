@@ -1,20 +1,11 @@
-<div id="flash">
-  <% if flash[:notice] %>
-    <div class="notice">
-      <div class="message-body">
-        <%= flash[:notice] %>
-      </div>
-    </div>
+<div id="flash" class="<%= flash[:notice] ? :notice : :alert %>">
+  <% if flash[:notice] || flash[:alert] %>
+    <%= tag.div class: ["message", "button", (flash[:notice] ? :notice : :alert)].join(" "),
+                data: {
+                  controller: "flash",
+                  action: "click->flash#hide"
+                } do %>
+      <%= flash[:notice] || flash[:alert] %>
     <% end %>
-  <% if flash[:alert] %>
-    <div class="alert">
-      <div class="message-body">
-        <%= flash[:alert] %>
-      </div>
-    </div>
   <% end %>
-  <style>
-    #flash .alert { color: red; }
-    #flash .notice { color: green; }
-  </style>
 </div>

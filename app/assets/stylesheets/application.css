@@ -61,8 +61,10 @@ header {
   padding: 1rem 0 1.5rem 0;
   padding-top: clamp(0.75rem, var(--adaptive-font-size), 1rem);
   padding-bottom: clamp(0.75rem, var(--adaptive-font-size), 2rem);
-/*   height: min(10%, 5rem); */
+  /* height: min(10%, 5rem); */
   min-height: 4rem;
+  /*  for flash: */
+  position: relative; 
 }
 
 main {

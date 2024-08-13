@@ -1,0 +1,75 @@
+#flash {
+  position: absolute;
+  visibility: hidden;
+  overflow: hidden;
+
+  top: 0;
+  right: 0;
+
+  z-index: 1;
+
+  &.alert {
+    .message {
+      background-color: var(--red);
+      color: var(--white);
+    }
+  }
+
+  &.notice {
+    .message {
+      background-color: var(--teal);
+      color: var(--black);
+    }
+  }
+
+  .message {
+    height: 4rem;
+    width: 240px;
+    padding: 1rem;
+
+    margin-top: clamp(0.75rem, var(--adaptive-font-size), 1rem);
+    margin-bottom: clamp(0.75rem, var(--adaptive-font-size), 2rem);
+
+    font-size: 1rem;
+    font-family: "Nunito Sans", system-ui;
+    font-weight: 500;
+    text-align: left;
+    border: none;
+
+    white-space: wrap;
+    
+    display: flex;
+    justify-content: first baseline;
+    align-items: center;
+  }
+}
+
+/*  */
+/** Animations  */
+/*  */
+
+#flash {
+  animation: 10s appear-and-vanish 1 normal forwards;
+}
+
+@keyframes appear-and-vanish {
+ from {
+    visibility: hidden;
+    width: 0px;
+  }
+
+  10% {
+    visibility: visible;
+    width: 240px;
+  }
+
+  90% {
+    visibility: visible;
+    width: 240px;
+  }
+
+  to {
+    width: 0px;
+    visibility: hidden;
+  }
+} 
