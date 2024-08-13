@@ -27,7 +27,7 @@
 
       <button class="viewers black">
         <%= inline_svg("icons/eye.svg") %>
-        <%= game.n_viewers %>
+        <%= render partial: "games/game_n_viewers", locals: { game: game } %>
       </button>
 
         <%# render partial: "games/game_settings", locals: { game: game } %>  
