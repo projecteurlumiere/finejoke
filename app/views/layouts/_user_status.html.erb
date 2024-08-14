@@ -3,10 +3,10 @@
     <% if current_page?(game_path(game)) %>
       <%= button_to "Выход", game_leave_path(game) %>
     <% else %>
-      <%= link_to "В игре", game_path(game), class: "button" %>
+      <%= link_to "В игре", game_path(game), class: :button %>
     <% end %>
   <% else %>
-    <%= yield(:join) %>
+    <%= yield(:nav_button) %>
   <% end %>
 </div>
 

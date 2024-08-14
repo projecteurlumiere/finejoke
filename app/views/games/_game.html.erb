@@ -5,8 +5,8 @@
           { user_id: current_or_guest_user.id,
             controller: "containers timer"
           })) do %>
-  <%= content_for(:join) do %>
-    <%= link_to "Назад в лобби", games_path %>
+  <%= content_for(:nav_button) do %>
+    <%= link_to "В лобби", games_path, class: :button %>
     <%# button_to "Присоединиться", game_join_path(game) if game.joinable? %>
   <% end %>
 
