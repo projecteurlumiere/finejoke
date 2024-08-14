@@ -1,0 +1,77 @@
+# Name of your application. Used to uniquely configure containers.
+service: finejoke
+
+# Name of the container image.
+image: projecteurlumiere/finejoke
+
+# Deploy to these servers.
+servers:
+  web:
+    hosts:
+      - IP
+    # labels:
+      # traefik.http.routers.my_awesome_app.entrypoints: websecure
+      # traefik.http.routers.my_awesome_app.rule: Host(`my_awesome_app.com`)
+      # traefik.http.routers.my_awesome_app.tls.certresolver: letsencrypt
+    options:
+      network: "private"
+
+# Credentials for your image host.
+registry:
+  # Specify the registry server, if you're not using Docker Hub
+  # server: registry.digitalocean.com / ghcr.io / ...
+  username: KAMAL_REGISTRY_USERNAME
+
+  # Always use an access token rather than real password when possible.
+  password:
+    - KAMAL_REGISTRY_PASSWORD # Must be present in your `.env`.
+
+# Inject ENV variables into containers (secrets come from .env).
+# Remember to run `kamal env push` after making changes!
+env:
+  clear:
+    RAILS_SERVE_STATIC_FILES: true
+    POSTGRES_USER: "finejoke"
+    POSTGRES_DB: "finejoke_production"
+    POSTGRES_HOST: "finejoke-db"
+  secret:
+    - RAILS_MASTER_KEY
+    - POSTGRES_PASSWORD
+
+# Use accessory services (secrets come from .env).
+accessories:
+  db:
+    image: postgres:16
+    host: IP
+    env:
+      clear:
+        POSTGRES_USER: "finejoke"
+        POSTGRES_DB: "finejoke_production"
+      secret:
+        - POSTGRES_PASSWORD
+    directories:
+      - data:/var/lib/postgresql/data
+    options:
+      network: "private"
+
+# Configure custom arguments for Traefik
+# traefik:
+#   options:
+#     publish:
+#       - "443:443"
+#     volume:
+#       - "/letsencrypt/acme.json:/letsencrypt/acme.json" # To save the configuration file.
+#     network: "private" 
+#   args:
+#     entryPoints.web.address: ":80"
+#     entryPoints.websecure.address: ":443"
+#     entryPoints.web.http.redirections.entryPoint.to: websecure # We want to force https
+#     entryPoints.web.http.redirections.entryPoint.scheme: https
+#     entryPoints.web.http.redirections.entrypoint.permanent: true
+#     certificatesResolvers.letsencrypt.acme.email: "email@example.com"
+#     certificatesResolvers.letsencrypt.acme.storage: "/letsencrypt/acme.json" 
+#     certificatesResolvers.letsencrypt.acme.httpchallenge: true
+#     certificatesResolvers.letsencrypt.acme.httpchallenge.entrypoint: web
+
+healthcheck:
+  interval: 5s
