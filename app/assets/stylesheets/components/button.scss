@@ -17,6 +17,9 @@ input[type=button],
   cursor: pointer;
   user-select: none;
 
+  font-family: "Press Start 2P", system-ui;
+  text-transform: lowercase;
+
   &.unstyled {
     border: none;
     border-bottom: solid 1px var(--white);

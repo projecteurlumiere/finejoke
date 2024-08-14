@@ -5,4 +5,5 @@
 
 .nunito-font {
   font-family: "Nunito Sans", system-ui !important;
+  text-transform: lowercase;
 }
