@@ -2,14 +2,31 @@ module ErrorHandling
   extend ActiveSupport::Concern
   
   included do 
-    private 
+    rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
+    rescue_from Pundit::NotAuthorizedError, with: :render_not_authorized
 
-    def turbo_redirect_to(path)
-      render partial: "shared/redirect_to", locals: { path: path }, status: :found
+    private
+
+    def render_not_found
+      flash.now.alert = "Не найдено"
+      status = :not_found
+
+      if request.formats.include?(:turbo_stream)
+        render_turbo_flash(status:)
+      else
+        render file: "#{Rails.root}/public/404.html", layout: false, status:
+      end
     end
 
-    def render_turbo_flash(status:)
-      render partial: "shared/flash", status: status
+    def render_not_authorized
+      flash.now.alert = "У вас здесь нет прав"
+      status = :forbidden
+
+      if request.formats.include?(:turbo_stream)
+        render_turbo_flash(status:)
+      else
+        render file: "#{Rails.root}/public/403.html", layout: false, status:
+      end
     end
   end
 end

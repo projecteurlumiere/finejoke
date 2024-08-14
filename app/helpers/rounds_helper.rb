@@ -173,7 +173,7 @@ module RoundsHelper
     return unless game.host == user
 
     content_for(:action) do 
-      button_to("Start game", game_rounds_path(game))
+      button_to("Старт!", game_rounds_path(game))
     end
   end
 

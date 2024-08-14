@@ -127,9 +127,9 @@ class GamesController < ApplicationController
     return true if user_game.nil? || user_game == @game
 
     if user_game != @game
-      flash[:alert] = "You have already joined another game"
+      flash[:alert] = "Вы уже в игре"
     elsif !@game.joinable?(by: current_or_guest_user)
-      flash[:alert] = "Game cannot be joined"
+      flash[:alert] = "К игре нельзя присоединиться"
     end
 
     false
