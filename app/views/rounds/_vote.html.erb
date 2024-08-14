@@ -1,4 +1,4 @@
-<div class="jokes-container" data-controller="jokes">
+<div class="jokes-container" data-vote-target="jokes">
   <% if jokes.any? %>
     <%= render partial: "rounds/joke", collection: jokes, as: :joke, locals: { round: round } %>
     <div class="buttons">

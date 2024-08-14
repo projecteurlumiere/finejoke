@@ -4,10 +4,6 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static targets = [ "jokes", "joke", "previous", "next", "submit" ]
 
-  connect() {
-    // this.#setSubmitLink();
-  }
-
   next() {
     this.#move("next");
   }
@@ -18,7 +14,7 @@ export default class extends Controller {
 
   // container
   jokesTargetConnected() {
-    this.#restrictNextMove(0);
+    this.#restrictNextMove(this.#getCurrentJoke().i) 
   } 
 
   #move(action) {
