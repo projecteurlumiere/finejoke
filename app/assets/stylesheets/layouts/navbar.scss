@@ -12,16 +12,10 @@ header {
     align-items: center;
 
     .start {
-      button,
-      .button {
+      .button,
+      button {
         color: inherit;
         box-sizing: border-box;
-      }
-
-      @media(max-width: 950px) {
-        > * {
-          display: none;
-        }
       }
     }
 
@@ -36,6 +30,12 @@ header {
 
       .profile-short {
         display: none;
+        
+        > a {
+          padding: 0.25em 0.5em;
+          font-weight: 600;
+          // border: solid 1px var(--white);
+        }
       }
 
       @media(max-width: 950px) {
@@ -54,15 +54,46 @@ header {
 
       .notice {
         font-size: 1rem;
-
         grid-row: 3 / 4;
       }
     }
-  }
 
-  @media(max-width: 950px) {
-    * {
-      font-size: 1.25rem;
+    @media(max-width: 1200px) {
+      .start, 
+      .start * {
+        width: 100%;
+        font-size: 0.9em;
+      }
+    }
+
+    @media(max-width: 950px) {
+      .start,
+      .center,
+      .end {
+        grid-row: 1 / 2;
+      }
+
+      .start {
+        width: auto;
+        grid-column: 1 / 3;
+        justify-self: first baseline;
+
+        * {
+          font-size: 1em;
+          @media(max-width: 500px) {
+            font-size: 0.85em;
+          }
+        }
+
+      }
+
+      .center {
+        grid-column: 2 / 3;
+      }
+
+      .end {
+        grid-column: 3 / 4;
+      }
     }
   }
 }

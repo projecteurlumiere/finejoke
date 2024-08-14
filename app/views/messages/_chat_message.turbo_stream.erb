@@ -1,7 +1,7 @@
 <%= turbo_stream.action(:append, "chat") do %>
   <div class="<%= ["message", dom_id(user)].join(" ") %>">
     <h4 class="username">
-      <%= user.username.truncate(16) %>
+      <%= user.username.truncate(14) %>
     </h4>
     <p>
       <%= text %>

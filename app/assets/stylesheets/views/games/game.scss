@@ -36,4 +36,12 @@
       flex: 1 1 300px;
     }
   }
+
+  > .mobile-navigation {
+    @media(max-width: 500px) {
+      span.max-players {
+      display: none;
+      }
+    }
+  }
 }
