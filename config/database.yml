@@ -79,6 +79,7 @@ test:
 #
 production:
   <<: *default
-  database: finejoke_production
-  username: finejoke
-  password: <%= ENV["FINEJOKE_DATABASE_PASSWORD"] %>
+  username: <%= ENV["POSTGRES_USER"] %>
+  password: <%= ENV["POSTGRES_PASSWORD"] %>
+  database: <%= ENV["POSTGRES_DB"] %>
+  host: <%= ENV["POSTGRES_HOST"] %> # Because we don't use DATABASE_URL, we need to add this line.
