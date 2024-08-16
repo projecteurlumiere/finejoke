@@ -15,3 +15,17 @@ Turbo.StreamActions.fetch = function() {
     }).then(r => r.text())
       .then(html => Turbo.renderStreamMessage(html))
 }
+
+// function for replacing what element turbo replaces: here it is #body:
+// Object.assign(Turbo.PageRenderer.prototype, {
+//   assignNewBody() {
+//     const container = document.querySelector("#body")
+//     const newContainer = this.newElement.querySelector("#body")
+
+//     if (container && newContainer) {
+//       container.replaceWith(newContainer)
+//     } else {
+//       PageRenderer.renderElement(this.currentElement, this.newElement)
+//     }
+//   },
+// })
