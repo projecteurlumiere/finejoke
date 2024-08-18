@@ -5,7 +5,8 @@ Rails.application.routes.draw do
     post "kick", to: "games#kick"
     get "rules", to: "games#show_rules"
     
-    resources :rounds, only: %i[show create update] do
+    get "rounds/current", to: "rounds#show_current"
+    resources :rounds, only: %i[show create update] do  
       resources :jokes, only: %i[index show create update]
     end
 

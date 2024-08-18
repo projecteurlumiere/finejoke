@@ -1,12 +1,17 @@
 class RoundsController < ApplicationController
-  before_action :set_game, only: %i[ show create update ]
+  before_action :set_game, only: %i[ show show_current create update ]
   before_action :set_round, only: %i[ show update ]
-  before_action :authorize_round!, only: %i[show update]
+  before_action :authorize_round!, only: %i[show show_current update]
 
   # GET /rounds/1
-  # shows round (for current round mainly)
+  # shows round (for current round mainly)s
   def show
     render layout: false, formats: %i[turbo_stream], locals: { game: @game, round: @round }
+  end
+
+  def show_current
+    @round = @game.current_round
+    render :show, layout: false, formats: %i[turbo_stream], locals: { game: @game, round: @round }
   end
 
   # POST /rounds
@@ -57,6 +62,13 @@ class RoundsController < ApplicationController
   end
 
   def authorize_round!
-    authorize(@round || Round)
+    authorize @round || Round
+  end
+
+  def pundit_user
+    {
+      user: current_or_guest_user,
+      game: @game
+    }
   end
 end

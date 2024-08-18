@@ -1,15 +1,21 @@
 class RoundPolicy < ApplicationPolicy
   attr_reader :user, :round
 
-  def initialize(user, round)
-    @user = user
+  def initialize(context, round)
+    @user = context[:user]
     @round = round
-    @game = round.game
+    @game = context[:game]
+
+    throw Pundit::NotAuthorizedError if @round != Round && @round.game != @game
   end
 
   def show?
     @game.current_round == @round &&
       (@game.viewable? || @user.joined?(@game))
+  end
+
+  def show_current?
+    @game.viewable? || @user.joined?(@game)
   end
 
   def create?
