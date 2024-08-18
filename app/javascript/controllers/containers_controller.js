@@ -5,7 +5,7 @@ export default class extends Controller {
   static targets = [ "container", "button"]
 
   show(e) {
-    this.#showByName(e.target.dataset.containerName);
+    this.#showByName(e.currentTarget.dataset.containerName);
   }
 
   #showByName(name) {
