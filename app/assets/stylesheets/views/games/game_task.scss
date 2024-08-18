@@ -25,6 +25,10 @@
     > *:last-child  {
       margin-bottom: var(--task-padding);
     }
+
+    p.setup {
+      overflow-wrap: anywhere;
+    }
     
     // upper div with h2
     > .description {
@@ -96,6 +100,10 @@
         justify-content: center;
         flex: 1;
         row-gap: 0.5rem;
+
+        p {
+          overflow-wrap: anywhere;
+        }
 
         .setup {
           flex: 1;

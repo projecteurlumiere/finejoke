@@ -27,7 +27,7 @@ module RoundsHelper
 
     [
       tag.h2(messages[0]),
-      tag.div(tag.p(messages[1]))
+      tag.div(tag.p(messages[1], class: @p_class))
     ].join(" ").html_safe
   end
 
@@ -61,6 +61,7 @@ module RoundsHelper
       end
     when :punchline
       unless user.lead?
+        @p_class = :setup
         [
           "Придумайте смешную развязку",
           round.setup
@@ -73,11 +74,13 @@ module RoundsHelper
       end
     when :vote
       if user.can_vote?(round)
+        @p_class = :setup
         [
           "Выберите лучший ответ",
           round.setup
         ]
       else
+        @p_class = :setup
         [
           "Игроки голосуют",
           round.setup
@@ -100,11 +103,13 @@ module RoundsHelper
       ]
 
     when :punchline
+      @p_class = :setup
       [
         "Игроки придумывают развязки к завязке:",
         round.setup
       ]
     when :vote
+      @p_class = :setup
       [
         "Игроки голосуют",
         round.setup
@@ -164,7 +169,7 @@ module RoundsHelper
   def render_rules_for(_game)
     [
       tag.h2("Правила"),
-      tag.div(tag.p("Какие-то правила"))
+      tag.div(tag.p("Какие-то правила"), class: "rules")
     ].join(" ").html_safe
   end
 
