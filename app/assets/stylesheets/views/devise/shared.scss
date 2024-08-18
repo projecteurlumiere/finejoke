@@ -1,10 +1,20 @@
+body:has(main > #authentication) {
+  overflow-y: scroll;
+}
+
 #authentication {
+  > a.sign-in:has(~ #authentication-form > #new-session),
+  > a.sign-up:has(~ #authentication-form > #new-registration) {
+    background-color: var(--red);
+    border: none;
+  }
 
   #authentication-form {
     display: flex;
     flex-direction: column;
     gap: 1rem;
     padding: 0;
+    padding-bottom: 1rem;
     border: none;
     grid-row: 2 / 3;
 

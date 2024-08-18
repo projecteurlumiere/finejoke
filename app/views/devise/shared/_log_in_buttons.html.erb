@@ -1,6 +1,7 @@
+<%# selecting buttons works via css's :has, not js %>
 <%= link_to "Вход", new_user_session_path, 
-      class: ["button", ("selected" if controller_name == "sessions")].compact.join(" "), 
+      class: %w[button sign-in], 
       data: { turbo_frame: "authentication-form", turbo_action: :advance } %>
 <%= link_to "Регистрация", new_user_registration_path, 
-      class: ["button", ("selected" if controller_name == "registrations")].compact.join(" "), 
+      class: %w[button sign-up],
         data: { turbo_frame: "authentication-form", turbo_action: :advance }  %>

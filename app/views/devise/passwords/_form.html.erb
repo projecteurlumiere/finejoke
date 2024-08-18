@@ -4,7 +4,7 @@
     <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Эмейл", aria_label: "Электронная почта" %>
   <% end %>
 
-  <input type="submit" form="new-password" value="Восстановить пароль">
+  <input class="selected" type="submit" form="new-password" value="Напомнить пароль">
   
   <%= render "devise/shared/links" %>
   <%= link_to "Нет, вспомнил", new_session_path(resource_name), class: "button", data: { turbo_action: :advance } %>
