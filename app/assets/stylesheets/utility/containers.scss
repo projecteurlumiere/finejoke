@@ -19,6 +19,21 @@
   // mobile buttons on top
   .mobile-navigation {
     display: none;
+
+    .unseen {
+       animation: blink 3s infinite;
+       animation-fill-mode: both;
+       
+       &.selected {
+        animation: none;
+       }
+    }
+
+    @keyframes blink {
+       0% { border-color: var(--white); }
+       50% { border-color: var(--red) }
+       100% { border-color: var(--white) }
+    }
   }
 
   @media(max-width: 950px) {

@@ -1,4 +1,12 @@
-<div class="chat-container hidden-when-mobile" data-controller="chat" data-containers-target="container" data-chat-id-value="<%= game.id %>" data-container-name="chat">
+<%= tag.div class: "chat-container hidden-when-mobile",
+            data: {
+              controller: :chat,
+              containers_target: :container,
+              chat_id_value: game.id,
+              container_name: "chat",
+              custom_unblink: true,
+              action: "resize@window->chat#adjustScrollOnResize"
+            } do %>
   <style>
     <%# coloring self messages with user's unique id %>
     <%= ".message.user_#{user.id} > p { background-color: var(--white-dimmest) }".html_safe %>
@@ -9,4 +17,4 @@
   <div class="form">
     <%= render partial: "games/chat_form", locals: { game: game } %>
   </div>
-</div>
+<% end %>
