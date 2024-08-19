@@ -72,7 +72,8 @@ traefik:
     entryPoints.web.http.redirections.entryPoint.to: websecure # We want to force https
     entryPoints.web.http.redirections.entryPoint.scheme: https
     entryPoints.web.http.redirections.entrypoint.permanent: true
-    certificatesResolvers.letsencrypt.acme.email: "email@example.com"
+    # one can get rid of email completely or use valid:
+    # certificatesResolvers.letsencrypt.acme.email: "email@example.com"
     certificatesResolvers.letsencrypt.acme.storage: "/letsencrypt/acme.json" 
     certificatesResolvers.letsencrypt.acme.httpchallenge: true
     certificatesResolvers.letsencrypt.acme.httpchallenge.entrypoint: web
