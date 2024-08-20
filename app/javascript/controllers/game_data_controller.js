@@ -53,13 +53,16 @@ export default class extends Controller {
   showSettings(e) {
     let node = e.currentTarget;
     const id = node.id
+    const settingsNode = node.querySelector(".settings")
+    if (window.getComputedStyle(settingsNode).display === "none") {
+      e.preventDefault()
+    } 
 
     if (this.timeouts[id]) {
       clearTimeout(this.timeouts[id])
     } else {
       node.classList.add("clicked");
     }
-
 
     this.timeouts[id] = setTimeout(() => {
       node.classList.remove("clicked");
