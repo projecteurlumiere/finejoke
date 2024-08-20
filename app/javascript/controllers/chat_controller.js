@@ -28,7 +28,8 @@ export default class extends Controller {
   }
 
   messageTargetConnected(element) {
-    if (this.#lastMessage() != element) return
+    const lastMessage = this.#lastMessage()
+    if (lastMessage != element) return
 
     this.#removeExcess();
 
@@ -43,11 +44,12 @@ export default class extends Controller {
     this.scrollObserver.observe(element);
 
     setTimeout(() => {
-      if (this.#lastMessage().classList.contains("unseen")) { 
+      if (lastMessage.classList.contains("unseen")) { 
         this.dispatch("unseen", { detail: { containerName: this.element.dataset.containerName } })
       }
     }, 100)
 
+    this.#insertTime(lastMessage);
     this.#storeChatHistory()
   }
 
@@ -105,6 +107,16 @@ export default class extends Controller {
     for (var i = this.messageTargets.length - 1; i >= 0; i--) {
       this.messageTargets[i].classList.remove("unseen")
     }
+  }
+
+  #insertTime(element) {
+    if (element.querySelector("time")) return
+
+    let node = document.createElement("time")
+    const now = new Date
+    node.innerText = `${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`
+
+    element.querySelector(".username").insertAdjacentElement("afterend", node)
   }
 
   #storeChatHistory() {

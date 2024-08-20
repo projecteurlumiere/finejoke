@@ -1,3 +1,9 @@
+.message {
+  display: grid;
+  grid-template-columns: auto;
+  row-gap: 0.5ch;
+}
+
 .message * {
   font-family: "Nunito sans", system-ui;
   margin: 0;
@@ -7,7 +13,17 @@
 }
 
 .message > .username {
-  margin-bottom: 0.5ch;
+  text-align: left;
+  text-transform: none;
+  font-size: 12px;
+}
+
+.message > time {
+  text-align: right;
+  justify-self: right;
+  align-self: center;
+  font-size: 12px;
+  font-weight: 600;
 }
 
 .message > p {
@@ -15,4 +31,6 @@
   background: var(--teal-dim);
   padding: 1ch;
   overflow-wrap: anywhere;
+  grid-row: 2 / 3;
+  grid-column: 1 / 3;
 }
