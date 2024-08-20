@@ -7,9 +7,13 @@ class ProfilesController < ApplicationController
     
     set_jokes
 
+
     respond_to do |format|
-      format.html
-      format.turbo_stream
+      if @action.nil?
+        format.html
+      else
+        format.turbo_stream
+      end
     end
   end
 
@@ -52,6 +56,7 @@ class ProfilesController < ApplicationController
 
   def process_joke_params
     set_turbo_action
+    return if @action.nil?
 
     property = set_property
     ordered_property = set_order(property)
@@ -63,7 +68,7 @@ class ProfilesController < ApplicationController
     @action = case params[:turbo_action]
               when "replace"
                 :replace
-              else
+              when "append"
                 :append
               end
   end

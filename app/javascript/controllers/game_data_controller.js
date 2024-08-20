@@ -9,6 +9,10 @@ export default class extends Controller {
 
   static targets = [ "user" ]
 
+  connect(){
+    this.timeouts = {}
+  }
+
   userTargetConnected(node) {
     if (node.dataset.id == this.idValue) {
       this.hostValue = node.dataset.host
@@ -48,10 +52,18 @@ export default class extends Controller {
 
   showSettings(e) {
     let node = e.currentTarget;
-    node.classList.add("clicked");
+    const id = node.id
 
-    setTimeout(() => {
+    if (this.timeouts[id]) {
+      clearTimeout(this.timeouts[id])
+    } else {
+      node.classList.add("clicked");
+    }
+
+
+    this.timeouts[id] = setTimeout(() => {
       node.classList.remove("clicked");
+      delete this.timeouts[id]
     }, "2000");
 
   }
