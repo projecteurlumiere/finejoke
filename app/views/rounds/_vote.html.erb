@@ -1,6 +1,6 @@
 <div class="jokes-container" data-vote-target="jokes">
   <% if jokes.any? %>
-    <%= render partial: "rounds/joke", collection: jokes, as: :joke, locals: { round: round } %>
+    <div id="swipe" class="swipe"><div class="swipe-wrap"><%= render partial: "rounds/joke", collection: jokes, as: :joke, locals: { round: round } %></div></div>
     <div class="buttons">
       <%= tag.div style: "-webkit-transform: scaleX(-1); transform: scaleX(-1);", 
             data: { vote_target: "previous", action: "click->vote#previous"} do %>

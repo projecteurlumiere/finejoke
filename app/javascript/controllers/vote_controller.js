@@ -1,43 +1,48 @@
 import { Controller } from "@hotwired/stimulus"
+import Swipe from "swipejs";
   
 // Connects to data-controller="vote"
 export default class extends Controller {
   static targets = [ "jokes", "joke", "previous", "next", "submit" ]
 
+  connect(){ 
+    for (var i = this.jokeTargets.length - 1; i >= 0; i--) {
+      this.jokeTargets[i].classList.remove("hidden")
+    }
+
+    this.swipe = new Swipe(document.getElementById("swipe"), 
+      { 
+        ignore: ".buttons",
+        continuous: false,
+        callback: (index, elem, dir) => { 
+          this.#restrictNextMove(index);
+          this.#setSubmitLink(elem); 
+        }
+      }
+    );
+
+    this.#restrictNextMove(0);
+  }
+
   next() {
-    this.#move("next");
+    this.swipe.next()
+    // this.#move("next");
   }
 
   previous() {
-    this.#move("previous");
+    this.swipe.prev()
+    // this.#move("previous");
   }
 
   // container
   jokesTargetConnected() {
-    this.#restrictNextMove(this.#getCurrentJoke().i) 
+    if (this.swipe) {
+      this.#restrictNextMove(0);
+    }
   } 
 
-  #move(action) {
-    let current = this.#getCurrentJoke();
-
-    let new_current = {
-      i: (action === "next" ? current.i + 1 : current.i - 1),
-      node: undefined
-    } 
-
-    if (new_current.i >= this.jokeTargets.length || new_current.i < 0) return
-    this.#restrictNextMove(new_current.i)
-
-    new_current.node = this.jokeTargets[new_current.i]
-
-    current.node.classList.add("hidden");
-    new_current.node.classList.remove("hidden");
-
-    this.#setSubmitLink(new_current.node);
-  }
-
   #restrictNextMove(i) {
-    if (i + 1 >= this.jokeTargets.length) {
+    if (i + 1 >= this.swipe.getNumSlides()) {
       this.#disable(this.nextTarget);
     }
     else {
@@ -52,24 +57,10 @@ export default class extends Controller {
     }
   }
 
-  #setSubmitLink(joke = undefined) {
-    if (!this.hasInputTarget) return
-      
-    joke = joke === undefined ? this.#getCurrentJoke().node : joke
+  #setSubmitLink(element) {
+    if (!this.hasSubmitTarget) return
 
-    this.submitTarget.action = joke.dataset.votePath
-  }
-
-  // returns object with joke and position
-  #getCurrentJoke() {
-    for (var i = this.jokeTargets.length - 1; i >= 0; i--) {
-      if (!this.jokeTargets[i].classList.contains("hidden")) {
-        return { 
-          i: i, 
-          node: this.jokeTargets[i]
-        } 
-      }
-    }
+    this.submitTarget.action = element.dataset.votePath
   }
 
   #enable(button) {

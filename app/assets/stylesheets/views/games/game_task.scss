@@ -34,6 +34,8 @@
     > .description {
       display: flex;
       flex-direction: column;
+      margin-left: 1em;
+      margin-right: 1em;
 
       flex: 1;
 
@@ -49,9 +51,6 @@
 
     > .description,
       .jokes-container {
-      margin-left: 1em;
-      margin-right: 1em;
-
       @container task (min-height: 0) {
         * {
           font-size: clamp(1rem, calc(1.6cqw + 1.6cqh), 1.75rem)
@@ -91,7 +90,30 @@
       flex-basis: auto;
       // overflow-y: auto;
       margin-bottom: 0;
+      margin-left: 0em;
+      margin-right: 0em;
       flex: 1;
+
+      // swipe!
+
+      .swipe {
+        overflow: hidden;
+        visibility: hidden;
+        position: relative;
+        height: 100%; // added
+      }
+      .swipe-wrap {
+        overflow: hidden;
+        position: relative;
+        height: 100%; // added
+      }
+      .swipe-wrap > div {
+        float: left;
+        width: 100%;
+        height: 100%; // added
+        position: relative;
+        overflow: hidden;
+      }
 
       .joke {
         flex-basis: auto;
@@ -100,6 +122,12 @@
         justify-content: center;
         flex: 1;
         row-gap: 0.5rem;
+        margin-left: 0;
+        margin-right: 0;
+        > * {
+          margin-left: 1em;
+          margin-right: 1em;
+        }
 
         p {
           overflow-wrap: anywhere;
@@ -123,7 +151,7 @@
         .user {
           flex: 1;
           flex-grow: 0.5;
-          width: 100%;
+          // width: 100%;
           display: flex;
           align-items: first baseline;
           justify-content: space-between;
@@ -143,19 +171,28 @@
         padding-bottom: var(--task-padding);
         padding-top: 1rem;
         margin-bottom: 0;
+        margin-left: 1em;
+        margin-right: 1em;
 
         svg {
           height: clamp(1rem, var(--adaptive-font-size), 1.75rem);
         }
 
         > * {
+          cursor: pointer;
           path {
             color: var(--black);
           }
         }
       
 
-        > *.disabled {
+        > .disabled {
+          cursor: unset;
+
+          * { 
+            cursor: unset; 
+          }
+
           path {
             color: var(--white-dim);
           }
