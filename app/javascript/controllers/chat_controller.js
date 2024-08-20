@@ -10,15 +10,9 @@ export default class extends Controller {
   connect() {
     this.key = `chat_${this.idValue}`
 
-    const chatHistory = this.#getChatHistory(this.key);
-
-    this.messagesTarget.innerHTML = chatHistory.HTML
-    this.#removeExcess();
     this.scrollObserver = this.#createScrollObserver();
-    for (var i = this.messageTargets.length - 1; i >= 0; i--) {
-      this.messageTargets[i].classList.remove("unseen")
-      this.scrollObserver.observe(this.messageTargets[i])
-    }
+
+    this.#restoreChatHistory();
 
     this.mustScrollToBottom = true
     setTimeout(() => { this.#scrollToBottom(); }, 100)
@@ -40,8 +34,10 @@ export default class extends Controller {
 
     const penultimateMessage = this.messageTargets.slice(-2, -1)[0]
 
-    if (!penultimateMessage || penultimateMessage.classList.contains("currently-viewed")) {
-      this.#scrollToBottom();
+    if (penultimateMessage) {
+      if (penultimateMessage.classList.contains("currently-viewed")) {
+        this.#scrollToBottom();
+      } 
     }
 
     this.scrollObserver.observe(element);
@@ -56,13 +52,23 @@ export default class extends Controller {
   }
 
   adjustScrollOnResize(e){
-    if (this.#lastMessage().classList.contains("currently-viewed")) {
+    if (!this.#lastMessage() || this.#lastMessage().classList.contains("currently-viewed")) {
       this.#scrollToBottom();
     }
   }
 
   #lastMessage() {
     return this.messageTargets.slice(-1)[0]
+  }
+
+  #restoreChatHistory() {
+    const chatHistory = this.#getChatHistory(this.key);
+    this.messagesTarget.innerHTML = chatHistory.HTML
+    this.#removeExcess();
+    for (var i = this.messageTargets.length - 1; i >= 0; i--) {
+      this.messageTargets[i].classList.remove("unseen")
+      this.scrollObserver.observe(this.messageTargets[i])
+    }
   }
 
   #clearChatHistories(){
@@ -139,7 +145,7 @@ export default class extends Controller {
           }
         } 
         else {
-          if (this.element.classList.contains("hidden-when-mobile") && elements[i] === lastMessage) {
+          if (window.getComputedStyle(this.element).display === "none" && elements[i].target === lastMessage && this.#noneIsIntersecting(elements) && lastMessage.classList.contains("currently-viewed")) {
             this.mustScrollToBottom = true
           }
           elements[i].target.classList.remove("currently-viewed");
@@ -154,5 +160,12 @@ export default class extends Controller {
       root: this.messagesTarget,
       threshold: 0.5
     })
+  }
+
+  #noneIsIntersecting(elements) {
+    for (var i = elements.length - 1; i >= 0; i--) {
+      if (elements[i].isIntersecting) return false
+    }
+    return true
   }
 }
