@@ -5,7 +5,18 @@ import Swipe from "swipejs";
 export default class extends Controller {
   static targets = [ "jokes", "joke", "previous", "next", "submit" ]
 
-  connect(){ 
+  next() {
+    this.swipe.next()
+    // this.#move("next");
+  }
+
+  previous() {
+    this.swipe.prev()
+    // this.#move("previous");
+  }
+
+  // container
+  jokesTargetConnected() {
     for (var i = this.jokeTargets.length - 1; i >= 0; i--) {
       this.jokeTargets[i].classList.remove("hidden")
     }
@@ -24,22 +35,9 @@ export default class extends Controller {
     this.#restrictNextMove(0);
   }
 
-  next() {
-    this.swipe.next()
-    // this.#move("next");
+  jokesTargetDisconnected() {
+    this.swipe.kill()
   }
-
-  previous() {
-    this.swipe.prev()
-    // this.#move("previous");
-  }
-
-  // container
-  jokesTargetConnected() {
-    if (this.swipe) {
-      this.#restrictNextMove(0);
-    }
-  } 
 
   #restrictNextMove(i) {
     if (i + 1 >= this.swipe.getNumSlides()) {
