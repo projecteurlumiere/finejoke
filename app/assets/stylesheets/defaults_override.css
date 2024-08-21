@@ -30,6 +30,10 @@ input {
   width: 100%;
 }
 
+input::placeholder {
+  color: var(--white-dim);
+}
+
 input:invalid:not(:placeholder-shown) {
   border-color: var(--red);
 }
@@ -71,4 +75,8 @@ select {
   -moz-appearance: none; /* Firefox */
   -webkit-appearance: none; /* Safari and Chrome */
   appearance: none;
+}
+
+option {
+  color: var(--black);
 }

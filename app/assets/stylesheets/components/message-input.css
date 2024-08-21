@@ -8,9 +8,14 @@
     padding: 0.5rem;
     border: none;
     width: 100%;
+    font-weight: 600;
   }
 
   input[type=image] {
     padding: 0.5rem;
+  }
+
+  input::placeholder {
+    color: var(--white-dimmer);
   }
 }
