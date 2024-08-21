@@ -6,6 +6,11 @@
             data: { vote_target: "previous", action: "click->vote#previous"} do %>
         <%= inline_svg("icons/next.svg") %>
       <% end %>
+      <div class="counter" data-vote-target="counter" data-action="click->vote#goToJoke">
+        <% jokes.length.times do %>
+          <div></div>
+        <% end %>
+      </div>
       <%= tag.div data: { vote_target: "next", action: "click->vote#next"} do %>
         <%= inline_svg("icons/next.svg") %>      
       <% end %>

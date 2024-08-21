@@ -3,7 +3,7 @@ import Swipe from "swipejs";
   
 // Connects to data-controller="vote"
 export default class extends Controller {
-  static targets = [ "jokes", "joke", "previous", "next", "submit" ]
+  static targets = [ "jokes", "joke", "previous", "next", "submit", "counter" ]
 
   next() {
     this.swipe.next()
@@ -13,6 +13,15 @@ export default class extends Controller {
   previous() {
     this.swipe.prev()
     // this.#move("previous");
+  }
+
+  goToJoke(e) {
+    const divs = this.counterTarget.querySelectorAll("div");
+    for (var i = divs.length - 1; i >= 0; i--) {
+      if (e.target === divs[i]) {
+        this.swipe.slide(i)
+      }
+    }
   }
 
   // container
@@ -26,17 +35,22 @@ export default class extends Controller {
         ignore: ".buttons",
         continuous: false,
         callback: (index, elem, dir) => { 
-          this.#restrictNextMove(index);
-          this.#setSubmitLink(elem); 
+          this.#setJoke(index, elem)
         }
       }
     );
 
-    this.#restrictNextMove(0);
+    this.#setJoke(0, this.jokeTargets[0]);
   }
 
   jokesTargetDisconnected() {
     this.swipe.kill()
+  }
+
+  #setJoke(index, elem) {
+    this.#restrictNextMove(index);
+    this.#setSubmitLink(elem);
+    this.#highlightCounter(index);
   }
 
   #restrictNextMove(i) {
@@ -59,6 +73,19 @@ export default class extends Controller {
     if (!this.hasSubmitTarget) return
 
     this.submitTarget.action = element.dataset.votePath
+  }
+
+  #highlightCounter(index) {
+    const divs = this.counterTarget.querySelectorAll("div");
+
+    for (var i = divs.length - 1; i >= 0; i--) {
+      if (i === index) { 
+        divs[i].classList.add("selected")
+      } 
+      else {
+        divs[i].classList.remove("selected")
+      }
+    }
   }
 
   #enable(button) {

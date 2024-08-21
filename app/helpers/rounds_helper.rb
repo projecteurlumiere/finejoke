@@ -73,17 +73,16 @@ module RoundsHelper
         ]
       end
     when :vote
+      @p_class = :setup
       if user.can_vote?(round)
-        @p_class = :setup
         [
           "Выберите лучший ответ",
-          round.setup
+          ""
         ]
       else
-        @p_class = :setup
         [
           "Игроки голосуют",
-          round.setup
+          ""
         ]
       end
     when :results
