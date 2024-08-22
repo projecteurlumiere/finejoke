@@ -26,7 +26,10 @@
           method: :patch, 
           form: { 
             data: { 
-              jokes_target: "submit" 
+              jokes_target: "action",
+              action: "turbo:submit-end->jokes#changeAction",
+              disabled_text: "Ждём",
+              revote_texts: "Переголосовать"
             } 
           } %>
   <% end %>

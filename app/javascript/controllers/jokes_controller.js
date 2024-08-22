@@ -4,7 +4,7 @@ import Swipe from "swipejs";
 // Connects to data-controller="vote"
 export default class extends Controller {
   static targets = [ 
-    "jokes", "joke", "previous", "next", "submit", "counter",
+    "jokes", "joke", "previous", "next", "action", "counter",
     "task", "description", "buttons" // counting visible area
     ]
 
@@ -75,9 +75,17 @@ export default class extends Controller {
     
   }
 
+  changeAction(e) {
+    if (e.detail.success) {
+      let button = this.actionTarget.querySelector("button[type=submit]")
+      button.classList.add("disabled")
+      button.innerText = this.actionTarget.dataset.disabledText
+    }
+  }
+
   #setJoke(index, elem) {
     this.#restrictNextMove(index);
-    this.#setSubmitLink(elem);
+    this.#setActionLink(elem);
     this.#highlightCounter(index);
     const visibleHeight = this.#countVisibleAreaForJoke();
     if (elem.offsetHeight <= visibleHeight) {
@@ -112,10 +120,10 @@ export default class extends Controller {
     }
   }
 
-  #setSubmitLink(element) {
-    if (!this.hasSubmitTarget) return
+  #setActionLink(element) {
+    if (!this.hasActionTarget) return
 
-    this.submitTarget.action = element.dataset.votePath
+    this.actionTarget.action = element.dataset.votePath
   }
 
   #highlightCounter(index) {
