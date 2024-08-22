@@ -1,21 +1,21 @@
 <%= tag.turbo_frame id: "current-round", 
       data: { 
-        controller: "round-refresh vote", 
+        controller: "round-refresh jokes", 
         round_refresh_url_value: game_rounds_current_path(game), 
         action: [
             "visibilitychange@window->round-refresh#fetch",
             "turbo:before-stream-render@window->round-refresh#checkResponse",
-            "resize@window->vote#countJokeFitness"
+            "resize@window->jokes#countJokeFitness"
           ].join(" "),
         containers_target: "container", 
         container_name: "round" 
       } do %>
   <%= tag.div data: round_data_attributes(round), class: "hidden" %>
-  <div class="task">
+  <div class="task" data-jokes-target="task">
     <div class="timer-wrapper">
       <div class="timer press-font" data-timer-target="digits"></div>
     </div>
-    <div class="description press-font">
+    <div class="description press-font" data-jokes-target="description">
       <%= round_task_for(current_or_guest_user, round, game) %>
     </div>
     <%= render_input_for(current_or_guest_user, round, game) %>

@@ -3,32 +3,28 @@ import Swipe from "swipejs";
   
 // Connects to data-controller="vote"
 export default class extends Controller {
-  static targets = [ "jokes", "joke", "previous", "next", "submit", "counter" ]
+  static targets = [ 
+    "jokes", "joke", "previous", "next", "submit", "counter",
+    "task", "description", "buttons" // counting visible area
+    ]
 
   next() {
     this.swipe.next()
-    // this.#move("next");
   }
 
   previous() {
     this.swipe.prev()
-    // this.#move("previous");
   }
 
   goToJoke(e) {
-    const divs = this.counterTarget.querySelectorAll("div");
-    for (var i = divs.length - 1; i >= 0; i--) {
-      if (e.target === divs[i]) {
-        this.swipe.slide(i)
-      }
-    }
+    if (e.target.dataset.index) this.swipe.slide(e.target.dataset.index)
   }
 
   // container
   jokesTargetConnected() {
-    for (var i = this.jokeTargets.length - 1; i >= 0; i--) {
-      this.jokeTargets[i].classList.remove("hidden");
-    }
+    // for (var i = this.jokeTargets.length - 1; i >= 0; i--) {
+    //   this.jokeTargets[i].classList.remove("hidden");
+    // }
 
     this.swipe = new Swipe(document.getElementById("swipe"), 
       { 
@@ -41,7 +37,6 @@ export default class extends Controller {
     );
 
     this.#setJoke(0, this.jokeTargets[0]);
-
     this.countJokeFitness();
   }
 
@@ -58,11 +53,10 @@ export default class extends Controller {
     }
 
     const visibleHeight = this.#countVisibleAreaForJoke();
-    document.querySelector(":root").style.setProperty("--joke-visible-height", `${visibleHeight}px`)
+    this.element.style.setProperty("--visible-height-for-joke", `${visibleHeight}px`)
 
     setTimeout(() => {
       for (var i = this.jokeTargets.length - 1; i >= 0; i--) {
-        console.log(this.jokeTargets[i].offsetHeight, visibleHeight)
         if (this.jokeTargets[i].offsetHeight <= visibleHeight) {
           this.jokeTargets[i].classList.add("fit")
         } else {
@@ -77,7 +71,7 @@ export default class extends Controller {
       for (var i = this.jokeTargets.length - 1; i >= 0; i--) {
         this.jokeTargets[i].style.visibility = "unset"
       }
-    }, 300)
+    }, 200)
     
   }
 
@@ -145,12 +139,13 @@ export default class extends Controller {
     button.classList.add("disabled");
   }
 
-  #countVisibleAreaForJoke(){
-    return document.querySelector(".task").offsetHeight - 
-      document.querySelector(".description").offsetHeight - 
-      window.getComputedStyle(document.querySelector(".description")).marginBottom.slice(0, -3) -
-      document.querySelector("#current-round .buttons").offsetHeight - 
-      window.getComputedStyle(document.querySelector("#current-round .buttons")).paddingTop.slice(0, -3) - 
-      window.getComputedStyle(document.querySelector("#current-round .buttons")).paddingBottom.slice(0, -3);
+  #countVisibleAreaForJoke() {
+    return this.taskTarget.offsetHeight -
+      this.descriptionTarget.offsetHeight -
+      window.getComputedStyle(this.descriptionTarget).marginBottom.slice(0, -3) - 
+      this.buttonsTarget.offsetHeight -
+      window.getComputedStyle(this.buttonsTarget).paddingTop.slice(0, -3) - 
+      window.getComputedStyle(this.buttonsTarget).paddingBottom.slice(0, -3)
   }
 }
+

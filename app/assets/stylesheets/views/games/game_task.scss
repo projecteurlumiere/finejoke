@@ -148,7 +148,7 @@
         overflow: hidden;
 
         &.fit {
-          height: var(--joke-visible-height); // set via js
+          height: var(--visible-height-for-joke); // set via js
         }
       }
 

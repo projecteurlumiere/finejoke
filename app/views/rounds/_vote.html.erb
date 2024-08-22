@@ -1,17 +1,17 @@
-<div class="jokes-container" data-vote-target="jokes">
+<div class="jokes-container" data-jokes-target="jokes">
   <% if jokes.any? %>
     <div id="swipe" class="swipe"><div class="swipe-wrap"><%= render partial: "rounds/joke", collection: jokes, as: :joke, locals: { round: round } %></div></div>
-    <div class="buttons">
+    <div class="buttons" data-jokes-target="buttons">
       <%= tag.div style: "-webkit-transform: scaleX(-1); transform: scaleX(-1);", 
-            data: { vote_target: "previous", action: "click->vote#previous"} do %>
+            data: { jokes_target: "previous", action: "click->jokes#previous"} do %>
         <%= inline_svg("icons/next.svg") %>
       <% end %>
-      <div class="counter" data-vote-target="counter" data-action="click->vote#goToJoke">
-        <% jokes.length.times do %>
-          <div></div>
+      <div class="counter" data-jokes-target="counter" data-action="click->jokes#goToJoke">
+        <% jokes.length.times do |i|%>
+          <div data-index="<%= i %>"></div>
         <% end %>
       </div>
-      <%= tag.div data: { vote_target: "next", action: "click->vote#next"} do %>
+      <%= tag.div data: { jokes_target: "next", action: "click->jokes#next"} do %>
         <%= inline_svg("icons/next.svg") %>      
       <% end %>
     </div>
@@ -26,7 +26,7 @@
           method: :patch, 
           form: { 
             data: { 
-              vote_target: "submit" 
+              jokes_target: "submit" 
             } 
           } %>
   <% end %>

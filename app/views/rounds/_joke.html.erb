@@ -1,7 +1,7 @@
 <%= tag.div class: [:joke, (:vote if round.vote_stage?)].compact.join(" "), 
-            data: { 
+              data: { 
               vote_path: game_round_joke_path(round.game, round, joke),
-              vote_target: :joke
+              jokes_target: :joke
             } do %>
   <% if round.vote_stage? || round.results_stage? || round.game.finished? %>
     <% unless round.vote_stage? %>
