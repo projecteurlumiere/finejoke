@@ -53,7 +53,7 @@
       padding-right: 1em;
       flex: 1;
 
-      &:has(> div > p:not(.setup)),
+      // &:has(> div > p:not(.setup)),
       &:has(> div > p:empty) {
         position: sticky;
         top: 0;
@@ -276,11 +276,12 @@
     }
 
     form {
-      flex: 0 1 50%;
+      flex: 0 1 33%;
       display: flex;
 
       textarea {
         border: none;
+        min-height: 4ch;
         // width: calc(100% - (var(--task-padding) * 2));
       }
     }
