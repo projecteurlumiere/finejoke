@@ -19,7 +19,7 @@
     <div class="username">
       <%= user.username.truncate(14) %>
     </div>
-    <div class="settings hidden">
+    <div class="settings">
       <%= link_to "В профиль", profile_path(user), data: { turbo_stream: true } %>
       <%= button_to("Кик", game_kick_path(game, params: { user_id: user.id }), class: :hidden, form_class: :hidden ) %>
     </div>

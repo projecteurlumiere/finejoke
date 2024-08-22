@@ -13,6 +13,27 @@ export default class extends Controller {
     this.timeouts = {}
   }
 
+  showSettings(e) {
+    let node = e.currentTarget;
+    const id = node.id
+    const settingsNode = node.querySelector(".settings")
+    if (window.getComputedStyle(settingsNode).display === "none") {
+      e.stopPropagation()
+      e.preventDefault()
+    } 
+
+    if (this.timeouts[id]) {
+      clearTimeout(this.timeouts[id])
+    } else {
+      node.classList.add("clicked");
+    }
+
+    this.timeouts[id] = setTimeout(() => {
+      node.classList.remove("clicked");
+      delete this.timeouts[id]
+    }, "2000");
+  }
+
   userTargetConnected(node) {
     if (node.dataset.id == this.idValue) {
       this.hostValue = node.dataset.host
@@ -48,26 +69,5 @@ export default class extends Controller {
       if (directive === "hide") { list.add("hidden") } 
       if (directive === "show") { list.remove("hidden") }
     }
-  }
-
-  showSettings(e) {
-    let node = e.currentTarget;
-    const id = node.id
-    const settingsNode = node.querySelector(".settings")
-    if (window.getComputedStyle(settingsNode).display === "none") {
-      e.preventDefault()
-    } 
-
-    if (this.timeouts[id]) {
-      clearTimeout(this.timeouts[id])
-    } else {
-      node.classList.add("clicked");
-    }
-
-    this.timeouts[id] = setTimeout(() => {
-      node.classList.remove("clicked");
-      delete this.timeouts[id]
-    }, "2000");
-
   }
 }

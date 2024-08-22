@@ -48,8 +48,29 @@
       }
     }
 
-    > li:hover:has(> .settings.hidden),
-    > li.clicked:has(> .settings.hidden) {
+    @media(hover: hover) {
+      > li:hover:has(> .settings),{
+        .score {
+          span {
+            display: none;
+          }
+
+          span:first-child {
+            display: block;
+          }
+        }      
+
+        .username {
+          display: none;
+        }
+
+        .settings {
+          display: flex;
+        }
+      }
+    }
+
+    > li.clicked:has(> .settings) {
       .score {
         span {
           display: none;
@@ -64,32 +85,36 @@
         display: none;
       }
 
-      .settings.hidden * {
-        display: block;
-        background: none;
-        border: none;
-        font-size: inheirt;
-        font-family: "Nunito Sans";
-        padding: 0;
-        text-decoration: underline;
-        cursor: pointer;
-      }
-
-      .settings.hidden {
-        display: flex !important;
-        align-items: center;
-        gap: 0.5ch;
-        width: 100%;
-
-        justify-content: space-around;
-        :has(> *:only-child) {
-          justify-content: center;
-        }
+      .settings {
+        display: flex;
       }
     }
 
     > *:last-child {
       margin-bottom: 0;
+    }
+
+    .settings * {
+      display: block;
+      background: none;
+      border: none;
+      font-size: inheirt;
+      font-family: "Nunito Sans";
+      padding: 0;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    .settings {
+      display: none;
+      align-items: center;
+      gap: 0.5ch;
+      width: 100%;
+
+      justify-content: space-around;
+      :has(> *:only-child) {
+        justify-content: center;
+      }
     }
 
     > .slot {
