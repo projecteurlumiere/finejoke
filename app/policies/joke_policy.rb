@@ -11,7 +11,7 @@ class JokePolicy < ApplicationPolicy
   def create?
     @user.playing?(@game) && 
       @round.current? &&
-      !@user.lead?
+      !@user.lead? && !@user.finished_turn?
   end
 
   def update?

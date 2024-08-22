@@ -60,7 +60,7 @@ module RoundsHelper
         ]
       end
     when :punchline
-      unless user.lead?
+      unless user.finished_turn? || user.lead?
         @p_class = :setup
         [
           "Придумайте смешную развязку",

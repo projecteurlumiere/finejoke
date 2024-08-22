@@ -20,6 +20,7 @@ class JokesController < ApplicationController
     if @joke.save
       response.status = :ok
       flash.now[:notice] = "Шутка создана"
+      reload_game_state
       render "rounds/show", layout: false, formats: %i[turbo_stream], locals: { game: @game, round: @round }
     else
       response.status = :unprocessable_entity
@@ -34,6 +35,7 @@ class JokesController < ApplicationController
     if @joke.register_vote(by: current_or_guest_user)
       response.status = :ok
       flash.now[:notice] = "Голос учтён"
+      reload_game_state
       render "rounds/show", layout: false, formats: %i[turbo_stream], locals: { game: @game, round: @round }
     else
       response.status = :unprocessable_entity
@@ -64,5 +66,11 @@ class JokesController < ApplicationController
 
   def authorize_joke!
     authorize(@joke || Joke)
+  end
+
+  def reload_game_state
+    [@game, @round, current_or_guest_user].each do |model|
+      model.reload
+    end
   end
 end
