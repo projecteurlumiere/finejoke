@@ -13,7 +13,8 @@
 
   <div class="mobile-navigation">
     <div class="button" data-container-name="data" data-containers-target="button" data-action="click->containers#show">
-      <%= game.n_players %><span class="max-players">/<%= game.max_players %></span>
+        <%= render partial: "games/game_n_players", locals: { game: game } %>
+      </span>
     </div>
     <div class="button selected" data-container-name="round" data-containers-target="button" data-action="click->containers#show">Игра</div>
     <div class="button" data-container-name="chat" data-containers-target="button" data-action="click->containers#show">Чат</div>

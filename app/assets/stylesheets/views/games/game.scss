@@ -38,9 +38,19 @@
   }
 
   > .mobile-navigation {
+    .n_players {
+      width: 5ch;
+      font-family: inherit;
+      font-size: inherit;
+    }
+
     @media(max-width: 500px) {
-      span.max-players {
-      display: none;
+      .n_players {
+        width: unset;
+
+        .max-players {
+          display: none;
+        }
       }
     }
   }
