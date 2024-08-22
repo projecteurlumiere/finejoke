@@ -13,7 +13,9 @@ module GamesHelper
 
     return default_classes if round.nil?
 
-    color_class = if round.setup_stage? && user.lead?
+    color_class = if user.hot_join?
+                    :slot # dim colors like in slot
+                  elsif round.setup_stage? && user.lead?
                     :red
                   elsif round.punchline_stage? 
                     if user.lead? 
