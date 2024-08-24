@@ -7,7 +7,7 @@
             action: "chat:unseen->containers#blink chat:seen->containers#unblink"
           })) do %>
   <%= content_for(:nav_button) do %>
-    <%= link_to "В лобби", games_path, class: :button %>
+    <%= link_to "В лобби", games_path, class: "button black-and-white" %>
     <%# button_to "Присоединиться", game_join_path(game) if game.joinable? %>
   <% end %>
 

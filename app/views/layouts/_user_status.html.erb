@@ -1,9 +1,9 @@
 <div id="user-status">
   <% if game&.persisted? %>
     <% if current_page?(game_path(game)) %>
-      <%= button_to "Выход", game_leave_path(game) %>
+      <%= button_to "Выход", game_leave_path(game), class: "button black-and-white" %>
     <% else %>
-      <%= link_to "В игре", game_path(game), class: :button %>
+      <%= link_to "В игре", game_path(game), class: "button black-and-white" %>
     <% end %>
   <% else %>
     <%= yield(:nav_button) %>

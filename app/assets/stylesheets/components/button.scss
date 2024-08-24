@@ -59,6 +59,27 @@ input[type=button],
     color: var(--black);
   }
 
+  &.black-and-white {
+    background-color: transparent;
+    border-color: var(--white);
+    color: var(--black);
+  }
+
+  &:hover {
+    &.disabled,
+    &:disabled {
+      box-shadow: none;
+    }
+    box-shadow: inset 0 0 30px var(--teal-dim);
+  }
+
+  &:active { 
+    // color: var(--teal);
+    box-shadow: inset 0 0 60px var(--teal);
+    // border-color: var(--teal-dim);
+    
+  }
+
   * {
     color: inherit;
   }
