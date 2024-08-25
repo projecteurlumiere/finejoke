@@ -163,6 +163,7 @@ AFK_ROUNDS_THRESHOLD = 1
 
   def decide_winner
     return if max_rounds.nil? && max_points.nil?
+    
     transaction do
       self.winner = users.order(current_score: :desc).limit(1)[0]
       self.winner_score = winner.current_score
