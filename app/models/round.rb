@@ -17,26 +17,83 @@ class Round < ApplicationRecord
   before_create :reset_players, :choose_lead
   before_create :last!, if: :max_rounds_achieved?, unless: :last?
   before_create :decurrent_previous_round
-   after_create -> { game.increment!(:n_rounds) }
-   after_create -> { game.ongoing! if game.waiting? }
-   after_create :schedule_next_stage
-   after_create -> { broadcast_round(self) }
-   after_create -> { game.broadcast_user_change }
-   after_create -> { game.integrate_hot_joined }
-   # after_create -> { touch }
+  after_create -> {
+    game.increment!(:n_rounds)
+    game.ongoing! if game.waiting?
+    game.integrate_hot_joined
+    schedule_next_stage
+    broadcast_round(self)
+    game.broadcast_user_change
+  }
+
   # when lead updated round with setup:
-   after_update :move_to_punchline, if: %i[setup_stage? setup?]
-   # after_update -> { touch }
+  before_update -> { move_to_punchline }, if: %i[setup_stage? setup? setup_changed?]
+
+  after_touch -> {
+    move_to_vote and return if time_to_vote?
+    move_to_results and return if time_for_results?
+  }
+
   # called every time joke is created:
-    after_touch :move_to_vote, if: %i[punchline_stage? turns_finished?]
-    after_touch :count_votes, :move_to_results, if: %i[vote_stage? votes_finished?]
-    after_touch :schedule_next_stage, unless: %i[results_stage? last?]
-    # after_touch -> { game.touch }
+  # after_touch :move_to_vote, if: %i[punchline_stage? turns_finished?]
+  # after_touch :count_votes, :move_to_results, if: %i[vote_stage? votes_finished?]
+  # after_touch :schedule_next_stage, unless: %i[results_stage? last?]
+  # after_touch -> { game.touch }
 
   delegate :broadcast_current_round, to: :game
   delegate :broadcast_round, to: :game
   delegate :current_round, to: :game
   delegate :reset_players, to: :game
+
+
+  def move_to_punchline
+    user.finished_turn!
+    random_setup if setup.nil?
+    punchline_stage!
+    broadcast_current_round
+    schedule_next_stage
+  end
+
+  def time_to_vote?
+    punchline_stage? && turns_finished?
+  end
+
+  def time_for_results?
+    vote_stage? && votes_finished?
+  end
+
+  def move_to_vote
+    handle_no_jokes and return if jokes.none?
+
+    vote_stage!
+    broadcast_current_round
+    schedule_next_stage
+  end
+
+  def move_to_results
+    count_votes
+    results_stage!
+    broadcast_current_round
+    game.broadcast_user_change(votes_change: votes_change)
+
+    if last? 
+      schedule_game_finish
+    else
+      schedule_next_round
+    end
+  end
+
+  def handle_no_jokes
+    game.increment!(:afk_rounds)
+    update_attribute(:last, true) if game.afk_rounds >= Game::AFK_ROUNDS_THRESHOLD
+
+
+    self.votes_change = {}
+
+    move_to_results
+
+    true
+  end
 
   def choose_lead 
     self.user_id = game.choose_lead.id
@@ -68,46 +125,6 @@ class Round < ApplicationRecord
 
   def random_setup
     self.setup = "i am a random setup to be implemented later"
-  end
-
-  def move_to_punchline
-    user.finished_turn!
-    random_setup if setup.nil?
-    punchline_stage!
-    broadcast_current_round
-    schedule_next_stage
-  end
-
-  def move_to_vote
-    handle_no_jokes and return if jokes.none?
-
-    vote_stage!
-    broadcast_current_round
-  end
-
-  def move_to_results
-    results_stage!
-    broadcast_current_round
-    game.broadcast_user_change(votes_change: votes_change)
-
-    if last? 
-      schedule_game_finish
-    else
-      schedule_next_round
-    end
-  end
-
-  def handle_no_jokes
-    transaction do
-      game.increment!(:afk_rounds)
-      update_attribute(:last, true)  if game.afk_rounds >= Game::AFK_ROUNDS_THRESHOLD
-    end
-
-    self.votes_change = {}
-
-    move_to_results
-
-    true
   end
 
   def count_votes

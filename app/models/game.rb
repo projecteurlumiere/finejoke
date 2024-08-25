@@ -15,8 +15,9 @@ class Game < ApplicationRecord
          MAX_PLAYERS = 10
       MIN_ROUND_TIME = 1 
       MAX_ROUND_TIME = 180
-AFK_ROUNDS_THRESHOLD = 2
+AFK_ROUNDS_THRESHOLD = 1
   RESULTS_STAGE_TIME = 5
+  FINISHED_GAME_TIME = 5
           MIN_POINTS = 2
           MAX_POINTS = 999
 
@@ -155,6 +156,8 @@ AFK_ROUNDS_THRESHOLD = 2
   def conclude
     finished!
     decide_winner
+    current_round.last!
+    current_round.store_change_timings(nil)
     broadcast_game_over
   end
 

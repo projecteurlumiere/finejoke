@@ -5,6 +5,7 @@ class CreateNewRoundJob < ApplicationJob
     # Do something later
     game = Game.find_by(id: game_id)
     return unless game
+    return if game.finished?
 
     round = game.rounds.build
     round.save

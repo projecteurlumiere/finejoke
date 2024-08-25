@@ -16,7 +16,7 @@ export default class extends Controller {
   #setTimings() {
     // date in ms
     const newChangeScheduledAt = Math.abs(this.timingsTarget.dataset.changeScheduledAt / 1000)
-    if (newChangeScheduledAt === this.changeScheduledAt) { return false }
+    if (newChangeScheduledAt === this.changeScheduledAt || newChangeScheduledAt === 0) { return false }
 
     this.changeScheduledAt = newChangeScheduledAt;
     this.changeDeadline = Math.abs(this.timingsTarget.dataset.changeDeadline / 1000)

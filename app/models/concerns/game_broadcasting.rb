@@ -32,7 +32,6 @@ module GameBroadcasting
 
     def broadcast_game_over
       broadcast_current_round
-      broadcast_user_change
       users.each(&:broadcast_status_change)
       broadcast_remove_to_lobby
     end
