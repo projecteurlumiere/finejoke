@@ -215,6 +215,7 @@
       }
 
       .buttons {
+        visibility: hidden; // becomes something with js
         display: flex;
         justify-content: space-between;
         color: var(--black);

@@ -5,7 +5,8 @@ import Swipe from "swipejs";
 export default class extends Controller {
   static targets = [ 
     "jokes", "joke", "previous", "next", "action", "counter",
-    "task", "description", "buttons" // counting visible area
+    "task", "description", // counting visible area
+    "buttons" // necessary for both controller & counting
     ]
 
   next() {
@@ -37,6 +38,7 @@ export default class extends Controller {
     );
 
     this.#setJoke(0, this.jokeTargets[0]);
+    this.buttonsTarget.style.visibility = "visible"
     this.countJokeFitness();
   }
 
