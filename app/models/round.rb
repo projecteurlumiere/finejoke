@@ -5,7 +5,7 @@ class Round < ApplicationRecord
 
   belongs_to :user, optional: true # lead
    validates :user_id, presence: true, unless: :new_record?
-    validate :enough_players?
+    validate :game_is_ready
   
     has_many :jokes, dependent: :nullify
     has_many :votes, dependent: :nullify
@@ -13,7 +13,7 @@ class Round < ApplicationRecord
   enum stage: %i[setup punchline vote results], _suffix: true
   attr_accessor :votes_change
 
-  validates :setup, length: { in: 1..200 }, on: :update
+  validates :setup, length: { in: 1..200 }, if: :setup_changed?
 
   # tidying up and choosing lead player:
   before_create -> {
@@ -114,8 +114,8 @@ class Round < ApplicationRecord
     user
   end
 
-  def enough_players? 
-    errors.add(:game_id, "must have enought players") unless game.enough_players?
+  def game_is_ready
+     errors.add(:game_id, "must have enough players") unless game.ready_to_play?
   end
 
   def max_rounds_achieved?

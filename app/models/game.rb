@@ -31,24 +31,20 @@ AFK_ROUNDS_THRESHOLD = 1
   validates :max_points, numericality: { only_integer: true },
                          comparison: { greater_than_or_equal_to: MIN_POINTS, less_than_or_equal_to: MAX_POINTS }, allow_nil: true
   validate -> { errors.add(:viewers_vote, "cannot be set when game is not viewable") if !viewable? && viewers_vote? }
-
-  # after_touch -> { ongoing! }, if: %i[waiting? current_round]
-  after_touch -> { waiting! }, if: %i[on_halt? enough_players?]
-  after_touch :on_halt!, if: %i[ongoing? not_enough_players?] # modified method 
-  after_touch :skip_round, if: %i[ongoing? lead_left?]
-
+  
   after_create_commit :broadcast_game_start
   after_destroy_commit :broadcast_game_over
 
   def add_user(user, is_host: false)
-    user.reset_game_attributes
-    return false unless joinable?(by: user)
-
     success = transaction do
+      user.reset_game_attributes
+      return false unless joinable?(by: user)
       self.host = user if is_host
       user.update_attribute(:hot_join, true) if ongoing?
       self.users << user
       self.increment!(:n_players)
+      waiting! if on_halt? && enough_players?
+
       save!
 
       true
@@ -66,6 +62,8 @@ AFK_ROUNDS_THRESHOLD = 1
     transaction do 
       self.users.include?(user) ? self.users.delete(user) : (return false)
       self.decrement!(:n_players)
+      on_halt! if ongoing? && not_enough_players?
+      skip_round if ongoing? && user.lead?
     end
 
     was_host = user.host?
@@ -77,7 +75,6 @@ AFK_ROUNDS_THRESHOLD = 1
 
     self.host = users.first if was_host
     
-    touch
     broadcast_user_change
 
     true
@@ -149,8 +146,7 @@ AFK_ROUNDS_THRESHOLD = 1
   end
 
   def skip_round
-    current_round.results_stage!
-    current_round.touch
+    current_round.move_to_results
   end
 
   def conclude
@@ -174,5 +170,9 @@ AFK_ROUNDS_THRESHOLD = 1
     current_round.update_attribute(:current, false)
     broadcast_current_round
     super
+  end
+
+  def ready_to_play?
+    !(finished? && on_halt?)
   end
 end
