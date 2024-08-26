@@ -4,6 +4,7 @@ import Swipe from "swipejs";
 // Connects to data-controller="vote"
 export default class extends Controller {
   static targets = [ 
+    "state",
     "jokes", "joke", "previous", "next", "action", "counter",
     "task", "description", // counting visible area
     "buttons" // necessary for both controller & counting
@@ -82,6 +83,7 @@ export default class extends Controller {
       let button = this.actionTarget.querySelector("button[type=submit]")
       button.classList.add("disabled")
       button.innerText = this.actionTarget.dataset.disabledText
+      this.stateTarget.dataset.userVoted = "true"
     }
   }
 

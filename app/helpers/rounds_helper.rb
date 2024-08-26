@@ -1,5 +1,5 @@
 module RoundsHelper
-  def round_data_attributes(round)
+  def round_data_attributes(user, round)
     return nil if round.nil?
 
     {
@@ -8,7 +8,11 @@ module RoundsHelper
       stage: round.stage,
       change_scheduled_at: round.change_scheduled_at.to_f * 1000,
       change_deadline: round.change_deadline.to_f * 1000,
-      timer_target: :timings
+      timer_target: :timings,
+      jokes_target: :state,
+      user_lead: user.lead?,
+      user_voted: user.voted?(round),
+      user_finished_turn: user.finished_turn?
     }
   end
 

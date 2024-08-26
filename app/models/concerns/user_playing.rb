@@ -36,7 +36,7 @@ module UserPlaying
     end
 
     def voted?(round)
-      round.votes.find_by(user_id: self)
+      round.votes.find_by(user_id: self) ? true : false
     end
 
     def not_voted?(round)
