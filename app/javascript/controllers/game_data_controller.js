@@ -18,7 +18,6 @@ export default class extends Controller {
     const id = node.id
     const settingsNode = node.querySelector(".settings")
     if (window.getComputedStyle(settingsNode).display === "none") {
-      e.stopPropagation()
       e.preventDefault()
     } 
 

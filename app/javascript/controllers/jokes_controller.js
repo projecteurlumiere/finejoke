@@ -6,8 +6,8 @@ export default class extends Controller {
   static targets = [ 
     "state",
     "jokes", "joke", "previous", "next", "action", "counter",
-    "task", "description", // counting visible area
-    "buttons" // necessary for both controller & counting
+    "task", "description", "buttons",
+    "swipeWrap"
     ]
 
   next() {
@@ -66,7 +66,7 @@ export default class extends Controller {
           this.jokeTargets[i].classList.remove("fit")
         }
         
-        document.querySelector(".swipe-wrap").style.height = `${this.jokeTargets[this.swipe.getPos()].offsetHeight}px`
+        this.swipeWrapTarget.style.height = `${this.jokeTargets[this.swipe.getPos()].offsetHeight}px`
       }
     }, 100)
 
@@ -98,14 +98,15 @@ export default class extends Controller {
       elem.classList.remove("fit")
     }
 
-    document.querySelector(".swipe-wrap").style.height = `${elem.offsetHeight}px`
+    this.swipeWrapTarget.style.height = `${elem.offsetHeight}px`
     elem.classList.add("selected");
     for (var i = this.jokeTargets.length - 1; i >= 0; i--) {
       if (this.jokeTargets[i] != elem) {
         this.jokeTargets[i].classList.remove("selected")
       }
     }
-    document.querySelector(".task").scrollTo(0, 0);
+
+    this.taskTarget.scrollTo(0, 0);
   }
 
   #restrictNextMove(i) {

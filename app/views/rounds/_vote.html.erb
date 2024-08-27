@@ -1,7 +1,7 @@
 <div class="jokes-container" data-jokes-target="jokes">
   <% if jokes.any? %>
     <div id="swipe" class="swipe">
-      <div class="swipe-wrap">
+      <div class="swipe-wrap" data-jokes-target="swipeWrap">
         <%= render partial: "rounds/joke", collection: jokes, as: :joke, locals: { round: round } %>
       </div>
     </div>
