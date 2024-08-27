@@ -72,14 +72,20 @@ input[type=button],
     &:disabled {
       box-shadow: none;
     }
-    box-shadow: inset 0 0 30px var(--teal-dim);
+
+    &.danger {
+      box-shadow: inset 0 0 30px var(--red-most-dimmest);
+    }
+
+    box-shadow: inset 0 0 30px var(--teal-dimmest);
   }
 
   &:active { 
-    // color: var(--teal);
     box-shadow: inset 0 0 60px var(--teal);
-    // border-color: var(--teal-dim);
-    
+
+    &.danger {
+      box-shadow: inset 0 0 60px var(--red-dim);
+    }
   }
 
   * {
