@@ -5,6 +5,10 @@
   overflow-y: auto;
   container-name: form-large;
   container-type: size;
+
+  input {
+    box-sizing: border-box;
+  }
   
   * {
     min-height: 0;
