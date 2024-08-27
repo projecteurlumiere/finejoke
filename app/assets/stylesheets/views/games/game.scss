@@ -5,19 +5,19 @@
   }
 
   h2 {
-    padding-top: calc(1.5em + var(--task-padding));
+    padding-top: 1.5em;
   }
 
   @media(max-height: 600px) {
     h2 {
-      padding-top: var(--task-padding);
+      // padding-top: var(--task-padding);
       padding-right: 3rem; // to accomodate for timer
     }
   }
 
   @media(max-height: 850px) and (max-width: 600px) {
     h2 {
-       padding-top: var(--task-padding);
+      padding-top: var(--task-padding);
       margin-bottom: 0;
     }
   }
