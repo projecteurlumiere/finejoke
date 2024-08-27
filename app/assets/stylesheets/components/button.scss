@@ -20,6 +20,13 @@ input[type=button],
   font-family: "Press Start 2P", system-ui;
   text-transform: lowercase;
 
+  &.disabled,
+  &:disabled {
+    color: var(--white-dim);
+    border-color: var(--white-dim);
+    pointer-events: none;
+  }
+
   &.unstyled {
     border: none;
     border-bottom: solid 1px var(--white);
@@ -42,13 +49,8 @@ input[type=button],
     background-color: transparent;
   }
 
-  &.disabled {
-    color: var(--white-dim);
-    border-color: var(--white-dim);
-    pointer-events: none;
-  }
-
   &.selected {
+    color: var(--white);
     background-color: var(--red);
     border-color: var(--red);
   }

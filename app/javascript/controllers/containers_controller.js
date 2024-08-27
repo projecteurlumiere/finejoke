@@ -61,9 +61,9 @@ export default class extends Controller {
       const classList = this.buttonTargets[i].classList
 
       if (this.buttonTargets[i].dataset.containerName != name) {
-        classList.remove("selected")
+        classList.remove("selected", "disabled")
       } else {
-        classList.add("selected")
+        classList.add("selected", "disabled")
       }
     }
   }
