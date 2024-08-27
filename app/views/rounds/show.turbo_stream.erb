@@ -5,7 +5,7 @@
     <%= render partial: "rounds/current_round", formats: %i[html], locals: { game: game, round: round } %>
   <% end %>
 
-<% unless round&.results_stage? %>
+<% if game.finished? || (round && !round.results_stage?) %>
   <%= turbo_stream.action(:replace, "user-list") do %>
     <%= render partial: "games/game_users", formats: %i[html], locals: { game: game, votes_change: {} } %>
   <% end %>

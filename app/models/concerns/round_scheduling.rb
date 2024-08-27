@@ -16,7 +16,7 @@ module RoundScheduling
 
     def schedule_game_finish
       deadline = Time.current + Game::RESULTS_STAGE_TIME
-      FinishGameJob.set(wait_until: deadline).perform_later(game.id)
+      ConcludeGameJob.set(wait_until: deadline).perform_later(game.id, notify: false, force: true)
       store_change_timings(deadline)
     end
 

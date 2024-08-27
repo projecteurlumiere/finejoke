@@ -41,4 +41,8 @@ class GamePolicy < ApplicationPolicy
   def show_rules?
     show?
   end
+
+  def game_over?
+    true
+  end
 end

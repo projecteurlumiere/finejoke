@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     post "leave", to: "games#leave"
     post "kick", to: "games#kick"
     get "rules", to: "games#show_rules"
+    get "over", to: "games#game_over"
     
     get "rounds/current", to: "rounds#show_current"
     resources :rounds, only: %i[show create update] do  

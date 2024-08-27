@@ -1,7 +1,8 @@
 class Game < ApplicationRecord
+  include GameScheduling
   include GameBroadcasting
 
-  has_many :users # players
+  has_many :users, dependent: :nullify # players
   belongs_to :winner, required: false, class_name: :User
 
   belongs_to :host, class_name: :User
@@ -18,6 +19,7 @@ class Game < ApplicationRecord
 AFK_ROUNDS_THRESHOLD = 1
   RESULTS_STAGE_TIME = 5
   FINISHED_GAME_TIME = 5
+      IDLE_GAME_TIME = 10
           MIN_POINTS = 2
           MAX_POINTS = 999
 
@@ -31,7 +33,9 @@ AFK_ROUNDS_THRESHOLD = 1
   validates :max_points, numericality: { only_integer: true },
                          comparison: { greater_than_or_equal_to: MIN_POINTS, less_than_or_equal_to: MAX_POINTS }, allow_nil: true
   validate -> { errors.add(:viewers_vote, "cannot be set when game is not viewable") if !viewable? && viewers_vote? }
-  
+
+  after_create :schedule_idle_game_destroy
+
   after_create_commit :broadcast_game_start
   after_destroy_commit :broadcast_game_over
 
@@ -46,6 +50,7 @@ AFK_ROUNDS_THRESHOLD = 1
       waiting! if on_halt? && enough_players?
 
       save!
+      touch
 
       true
     end
@@ -64,17 +69,18 @@ AFK_ROUNDS_THRESHOLD = 1
       self.decrement!(:n_players)
       on_halt! if ongoing? && not_enough_players?
       skip_round if ongoing? && user.lead?
+      was_host = user.host?
+
+      user.reset_game_attributes
+      user.broadcast_status_change
+
+      self.destroy and return true if n_players == 0
+
+      self.host = users.first if was_host
+      save!
+      touch
     end
 
-    was_host = user.host?
-
-    user.reset_game_attributes
-    user.broadcast_status_change
-
-    self.destroy and return true if n_players == 0
-
-    self.host = users.first if was_host
-    
     broadcast_user_change
 
     true
@@ -152,9 +158,12 @@ AFK_ROUNDS_THRESHOLD = 1
   def conclude
     finished!
     decide_winner
+    # current round is necessary because sometimes it is used to get game instance:
+    rounds.last.update_attribute(:current, true) if current_round.nil? 
     current_round.last!
     current_round.store_change_timings(nil)
     broadcast_game_over
+    schedule_idle_game_destroy(force: true)
   end
 
   def decide_winner
@@ -167,8 +176,14 @@ AFK_ROUNDS_THRESHOLD = 1
   end
 
   def on_halt!
+    schedule_game_conclude
     current_round.update_attribute(:current, false)
     broadcast_current_round
+    super
+  end
+
+  def waiting!
+    schedule_game_conclude
     super
   end
 

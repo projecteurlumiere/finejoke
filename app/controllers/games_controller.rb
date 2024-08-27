@@ -1,7 +1,7 @@
 class GamesController < ApplicationController
   include ActionView::RecordIdentifier
   before_action :set_game, only: %i[ show destroy ]
-  before_action :authorize_game!, only: %i[ index show destroy ]
+  before_action :authorize_game!, only: %i[ index show destroy game_over]
 
   # GET /games
   def index
@@ -95,6 +95,12 @@ class GamesController < ApplicationController
     authorize_game!
 
     render "rounds/show", layout: false, formats: %i[turbo_stream], locals: { game: @game, round: nil }
+  end
+
+  def game_over
+    flash[:notice] = "Игра была закрыта"
+    redirect_to games_path
+    return
   end
 
   private

@@ -1,7 +1,7 @@
 module GameBroadcasting
   extend ActiveSupport::Concern
   include Rails.application.routes.url_helpers
-  
+
   included do 
     def broadcast_current_round
       broadcast_round(current_round)
@@ -34,6 +34,15 @@ module GameBroadcasting
       broadcast_current_round
       users.each(&:broadcast_status_change)
       broadcast_remove_to_lobby
+    end
+
+    # either { notice: "your_string" } or { alert: "your_string" }
+    def broadcast_flash(flashable = { alert: "no flash message was supplied" })
+      broadcast_render_later_to(["game", self], partial: "shared/flash", locals: { flashable: })
+    end
+
+    def broadcast_redirect_to(path)
+      broadcast_render_to(["game", self], partial: "shared/redirect_to", locals: { path: })
     end
 
     def broadcast_create_to_lobby

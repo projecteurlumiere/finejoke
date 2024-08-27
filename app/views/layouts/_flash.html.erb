@@ -1,11 +1,13 @@
-<div id="flash" class="<%= flash[:notice] ? :notice : :alert %>">
-  <% if flash[:notice] || flash[:alert] %>
-    <%= tag.div class: ["message", "button", (flash[:notice] ? :notice : :alert)].join(" "),
+<% flashable = ((defined? flashable) && flashable) || flash %>
+<div id="flash" class="<%= flashable[:notice] ? :notice : :alert %>">
+  <%# binding.irb %>
+  <% if flashable[:notice] || flashable[:alert] %>
+    <%= tag.div class: ["message", "button", (flashable[:notice] ? :notice : :alert)].join(" "),
                 data: {
                   controller: "flash",
                   action: "click->flash#hide"
                 } do %>
-      <%= flash[:notice] || flash[:alert] %>
+      <%= flashable[:notice] || flashable[:alert] %>
     <% end %>
   <% end %>
 </div>
