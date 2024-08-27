@@ -156,14 +156,17 @@ AFK_ROUNDS_THRESHOLD = 1
   end
 
   def conclude
-    finished!
-    decide_winner
-    # current round is necessary because sometimes it is used to get game instance:
-    rounds.last.update_attribute(:current, true) if current_round.nil? 
-    current_round.last!
-    current_round.store_change_timings(nil)
-    broadcast_game_over
-    schedule_idle_game_destroy(force: true)
+    transaction do
+      finished!
+      decide_winner
+      users.update_all("total_games = total_games + 1")
+      # current round is necessary because sometimes it is used to get game instance:
+      rounds.last.update_attribute(:current, true) if current_round.nil?
+      current_round.last!
+      current_round.store_change_timings(nil)
+      broadcast_game_over
+      schedule_idle_game_destroy(force: true)
+    end
   end
 
   def decide_winner
@@ -171,6 +174,7 @@ AFK_ROUNDS_THRESHOLD = 1
     
     transaction do
       self.winner = users.order(current_score: :desc).limit(1)[0]
+      self.winner.increment!(:total_wins)
       self.winner_score = winner.current_score
     end
   end

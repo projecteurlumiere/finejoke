@@ -7,6 +7,7 @@ module JokePlaying
     before_create :compose_full_joke
     after_create :finish_user_turn
     after_create -> { round.touch if round&.turns_finished? }
+    after_create -> { user.increment!(:total_punchlines) }
 
     def compose_full_joke
       self.text = [setup, punchline].join(" ")

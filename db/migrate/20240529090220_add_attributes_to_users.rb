@@ -18,6 +18,10 @@ class AddAttributesToUsers < ActiveRecord::Migration[7.1]
     add_column :users, :voted, :boolean, default: false
     add_column :users, :current_score, :integer, default: 0
     add_column :users, :total_score, :integer, default: 0
+    add_column :users, :total_setups, :integer, default: 0
+    add_column :users, :total_punchlines, :integer, default: 0
+    add_column :users, :total_games, :integer, default: 0
+    add_column :users, :total_wins, :integer, default: 0
 
     # profile related
     add_column :users, :show_jokes_allowed, :boolean, default: true

@@ -26,21 +26,27 @@
       </div>
     </div>
     <div>
+      <div class="label">Игр выиграно</div>
+      <div class="value red">
+        <%= user.total_wins %>
+      </div>
+    </div>
+    <div>
       <div class="label">Игр сыграно</div>
       <div class="value red">
-        0
+        <%= user.total_games %>
       </div>
     </div>
     <div>
       <div class="label">Завязок придумано</div>
       <div class="value red">
-        0
+        <%= user.total_setups %>
       </div>
     </div>
     <div>
       <div class="label">Ответов придумано</div>
       <div class="value red">
-        0
+        <%= user.total_punchlines %>
       </div>
     </div>
   </div>

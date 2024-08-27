@@ -105,6 +105,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_22_113326) do
     t.boolean "voted", default: false
     t.integer "current_score", default: 0
     t.integer "total_score", default: 0
+    t.integer "total_setups", default: 0
+    t.integer "total_punchlines", default: 0
+    t.integer "total_games", default: 0
+    t.integer "total_wins", default: 0
     t.boolean "show_jokes_allowed", default: true
     t.boolean "show_awards_allowed", default: true
     t.boolean "guest", default: false
