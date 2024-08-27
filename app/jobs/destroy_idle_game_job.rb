@@ -3,20 +3,7 @@ class DestroyIdleGameJob < ApplicationJob
 
   queue_as :default
 
-  # def perform(game_id, last_updated_at, force: false)
-  #   game = Game.find_by(id: game_id)
-  #   return unless game
-
-  #   if !force && game.updated_at > last_updated_at
-  #     game.schedule_idle_game_destroy(force:) if game.waiting? || game.on_halt?
-  #     return
-  #   end
-
-  #   game.broadcast_redirect_to(game_over_path(game))
-  #   game.destroy
-  # end
-
-  def perform(game_id, last_updated_at, notify:, force:)
+  def perform(game_id, last_updated_at = nil, notify:, force:)
     game = Game.find_by(id: game_id)
     return unless game
 
