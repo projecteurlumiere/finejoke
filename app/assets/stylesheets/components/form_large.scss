@@ -36,7 +36,7 @@
 
   .settings {
     > * {
-      grid-template-columns: 4.5rem auto;
+      grid-template-columns: var(--slider-width) auto;
     }
   }
 
@@ -50,6 +50,10 @@
       aspect-ratio: 1 / 1;
       border: solid 1px var(--white);
       border-radius: 50%;
+
+      &:not(:has(~ select > option[value=""]:checked)) {
+        background-color: var(--teal);
+      }
     }
 
     @container form-large (max-width: 290px) {

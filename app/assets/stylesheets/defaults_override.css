@@ -101,6 +101,10 @@ select {
   -moz-appearance: none; /* Firefox */
   -webkit-appearance: none; /* Safari and Chrome */
   appearance: none;
+  background-image: url("icons/dropdown.svg");
+  background-repeat: no-repeat;
+  background-position: 90% 55%;
+  background-size: 14px;
 }
 
 option {

@@ -36,7 +36,7 @@
   --teal-dimmest: rgba(0, 255, 221, 0.4);
   --background-gradient: linear-gradient(270.00deg, rgb(83, 217, 216),rgb(31, 182, 199) 100%);
 
-  --slider-width: 4rem;
+  --slider-width: 5rem;
 }
 
 html, body {
