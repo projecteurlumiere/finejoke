@@ -192,6 +192,6 @@ AFK_ROUNDS_THRESHOLD = 1
   end
 
   def ready_to_play?
-    !(finished? && on_halt?)
+    !(finished? && on_halt?) && enough_players?
   end
 end
