@@ -41,7 +41,11 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(_resource)
-    turbo_redirect_to_path(params: { path: session[:referrer]})
+    if request.formats.include?(:turbo_stream)
+      turbo_redirect_to_path(params: { path: session[:referrer]})
+    else
+      session[:referrer] || root_path
+    end
   end
 
   def remove_referrer
