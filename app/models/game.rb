@@ -163,7 +163,7 @@ AFK_ROUNDS_THRESHOLD = 1
       # current round is necessary because sometimes it is used to get game instance:
       rounds.last.update_attribute(:current, true) if current_round.nil?
       current_round.last!
-      current_round.store_change_timings(nil)
+      current_round.store_change_timings(nil, nil)
       broadcast_game_over
       schedule_idle_game_destroy(force: true)
     end

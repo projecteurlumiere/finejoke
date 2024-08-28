@@ -16,7 +16,19 @@ export default class extends Controller {
   #setTimings() {
     // date in ms
     const newChangeScheduledAt = Math.abs(this.timingsTarget.dataset.changeScheduledAt / 1000)
-    if (newChangeScheduledAt === this.changeScheduledAt || newChangeScheduledAt === 0) { return false }
+
+    switch (isNaN(newChangeScheduledAt) || newChangeScheduledAt) {
+      case this.changeScheduledAt:
+        return false
+        break;
+      case true: // which is NaN
+      case 0:
+      case undefined:
+        if (this.timer) clearInterval(this.timer);
+        this.#reportTime("")
+        return false
+        break;
+    }
 
     this.changeScheduledAt = newChangeScheduledAt;
     this.changeDeadline = Math.abs(this.timingsTarget.dataset.changeDeadline / 1000)
