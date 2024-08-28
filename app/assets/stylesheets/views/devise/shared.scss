@@ -8,6 +8,7 @@ body:has(main > #authentication) {
     background-color: var(--red);
     border: none;
     pointer-events: none;
+    box-shadow: none;
   }
 
   #authentication-form {

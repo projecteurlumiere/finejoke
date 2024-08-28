@@ -71,6 +71,8 @@
     }
 
     > li.clicked:has(> .settings) {
+      box-shadow: var(--hover-shadow);
+
       .score {
         span {
           display: none;
