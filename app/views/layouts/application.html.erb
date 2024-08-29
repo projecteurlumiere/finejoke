@@ -9,7 +9,7 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= preload_fonts if Rails.env.production? %>
+    <%# preload_fonts if Rails.env.production? %>
     <%= javascript_importmap_tags %>
     <%= turbo_stream_from ["user", current_or_guest_user], channel: UserChannel unless new_guest? %>
   </head>
