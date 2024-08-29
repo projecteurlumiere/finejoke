@@ -36,4 +36,8 @@ module GamesHelper
     default_classes << color_class
     default_classes.compact.join(" ")
   end
+
+  def hide_in_mobile_when(action)
+    "hidden-when-mobile" if action_name == action
+  end
 end
