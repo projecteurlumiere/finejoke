@@ -25,7 +25,13 @@ body:has(main > #authentication) {
       flex-direction: column;
       padding: 2rem;
       border: solid 1px var(--white);
-      gap: 1rem;
+      > * {
+        padding-bottom: 1.5rem;
+      }
+
+      > *:last-child {
+        // padding-bottom: 0;
+      }
     }
   }
 

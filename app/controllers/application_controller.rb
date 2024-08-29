@@ -2,6 +2,8 @@ class ApplicationController < ActionController::Base
   include Pundit::Authorization
   include TurboRendering
   include ErrorHandling
+
+  layout "layouts/application"
   
   before_action :welcome_guest, if: :new_guest?, unless: :guest_welcomed?
   before_action :configure_permitted_parameters, if: :devise_controller?

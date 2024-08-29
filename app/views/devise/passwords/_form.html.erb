@@ -1,7 +1,10 @@
 <turbo-frame id="authentication-form">
   <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { id: "new-password", class: "new-password", method: :post }) do |f| %>
-    <%= render "devise/shared/error_messages", resource: resource %>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Эмейл", aria_label: "Электронная почта" %>
+    <%# render "devise/shared/error_messages", resource: resource %>
+    <div>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Эмейл", aria_label: "Электронная почта" %>
+      <%= render_errors(resource, :email) %>
+    </div>
   <% end %>
 
   <input class="selected" type="submit" form="new-password" value="Напомнить пароль">

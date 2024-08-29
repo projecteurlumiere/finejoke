@@ -30,7 +30,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
       turbo_redirect_to edit_self_profile_path
     else
       flash.now[:alert] = "Аккаунт не был обновлён"
-      render_turbo_flash
+      response.status = :unprocessable_entity
+      render :edit
     end 
   end
 
@@ -42,7 +43,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       turbo_redirect_to root_path
     else
       flash.now[:alert] = "Аккаунт не был удалён - неверный пароль"
-      render_turbo_flash
+      render_turbo_flash(status: :unprocessable_entity)
     end 
   end
 

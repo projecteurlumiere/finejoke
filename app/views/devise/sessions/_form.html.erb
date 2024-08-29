@@ -1,13 +1,19 @@
 <turbo-frame id="authentication-form">
   <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { id: "new-session", class: "new-session" }) do |f| %>
-    <%# render "devise/shared/error_messages", resource: resource %>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Эмейл", aria_label: "Электронная почта" %>
-    <%= f.password_field :password, autocomplete: "current-password", placeholder: "Пароль", aria_label: "Пароль" %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+    <div>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Эмейл", aria_label: "Электронная почта" %>
+      <%= render_errors(resource, :email) %>
+    </div>
+    <div>
+      <%= f.password_field :password, autocomplete: "current-password", placeholder: "Пароль", aria_label: "Пароль" %>
+      <%= render_errors(resource, :password) %>
+    </div>
     <% if devise_mapping.rememberable? %>
       <%= f.hidden_field :remember_me, value: true %>
     <% end %>
   <% end %>
-  <input type="submit" form="new-session" value="Войти">
+  <input type="submit" form="new-session" value="Войти" data-turbo-frame="_top">
   <%= render "devise/shared/links" %>
   <%= link_to "Остаться гостем", session[:referrer] || root_path, class: "button", data: { turbo_frame: "_top" } %>
 </turbo-frame>

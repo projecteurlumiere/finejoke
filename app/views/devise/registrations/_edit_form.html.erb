@@ -1,5 +1,14 @@
 <turbo-frame id="summary" data-controller="profile-edit" data-two-containers-target="leftContainer">
   <h2 class="black">Редактировать</h2>
+  <%= form_with(url: registration_path(resource_name), 
+        method: :delete, 
+        html: { 
+          id: "delete-account",
+          data: { profile_edit_target: "deleteForm", action: "profile-edit#submitDeleteForm" } 
+        }) do |f| %>
+    <%= f.hidden_field :current_password, name: "user[current_password]", data: { profile_edit_target: "passwordHiddenField" } %>
+    <% @delete_account_password_errors = render_errors(resource, :current_password) %>
+  <% end %>
   
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), 
         html: { 
@@ -12,17 +21,29 @@
     
     <fieldset>
       <legend>Важные (можно не заполнять)</legend>
-      <%= f.text_field :username, value: nil, placeholder: "Новое имя?", aria_label: "Введите новое имя пользователя, если желаете изменить", autocomplete: "off" %>
+      <div>
+        <%= f.text_field :username, value: nil, placeholder: "Новое имя?", aria_label: "Введите новое имя пользователя, если желаете изменить", autocomplete: "off" %>
+        <%= render_errors(resource, :username) %>
+      </div>
 
-      <%= f.email_field :email, value: nil, placeholder: "Новый эмейл?", aria_label: "Введите новйы эмейл, если желаете изменить", autocomplete: "off" %>
-    
+      <div>
+        <%= f.email_field :email, value: nil, placeholder: "Новый эмейл?", aria_label: "Введите новйы эмейл, если желаете изменить", autocomplete: "off" %>
+        <%= render_errors(resource, :email) %>
+      </div>
+
       <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
         <div>Ждём подтверждения <%= resource.unconfirmed_email %></div>
       <% end %>
     
-      <%= f.password_field :password, placeholder: "Новый пароль?", aria_label: "Введите новый пароль, если желаете изменить", autocomplete: "new-password" %>
+      <div>
+        <%= f.password_field :password, placeholder: "Новый пароль?", aria_label: "Введите новый пароль, если желаете изменить", autocomplete: "new-password" %>
+        <%= render_errors(resource, :password) %>
+      </div>
 
-      <%= f.password_field :password_confirmation, placeholder: "Ещё раз", aria_label: "Повторите новый пароль, если желаете изменить", autocomplete: "new-password" %>
+      <div>
+        <%= f.password_field :password_confirmation, placeholder: "Ещё раз", aria_label: "Повторите новый пароль, если желаете изменить", autocomplete: "new-password" %>
+        <%= render_errors(resource, :password_confirmation) %>
+      </div>
 
       <div class="delete-account">
         <input type="submit" class="unstyled red" form="delete-account" value="Удалить аккаунт?" data-confirm="Удалить аккаунт? Вся статистика и трофеи будут потеряны навсегда!" data-turbo-confirm="Удалить аккаунт? Вся статистика и трофеи будут потеряны навсегда!">
@@ -52,29 +73,23 @@
           <% end %>
         </div>
       </div>
-
     </fieldset>
+
     <fieldset>
       <legend>
       Подтвеждение
     </legend>
+      <div>
+        <%= f.password_field :current_password, 
+              required: true,
+              minlength: 6,
+              placeholder: "Старый пароль", 
+              autocomplete: "password", 
+              data: { profile_edit_target: "passwordField", action: "profile-edit#copyPassword" } %>
+          <% end %>
+        <%= @delete_account_password_errors || render_errors(resource, :current_password) %>
+      </div>
     </fieldset>
-    <%= f.password_field :current_password, 
-          required: true,
-          minlength: 6,
-          placeholder: "Старый пароль", 
-          autocomplete: "password", 
-          data: { profile_edit_target: "passwordField", action: "profile-edit#copyPassword" } %>
-  <% end %>
-
-  <%= form_with(url: registration_path(resource_name), 
-        method: :delete, 
-        html: { 
-          id: "delete-account",
-          data: { profile_edit_target: "deleteForm", action: "profile-edit#submitDeleteForm" } 
-        }) do |f| %>
-    <%= f.hidden_field :current_password, name: "user[current_password]", data: { profile_edit_target: "passwordHiddenField" } %>
-  <% end %>
 
   <div class="buttons-container">
     <input type="submit" form="edit-registration" value="Сохранить" class="highlighted">

@@ -17,6 +17,7 @@ export default class extends Controller {
       this.copyPassword();
       this.deleteFormTarget.requestSubmit();
     } else {
+      this.passwordFieldTarget.focus()
       e.preventDefault();
     }
   }

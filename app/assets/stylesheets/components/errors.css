@@ -1,0 +1,10 @@
+form *:has(> .field-errors) {
+  position: relative;
+}
+
+.field-errors {
+  font-size: 0.9rem;
+  color: var(--red);
+  position: absolute;
+  bottom: 0.25rem;
+}

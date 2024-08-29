@@ -23,7 +23,7 @@ AFK_ROUNDS_THRESHOLD = 1
           MIN_POINTS = 2
           MAX_POINTS = 999
 
-  validates :name, presence: true, length: { in: 1..30 }
+  validates :name, presence: true, length: { in: 5..30 }
   validates :max_players, numericality: { only_integer: true },
                           comparison: { greater_than_or_equal_to: MIN_PLAYERS, less_than_or_equal_to: MAX_PLAYERS }
   validates :max_round_time, numericality: { only_integer: true },
@@ -32,7 +32,7 @@ AFK_ROUNDS_THRESHOLD = 1
                          if: :max_rounds, allow_nil: true
   validates :max_points, numericality: { only_integer: true },
                          comparison: { greater_than_or_equal_to: MIN_POINTS, less_than_or_equal_to: MAX_POINTS }, allow_nil: true
-  validate -> { errors.add(:viewers_vote, "cannot be set when game is not viewable") if !viewable? && viewers_vote? }
+  validate -> { errors.add(:viewers_vote, "игра должна быть открыта для зрителей") if !viewable? && viewers_vote? }
 
   after_create :schedule_idle_game_destroy
 
@@ -40,7 +40,7 @@ AFK_ROUNDS_THRESHOLD = 1
   after_destroy_commit :broadcast_game_over
 
   def add_user(user, is_host: false)
-    success = transaction do
+    transaction do
       user.reset_game_attributes
       return false unless joinable?(by: user)
       self.host = user if is_host
@@ -53,9 +53,9 @@ AFK_ROUNDS_THRESHOLD = 1
       touch
 
       true
+    rescue ActiveRecord::RecordInvalid
+      return false
     end
-
-    return false unless success
 
     user.broadcast_status_change
     broadcast_user_change
@@ -79,6 +79,8 @@ AFK_ROUNDS_THRESHOLD = 1
       self.host = users.first if was_host
       save!
       touch
+    rescue ActiveRecord::RecordInvalid
+      return false
     end
 
     broadcast_user_change
@@ -165,6 +167,7 @@ AFK_ROUNDS_THRESHOLD = 1
       current_round.last!
       current_round.store_change_timings(nil, nil)
       broadcast_game_over
+    ensure
       schedule_idle_game_destroy(force: true)
     end
   end
