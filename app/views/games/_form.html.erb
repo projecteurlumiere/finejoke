@@ -1,5 +1,5 @@
 <%= form_with(model: game, id: "new-game", class: "form-large") do |form| %>
-  <% if game.errors.any? %>
+  <% if false && game.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(game.errors.count, "error") %> prohibited this game from being saved:</h2>
 
@@ -53,7 +53,7 @@
       <div>Открыта для зрителей</div>
       <div class="switch">
         <%= form.label :viewable, aria_label: "Открыта для зрителей" do %>
-          <%= form.check_box :viewable %>
+          <%= form.check_box :viewable, data: { new_game_target: :viewable, action: "click->new-game#toggleViewable" } %>
           <span class="slider"></span>
         <% end %>
       </div>
@@ -63,12 +63,11 @@
       <div>Зрители голосуют</div>
       <div class="switch">
         <%= form.label :viewers_vote, aria_label: "Зрители голосуют" do %>
-          <%= form.check_box :viewers_vote %>
+          <%= form.check_box :viewers_vote, data: { new_game_target: "viewersVote", action: "click->new-game#toggleViewable" } %>
           <span class="slider"></span>
         <% end %>
       </div>
     </div>
-
   </fieldset>
 
   <%# <div> %>
