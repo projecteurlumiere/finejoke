@@ -14,10 +14,10 @@ module ApplicationHelper
   end
 
   def render_errors(object, field_name)
-    return unless object.errors.any?
+    # return unless object.errors.any?
 
-    if object.errors.messages[field_name].present?
-      tag.div(object.errors.messages[field_name].join(", "), class: "field-errors").html_safe
-    end
+    tag.div class: "field-errors" do 
+      object.errors.messages[field_name].join(", ") if object.errors.messages[field_name].present?
+    end.html_safe
   end 
 end
