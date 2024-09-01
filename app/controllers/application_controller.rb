@@ -31,6 +31,7 @@ class ApplicationController < ActionController::Base
 
   def welcome_guest
     session[:guest_welcomed] = true if devise_controller?
+    flash[:notice] = "Войдите или останьтесь гостем"
 
     unless devise_controller?
       store_referrer

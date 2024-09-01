@@ -2,8 +2,9 @@ class Round < ApplicationRecord
   include RoundScheduling
   
   belongs_to :game, touch: true
-
   belongs_to :user, optional: true # lead
+  
+   validates :setup, length: { in: 1..200 }, if: :setup_changed?
    validates :user_id, presence: true, unless: :new_record?
     validate :game_is_ready
   
@@ -13,7 +14,6 @@ class Round < ApplicationRecord
   enum stage: %i[setup punchline vote results], _suffix: true
   attr_accessor :votes_change
 
-  validates :setup, length: { in: 1..200 }, if: :setup_changed?
 
   # tidying up and choosing lead player:
   before_create -> {

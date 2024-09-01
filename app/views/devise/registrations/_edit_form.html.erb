@@ -86,10 +86,10 @@
               placeholder: "Старый пароль", 
               autocomplete: "password", 
               data: { profile_edit_target: "passwordField", action: "profile-edit#copyPassword" } %>
-          <% end %>
         <%= @delete_account_password_errors || render_errors(resource, :current_password) %>
       </div>
     </fieldset>
+  <% end %>
 
   <div class="buttons-container">
     <input type="submit" form="edit-registration" value="Сохранить" class="highlighted">

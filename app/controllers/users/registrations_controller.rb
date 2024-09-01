@@ -22,17 +22,40 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # PUT /resource
   def update
     skip_authorization
-
     remove_empty_params(%i[email username])
 
-    if resource.update_with_password(devise_parameter_sanitizer.sanitize(:account_update))
-      flash[:notice] = "Аккаунт обновлён"
-      turbo_redirect_to edit_self_profile_path
+    self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
+    prev_unconfirmed_email = resource.unconfirmed_email if resource.respond_to?(:unconfirmed_email)
+
+    resource_updated = update_resource(resource, account_update_params)
+
+    yield resource if block_given?
+    if resource_updated
+      set_flash_message_for_update(resource, prev_unconfirmed_email)
+      if sign_in_after_change_password?
+        bypass_sign_in resource, scope: resource_name
+        turbo_redirect_to profile_path(resource.id)
+      else
+        turbo_redirect_to new_session_path(resource_name)
+      end
+
     else
-      flash.now[:alert] = "Аккаунт не был обновлён"
+      flash.now[:alert] = t("devise.registrations.not_updated")
       response.status = :unprocessable_entity
+      clean_up_passwords resource
+      set_minimum_password_length
       render :edit
-    end 
+    end
+
+    # if resource.update_with_password(devise_parameter_sanitizer.sanitize(:account_update))
+    #   # flash[:notice] = "Изменения сохранены"
+    #   bypass_sign_in resource, scope: resource_name if sign_in_after_change_password?
+    #   turbo_redirect_to edit_self_profile_path
+    # else
+    #   # flash.now[:alert] = "Изменения не были сохранены"
+    #   response.status = :unprocessable_entity
+    #   render :edit
+    # end 
   end
 
   # DELETE /resource
