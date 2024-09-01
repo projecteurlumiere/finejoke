@@ -1,0 +1,99 @@
+ru:
+  activerecord:
+    models:
+      award: Премия  #g
+      game: Игра  #g
+      joke: Шутить  #g
+      present: Подарок  #g
+      round: Круглый  #g
+      user: Пользователь  #g
+      vote: Голосование  #g
+
+    attributes:
+      award:
+        present: :activerecord.models.present  #g
+        signature: Подпись  #g
+        user: :activerecord.models.user  #g
+
+      game:
+        afk_rounds: Афк-раунды  #g
+        host: :activerecord.models.host  #g
+        host_username: Имя пользователя хоста  #g
+        jokes: Шутки  #g
+        max_players: Максимальное количество игроков  #g
+        max_points: Макс. баллы  #g
+        max_round_time: Максимальное время раунда  #g
+        max_rounds: Макс. раундов  #g
+        n_players: N игроков  #g
+        n_rounds: N раундов  #g
+        n_viewers: N зрителей  #g
+        name: Имя  #g
+        rounds: Раунды  #g
+        status: Статус  #g
+        users: Пользователи  #g
+        viewable: Доступный для просмотра  #g
+        viewers_vote: Зрители голосуют  #g
+        winner: :activerecord.models.winner  #g
+        winner_score: Победительский счет  #g
+
+      joke:
+        n_votes: N голосов  #g
+        punchline: Изюминка  #g
+        punchline_author: :activerecord.models.punchline_author  #g
+        round: :activerecord.models.round  #g
+        setup: Настраивать  #g
+        setup_author: :activerecord.models.setup_author  #g
+        text: Текст  #g
+
+      present:
+        awards: Награды  #g
+        description: Описание  #g
+        icon: Икона  #g
+        name: Имя  #g
+
+      round:
+        change_deadline: Изменить срок  #g
+        change_scheduled_at: Изменение запланировано на  #g
+        current: Текущий  #g
+        game: :activerecord.models.game  #g
+        jokes: Шутки  #g
+        last: Последний  #g
+        setup: Настраивать  #g
+        stage: Этап  #g
+        user: :activerecord.models.user  #g
+        votes: Голоса  #g
+
+      user:
+        awards: Награды  #g
+        connected: Подключено  #g
+        current_score: Текущий счет  #g
+        email: Электронная почта  #g
+        encrypted_password: Зашифрованный пароль  #g
+        finished_jokes: Готовые шутки  #g
+        finished_turn: Законченный поворот  #g
+        game: :activerecord.models.game  #g
+        guest: Гость  #g
+        host: Хозяин  #g
+        hot_join: Горячее присоединение  #g
+        lead: Вести  #g
+        remember_created_at: Помните, что создано в  #g
+        reset_password_sent_at: Сбросить пароль отправлено на  #g
+        reset_password_token: Токен сброса пароля  #g
+        show_awards_allowed: Показ наград разрешен  #g
+        show_jokes_allowed: Показывать шутки разрешено  #g
+        started_jokes: Начались шутки  #g
+        subscribed_to_game: Подписался на игру  #g
+        total_games: Всего игр  #g
+        total_punchlines: Всего изюминок  #g
+        total_score: Общий балл  #g
+        total_setups: Всего настроек  #g
+        total_wins: Всего побед  #g
+        username: Имя пользователя  #g
+        voted: Проголосовали  #g
+        was_lead: Был ведущим  #g
+
+      vote:
+        joke: :activerecord.models.joke  #g
+        round: :activerecord.models.round  #g
+        user: :activerecord.models.user  #g
+        weight: Масса  #g
