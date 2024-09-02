@@ -66,7 +66,6 @@ class Round < ApplicationRecord
     game.increment!(:afk_rounds)
     update_attribute(:last, true) if game.afk_rounds >= Game::AFK_ROUNDS_THRESHOLD
 
-
     self.votes_change = {}
 
     move_to_results
@@ -121,7 +120,7 @@ class Round < ApplicationRecord
   def max_rounds_achieved?
     return false if game.max_rounds.nil?
 
-    game.max_rounds == game.rounds.count + 1 # one being this new round
+    game.rounds.count + 1 >= game.max_rounds # one being this new round
   end
 
   def last!
