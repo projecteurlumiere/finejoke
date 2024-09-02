@@ -46,7 +46,8 @@ textarea:focus {
   outline-offset: 0;
 }
 
-input:focus {
+input:focus,
+select:focus {
   outline: 2px solid var(--teal);
   outline-offset: -2px;
   border-color: transparent;
