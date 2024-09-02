@@ -7,7 +7,6 @@ class ProfilesController < ApplicationController
     
     set_jokes
 
-
     respond_to do |format|
       if @action.nil?
         format.html
@@ -49,14 +48,13 @@ class ProfilesController < ApplicationController
   end
 
   def set_jokes
-    return unless @user.show_jokes_allowed?
-
     @jokes = process_joke_params
   end
 
   def process_joke_params
     set_turbo_action
     return if @action.nil?
+    return unless @user.show_jokes_allowed?
 
     property = set_property
     ordered_property = set_order(property)
