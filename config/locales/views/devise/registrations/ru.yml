@@ -1,0 +1,36 @@
+ru:
+  devise:
+    registrations:
+      edit:
+        to_lobby: "В лобби"
+      edit_form:
+        edit: Редактировать
+        important_settings: Важные (можно не заполнять)
+        new_username: Новое имя?
+        new_username_aria: Введите новое имя пользователя, если желаете изменить
+        new_email: Новый эмейл?
+        new_email_aria: Введите новый эмейл, если желаете изменить
+        new_password: Новый пароль?
+        new_password_aria: Введите новый пароль, если желаете изменить
+        confirm_password: Ещё раз
+        confirm_password_aria: Повторите новый пароль, если желаете изменить
+        delete_account: Удалить аккаунт?
+        delete_account_prompt: Удалить аккаунт? Вся статистика и трофеи будут потеряны навсегда!
+        privacy_settings: Приватность профиля
+        show_jokes: Показывать шутки
+        show_awards: Показывать награды
+        confirm: Подтверждение
+        current_password: Нынешний пароль
+        current_password_aria: Подтвердите изменения действующим паролем
+        save: Сохранить
+        back: Назад
+      form:
+        email: Эмейл
+        email_aria: Электронный адрес
+        username: Имя
+        username_aria: Имя пользователя
+        password: Пароль
+        password_aria: Пароль (минимум %{max_length} знаков)
+        password_confirm: Ещё раз
+        password_confirm_aria: Подтвердите пароль
+        create_account: Создать

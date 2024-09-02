@@ -31,8 +31,9 @@
       justify-content: center;
       align-items: center;
       text-align: center;
-      content: "Пусто...";
-      @container (max-width: 160px) { content: "Пусто" }
+      // to account for locale, moved to the chat partial:
+      // content: "Пусто..."; 
+      // @container (max-width: 160px) { content: "Пусто" }
       color: var(--white-dimmer);
       font-family: "Press Start 2P" ;
       text-transform: lowercase;

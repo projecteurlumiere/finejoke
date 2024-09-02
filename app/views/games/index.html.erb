@@ -2,34 +2,56 @@
 
 <%= turbo_stream_from "lobby", channel: LobbyChannel %>
 
-<div id="lobby" class="two-columns" data-controller="catalogue new-game containers">  
-  <div id="catalogue" class="bg-red <%= hide_in_mobile_when("create") %>" data-containers-target="container" data-container-name="catalogue">
-    <h2 class="hidden-when-mobile">Комнаты</h2>
-    
+<div id="lobby" class="two-columns" 
+  data-controller="catalogue new-game containers">  
+  <div id="catalogue" class="bg-red <%= hide_in_mobile_when("create") %>" 
+    data-containers-target="container" 
+    data-container-name="catalogue">
+    <h2 class="hidden-when-mobile">
+      <%= t ".rooms" %>
+    </h2>
     <div class="scrollable">
       <ul id="games" class="list">
         <%= render partial: "game_entry", collection: @games, as: :game %>
       </ul>
     </div>
   </div>
-  
-    
-  <div class="<%= hide_in_mobile_when("index") %> form" data-containers-target="container" data-container-name="form">
-    <h2 class="hidden-when-mobile">Новая игра</h2>
+  <div class="<%= hide_in_mobile_when("index") %> form" 
+    data-containers-target="container" 
+    data-container-name="form">
+    <h2 class="hidden-when-mobile">
+      <%= t ".new_game" %>
+    </h2>
     <%= render partial: "form", locals: { game: @game } %>
   </div>
 
-  <div class="buttons-container <%= hide_in_mobile_when("create") %>" data-containers-target="container" data-container-name="catalogue">
-    <a class="button disabled" data-catalogue-target="connect" data-turbo-stream>Подключиться</a>
-    <a class="button disabled" data-catalogue-target="view" data-turbo-stream>Смотреть</a>
+  <div class="buttons-container <%= hide_in_mobile_when("create") %>" 
+    data-containers-target="container" data-container-name="catalogue">
+    <a class="button disabled" data-catalogue-target="connect" data-turbo-stream>
+      <%= t ".connect" %>
+    </a>
+    <a class="button disabled" data-catalogue-target="view" data-turbo-stream>
+      <%= t ".view" %>
+    </a>
   </div>
 
-  <div class="buttons-container <%= hide_in_mobile_when("index") %>" data-containers-target="container" data-container-name="form">
-    <input type="submit" form="new-game" value="Создать" data-action="click->new-game#validate">
+  <div class="buttons-container <%= hide_in_mobile_when("index") %>" 
+    data-containers-target="container" data-container-name="form">
+    <input 
+      type="submit" 
+      form="new-game" 
+      value="<%= t ".create" %>" 
+      data-action="click->new-game#validate">
   </div>
 
   <div class="buttons-container mobile-navigation">
-    <a class="button selected" data-containers-target="button" data-container-name="catalogue" data-action="click->containers#show">Комнаты</a>
-    <a class="button" data-containers-target="button" data-container-name="form" data-action="click->containers#show">Новая</a>
+    <a class="button selected" 
+      data-containers-target="button" data-container-name="catalogue" data-action="click->containers#show">
+      <%= t ".create" %>
+    </a>
+    <a class="button" 
+      data-containers-target="button" data-container-name="form" data-action="click->containers#show">
+      <%= t ".new" %>
+    </a>
   </div>
 </div>

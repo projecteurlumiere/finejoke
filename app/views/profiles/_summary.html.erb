@@ -1,50 +1,66 @@
 <turbo-frame id="summary" data-controller="profile-form" data-containers-target="container" data-container-name="summary">
   <h2>
-    <div class="label black">Профиль</div>
+    <div class="label black">
+      <%= t(".profile") %>
+    </div>
     <div class="value">
       <%= user.username.truncate(14) %>
     </div>
   </h2>
   <div class="statistics-container">
     <div>
-      <div class="label">В игре с</div>
+      <div class="label">
+        <%= t(".in_game_since") %>
+      </div>
       <div class="value black">
         <% date = user.created_at %>
         <%= [date.year, date.month, date.day].join("-") %>
       </div>
     </div>
     <div>
-      <div class="label">Наград получено</div>
+      <div class="label">
+        <%= t(".awards_received") %>
+      </div>
       <div class="value red">
         0
       </div>
     </div>
     <div>
-      <div class="label">Очков набрано</div>
+      <div class="label">
+        <%= t(".points_received") %>
+      </div>
       <div class="value red">
         <%= user.total_score %>
       </div>
     </div>
     <div>
-      <div class="label">Игр выиграно</div>
+      <div class="label">
+        <%= t(".games_won") %>
+      </div>
       <div class="value red">
         <%= user.total_wins %>
       </div>
     </div>
     <div>
-      <div class="label">Игр сыграно</div>
+      <div class="label">
+        <%= t(".games_finished") %>
+      </div>
       <div class="value red">
         <%= user.total_games %>
       </div>
     </div>
     <div>
-      <div class="label">Завязок придумано</div>
+      <div class="label">
+        <%= t(".setups_created") %>
+      </div>
       <div class="value red">
         <%= user.total_setups %>
       </div>
     </div>
     <div>
-      <div class="label">Ответов придумано</div>
+      <div class="label">
+        <%= t(".punchlines_created") %>
+      </div>
       <div class="value red">
         <%= user.total_punchlines %>
       </div>
@@ -52,12 +68,25 @@
   </div>
   <div class="buttons-container">
     <% if user == current_user %>
-        <%= link_to "Настройки", edit_self_profile_path, class: "button highlighted", data: { turbo_action: :advance } %>
+        <%= link_to t(".profile_settings"), 
+          edit_self_profile_path, 
+          class: "button highlighted", 
+            data: { 
+              turbo_action: :advance } %>
         <% unless user.guest? %>
-          <%= button_to "Выход", destroy_user_session_path, method: :delete,  class: "danger", data: { turbo_confirm: "Вы уверены, что хотите выйти из аккаунта?", turbo_frame: "_top" } %>
+          <%= button_to t(".sign_out"), 
+            destroy_user_session_path, 
+            method: :delete, 
+            class: "danger", 
+              data: { 
+                turbo_confirm: t(".sign_out_confirm"), 
+                turbo_frame: "_top" } %>
         <% end %>
     <% elsif user == current_or_guest_user %>
-      <%= link_to "Регистрация", new_user_registration_path, class: "button highlighted", data: { turbo_frame: "_top"} %>
+      <%= link_to t(".sign_up"), 
+        new_user_registration_path, 
+        class: "button highlighted", 
+        data: { turbo_frame: "_top"} %>
       <%# <button class="highlighted">Подарок</button> %>
     <% end %>
   </div>

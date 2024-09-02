@@ -1,0 +1,40 @@
+ru:
+  games:
+    index:
+      rooms: Комнаты
+      new_game: Новая игра
+      connect: Подключиться
+      view: Смотреть
+      create: Создать
+      new: Новая
+    game:
+      back_to_lobby: В лобби
+      game: Игра
+      chat: Чат
+    game_user:
+      to_profile: В профиль
+      kick: Кик
+      empty: Пусто
+    chat:
+      chat: Чат
+      empty: Пусто...
+      empty_short: Пусто
+    chat_form:
+      hello: Привет!
+      message_text: Текст сообщения
+      send_message: Отправить сообщение
+    form:
+      name: Название
+      enter_name: Введите название
+      extra_settings: Доп настройки
+      max_players: Макс игроков
+      max_round_time: Время раунда, сек
+      victory_conditions: Условия победы
+      max_rounds: Кол-во раундов
+      max_rounds_aria: Включить условие победы по раундам
+      max_points: Кол-во очков
+      max_points_aria: Включить условие победы по очкам
+      none: Нет
+      access: Доступ
+      open_for_viewers: Открыта для зрителей
+      viewers_vote: Зрители голосуют

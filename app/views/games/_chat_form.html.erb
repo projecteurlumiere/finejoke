@@ -9,13 +9,14 @@
               }
               ) do |form| %>
   <div class="message-input">
-    <%= form.text_field :text, 
-      class: "nunito-font", 
-        aria_label: "Текст сообщения", 
-        placeholder: "Привет!", 
-        autocomplete: :off,
-        required: true,
-        minlength: 1 %> 
-    <%= form.submit type: :image, src: asset_path("icons/send-message.svg"), aria_label: "Отправить сообщение" %>
+    <%= form.text_field :text, class: "nunito-font", 
+      aria_label: t(".message_text"), 
+      placeholder:t(".hello"), 
+      autocomplete: :off,
+      required: true,
+      minlength: 1 %> 
+    <%= form.submit type: :image, 
+      src: asset_path("icons/send-message.svg"), 
+      aria_label: t(".send_message") %>
   </div>
 <% end %>

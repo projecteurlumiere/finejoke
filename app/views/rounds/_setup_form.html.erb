@@ -1,5 +1,5 @@
 <%= form_with(model: round, url: game_round_path(game, round), method: :patch, id: "new-setup") do |form| %>
-  <% if round.errors.any? %>
+  <% if false && round.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(round.errors.count, "error") %> prohibited this round from being saved:</h2>
 
@@ -12,10 +12,10 @@
   <% end %>
 
   <%# form.label :setup, style: "display: block" %>
-  <%= form.text_area :setup, placeholder: "Введите текст...", aria_label: "Введите текст завязки" %>
+  <%= form.text_area :setup, placeholder: t(".enter_text"), aria_label: t(".enter_text_full") %>
 
   <% content_for(:action) do %>
-    <input type="button" form="new-setup" value="Придумать">
-    <input type="submit" form="new-setup" value="Готово">
+    <input type="button" form="new-setup" value="<%= t(".ask_ai") %>">
+    <input type="submit" form="new-setup" value="<%= t(".done") %>">
   <% end %>
 <% end %>

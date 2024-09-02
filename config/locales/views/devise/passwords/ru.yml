@@ -1,0 +1,9 @@
+ru:
+  devise:
+    passwords:
+      form:
+        email: Эмейл
+        email_aria: Электронная почта
+        restore_password: Напомнить пароль
+        back: Нет, я вспомнил
+        

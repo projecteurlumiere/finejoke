@@ -44,5 +44,7 @@ module Finejoke
 
     config.action_view.sanitized_allowed_tags = []
     config.action_view.sanitized_allowed_attributes = []
+    
+    config.action_view.automatically_disable_submit_tag = false
   end
 end

@@ -1,20 +1,21 @@
 <turbo-frame id="authentication-form">
-  <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { id: "new-session", class: "new-session" }) do |f| %>
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name), 
+    html: { id: "new-session", class: "new-session" }) do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
     <div>
       <%= f.email_field :email, 
         autofocus: true, 
         autocomplete: "email", 
-        placeholder: "Эмейл", 
-        aria_label: "Электронная почта", 
+        placeholder: t(".email"), 
+        aria_label: t(".email_aria"), 
         required: true %>
       <%= render_errors(resource, :email) %>
     </div>
     <div>
       <%= f.password_field :password, 
         autocomplete: "current-password", 
-        placeholder: "Пароль", 
-        aria_label: "Пароль", 
+        placeholder: t(".password"), 
+        aria_label: t(".password_aria"), 
         required: true, 
         maxlength: 128 %>
       <%= render_errors(resource, :password) %>
@@ -23,7 +24,12 @@
       <%= f.hidden_field :remember_me, value: true %>
     <% end %>
   <% end %>
-  <input type="submit" form="new-session" value="Войти" data-turbo-frame="_top">
+  <input type="submit" 
+    form="new-session" 
+    value="<%= t(".sign_in") %>" 
+    data-turbo-frame="_top">
   <%= render "devise/shared/links" %>
-  <%= link_to "Остаться гостем", session[:referrer] || root_path, class: "button", data: { turbo_frame: "_top" } %>
+  <%= link_to t(".remain_guest"), session[:referrer] || root_path, 
+    class: "button", 
+    data: { turbo_frame: "_top" } %>
 </turbo-frame>

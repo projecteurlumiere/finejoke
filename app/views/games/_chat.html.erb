@@ -8,10 +8,23 @@
               action: "resize@window->chat#adjustScrollOnResize"
             } do %>
   <style>
-    <%# coloring self messages with user's unique id %>
-    <%= ".message.user_#{user.id} > p { background-color: var(--white-dimmest) }".html_safe %>
+    <%= ".message.user_#{user.id} > p".html_safe %> { 
+      background-color: var(--white-dimmest);
+    }
+
+    .chat-container #chat:empty:before {
+      content: "<%= t(".empty") %>";
+    }
+
+    @container (max-width: 160px) { 
+      .chat-container #chat:empty:before {
+        content: "<%= t(".empty_short") %>";
+      }
+    }
   </style>
-  <h2>Чат</h2>
+  <h2>
+    <%= t ".chat" %>
+  </h2>
   <div id="chat" data-chat-target="messages">
   </div>
   <div class="form">

@@ -1,0 +1,32 @@
+ru:
+  profiles:
+    show:
+      to_lobby: В лобби
+      jokes: Шутки
+      profile: Профиль
+      jokes_hidden: Игрок %{username} скрыл свои шутки!
+      no_jokes: Шуток нет
+      no_more_jokes: Шутки кончились
+      get_more_jokes: Загрузить ещё шуточек
+    catalogue:
+      best: Лучшие
+      recent: Недавние
+      jokes: Шутки
+      setups: Завязки
+      punchlines: Развязки
+      downloading_jokes: Загружаем шуточки
+    summary:
+      profile: Профиль
+      in_game_since: В игре с
+      awards_received: Наград получено
+      points_received: Очков получено
+      games_won: Игр выиграно
+      games_finished: Игр сыграно
+      setups_created: Завязок придумано
+      punchlines_created: Развязок придумано
+      profile_settings: Настройки
+      sign_out: Выход
+      sign_out_confirm: Вы уверены, что хотите выйти из аккаунта?
+      sign_up: Регистрация
+
+

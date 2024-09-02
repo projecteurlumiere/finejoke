@@ -14,14 +14,21 @@
     <div class="pagination">
       <% if not @user.show_jokes_allowed? %>
         <p>
-          Игрок <%= @user.username %> скрыл свои шутки!
+          <%= t(".jokes_hidden", username: @user.username) %>
         </p>
       <% elsif @jokes.nil? || @jokes.none? %>
-        <p>Шуток нет</p>
+        <p>
+          <%= t(".no_jokes") %>
+        </p>
       <% elsif @jokes.last_page? %>
-        <p>Шутки кончились</p>
+        <p>
+          <%= t(".no_more_jokes") %>
+        </p>
       <% else %>
-        <%= link_to_next_page @jokes, "Загрузить ещё шуточек", data: { turbo_stream: true }, params: { turbo_action: :append } %>
+        <%= link_to_next_page @jokes, 
+          t(".get_more_jokes"), 
+          data: { turbo_stream: true }, 
+          params: { turbo_action: :append } %>
       <% end %>
     </div>
 <% end %>

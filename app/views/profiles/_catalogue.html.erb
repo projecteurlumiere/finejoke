@@ -1,13 +1,24 @@
-<div id="catalogue" class="bg-red hidden-when-mobile" data-controller="catalogue" data-containers-target="container" data-container-name="catalogue">
+<div id="catalogue" class="bg-red hidden-when-mobile" 
+  data-controller="catalogue" 
+  data-containers-target="container" 
+  data-container-name="catalogue">
     <h2>
-      <%= form_with(url: profile_path(@user), method: :get, data: { turbo_stream: true, catalogue_target: "form" }) do |form| %>
+      <%= form_with(url: profile_path(@user), 
+        method: :get, 
+        data: { 
+          turbo_stream: true, 
+          catalogue_target: "form" }) do |form| %>
         <%= form.select :order_by, 
-              options_for_select([["Лучшие", "n_votes"], ["Недавние", "created_at"]], params[:order_by] || "created_at"),
+              options_for_select(
+                [[t(".best"), "n_votes"], [t(".recent"), "created_at"]], 
+                params[:order_by] || "created_at"),
               {},
               { data: { action: "catalogue#submit" } } %>
         <br>
         <%= form.select :property, 
-              options_for_select([["Шутки", "jokes"], ["Завязки", "started_jokes"], ["Развязки", "finished_jokes"]], params[:property] || "finished_jokes"),
+              options_for_select(
+                [[t(".jokes"), "jokes"], [t(".setups"), "started_jokes"], [t(".punchlines"), "finished_jokes"]], 
+                params[:property] || "finished_jokes"),
               {}, 
               { data: { action: "catalogue#submit" } } %>
         <%= form.hidden_field :turbo_action, value: :replace %>
@@ -19,7 +30,7 @@
       </ul>
       <div class="pagination">
         <p>
-          Загружаем шуточки
+          <%= t(".downloading_jokes") %>
         </p>
       </div>
     </div>

@@ -1,5 +1,5 @@
 <%= form_with(model: joke, url: [game, round, joke], id: "new-joke") do |form| %>
-  <% if joke.errors.any? %>
+  <% if false && joke.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(joke.errors.count, "error") %> prohibited this joke from being saved:</h2>
 
@@ -11,10 +11,10 @@
     </div>
   <% end %>
 
-  <%= form.text_area :punchline, placeholder: "Введите текст...", aria_label: "Придумайте развязку к шутке", minrows: 1, rows: 1 %>
+  <%= form.text_area :punchline, placeholder: t(".enter_text"), aria_label: t(".enter_text_full"), minrows: 1, rows: 1 %>
 
   <% content_for(:action) do %>
-    <input type="button" form="new-joke" value="Придумать">
-    <input type="submit" form="new-joke" value="Готово">
+    <input type="button" form="new-joke" value="<%= t(".ask_ai") %>">
+    <input type="submit" form="new-joke" value="<%= t(".done") %>">
   <% end %>
 <% end %>

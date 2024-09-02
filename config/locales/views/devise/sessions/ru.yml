@@ -1,0 +1,10 @@
+ru:
+  devise:
+    sessions:
+      form:
+        email: Эмейл
+        email_aria: Электронная почта
+        password: Пароль
+        password_aria: Пароль
+        sign_in: Войти
+        remain_guest: Остаться гостем

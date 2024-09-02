@@ -7,34 +7,43 @@
             action: "chat:unseen->containers#blink chat:seen->containers#unblink"
           })) do %>
   <%= content_for(:nav_button) do %>
-    <%= link_to "В лобби", games_path, class: "button black-and-white" %>
+    <%= link_to t(".back_to_lobby"), games_path, class: "button black-and-white" %>
     <%# button_to "Присоединиться", game_join_path(game) if game.joinable? %>
   <% end %>
 
   <div class="mobile-navigation">
-    <div class="button" data-container-name="data" data-containers-target="button" data-action="click->containers#show">
+    <div class="button" 
+      data-container-name="data" 
+      data-containers-target="button" 
+      data-action="click->containers#show">
         <%= render partial: "games/game_n_players", locals: { game: game } %>
       </span>
     </div>
-    <div class="button selected" data-container-name="round" data-containers-target="button" data-action="click->containers#show">Игра</div>
-    <div class="button" data-container-name="chat" data-containers-target="button" data-action="click->containers#show">Чат</div>
+    <div class="button selected" 
+      data-container-name="round" 
+      data-containers-target="button" 
+      data-action="click->containers#show">
+      <%= t(".game") %>
+    </div>
+    <div class="button" 
+      data-container-name="chat" 
+      data-containers-target="button" 
+      data-action="click->containers#show">
+      <%= t(".chat") %>
+    </div>
   </div>
 
-  <div class="data-container hidden-when-mobile" data-controller="game-data" data-containers-target="container" data-container-name="data" data-game-data-id-value="<%= current_or_guest_user.id %>">
+  <div class="data-container hidden-when-mobile" 
+    data-controller="game-data" 
+    data-containers-target="container" 
+    data-container-name="data" 
+    data-game-data-id-value="<%= current_or_guest_user.id %>">
     <%= render partial: "games/game_users", formats: %i[html], locals: { game: game, votes_change: {} } %>
-      <%# <button class="black"> %>
-        <%# <span class="icon"> %>
-          <%# inline_svg("icons/gear.svg") %>
-        <%# </span> %>
-        <%# <span class="text">Настройки</span> %>
-      <%# </button> %>
-
-      <button class="viewers black">
-        <%= inline_svg("icons/eye.svg") %>
-        <%= render partial: "games/game_n_viewers", locals: { game: game } %>
-      </button>
-
-        <%# render partial: "games/game_settings", locals: { game: game } %>  
+    <button class="viewers black">
+      <%= inline_svg("icons/eye.svg") %>
+      <%= render partial: "games/game_n_viewers", locals: { game: game } %>
+    </button>
+    <%# render partial: "games/game_settings", locals: { game: game } %>  
   </div>
 
   <%= render partial: "rounds/current_round", formats: %i[html], locals: { game: game, round: game.current_round } %>

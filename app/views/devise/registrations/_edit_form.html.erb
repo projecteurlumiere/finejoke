@@ -1,12 +1,19 @@
-<turbo-frame id="summary" data-controller="profile-edit" data-two-containers-target="leftContainer">
-  <h2 class="black">Редактировать</h2>
+<turbo-frame id="summary" 
+  data-controller="profile-edit" 
+  data-two-containers-target="leftContainer">
+  <h2 class="black">
+    <%= t(".edit") %>
+  </h2>
   <%= form_with(url: registration_path(resource_name), 
         method: :delete, 
         html: { 
           id: "delete-account",
-          data: { profile_edit_target: "deleteForm", action: "profile-edit#submitDeleteForm" } 
+          data: { 
+            profile_edit_target: "deleteForm", 
+            action: "profile-edit#submitDeleteForm" } 
         }) do |f| %>
-    <%= f.hidden_field :current_password, name: "user[current_password]", data: { profile_edit_target: "passwordHiddenField" } %>
+    <%= f.hidden_field :current_password, name: "user[current_password]", 
+      data: { profile_edit_target: "passwordHiddenField" } %>
     <% @delete_account_password_errors = render_errors(resource, :current_password) %>
   <% end %>
   
@@ -20,12 +27,14 @@
     <%# render "devise/shared/error_messages", resource: resource %>
     
     <fieldset>
-      <legend>Важные (можно не заполнять)</legend>
+      <legend>
+        <%= t(".important_settings") %>
+      </legend>
       <div>
         <%= f.text_field :username, 
           value: nil, 
-          placeholder: "Новое имя?", 
-          aria_label: "Введите новое имя пользователя, если желаете изменить", 
+          placeholder: t(".new_username"), 
+          aria_label: t(".new_username_aria"), 
           autocomplete: "off",
           minlength: 1,
           maxlength: 14 %>
@@ -35,8 +44,8 @@
       <div>
         <%= f.email_field :email, 
           value: nil, 
-          placeholder: "Новый эмейл?", 
-          aria_label: "Введите новйы эмейл, если желаете изменить", 
+          placeholder: t(".new_email"), 
+          aria_label: t(".new_email_aria"), 
           autocomplete: "off" %>
         <%= render_errors(resource, :email) %>
       </div>
@@ -47,8 +56,8 @@
     
       <div>
         <%= f.password_field :password, 
-          placeholder: "Новый пароль?", 
-          aria_label: "Введите новый пароль, если желаете изменить", 
+          placeholder: t(".new_password"), 
+          aria_label: t(".new_password_aria"), 
           autocomplete: "new-password",
           minlength: 8,
           maxlength: 128 %>
@@ -57,8 +66,8 @@
 
       <div>
         <%= f.password_field :password_confirmation, 
-          placeholder: "Ещё раз", 
-          aria_label: "Повторите новый пароль, если желаете изменить", 
+          placeholder: t(".confirm_password"), 
+          aria_label: t(".confirm_password_aria"), 
           autocomplete: "new-password",
           minlength: 8,
           maxlength: 128 %>
@@ -66,18 +75,26 @@
       </div>
 
       <div class="delete-account">
-        <input type="submit" class="unstyled red" form="delete-account" value="Удалить аккаунт?" data-confirm="Удалить аккаунт? Вся статистика и трофеи будут потеряны навсегда!" data-turbo-confirm="Удалить аккаунт? Вся статистика и трофеи будут потеряны навсегда!">
+        <input type="submit" 
+          class="unstyled red" 
+          form="delete-account" 
+          value="<%= t(".delete_account") %>" 
+          data-turbo-confirm="<%= t(".delete_account_prompt") %>">
       </div>
     </fieldset>
 
     <fieldset class="switch-container">
       <legend>
-        Приватность профиля
+        <%= t(".privacy_settings") %>
       </legend>
       <div>
-        <div>Показывать шутки</div>
+        <div>
+          <%= t(".show_jokes") %>
+        </div>
          <div class="switch">
-          <%= f.label :show_jokes_allowed, aria_label: "Показывать шутки", style: "display: block" do %>
+          <%= f.label :show_jokes_allowed, 
+            aria_label: t(".show_jokes"), 
+            style: "display: block" do %>
             <%= f.check_box :show_jokes_allowed %>
             <span class="slider"></span>
           <% end %>
@@ -85,9 +102,13 @@
       </div>
 
       <div>
-        <div>Показывать награды</div>
+        <div>
+          <%= t(".show_awards") %>
+        </div>
          <div class="switch">
-          <%= f.label :show_awards_allowed, aria_label: "Показывать награды", style: "display: block" do %>
+          <%= f.label :show_awards_allowed, 
+            aria_label: t(".show_awards"), 
+            style: "display: block" do %>
             <%= f.check_box :show_awards_allowed %>
             <span class="slider"></span>
           <% end %>
@@ -97,22 +118,31 @@
 
     <fieldset>
       <legend>
-      Подтвеждение
-    </legend>
+        <%= t(".confirm") %>
+      </legend>
       <div>
         <%= f.password_field :current_password, 
           required: true,
           maxlength: 128,
-          placeholder: "Старый пароль", 
+          placeholder: t(".current_password"), 
           autocomplete: "password",
-          data: { profile_edit_target: "passwordField", action: "profile-edit#copyPassword" } %>
+          aria_label: t(".current_password_aria"),
+          data: { 
+            profile_edit_target: "passwordField", 
+            action: "profile-edit#copyPassword" } %>
         <%= @delete_account_password_errors || render_errors(resource, :current_password) %>
       </div>
     </fieldset>
   <% end %>
 
   <div class="buttons-container">
-    <input type="submit" form="edit-registration" value="Сохранить" class="highlighted">
-    <%= link_to "Назад", profile_path(current_or_guest_user), class: "button", data: { turbo_action: :advance } %>
+    <input type="submit" 
+      form="edit-registration" 
+      value="<%= t(".save") %>" 
+      class="highlighted">
+    <%= link_to t(".back"), 
+      profile_path(current_or_guest_user), 
+      class: "button", 
+      data: { turbo_action: :advance } %>
   </div>
 </turbo-frame>

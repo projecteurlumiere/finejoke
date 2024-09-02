@@ -41,13 +41,13 @@ module RoundsHelper
   def game_over_task_for(game)
     if game.winner
       [
-        "Победил #{game.winner.username}",
-        "Его счёт #{game.winner_score}"
+        "#{t(".winner_is")} #{game.winner.username}",
+        "#{t(".his_score_is")} #{game.winner_score}"
       ]
     else
       [
-        "Игра окончена",
-        "Поздравляем!"
+        t(".game_over"),
+        t(".congratulations")
       ]
     end
   end
@@ -57,44 +57,48 @@ module RoundsHelper
     when :setup
       if user.lead?
         [
-          "Придумайте завязку",
-          "Как начать хорошую шутку?"
+          t(".create_setup"),
+          t(".create_setup_subheading")
         ]
       else
         [
-          "Игрок придумывает завязку",
-          "Надо подождать"
+          t(".setup_is_being_created"),
+          t(".setup_is_being_created_subheading")
         ]
       end
     when :punchline
       unless user.finished_turn? || user.lead?
         @p_class = :setup
         [
-          "Придумайте смешную развязку",
+          t(".create_punchline"),
+          # t(".create_punchline_subheading"),
           round.setup
         ]
       else
         [
-          "Другие игроки придумывают развязки",
-          "Надо подождать"
+          t(".punchlines_are_being_created"),
+          t(".punchlines_are_being_created_subheading")
         ]
       end
     when :vote
       @p_class = :setup
       if user.can_vote?(round)
         [
-          "Выберите лучший ответ",
+          t(".vote_for_joke"),
+          # t(".vote_for_joke_subheading"),
           ""
         ]
       else
         [
-          "Игроки голосуют",
+          t(".players_are_voting"),
+          # t(".players_are_voting_subheading"),
           ""
         ]
       end
     when :results
       [
-        "Результаты раунда",
+        t(".round_results"),
+        # t(".round_results.subheading"),
         ""
       ]
     end
@@ -104,25 +108,28 @@ module RoundsHelper
     case round.stage.to_sym
     when :setup
       [
-        "Игрок придумывает завязку",
-        "Ждём, что она будет забавной"
+        t(".viewer.setup_is_being_created"),
+        t(".viewer.setup_is_being_created_subheading")
       ]
 
     when :punchline
       @p_class = :setup
       [
-        "Игроки придумывают развязки к завязке:",
+        t(".viewer.punchlines_are_being_created"),
+        # t(".viewer.punchlines_are_being_created_subheading"),
         round.setup
       ]
     when :vote
       @p_class = :setup
       [
-        "Игроки голосуют",
+        t(".viewer.players_are_voting"),
+        # t(".viewer.players_are_voting_subheading")
         round.setup
       ]
     when :results
       [
-        "Результаты раунда",
+        t(".viewer.round_results"),
+        # t(".viewer.round_results_subheading")
         ""
       ]
     end
@@ -145,7 +152,7 @@ module RoundsHelper
     if user.lead? && round.setup_stage?
       render partial: "rounds/setup_form", locals: { game: round.game, round: round }
     elsif !user.lead? && round.punchline_stage?
-      render partial: "jokes/form", locals: { game: round.game, round: round, joke: round.jokes.build }
+      render partial: "rounds/joke_form", locals: { game: round.game, round: round, joke: round.jokes.build }
     end
   end
 
@@ -174,8 +181,8 @@ module RoundsHelper
   # for everyone
   def render_rules_for(_game)
     [
-      tag.h2("Правила"),
-      tag.div(tag.p("Какие-то правила"), class: "rules")
+      tag.h2(t(".rules")),
+      tag.div(tag.p(t(".rules_content")), class: "rules")
     ].join(" ").html_safe
   end
 
@@ -184,7 +191,7 @@ module RoundsHelper
     return unless game.host == user
 
     content_for(:action) do 
-      button_to("Старт!", game_rounds_path(game))
+      button_to(t(".start"), game_rounds_path(game))
     end
   end
 
@@ -196,15 +203,15 @@ module RoundsHelper
   end
 
   def render_join(game)
-    link_to("Присоединиться", game_join_path(game), class: "button").html_safe
+    link_to(t(".join"), game_join_path(game), class: "button").html_safe
   end
 
   def render_game_over_button
-    tag.button("Игра окончена", class: "disabled", disabled: true).html_safe
+    tag.button(t(".game_over"), class: "disabled", disabled: true).html_safe
   end
 
   def render_wait_for(user, round, game)
-    message = user.hot_joined?(game) && !round.last? ? "Ждём новый раунд" : "Ждём"
+    message = user.hot_joined?(game) && !round.last? ? t(".wait_for_new_round") : t(".wait")
     tag.button(message, class: "disabled", disabled: true).html_safe
   end
 

@@ -1,7 +1,7 @@
 <%# selecting buttons works via css's :has, not js %>
-<%= link_to "Вход", new_user_session_path, 
+<%= link_to t(".sign_in"), new_user_session_path, 
       class: %w[button sign-in], 
       data: { turbo_frame: "authentication-form", turbo_action: :advance } %>
-<%= link_to "Регистрация", new_user_registration_path, 
+<%= link_to t(".sign_up"), new_user_registration_path, 
       class: %w[button sign-up],
         data: { turbo_frame: "authentication-form", turbo_action: :advance }  %>

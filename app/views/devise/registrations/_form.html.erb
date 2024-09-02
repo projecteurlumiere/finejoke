@@ -5,8 +5,8 @@
       <%= f.email_field :email, 
         autofocus: true, 
         autocomplete: "email", 
-        placeholder: "Эмейл", 
-        aria_label: "Электронный адрес", 
+        placeholder: t(".email"), 
+        aria_label: t(".email_aria"), 
         required: true %>
       <%= render_errors(resource, :email) %>
     </div>
@@ -14,8 +14,8 @@
     <div>
       <%= f.text_field :username, 
         autocomplete: "username", 
-        placeholder: "Имя", 
-        aria_label: "Имя пользователя", 
+        placeholder: t(".username"), 
+        aria_label: t(".username_aria"), 
         required: true,
         minlength: 1, 
         maxlength: 14 %>
@@ -25,8 +25,8 @@
     <div>
       <%= f.password_field :password, 
           autocomplete: "new-password", 
-          placeholder: "Пароль", 
-          aria_label: "Пароль (минимум #{@minimum_password_length} знаков)",
+          placeholder: t(".password"), 
+          aria_label: t(".password_aria", max_length: @minimum_password_length),
           required: true,
           minlength: 8 %>
       <%= render_errors(resource, :password) %>
@@ -35,15 +35,18 @@
     <div>
       <%= f.password_field :password_confirmation, 
         autocomplete: "new-password", 
-        placeholder: "Ещё раз", 
-        aria_label: "Подтвердите пароль",
+        placeholder: t(".password_confirm"), 
+        aria_label: t(".password_confirm_aria"),
         required: true,
         minlength: 8 %>
       <%= render_errors(resource, :password_confirmation) %>
     </div>
   <% end %>
 
-   <input type="submit" form="new-registration" value="Создать" data-turbo-frame="_top">
+   <input type="submit" 
+    form="new-registration" 
+    value="<%= t(".create_account") %>" 
+    data-turbo-frame="_top">
 
   <%= render "devise/shared/links" %>
 </turbo-frame>

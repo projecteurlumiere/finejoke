@@ -13,8 +13,8 @@
 
   <div>
     <%= form.text_field :name,
-      placeholder: "Название", 
-      aria_label: "Введите название", 
+      placeholder: t(".name"), 
+      aria_label: t(".enter_name"), 
       required: true, 
       minlength: 1, 
       maxlength: 14, 
@@ -23,54 +23,82 @@
   </div>
 
   <fieldset class="settings">
-    <legend>Доп настройки</legend>
+    <legend>
+      <%= t(".extra_settings") %>  
+    </legend>
     <div>
       <%= form.select :max_players, (2..10), value: 2 %>
-      <%= form.label :max_players, "Макс игроков", style: "display: block" %>
+      <%= form.label :max_players, t(".max_players"), style: "display: block" %>
     </div>
     
     <div>
       <%= form.select :max_round_time, [60, 90, 120, 150, 180], value: 90 %>
-      <%= form.label :max_round_time, "Время раунда, сек", style: "display: block" %>
+      <%= form.label :max_round_time, t(".max_round_time"), style: "display: block" %>
     </div>
   </fieldset>
 
   <fieldset class="conditions">
-    <legend>Условия победы</legend>
+    <legend>
+      <%= t(".victory_conditions") %>
+    </legend>
     <div>
       <%# form.check_box :max_rounds_enabled, aria_label: "Включить условие победы по раундам" %>
       <div class="circle"></div>
-      <%= form.label :max_rounds, "Кол-во раундов", style: "display: block" %>
+      <%= form.label :max_rounds, 
+      t(".max_rounds"), 
+      aria_label: t(".max_rounds_aria"),
+      style: "display: block" %>
       <%# form.number_field :max_rounds, min: 1, max: 42, value: nil, placeholder: "Нет" %>
-      <%= form.select :max_rounds, [["Нет", nil], 1, 5, 10, 15, 20, 25, 30, 35, 40, 42], value: "Нет", placeholder: "Нет" %>
+      <%= form.select :max_rounds, 
+        [[t(".none"), nil], 1, 5, 10, 15, 20, 25, 30, 35, 40, 42], 
+        value: t(".none"), 
+        placeholder: t(".none") %>
     </div>
     
     <div>
       <%# form.check_box :max_points_enabled aria_label: "Включить условие победы по очкам %>
       <div class="circle"></div>
-      <%= form.label :max_points, "Кол-во очков", aria_label: "Включить условие победы по очкам", style: "display: block" %>
+      <%= form.label :max_points, 
+        t(".max_points"), 
+        aria_label: t(".max_points_aria"), 
+        style: "display: block" %>
       <%# form.number_field :max_points, min: 10, max: 999, value: nil, placeholder: "Нет" %>
-      <%= form.select :max_points, [["Нет", nil], 10, 50, 100, 150, 200, 400, 600, 800, 999], value: "Нет", placeholder: "Нет" %>
+      <%= form.select :max_points, 
+        [[t(".none"), nil], 10, 50, 100, 150, 200, 400, 600, 800, 999], 
+        value: t(".none"), 
+        placeholder: t(".none") %>
     </div>
   </fieldset>
 
   <fieldset class="switch-container">
-    <legend>Доступ</legend>
+    <legend>
+      <%= t(".access") %>
+    </legend>
     <div>
-      <div>Открыта для зрителей</div>
+      <div>
+        <%= t(".open_for_viewers") %>
+      </div>
       <div class="switch">
         <%= form.label :viewable, aria_label: "Открыта для зрителей" do %>
-          <%= form.check_box :viewable, data: { new_game_target: :viewable, action: "click->new-game#toggleViewable" } %>
+          <%= form.check_box :viewable, 
+            data: { 
+              new_game_target: :viewable, 
+              action: "click->new-game#toggleViewable" } %>
           <span class="slider"></span>
         <% end %>
       </div>
     </div>
 
     <div>
-      <div>Зрители голосуют</div>
+      <div>
+        <%= t(".viewers_vote") %>
+      </div>
       <div class="switch">
         <%= form.label :viewers_vote, aria_label: "Зрители голосуют" do %>
-          <%= form.check_box :viewers_vote, data: { new_game_target: "viewersVote", action: "click->new-game#toggleViewable" } %>
+          <%= form.check_box :viewers_vote, 
+            data: { 
+              new_game_target: "viewersVote", 
+              action: "click->new-game#toggleViewable" } %>
           <span class="slider"></span>
         <% end %>
       </div>

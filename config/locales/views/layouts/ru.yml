@@ -1,0 +1,10 @@
+ru:
+  layouts:
+    application:
+      title: Файнджоук
+    user_profile:
+      you_are_guest: Вы гость
+      wanna_sign_in: Войти?
+    user_status:
+      quit_game: Выход
+      currently_in_game: В игре

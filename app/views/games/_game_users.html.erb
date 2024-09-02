@@ -3,7 +3,8 @@
 
   <%= render partial: "games/game_user", 
              formats: %i[html],
-             collection: game.users.order(current_score: :desc, username: :asc).to_a + Array.new((game.max_players - game.n_players), nil),
+             collection: game.users.order(current_score: :desc, username: :asc).to_a +
+               Array.new((game.max_players - game.n_players), nil),
              as: :user, 
              locals: locals %>
 </ul>
