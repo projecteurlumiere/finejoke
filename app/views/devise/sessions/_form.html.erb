@@ -2,11 +2,21 @@
   <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { id: "new-session", class: "new-session" }) do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
     <div>
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Эмейл", aria_label: "Электронная почта" %>
+      <%= f.email_field :email, 
+        autofocus: true, 
+        autocomplete: "email", 
+        placeholder: "Эмейл", 
+        aria_label: "Электронная почта", 
+        required: true %>
       <%= render_errors(resource, :email) %>
     </div>
     <div>
-      <%= f.password_field :password, autocomplete: "current-password", placeholder: "Пароль", aria_label: "Пароль" %>
+      <%= f.password_field :password, 
+        autocomplete: "current-password", 
+        placeholder: "Пароль", 
+        aria_label: "Пароль", 
+        required: true, 
+        maxlength: 128 %>
       <%= render_errors(resource, :password) %>
     </div>
     <% if devise_mapping.rememberable? %>

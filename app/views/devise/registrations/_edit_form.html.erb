@@ -22,12 +22,22 @@
     <fieldset>
       <legend>Важные (можно не заполнять)</legend>
       <div>
-        <%= f.text_field :username, value: nil, placeholder: "Новое имя?", aria_label: "Введите новое имя пользователя, если желаете изменить", autocomplete: "off" %>
+        <%= f.text_field :username, 
+          value: nil, 
+          placeholder: "Новое имя?", 
+          aria_label: "Введите новое имя пользователя, если желаете изменить", 
+          autocomplete: "off",
+          minlength: 1,
+          maxlength: 14 %>
         <%= render_errors(resource, :username) %>
       </div>
 
       <div>
-        <%= f.email_field :email, value: nil, placeholder: "Новый эмейл?", aria_label: "Введите новйы эмейл, если желаете изменить", autocomplete: "off" %>
+        <%= f.email_field :email, 
+          value: nil, 
+          placeholder: "Новый эмейл?", 
+          aria_label: "Введите новйы эмейл, если желаете изменить", 
+          autocomplete: "off" %>
         <%= render_errors(resource, :email) %>
       </div>
 
@@ -36,12 +46,22 @@
       <% end %>
     
       <div>
-        <%= f.password_field :password, placeholder: "Новый пароль?", aria_label: "Введите новый пароль, если желаете изменить", autocomplete: "new-password" %>
+        <%= f.password_field :password, 
+          placeholder: "Новый пароль?", 
+          aria_label: "Введите новый пароль, если желаете изменить", 
+          autocomplete: "new-password",
+          minlength: 8,
+          maxlength: 128 %>
         <%= render_errors(resource, :password) %>
       </div>
 
       <div>
-        <%= f.password_field :password_confirmation, placeholder: "Ещё раз", aria_label: "Повторите новый пароль, если желаете изменить", autocomplete: "new-password" %>
+        <%= f.password_field :password_confirmation, 
+          placeholder: "Ещё раз", 
+          aria_label: "Повторите новый пароль, если желаете изменить", 
+          autocomplete: "new-password",
+          minlength: 8,
+          maxlength: 128 %>
         <%= render_errors(resource, :password_confirmation) %>
       </div>
 
@@ -81,11 +101,11 @@
     </legend>
       <div>
         <%= f.password_field :current_password, 
-              required: true,
-              minlength: 6,
-              placeholder: "Старый пароль", 
-              autocomplete: "password", 
-              data: { profile_edit_target: "passwordField", action: "profile-edit#copyPassword" } %>
+          required: true,
+          maxlength: 128,
+          placeholder: "Старый пароль", 
+          autocomplete: "password",
+          data: { profile_edit_target: "passwordField", action: "profile-edit#copyPassword" } %>
         <%= @delete_account_password_errors || render_errors(resource, :current_password) %>
       </div>
     </fieldset>

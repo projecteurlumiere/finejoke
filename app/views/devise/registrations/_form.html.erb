@@ -2,22 +2,43 @@
   <%= form_for(resource, url: registration_path(resource_name), html: { id: "new-registration", class: "new-registration" }) do |f| %>
     <%# render "devise/shared/error_messages", resource: resource %>
     <div>
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Эмейл", aria_label: "Электронный адрес" %>
+      <%= f.email_field :email, 
+        autofocus: true, 
+        autocomplete: "email", 
+        placeholder: "Эмейл", 
+        aria_label: "Электронный адрес", 
+        required: true %>
       <%= render_errors(resource, :email) %>
     </div>
   
     <div>
-      <%= f.text_field :username, autocomplete: "username", placeholder: "Имя", aria_label: "Имя пользователя" %>
+      <%= f.text_field :username, 
+        autocomplete: "username", 
+        placeholder: "Имя", 
+        aria_label: "Имя пользователя", 
+        required: true,
+        minlength: 1, 
+        maxlength: 14 %>
       <%= render_errors(resource, :username) %>
     </div>
   
     <div>
-      <%= f.password_field :password, autocomplete: "new-password", placeholder: "Пароль", aria_label: "Пароль (минимум #{@minimum_password_length} знаков)" %>
+      <%= f.password_field :password, 
+          autocomplete: "new-password", 
+          placeholder: "Пароль", 
+          aria_label: "Пароль (минимум #{@minimum_password_length} знаков)",
+          required: true,
+          minlength: 8 %>
       <%= render_errors(resource, :password) %>
     </div>
   
     <div>
-      <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Ещё раз", aria_label: "Подтвердите пароль" %>
+      <%= f.password_field :password_confirmation, 
+        autocomplete: "new-password", 
+        placeholder: "Ещё раз", 
+        aria_label: "Подтвердите пароль",
+        required: true,
+        minlength: 8 %>
       <%= render_errors(resource, :password_confirmation) %>
     </div>
   <% end %>

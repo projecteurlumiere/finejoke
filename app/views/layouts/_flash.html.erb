@@ -1,6 +1,5 @@
 <% flashable = ((defined? flashable) && flashable) || flash %>
 <div id="flash" class="<%= flashable[:notice] ? :notice : :alert %>">
-  <%# binding.irb %>
   <% if flashable[:notice] || flashable[:alert] %>
     <%= tag.div class: ["message", "button", (flashable[:notice] ? :notice : :alert)].join(" "),
                 data: {

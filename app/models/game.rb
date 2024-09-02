@@ -23,7 +23,7 @@ AFK_ROUNDS_THRESHOLD = 1
           MIN_POINTS = 2
           MAX_POINTS = 999
 
-  validates :name, presence: true, length: { in: 5..30 }
+  validates :name, presence: true, length: { in: 1..14 }
   validates :max_players, numericality: { only_integer: true },
                           comparison: { greater_than_or_equal_to: MIN_PLAYERS, less_than_or_equal_to: MAX_PLAYERS }
   validates :max_round_time, numericality: { only_integer: true },

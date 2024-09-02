@@ -12,7 +12,13 @@
   <% end %>
 
   <div>
-    <%= form.text_field :name, placeholder: "Название", aria_label: "Введите название", required: true, minlength: 1, data: { new_game_target: "name" } %>
+    <%= form.text_field :name,
+      placeholder: "Название", 
+      aria_label: "Введите название", 
+      required: true, 
+      minlength: 1, 
+      maxlength: 14, 
+      data: { new_game_target: "name" } %>
     <%= render_errors(game, :name) %>
   </div>
 

@@ -5,7 +5,7 @@ class Message
 
   validates :user, presence: true
   validates :game, presence: true
-  validates :text, presence: true, length: { in: 2..140 }
+  validates :text, presence: true, length: { in: 1..140 }
 
   def broadcast
     game.broadcast_message(text, from: user)

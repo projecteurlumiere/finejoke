@@ -18,10 +18,6 @@ class ApplicationController < ActionController::Base
     current_or_guest_user
   end
 
-  def guest_user_params
-    { username: "Joker" + SecureRandom.hex(10) }
-  end
-
   private
   
   def guest_welcomed?
