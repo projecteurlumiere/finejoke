@@ -14,7 +14,7 @@ class Game < ApplicationRecord
 
          MIN_PLAYERS = 2
          MAX_PLAYERS = 10
-      MIN_ROUND_TIME = 1 
+      MIN_ROUND_TIME = 1
       MAX_ROUND_TIME = 180
 AFK_ROUNDS_THRESHOLD = 1
   RESULTS_STAGE_TIME = 5
@@ -41,8 +41,8 @@ AFK_ROUNDS_THRESHOLD = 1
 
   def add_user(user, is_host: false)
     transaction do
+      raise ActiveRecord::RecordInvalid unless joinable?(by: user)
       user.reset_game_attributes
-      return false unless joinable?(by: user)
       self.host = user if is_host
       user.update_attribute(:hot_join, true) if ongoing?
       self.users << user
@@ -51,16 +51,14 @@ AFK_ROUNDS_THRESHOLD = 1
 
       save!
       touch
-
-      true
-    rescue ActiveRecord::RecordInvalid
-      return false
     end
 
     user.broadcast_status_change
     broadcast_user_change
 
     true
+  rescue ActiveRecord::RecordInvalid
+    return false
   end
 
   def remove_user(user)
@@ -74,18 +72,18 @@ AFK_ROUNDS_THRESHOLD = 1
       user.reset_game_attributes
       user.broadcast_status_change
 
-      self.destroy and return true if n_players == 0
+      self.destroy and return true if n_players.zero?
 
       self.host = users.first if was_host
       save!
       touch
-    rescue ActiveRecord::RecordInvalid
-      return false
     end
 
     broadcast_user_change
 
     true
+  rescue ActiveRecord::RecordInvalid
+    return false
   end
 
   alias_method :kick_user, :remove_user
@@ -148,7 +146,8 @@ AFK_ROUNDS_THRESHOLD = 1
     user = by
     return false if finished?
     return false if n_players >= max_players
-    return false if user&.game
+    return false if user.nil?
+    return false if user.game
 
     true
   end

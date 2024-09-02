@@ -5,8 +5,10 @@ class Joke < ApplicationRecord
 
   belongs_to :punchline_author, class_name: :User
   belongs_to :setup_author, class_name: :User
+
+  validate -> { game.present? && round.present? }, if: :new_record?
   validates :setup, length: { in: 1..200 }
-  validates :punchline, length: { in: 1...200 } 
+  validates :punchline, length: { in: 1...200 }
 
   alias_method :user=, :punchline_author=
   alias_method :user, :punchline_author
