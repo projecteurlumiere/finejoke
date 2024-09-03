@@ -1,6 +1,13 @@
 #profile {
   // #summary {
     .form-large {    
+      .email-not-confirmed {
+        p {
+          font-size: 0.9em;
+          color: var(--black)
+        }
+      }
+
       .switch-container > div > div:first-child {
         margin-left: 1rem;
       }

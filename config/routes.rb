@@ -27,7 +27,8 @@ Rails.application.routes.draw do
   end
 
   devise_for :users, controllers: {
-    registrations: "users/registrations"
+    registrations: "users/registrations",
+    confirmations: "users/confirmations"
   }
 
   get "up" => "rails/health#show", as: :rails_health_check

@@ -1,0 +1,20 @@
+ru:
+  devise:
+    mailer:
+      shared:
+        hello: Привет %{username}!
+        sign_off: С уважением,
+        signature: Файнджоук
+      confirmation_instructions:
+        welcome: Добро пожаловать %{username}!
+        you_can_confirm: "Вы можете подтвердить свой эмейл, пройдя по следующей ссылке:"
+        confirm_link: Подтвердить эмейл
+      email_changed:
+        email_is_being_changed: "Ваш эмейл будет изменён на следующий:"
+        email_has_been_changed: "Ваш эмейл был изменён на следующий:"
+      password_change:
+        password_changed: Ваш пароль был изменён.
+      reset_password_instructions:
+        link_was_requested: "Забыли пароль? Вы можете его восстановить по следующей ссылке:"
+        reset_link: Восстановить пароль
+        ignore: Пожалуйста, проигнорируйте это письмо, если это были не вы. Пароль останется прежним.
