@@ -32,7 +32,7 @@ class GamesController < ApplicationController
       turbo_redirect_to game_path(@game)
     else
       flash.now[:alert] = "Игра не была создана"
-      render :index, status: :unprocessable_entity
+      render partial: "games/form", formats: [:turbo_stream], status: :unprocessable_entity
     end
   end
 

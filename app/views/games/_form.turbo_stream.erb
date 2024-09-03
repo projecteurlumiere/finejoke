@@ -1,0 +1,5 @@
+<%= turbo_stream.replace("new-game") do %>
+  <%= render partial: "games/form", formats: [:html], locals: { game: @game } %>
+<% end %>
+
+<%= render partial: "shared/flash" %>
