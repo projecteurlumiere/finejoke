@@ -58,8 +58,14 @@ class GamesController < ApplicationController
   end
 
   def leave # game
-    @game = Game.includes(:users).find(params[:game_id])
-    skip_authorization and redirect_to(games_path) and return if @game.users.exclude?(current_or_guest_user)
+    @game = Game.includes(:users).find_by(id: params[:game_id])
+
+    if @game.nil? || @game.users.exclude?(current_or_guest_user)
+      skip_authorization
+      flash[:notice] = "Вы успешно покинули игру"
+      redirect_to(games_path)
+      return
+    end 
 
     authorize_game!
 
