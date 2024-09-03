@@ -19,7 +19,6 @@ class DestroyIdleGameJob < ApplicationJob
       return
     end
 
-    game.broadcast_redirect_to(game_over_path(game))
     game.destroy
   end
 end

@@ -37,7 +37,7 @@ AFK_ROUNDS_THRESHOLD = 1
   after_create :schedule_idle_game_destroy
 
   after_create_commit :broadcast_game_start
-  after_destroy_commit :broadcast_game_over
+  after_destroy_commit -> { broadcast_redirect_to(game_over_path(self)) }
 
   def add_user(user, is_host: false)
     transaction do
