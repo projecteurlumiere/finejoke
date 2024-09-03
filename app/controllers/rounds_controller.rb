@@ -22,10 +22,10 @@ class RoundsController < ApplicationController
     
     if @round.save
       response.status = :accepted
-      flash.now[:notice] = "Раунд создан"
+      flash.now[:notice] = t(".round_created")
     else
       response.status = :unprocessable_entity
-      flash.now[:alert] = "Раунд не создан"
+      flash.now[:alert] = t(".round_not_created")
     end
 
     render_turbo_flash
@@ -36,10 +36,10 @@ class RoundsController < ApplicationController
   def update
     if @round.update(round_params)
       response.status = :accepted
-      flash.now[:notice] = "Завязка создана"
+      flash.now[:notice] = t(".setup_created")
     else
       response.status = :unprocessable_entity
-      flash.now[:alert] = "Завязка не создана"
+      flash.now[:alert] = t(".setup_not_created")
     end
 
     render_turbo_flash

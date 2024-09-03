@@ -1,0 +1,37 @@
+ru:
+  application:
+    welcome_guest: Войдите или останьтесь гостем
+    not_found: Не найдено
+    forbidden: У вас здесь нет прав
+  awards:
+    award_given: Подарок подарен
+    award_not_given: "Подарок не удалось подарить"
+  games:
+    cannot_show_game: Игру нельзя смотреть
+    game_created: Игра создана
+    game_not_created: Игра не была создана
+    game_destroyed: Игра удалена
+    join_game: Вы присоединились к игре
+    join_game_failed: Не удалось присоединиться к игре
+    leave_game: Вы успешно покинули игру
+    leave_game_failed: Не удалось покинуть игру
+    kick_user: Игрок кикнут
+    kick_user_fail: Игрок не был кикнут
+    game_over: Игра была закрыта
+    already_in_game: Вы уже в игре
+  jokes:
+    joke_created: Шутка создана
+    joke_not_create: Шутка не создана
+    vote_counted: Голос учтён
+    vote_not_counted: Голос не был учтён
+  messages:
+    message_sent: Сообщение отправлено
+    message_not_sent: Сообщение не отправлено
+  profile:
+    profile_updated: Настройки профиля сохранены
+    profile_not_updated: Настройки профиля не были сохранены
+  rounds:
+    round_created: Раунд создан # игра началась/продолжилась?
+    round_not_created: Раунд не создан # игра не началась и не продолжилась?
+    setup_created: Завязка создана
+    setup_not_created: Завязка не создана

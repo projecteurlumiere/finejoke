@@ -19,12 +19,12 @@ class JokesController < ApplicationController
     
     if @joke.save
       response.status = :ok
-      flash.now[:notice] = "Шутка создана"
+      flash.now[:notice] = t(".joke_created")
       reload_game_state
       render "rounds/show", layout: false, formats: %i[turbo_stream], locals: { game: @game, round: @round }
     else
       response.status = :unprocessable_entity
-      flash.now[:alert] = "Шутка не создана"
+      flash.now[:alert] = t(".joke_not_created")
       render_turbo_flash
     end
 
@@ -34,10 +34,10 @@ class JokesController < ApplicationController
   def update
     if @joke.register_vote(by: current_or_guest_user)
       response.status = :ok
-      flash.now[:notice] = "Голос учтён"
+      flash.now[:notice] = t(".vote_counted")
     else
       response.status = :unprocessable_entity
-      flash.now[:alert] = "Голос не был учтён"
+      flash.now[:alert] = t(".vote_not_counted")
     end
     
     render_turbo_flash

@@ -62,10 +62,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def destroy
     skip_authorization
     if resource.destroy_with_password(params[:user][:current_password])
-      flash[:notice] = "Аккаунт удалён"
+      flash[:notice] = t("devise.registrations.destroyed")
       turbo_redirect_to root_path
     else
-      flash.now[:alert] = "Аккаунт не был удалён - неверный пароль"
+      flash.now[:alert] = t("devise.registrations.not_destroyed")
       render_turbo_flash(status: :unprocessable_entity)
     end 
   end

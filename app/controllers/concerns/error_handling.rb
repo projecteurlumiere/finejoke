@@ -8,7 +8,7 @@ module ErrorHandling
     private
 
     def render_not_found
-      flash.now.alert = "Не найдено"
+      flash.now.alert = t("application.not_found")
       status = :not_found
 
       if request.formats.include?(:turbo_stream)
@@ -19,7 +19,7 @@ module ErrorHandling
     end
 
     def render_not_authorized
-      flash.now.alert = "У вас здесь нет прав"
+      flash.now.alert = t("application.forbidden")
       status = :forbidden
 
       if request.formats.include?(:turbo_stream)
