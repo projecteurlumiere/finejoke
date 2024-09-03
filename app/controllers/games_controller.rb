@@ -7,7 +7,7 @@ class GamesController < ApplicationController
   def index
     @game = Game.new
 
-    @games = Game.where.not(status: :finished).order(n_players: :desc).all
+    @games = Game.where.not(status: :finished).order(n_players: :desc, created_at: :desc).all
     # clean_up_games
   end
 
