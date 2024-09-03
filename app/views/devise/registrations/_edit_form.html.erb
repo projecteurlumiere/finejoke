@@ -59,8 +59,7 @@
           placeholder: t(".new_password"), 
           aria_label: t(".new_password_aria"), 
           autocomplete: "new-password",
-          minlength: 8,
-          maxlength: 128 %>
+          minlength: 8 %>
         <%= render_errors(resource, :password) %>
       </div>
 
@@ -69,8 +68,7 @@
           placeholder: t(".confirm_password"), 
           aria_label: t(".confirm_password_aria"), 
           autocomplete: "new-password",
-          minlength: 8,
-          maxlength: 128 %>
+          minlength: @minimum_password_length %>
         <%= render_errors(resource, :password_confirmation) %>
       </div>
 
@@ -123,7 +121,6 @@
       <div>
         <%= f.password_field :current_password, 
           required: true,
-          maxlength: 128,
           placeholder: t(".current_password"), 
           autocomplete: "password",
           aria_label: t(".current_password_aria"),

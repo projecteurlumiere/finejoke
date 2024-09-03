@@ -13,11 +13,17 @@ module ApplicationHelper
     end.join(" ").html_safe
   end
 
-  def render_errors(object, field_name)
+  def render_errors(object, field_name, custom_message = nil)
     # return unless object.errors.any?
 
-    tag.div class: "field-errors" do 
-      object.errors.messages[field_name].join(", ") if object.errors.messages[field_name].present?
+    tag.div class: "field-errors" do
+      error_messages = object.errors.messages[field_name]
+
+      if custom_message && error_messages.present?
+         custom_message
+      elsif error_messages.present?
+        error_messages.join(", ")
+      end
     end.html_safe
   end 
 end

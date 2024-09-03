@@ -6,4 +6,12 @@ ru:
         email_aria: Электронная почта
         restore_password: Напомнить пароль
         back: Нет, я вспомнил
-        
+      edit:
+        heading: Восстановление пароля
+        token_expired: "Токен для восстановления пароля больше не действителен: восстановите пароль ещё раз."
+        password: Новый пароль
+        password_aria: Введите новый пароль (минимум %{min_length} знаков)
+        password_confirm: Ещё раз
+        password_confirm_aria: Подтвердите пароль
+        save: Сохранить
+        back: Назад

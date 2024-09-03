@@ -1,5 +1,5 @@
 <% unless new_guest? || 
-  (%w[sessions registrations].include?(controller_name) && !current_page?(edit_self_profile_path)) %>
+  (%w[sessions registrations passwords].include?(controller_name) && !current_page?(edit_self_profile_path)) %>
   <div class="profile">
     <%= link_to current_or_guest_user.username.truncate(14), profile_path(current_or_guest_user) %>
   </div>

@@ -30,7 +30,7 @@ ru:
         username: Имя
         username_aria: Имя пользователя
         password: Пароль
-        password_aria: Пароль (минимум %{max_length} знаков)
+        password_aria: Пароль (минимум %{min_length} знаков)
         password_confirm: Ещё раз
         password_confirm_aria: Подтвердите пароль
         create_account: Создать

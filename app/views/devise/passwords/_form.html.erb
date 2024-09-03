@@ -12,7 +12,7 @@
     </div>
   <% end %>
 
-  <input class="selected" type="submit" form="new-password" value="<%= t(".restore_password") %>">
+  <input class="selected" type="submit" form="new-password" value="<%= t(".restore_password") %>" data-turbo-frame="_top">
   
   <%= render "devise/shared/links" %>
   <%= link_to t(".back"), new_session_path(resource_name), class: "button", data: { turbo_action: :advance } %>
