@@ -8,7 +8,6 @@
           })) do %>
   <%= content_for(:nav_button) do %>
     <%= link_to t(".back_to_lobby"), games_path, class: "button black-and-white" %>
-    <%# button_to "Присоединиться", game_join_path(game) if game.joinable? %>
   <% end %>
 
   <div class="mobile-navigation">

@@ -1,7 +1,6 @@
 <div id="profile" class="two-columns">
   <%= content_for(:nav_button) do %>
     <%= link_to t(".to_lobby"), games_path, class: :button %>
-    <%# button_to "Присоединиться", game_join_path(game) if game.joinable? %>
   <% end %>
   <%= render partial: "profiles/catalogue", locals: { user: current_user, jokes: @jokes } %>
   <%= render partial: "edit_form" %>

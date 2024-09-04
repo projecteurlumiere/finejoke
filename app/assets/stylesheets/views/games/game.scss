@@ -38,15 +38,18 @@
   }
 
   > .mobile-navigation {
-    .n_players {
-      width: 5ch;
+    .n-players {
+      width: 100%;
+      min-width: 5ch;
       font-family: inherit;
       font-size: inherit;
+      display: flex;
+      justify-content: center;
     }
 
     @media(max-width: 500px) {
-      .n_players {
-        width: unset;
+      .n-players {
+        min-width: 2ch;
 
         .max-players {
           display: none;

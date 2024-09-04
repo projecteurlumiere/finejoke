@@ -5,12 +5,12 @@
     <%= render partial: "games/game_users", formats: %i[html], locals: { game: game, votes_change: votes_change } %>
   <% end %>
 
-  <%= turbo_stream.replace_all(".n_players") do %>
+  <%= turbo_stream.replace_all(".n-players") do %>
     <%= render partial: "games/game_n_players", locals: { game: game } %>
   <% end %> 
 
   <% if game.viewable? %>
-    <%= turbo_stream.replace_all(".n_viewers") do %>
+    <%= turbo_stream.replace_all(".n-viewers") do %>
       <%= render partial: "games/game_n_viewers", locals: { game: game } %>
     <% end %>
   <% end %>

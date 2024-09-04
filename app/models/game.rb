@@ -146,8 +146,7 @@ AFK_ROUNDS_THRESHOLD = 1
     user = by
     return false if finished?
     return false if n_players >= max_players
-    return false if user.nil?
-    return false if user.game
+    return false if user&.game
 
     true
   end
