@@ -23,7 +23,7 @@ ru:
     already_in_game: Вы уже в игре
   jokes:
     joke_created: Шутка создана
-    joke_not_create: Шутка не создана
+    joke_not_created: Шутка не создана
     vote_counted: Голос учтён
     vote_not_counted: Голос не был учтён
   messages:
