@@ -20,6 +20,8 @@ Rails.application.routes.draw do
     get "profile/edit", to: "devise/registrations#edit", as: :edit_self_profile
   end
 
+  resources :guests, only: %i[create]
+
   post "award", to: "awards#gift"
   
   devise_scope :user do

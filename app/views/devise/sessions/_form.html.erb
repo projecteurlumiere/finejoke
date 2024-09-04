@@ -29,7 +29,12 @@
     value="<%= t(".sign_in") %>" 
     data-turbo-frame="_top">
   <%= render "devise/shared/links" %>
-  <%= link_to t(".remain_guest"), session[:referrer] || root_path, 
+  
+  <%= button_to t(".remain_guest"), guests_path, 
+    params: { referrer: session[:referrer] || root_path }, 
+    data: { turbo_frame: "_top"} %>
+
+  <%# link_to t(".remain_guest"), session[:referrer] || root_path, 
     class: "button", 
     data: { turbo_frame: "_top" } %>
 </turbo-frame>

@@ -20,7 +20,7 @@ body:has(main > #authentication) {
     border: none;
     grid-row: 2 / 3;
 
-    form {
+    form:not(.button_to) {
       display: flex;
       flex-direction: column;
       padding: 2rem;

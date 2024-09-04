@@ -24,12 +24,18 @@ class ApplicationController < ActionController::Base
     session[:guest_welcomed]
   end
 
+  def new_guest?
+    return false if current_user || session[:guest_user_id]
+
+    true
+  end
+
+  helper_method :new_guest?
 
   def welcome_guest
-    session[:guest_welcomed] = true if devise_controller?
     flash[:notice] = t("application.welcome_guest")
 
-    unless devise_controller?
+    unless devise_controller? || controller_name == "guests"
       store_referrer
       authenticate_user!
     end
@@ -39,6 +45,11 @@ class ApplicationController < ActionController::Base
     session[:referrer] = request.path
   end
 
+  def remove_referrer
+    session[:referrer] = nil
+  end
+
+
   def after_sign_in_path_for(_resource)
     if request.formats.include?(:turbo_stream)
       turbo_redirect_to_path(params: { path: session[:referrer]})
@@ -46,18 +57,6 @@ class ApplicationController < ActionController::Base
       session[:referrer] || root_path
     end
   end
-
-  def remove_referrer
-    session[:referrer] = nil
-  end
-
-  def new_guest?
-    return false if current_user || session[:guest_user_id]
-
-    true
-  end
-
-  helper_method :new_guest?
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:username])

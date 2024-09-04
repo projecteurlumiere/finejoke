@@ -3,6 +3,8 @@ ru:
     welcome_guest: Войдите или останьтесь гостем
     not_found: Не найдено
     forbidden: У вас здесь нет прав
+  guests:
+    you_are_guest: Вы теперь гость!
   awards:
     award_given: Подарок подарен
     award_not_given: "Подарок не удалось подарить"
