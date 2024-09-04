@@ -11,8 +11,8 @@ module TurboRendering
 
       @turbo_redirect = true
       path ||= params[:path] || root_path
-      # change to :see_other?
-      render partial: "shared/redirect_to", formats: %i[turbo_stream], locals: { path: path }, status: :found
+
+      render partial: "shared/redirect_to", formats: %i[turbo_stream], locals: { path: path }, status: :see_other
     end
 
     def render_turbo_flash(status: response.status)

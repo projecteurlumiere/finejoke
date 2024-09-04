@@ -24,6 +24,8 @@ Rails.application.routes.draw do
 
   post "award", to: "awards#gift"
   
+  get "/users/confirmation/new", to: redirect("users/edit")
+
   devise_scope :user do
     get "users/edit", to: redirect("profile/edit")
   end
