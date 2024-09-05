@@ -61,6 +61,8 @@ ru:
       vote: Проголосовать
       revote: Переголосовать
       wait: Ждём
+    joke:
+      anon: Некто
     no_jokes:
       players: Игроки
       join_the_game: Заходят игрок в игру-нейм

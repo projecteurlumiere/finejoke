@@ -1,0 +1,11 @@
+.task {
+   form {
+    display: flex;
+
+    textarea {
+      border: none;
+      // min-height: 4ch;
+      // width: calc(100% - (var(--task-vertical-padding) * 2));
+    }
+  }
+}

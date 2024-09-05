@@ -18,6 +18,7 @@
     <div class="description press-font" data-jokes-target="description">
       <%= round_task_for(current_or_guest_user, round, game) %>
     </div>
+    <%= render_setup_for(round) %>
     <%= render_input_for(current_or_guest_user, round, game) %>
   </div>
   <div class="action">

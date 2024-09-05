@@ -1,0 +1,46 @@
+.task {
+  .punchline,
+  .setup {
+    display: flex;
+    flex-direction: column;
+
+    .username {
+      font-family: var(--press-start-2p);
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-family: var(--nunito-sans);
+      font-size: 1.1em;
+      font-weight: 600;
+      overflow-wrap: anywhere;
+    }
+  }
+
+  .setup {
+    align-items: flex-start;
+  }
+
+  .punchline {
+    align-items: flex-end;
+    
+    .username-container {
+      width: 100%;
+      
+      display: flex;
+      justify-content: flex-end;
+      gap: 1rem;
+      text-align: right;
+
+      .n-votes {
+        text-align: right;
+        font-family: var(--press-start-2p);
+        color: var(--red);
+      }
+
+      .username {
+        text-align: right;
+      }
+    }
+  }
+}

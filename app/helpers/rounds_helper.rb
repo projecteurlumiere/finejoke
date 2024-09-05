@@ -32,10 +32,13 @@ module RoundsHelper
 
     raise "why is it nil?" if messages.nil?
 
+    @setup = messages[2]
+
     [
       tag.h2(messages[0]),
-      tag.div(tag.p(messages[1], class: @p_class))
-    ].join(" ").html_safe
+      tag.div(tag.p(messages[1]))
+
+    ].compact.join(" ").html_safe
   end
 
   def game_over_task_for(game)
@@ -68,11 +71,10 @@ module RoundsHelper
       end
     when :punchline
       unless user.finished_turn? || user.lead?
-        @p_class = :setup
         [
           t(".create_punchline"),
-          # t(".create_punchline_subheading"),
-          round.setup
+          nil, # t(".create_punchline_subheading")
+          :setup
         ]
       else
         [
@@ -81,25 +83,24 @@ module RoundsHelper
         ]
       end
     when :vote
-      @p_class = :setup
       if user.can_vote?(round)
         [
           t(".vote_for_joke"),
-          # t(".vote_for_joke_subheading"),
-          ""
+          nil, # t(".vote_for_joke_subheading")
+          :setup
         ]
       else
         [
           t(".players_are_voting"),
-          # t(".players_are_voting_subheading"),
-          ""
+          nil, # t(".players_are_voting_subheading"),
+          :setup
         ]
       end
     when :results
       [
         t(".round_results"),
-        # t(".round_results.subheading"),
-        ""
+        nil, # t(".round_results.subheading"),
+        :setup
       ]
     end
   end
@@ -113,25 +114,35 @@ module RoundsHelper
       ]
 
     when :punchline
-      @p_class = :setup
       [
         t(".viewer.punchlines_are_being_created"),
-        # t(".viewer.punchlines_are_being_created_subheading"),
-        round.setup
+        nil, # t(".viewer.punchlines_are_being_created_subheading"),
+        :setup
       ]
     when :vote
-      @p_class = :setup
       [
         t(".viewer.players_are_voting"),
-        # t(".viewer.players_are_voting_subheading")
-        round.setup
+        nil, # t(".viewer.players_are_voting_subheading")
+        :setup
       ]
     when :results
       [
         t(".viewer.round_results"),
-        # t(".viewer.round_results_subheading")
-        ""
+        nil,
+        :setup
       ]
+    end
+  end
+
+  def render_setup_for(round)
+    # declared in round_task_for
+    return unless @setup
+
+    tag.div(class: "setup") do 
+      [
+        tag.div(round.user.username, class: :username),
+        tag.p(round.setup, class: "bubble top shadow")
+      ].join(" ").html_safe
     end
   end
 
