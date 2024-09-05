@@ -1,9 +1,9 @@
 .press-font,
 .press-font * {
-  font-family: "Press Start 2P", system-ui !important;
+  font-family: var(--press-start-2p) !important;
   text-transform: lowercase;
 }
 
 .nunito-font {
-  font-family: "Nunito Sans", system-ui !important;
+  font-family: var(--nunito-sans) !important;
 }

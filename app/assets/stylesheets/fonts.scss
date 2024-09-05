@@ -5,6 +5,9 @@
   * {
     font-size: clamp(1rem, var(--adaptive-font-size), 1.25rem);
   }
+
+  --nunito-sans: "Nunito Sans", system-ui;
+  --press-start-2p: "Press Start 2P", system-ui;
 }
 
 @media (max-width: 375px) {
@@ -73,7 +76,7 @@
 }
 
 * {
-  font-family: "Nunito Sans", system-ui;
+  font-family: var(--nunito-sans);
 }
 
 h1, h2, h3, h4, h5, h6,
@@ -81,7 +84,7 @@ input,
 .label,
 .value,
 textarea {
-  font-family: "Press Start 2P", system-ui;
+  font-family: var(--press-start-2p);
 }
 
 h1, h2, h3, h4, h5, h6,

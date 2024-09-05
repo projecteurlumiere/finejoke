@@ -32,7 +32,7 @@
     margin-bottom: clamp(0.75rem, var(--adaptive-font-size), 2rem);
 
     font-size: 1rem;
-    font-family: "Nunito Sans", system-ui;
+    font-family: var(--nunito-sans);
     text-transform: none;
     font-weight: 500;
     text-align: left;
