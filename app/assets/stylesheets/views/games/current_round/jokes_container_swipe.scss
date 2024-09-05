@@ -1,0 +1,40 @@
+// swipe!
+
+.jokes-container {
+  .swipe {
+    overflow: hidden;
+    visibility: hidden;
+    position: relative;
+    height: 100%;
+    margin: 0;
+  }
+  .swipe-wrap {
+    overflow: hidden;
+    position: relative;
+    height: 100%; // added
+  }
+  .swipe-wrap > div {
+    float: left;
+    width: 100%;
+    height: auto;
+    // max-height: min-content;
+    // @container task (min-height: 0) {
+    //     height: 200px;
+    // }
+    // max-height: 100%;
+    min-height: min-content; // added
+    // overflow-y: auto;
+    position: relative;
+    overflow: hidden;
+
+    > .joke-content-wrapper {
+      padding-right: var(--task-horizontal-padding);
+      padding-left: var(--task-horizontal-padding);
+    }
+
+    p {
+      margin-right: 8px;
+      margin-left: 8px;
+    }
+  }
+}

@@ -24,7 +24,7 @@
     color: var(--black);
     font-size: clamp(14px, var(--adaptive-font-size), 1.5rem);
   }
-  
+
   @container task (min-height: 0) {
     * {
       font-size: clamp(14px, calc(1.6cqw + 1.6cqh), 1.75rem)
@@ -32,7 +32,7 @@
   }
 
   --task-horizontal-padding: 2rem;
-  @media (min-width: 450px) { --task-horizontal-padding: 4rem; }
+  @media (min-width: 550px) { --task-horizontal-padding: 4rem; }
 
   > * {
     padding-right: var(--task-horizontal-padding);
@@ -61,6 +61,10 @@
   > .setup {
     flex: 1;
     margin-bottom: 2rem;
+
+    @container task (max-height: 500px) {
+      margin-bottom: 0.5rem;
+    }
 
     &:has(+ .jokes-container) {
       flex: 0;

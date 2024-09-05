@@ -3,15 +3,17 @@
               vote_path: game_round_joke_path(round.game, round, joke),
               jokes_target: :joke
             } do %>
-  <div class="punchline">
-    <div class="username-container">
-      <%= tag.div("+#{joke.n_votes}", class: "n-votes") unless round.vote_stage? %>
-      <div class="username">
-        <%= round.vote_stage? ? t(".anon") : joke.punchline_author.username %>
+  <div class="joke-content-wrapper">
+    <div class="punchline">
+      <div class="username-container">
+        <%= tag.div("+#{joke.n_votes}", class: "n-votes") unless round.vote_stage? %>
+        <div class="username">
+          <%= round.vote_stage? ? t(".anon") : joke.punchline_author.username %>
+        </div>
       </div>
+      <p class="bubble top flip shadow">
+        <%= joke.punchline %>
+      </p>
     </div>
-    <p class="bubble top flip shadow">
-      <%= joke.punchline %>
-    </p>
   </div>
 <% end %>

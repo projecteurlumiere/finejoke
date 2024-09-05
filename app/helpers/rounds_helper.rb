@@ -138,7 +138,7 @@ module RoundsHelper
     # declared in round_task_for
     return unless @setup
 
-    tag.div(class: "setup") do 
+    tag.div(class: "setup", data: { jokes_target: "setup" }) do 
       [
         tag.div(round.user.username, class: :username),
         tag.p(round.setup, class: "bubble top shadow")
