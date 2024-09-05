@@ -12,10 +12,10 @@
       } do %>
   <%= tag.div data: round_data_attributes(current_or_guest_user, round, game), class: "hidden state" %>
   <div class="task" data-jokes-target="task">
-    <div class="timer-wrapper">
-      <div class="timer press-font" data-timer-target="digits"></div>
-    </div>
+    <%# <div class="timer-wrapper"> %>
+    <%# </div> %>
     <div class="description press-font" data-jokes-target="description">
+      <div class="timer press-font" data-timer-target="bar"></div>
       <%= round_task_for(current_or_guest_user, round, game) %>
     </div>
     <%= render_setup_for(round) %>

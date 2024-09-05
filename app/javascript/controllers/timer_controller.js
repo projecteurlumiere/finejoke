@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="timer"
 export default class extends Controller {
-  static targets = [ "timings", "circle", "border", "digits" ]
+  static targets = [ "timings", "circle", "bar", "digits" ]
 
   connect() {
   }
@@ -61,8 +61,9 @@ export default class extends Controller {
   // in seconds
   #reportTime(time) {
     if (this.hasCircleTarget) { this.#updateCircles(time) }
-    if (this.hasBorderTarget) { this.#updateBorders(time) }
+    if (this.hasBarTarget) { this.#updateBars(time) }
     if (this.hasDigitsTarget) { this.#updateDigits(time) }
+    console.log(time)
   }
 
   #updateCircles(time) {
@@ -72,11 +73,18 @@ export default class extends Controller {
     // }
   }
 
-  #updateBorders(time) {
-    throw "not implemented"
-    // for (var i = this.BorderTargets.length - 1; i >= 0; i--) {
-    //   this.BorderTargets[i]
-    // }
+  #updateBars(time) {
+    for (var i = this.barTargets.length - 1; i >= 0; i--) {
+      let bar = this.barTargets[i]
+
+      if (time < 10 && this.interval > 15) {
+       bar.classList.add("red")
+      } else {
+       bar.classList.remove("red")
+      }
+
+     bar.style.width = `${bar.parentNode.offsetWidth / this.interval * time}px`
+    }
   }
 
   #updateDigits(time) {
