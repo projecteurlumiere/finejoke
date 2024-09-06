@@ -63,7 +63,6 @@ export default class extends Controller {
     if (this.hasCircleTarget) { this.#updateCircles(time) }
     if (this.hasBarTarget) { this.#updateBars(time) }
     if (this.hasDigitsTarget) { this.#updateDigits(time) }
-    console.log(time)
   }
 
   #updateCircles(time) {
@@ -83,7 +82,11 @@ export default class extends Controller {
        bar.classList.remove("red")
       }
 
-     bar.style.width = `${bar.parentNode.offsetWidth / this.interval * time}px`
+      // 100 - because we set width in percents 
+      let width = 100 / this.interval * time
+      if (bar.dataset.timerReverse) width = 100 - width
+
+      bar.style.width = `${width}%`
     }
   }
 

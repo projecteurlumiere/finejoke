@@ -3,18 +3,21 @@ module RoundScheduling
   
   included do 
     def schedule_next_stage
+      # deadline = Time.current + 9999
       deadline = Time.current + game.max_round_time
       RoundToNextStageJob.set(wait_until: deadline).perform_later(id, stage)
       store_change_timings(deadline)
     end
 
     def schedule_next_round
+      # deadline = Time.current + 10
       deadline = Time.current + Game::RESULTS_STAGE_TIME
       CreateNewRoundJob.set(wait_until: deadline).perform_later(game.id)
       store_change_timings(deadline)
     end
 
     def schedule_game_finish
+      # deadline = Time.current + 9999
       deadline = Time.current + Game::RESULTS_STAGE_TIME
       ConcludeGameJob.set(wait_until: deadline).perform_later(game.id, notify: false, force: true)
       store_change_timings(deadline)
