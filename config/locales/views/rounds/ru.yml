@@ -8,7 +8,7 @@ ru:
       congratulations: Поздравляем!
       # ROUND TASK FOR PLAYER:
       # FOR SETUP:
-      create_setup: Придумайте завязку,
+      create_setup: Придумайте завязку
       create_setup_subheading: Как начать хорошую шутку?
       setup_is_being_created: Игрок придумывает завязку
       setup_is_being_created_subheading: Надо подождать
