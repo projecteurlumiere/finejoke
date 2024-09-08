@@ -1,8 +1,8 @@
-require "test_helper"
+# require "test_helper"
 
-class LobbyChannelTest < ActionCable::Channel::TestCase
-  # test "subscribes" do
-  #   subscribe
-  #   assert subscription.confirmed?
-  # end
-end
+# class LobbyChannelTest < ActionCable::Channel::TestCase
+#   # test "subscribes" do
+#   #   subscribe
+#   #   assert subscription.confirmed?
+#   # end
+# end

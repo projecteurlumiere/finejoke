@@ -1,7 +1,7 @@
-require "test_helper"
+# require "test_helper"
 
-class CreateNewRoundJobTest < ActiveJob::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
-end
+# class CreateNewRoundJobTest < ActiveJob::TestCase
+#   # test "the truth" do
+#   #   assert true
+#   # end
+# end

@@ -1,7 +1,7 @@
-require "test_helper"
+# require "test_helper"
 
-class VoteTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
-end
+# class VoteTest < ActiveSupport::TestCase
+#   # test "the truth" do
+#   #   assert true
+#   # end
+# end
