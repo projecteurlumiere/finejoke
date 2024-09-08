@@ -4,7 +4,6 @@ export default class extends Controller {
   static targets = ["long", "short"]
 
   toggleView() {
-    console.log("hi")
     if (!this.hasShortTarget) return
 
     this.longTarget.classList.toggle("hidden")

@@ -24,7 +24,6 @@ export default class extends Controller {
 
   // container
   jokesTargetConnected() {
-
     this.swipe = new Swipe(document.getElementById("swipe"), 
       { 
         ignore: ".buttons",
@@ -35,23 +34,29 @@ export default class extends Controller {
       }
     );
 
+    if (!this.observer) this.#setObserver()
+    this.observer.observe(this.jokesTarget)
+
     this.#setJoke(0, this.jokeTargets[0]);
     this.buttonsTarget.style.visibility = "visible"
-    this.countJokeFitness();
+    this.fitJoke();
   }
 
   jokesTargetDisconnected() {
     this.swipe.kill()
+    this.observer.unobserve(this.jokesTarget)
   }
 
-  countJokeFitness() {
-    if (!this.hasJokesTarget) return
+  fitJoke() {
+    if (!this.hasJokesTarget || 
+        window.getComputedStyle(this.element).display === "none") return
 
     const jokeHeight = this.jokeTargets[this.swipe.getPos()].offsetHeight
     const visibleArea = this.#countVisibleAreaForJoke();
 
     const height = jokeHeight > visibleArea ? jokeHeight : visibleArea
 
+    this.swipe.setup()
     this.swipeWrapTarget.style.height = `${height}px`
   }
 
@@ -69,7 +74,7 @@ export default class extends Controller {
     this.#setActionLink(elem);
     this.#highlightCounter(index);
 
-    this.countJokeFitness();
+    this.fitJoke();
     elem.classList.add("selected");
 
     for (var i = this.jokeTargets.length - 1; i >= 0; i--) {
@@ -135,6 +140,18 @@ export default class extends Controller {
       this.buttonsTarget.offsetHeight - 
       this.buttonsTarget.offsetHeight
       // why two times? I don't know - perhaps, because it's sticky
+  }
+
+  #setObserver() {
+    this.observer = new IntersectionObserver((elements) => {  
+      for (var i = elements.length - 1; i >= 0; i--) {
+        if (elements[i].isIntersecting) {
+          elements[i].target.dispatchEvent(new Event("jokesvisible", {bubbles: true}))
+        }
+      }
+    }, {
+      threshold: 0.1
+    })
   }
 }
 

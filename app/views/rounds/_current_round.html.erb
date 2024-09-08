@@ -5,7 +5,8 @@
         action: [
             "visibilitychange@window->round-refresh#fetch",
             "turbo:before-stream-render@window->round-refresh#checkResponse",
-            "resize@window->jokes#countJokeFitness"
+            "resize@window->jokes#fitJoke",
+            "jokesvisible@window->jokes#fitJoke"
           ].join(" "),
         containers_target: "container", 
         container_name: "round" 
