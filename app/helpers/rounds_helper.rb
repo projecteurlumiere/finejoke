@@ -138,10 +138,24 @@ module RoundsHelper
     # declared in round_task_for
     return unless @setup
 
-    tag.div(class: "setup", data: { jokes_target: "setup" }) do 
+    setup_p = tag.p(class: "bubble top shadow", 
+                    data: {
+                      action: "click->setup#toggleView"
+                    }) do
+      [
+        tag.span(round.setup, 
+          data: { setup_target: :long },
+          class: ("hidden" if !round.punchline_stage? && round.setup_short)),
+        (tag.span("...#{round.setup_short}", 
+          data: { setup_target: :short },
+          class: ("hidden" if round.punchline_stage?)) if round.setup_short)
+      ].compact.join(" ").html_safe
+    end
+
+    tag.div(class: "setup", data: { controller: "setup", jokes_target: "setup" }) do 
       [
         tag.div(round.user.username, class: :username),
-        tag.p(round.setup, class: "bubble top shadow")
+        setup_p
       ].join(" ").html_safe
     end
   end
@@ -224,18 +238,5 @@ module RoundsHelper
   def render_wait_for(user, round, game)
     message = user.hot_joined?(game) && !round.last? ? t(".wait_for_new_round") : t(".wait")
     tag.button(message, class: "disabled", disabled: true).html_safe
-  end
-
-  def format_shorter(string)
-    str_modified = if string.end_with?(*%w[. ! ?])
-                     string.concat(".")
-                     true
-                   end
-    
-    sentences = string.scan(/[^\.!?]+[\.!?]/).map(&:strip)
-    last_sentence = sentences.pop
-    last_sentence.slice!(0, -1) if str_modified
-
-    [tag.span(sentences.join(" "), class: "hidden"), tag.span([tag.span("..."), last_sentence].join(" ").html_safe)].join(" ") 
   end
 end

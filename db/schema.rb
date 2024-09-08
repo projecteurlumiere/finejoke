@@ -79,6 +79,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_22_113326) do
     t.datetime "change_deadline"
     t.integer "stage", default: 0
     t.string "setup"
+    t.string "setup_short"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["game_id"], name: "index_rounds_on_game_id"

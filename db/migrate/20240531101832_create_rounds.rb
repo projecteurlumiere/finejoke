@@ -9,6 +9,7 @@ class CreateRounds < ActiveRecord::Migration[7.1]
       t.datetime :change_deadline
       t.integer :stage, default: 0
       t.string :setup
+      t.string :setup_short
       t.timestamps
     end
   end
