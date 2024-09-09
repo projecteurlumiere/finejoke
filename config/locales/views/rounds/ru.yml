@@ -13,17 +13,17 @@ ru:
       setup_is_being_created: Игрок придумывает завязку
       setup_is_being_created_subheading: Надо подождать
       # FOR PUNCHLINE:
-      create_punchline: Придумайте смешную развязку
+      create_punchline: Продолжите
       create_punchline_subheading: Как бы смешно пошутить? # unused
-      punchlines_are_being_created: Другие игроки придумывают развязки
+      punchlines_are_being_created: Игроки придумывают развязки
       punchlines_are_being_created_subheading: Надо подождать
       # FOR VOTE:
-      vote_for_joke: Выберите лучший ответ
+      vote_for_joke: Проголосуйте
       # vote_for_joke_subheading: 
       players_are_voting: Игроки голосуют
       # players_are_voting_subheading:
       # FOR RESULTS
-      round_results: Результаты раунда
+      round_results: Результаты
       # round_results_subheading:
       # ROUND TASK FOR VIEWER:
       viewer:
@@ -31,10 +31,11 @@ ru:
         setup_is_being_created: Игрок придумывает завязку
         setup_is_being_created_subheading: Ждём, что она будет забавной
         # FOR PUNCHLINES
-        punchlines_are_being_created: Игроки придумывают развязки к завязке
+        punchlines_are_being_created: Игроки придумывают развязки
         # punchlines_are_being_created_subheading: 
         # FOR VOTE
         players_are_voting: Игроки голосуют
+        vote_for_joke: Проголосуйте
         # players_are_voting_subheading:
         # FOR RESULTS
         round_results: Результаты раунда
@@ -61,6 +62,7 @@ ru:
       vote: Проголосовать
       revote: Переголосовать
       wait: Ждём
+      join: Присоединиться
     joke:
       anon: Некто
     no_jokes:

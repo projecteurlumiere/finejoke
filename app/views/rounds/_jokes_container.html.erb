@@ -31,5 +31,6 @@
               revote_texts: t(:".revote")
             } 
           } %>
+    <%= render_join(game) unless user.playing?(game) %>
   <% end %>
 <% end %>

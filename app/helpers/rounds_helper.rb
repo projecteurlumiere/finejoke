@@ -105,7 +105,7 @@ module RoundsHelper
     end
   end
 
-  def round_task_for_viewer(_user, round)
+  def round_task_for_viewer(user, round)
     case round.stage.to_sym
     when :setup
       [
@@ -121,7 +121,7 @@ module RoundsHelper
       ]
     when :vote
       [
-        t(:".viewer.players_are_voting"),
+        user.can_vote?(round) ? t(:".viewer.vote_for_joke") : t(:".viewer.players_are_voting"),
         nil, # t(:".viewer.players_are_voting_subheading")
         :setup
       ]
