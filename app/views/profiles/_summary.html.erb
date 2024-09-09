@@ -1,9 +1,9 @@
 <turbo-frame id="summary" data-controller="profile-form" data-containers-target="container" data-container-name="summary">
   <h2>
-    <div class="label black">
+    <div class="label black hidden-when-mobile">
       <%= t(:".profile") %>
     </div>
-    <div class="value">
+    <div class="value" aria_label="<%= t(:".username") %>">
       <%= user.username.truncate(14) %>
     </div>
   </h2>

@@ -17,6 +17,11 @@
       .value {
         margin-left: -1em;
         margin-bottom: 1rem;
+
+        @media(max-width: 950px) {
+          margin-left: 0;
+          color: var(--black);
+        }
       }
     }
 
