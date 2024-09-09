@@ -9,6 +9,10 @@
   scrollbar-width: none;  /* Firefox */
 } 
 
+p {
+  margin: 1rem 0;
+}
+
 ul, ol, li {
   list-style: none;
   margin: unset;
