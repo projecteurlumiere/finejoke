@@ -57,7 +57,7 @@
       border-radius: 50%;
 
       &:not(:has(~ select > option[value=""]:checked)) {
-        background-color: var(--teal);
+        background-color: var(--accent-notice);
       }
     }
 

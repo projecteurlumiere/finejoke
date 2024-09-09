@@ -1,7 +1,7 @@
-require "test_helper"
+# require "test_helper"
 
-class RoundTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
-end
+# class RoundTest < ActiveSupport::TestCase
+#   # test "the truth" do
+#   #   assert true
+#   # end
+# end

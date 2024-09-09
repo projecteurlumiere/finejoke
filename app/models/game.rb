@@ -161,9 +161,11 @@ AFK_ROUNDS_THRESHOLD = 1
       decide_winner
       users.update_all("total_games = total_games + 1")
       # current round is necessary because sometimes it is used to get game instance:
-      rounds.last.update_attribute(:current, true) if current_round.nil?
-      current_round.last!
-      current_round.store_change_timings(nil, nil)
+      if current_round
+        rounds.last.update_attribute(:current, true)
+        current_round.last!
+        current_round.store_change_timings(nil, nil)
+      end
       broadcast_game_over
     ensure
       schedule_idle_game_destroy(force: true)
@@ -182,7 +184,7 @@ AFK_ROUNDS_THRESHOLD = 1
 
   def on_halt!
     schedule_game_conclude
-    current_round.update_attribute(:current, false)
+    current_round&.update_attribute(:current, false)
     broadcast_current_round
     super
   end

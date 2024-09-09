@@ -1,0 +1,14 @@
+<div class="buttons" data-jokes-target="buttons">
+  <%= tag.div style: "-webkit-transform: scaleX(-1); transform: scaleX(-1);", 
+        data: { jokes_target: "previous", action: "click->jokes#previous"} do %>
+    <%= inline_svg("icons/next.svg") %>
+  <% end %>
+  <div class="counter" data-jokes-target="counter" data-action="click->jokes#goToJoke">
+    <% jokes.length.times do |i|%>
+      <div data-index="<%= i %>"></div>
+    <% end %>
+  </div>
+  <%= tag.div data: { jokes_target: "next", action: "click->jokes#next"} do %>
+    <%= inline_svg("icons/next.svg") %>      
+  <% end %>
+</div>

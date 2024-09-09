@@ -1,0 +1,89 @@
+// from top to bottom
+
+// *= require_directory ./current_round
+// *= require_self
+
+.timer-wrapper {
+  display: none;
+}
+
+.task {
+  height: 100%;
+  background-color: var(--section-background);
+  text-align: left;
+
+  container-name: task;
+  container-type: size;
+
+  position: relative;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+
+  * { 
+    color: var(--black);
+    font-size: clamp(14px, var(--adaptive-font-size), 1.5rem);
+  }
+
+  @container task (min-height: 0) {
+    * {
+      font-size: clamp(14px, calc(1.6cqw + 1.6cqh), 1.75rem)
+    }
+  }
+
+  --task-horizontal-padding: 2rem;
+  // @media (min-width: 550px) { --task-horizontal-padding: 4rem; }
+
+  > * {
+    padding-right: var(--task-horizontal-padding);
+    padding-left: var(--task-horizontal-padding);
+  }
+
+  h2 {
+    color: var(--accent-alert);
+  }
+
+  // layout
+  display: flex;
+  flex-direction: column;
+
+  > .description {
+    flex: 0;
+  }
+
+  // when there is no .setup in setup stage, for instance
+  // either as direct child or as in .joke > .setup
+  &:not(:has(.setup)) {
+    > .description {
+      flex: 1;
+    }
+  }
+
+  > .setup {
+    flex: 1;
+    margin-bottom: 2rem;
+
+    @container task (max-height: 500px) {
+      margin-bottom: 0.5rem;
+    }
+
+    &:has(+ .jokes-container) {
+      flex: 0;
+    }
+  }
+
+  > form {
+    flex: 0.5;
+    flex-shrink: 0;
+    flex-basis: 4ch;
+    padding: 1.5rem;
+  }
+
+  > .jokes-container {
+    flex: 1;
+  }
+
+  > .buttons {
+    flex: 0;
+  }
+}

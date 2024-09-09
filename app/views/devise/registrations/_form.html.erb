@@ -5,8 +5,8 @@
       <%= f.email_field :email, 
         autofocus: true, 
         autocomplete: "email", 
-        placeholder: t(".email"), 
-        aria_label: t(".email_aria"), 
+        placeholder: t(:".email"), 
+        aria_label: t(:".email_aria"), 
         required: true %>
       <%= render_errors(resource, :email) %>
     </div>
@@ -14,8 +14,8 @@
     <div>
       <%= f.text_field :username, 
         autocomplete: "username", 
-        placeholder: t(".username"), 
-        aria_label: t(".username_aria"), 
+        placeholder: t(:".username"), 
+        aria_label: t(:".username_aria"), 
         required: true,
         minlength: 1, 
         maxlength: 14 %>
@@ -25,8 +25,8 @@
     <div>
       <%= f.password_field :password, 
           autocomplete: "new-password", 
-          placeholder: t(".password"), 
-          aria_label: t(".password_aria", min_length: @minimum_password_length),
+          placeholder: t(:".password"), 
+          aria_label: t(:".password_aria", min_length: @minimum_password_length),
           required: true,
           minlength: @minimum_password_length %>
       <%= render_errors(resource, :password) %>
@@ -35,8 +35,8 @@
     <div>
       <%= f.password_field :password_confirmation, 
         autocomplete: "new-password", 
-        placeholder: t(".password_confirm"), 
-        aria_label: t(".password_confirm_aria"),
+        placeholder: t(:".password_confirm"), 
+        aria_label: t(:".password_confirm_aria"),
         required: true,
         minlength: @minimum_password_length %>
       <%= render_errors(resource, :password_confirmation) %>
@@ -45,7 +45,7 @@
 
    <input type="submit" 
     form="new-registration" 
-    value="<%= t(".create_account") %>" 
+    value="<%= t(:".create_account") %>" 
     data-turbo-frame="_top">
 
   <%= render "devise/shared/links" %>

@@ -15,7 +15,7 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
       turbo_redirect_to profile_path(resource.id)
     else
       response.status = :unprocessable_entity
-      flash.now[:alert] = t("devise.confirmations.send_instructions_fail")
+      flash.now[:alert] = t(:"devise.confirmations.send_instructions_fail")
       render "devise/registrations/edit"
     end
   end

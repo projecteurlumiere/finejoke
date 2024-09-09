@@ -46,17 +46,17 @@
   width: calc(var(--slider-width) * 0.4333333);
   left: calc(var(--slider-width) / 15);
   bottom: calc(var(--slider-width) / 15);
-  background-color: white;
+  background-color: var(--white);
   -webkit-transition: .4s;
   transition: .4s;
 }
 
 input:checked + .slider {
-  background-color: #2196F3;
+  background-color: var(--accent-notice);
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
+  box-shadow: 0 0 1px var(--accent-notice);
 }
 
 input:checked + .slider:before {

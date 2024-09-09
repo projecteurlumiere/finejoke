@@ -14,7 +14,7 @@ class GamesController < ApplicationController
   # joins game
   def show
     unless user_can_view?
-      flash[:alert] = t(".cannot_show_game")
+      flash[:alert] = t(:".cannot_show_game")
       redirect_to games_path
     end
   end
@@ -31,10 +31,10 @@ class GamesController < ApplicationController
     authorize_game!
 
     if create_game
-      flash[:notice] = t(".game_created")
+      flash[:notice] = t(:".game_created")
       turbo_redirect_to game_path(@game)
     else
-      flash.now[:alert] = t(".game_not_created")
+      flash.now[:alert] = t(:".game_not_created")
       render partial: "games/form", formats: [:turbo_stream], status: :unprocessable_entity
     end
   end
@@ -43,7 +43,7 @@ class GamesController < ApplicationController
   def destroy
     @game.destroy!
 
-    redirect_to games_url, notice: t(".game_destroyed")
+    redirect_to games_url, notice: t(:".game_destroyed")
   end
 
   def join
@@ -54,9 +54,9 @@ class GamesController < ApplicationController
     authorize_game!
 
     if @game.add_user(current_or_guest_user)
-      redirect_to game_path(@game), notice: t(".join_game")
+      redirect_to game_path(@game), notice: t(:".join_game")
     else
-      redirect_to games_path, alert: t(".joined_game_failed")
+      redirect_to games_path, alert: t(:".joined_game_failed")
     end
   end
 
@@ -65,7 +65,7 @@ class GamesController < ApplicationController
 
     if @game.nil? || @game.users.exclude?(current_or_guest_user)
       skip_authorization
-      flash[:notice] = t(".leave_game")
+      flash[:notice] = t(:".leave_game")
       redirect_to(games_path)
       return
     end 
@@ -73,10 +73,10 @@ class GamesController < ApplicationController
     authorize_game!
 
     if @game.remove_user(current_or_guest_user)
-      flash[:notice] = t(".leave_game")
+      flash[:notice] = t(:".leave_game")
       render :leave, formats: %i[turbo_stream] # removes turbo_stream that streams the game and then issues a redirect!
     else
-      flash[:alert] = t(".leave_game_failed")
+      flash[:alert] = t(:".leave_game_failed")
       response.status = :unprocessable_entity
       render_turbo_flash
     end
@@ -89,10 +89,10 @@ class GamesController < ApplicationController
 
     if @user && @game.kick_user(@user)
       response.status = :ok
-      flash.now[:notice] = t(".kick_user")
+      flash.now[:notice] = t(:".kick_user")
     else
       response.status = :unprocessable_entity
-      flash.now[:alert] = t(".kick_user_failed")
+      flash.now[:alert] = t(:".kick_user_failed")
     end
 
     render_turbo_flash
@@ -107,7 +107,7 @@ class GamesController < ApplicationController
   end
 
   def game_over
-    flash[:notice] = t(".game_over")
+    flash[:notice] = t(:".game_over")
     redirect_to games_path
     return
   end
@@ -146,9 +146,9 @@ class GamesController < ApplicationController
     # return true if user_game.nil? || user_game == @game
 
     # if user_game != @game
-    #   flash[:alert] = t(".already_in_game")
+    #   flash[:alert] = t(:".already_in_game")
     # elsif !@game.joinable?(by: current_or_guest_user)
-    #   flash[:alert] = t(".cannot_join_game")
+    #   flash[:alert] = t(:".cannot_join_game")
     # end
   end
 

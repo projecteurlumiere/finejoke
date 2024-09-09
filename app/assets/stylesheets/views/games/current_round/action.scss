@@ -1,0 +1,11 @@
+#current-round {
+  .action {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    @media(max-height: 550px) {
+      gap: 0.5rem;
+    } 
+  }
+}

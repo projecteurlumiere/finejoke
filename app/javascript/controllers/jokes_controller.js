@@ -6,7 +6,7 @@ export default class extends Controller {
   static targets = [ 
     "state",
     "jokes", "joke", "previous", "next", "action", "counter",
-    "task", "description", "buttons",
+    "task", "description", "setup", "buttons",
     "swipeWrap"
     ]
 
@@ -24,10 +24,6 @@ export default class extends Controller {
 
   // container
   jokesTargetConnected() {
-    // for (var i = this.jokeTargets.length - 1; i >= 0; i--) {
-    //   this.jokeTargets[i].classList.remove("hidden");
-    // }
-
     this.swipe = new Swipe(document.getElementById("swipe"), 
       { 
         ignore: ".buttons",
@@ -38,44 +34,30 @@ export default class extends Controller {
       }
     );
 
+    if (!this.observer) this.#setObserver()
+    this.observer.observe(this.jokesTarget)
+
     this.#setJoke(0, this.jokeTargets[0]);
     this.buttonsTarget.style.visibility = "visible"
-    this.countJokeFitness();
+    this.fitJoke();
   }
 
   jokesTargetDisconnected() {
     this.swipe.kill()
+    this.observer.unobserve(this.jokesTarget)
   }
 
-  countJokeFitness() {
-    if (!this.hasJokesTarget) return
+  fitJoke() {
+    if (!this.hasJokesTarget || 
+        window.getComputedStyle(this.element).display === "none") return
 
-    for (var i = this.jokeTargets.length - 1; i >= 0; i--) {
-      this.jokeTargets[i].style.visibility = "hidden"
-      this.jokeTargets[i].classList.remove("fit")
-    }
+    const jokeHeight = this.jokeTargets[this.swipe.getPos()].offsetHeight
+    const visibleArea = this.#countVisibleAreaForJoke();
 
-    const visibleHeight = this.#countVisibleAreaForJoke();
-    this.element.style.setProperty("--visible-height-for-joke", `${visibleHeight}px`)
+    const height = jokeHeight > visibleArea ? jokeHeight : visibleArea
 
-    setTimeout(() => {
-      for (var i = this.jokeTargets.length - 1; i >= 0; i--) {
-        if (this.jokeTargets[i].offsetHeight <= visibleHeight) {
-          this.jokeTargets[i].classList.add("fit")
-        } else {
-          this.jokeTargets[i].classList.remove("fit")
-        }
-        
-        this.swipeWrapTarget.style.height = `${this.jokeTargets[this.swipe.getPos()].offsetHeight}px`
-      }
-    }, 100)
-
-    setTimeout(() => { 
-      for (var i = this.jokeTargets.length - 1; i >= 0; i--) {
-        this.jokeTargets[i].style.visibility = "unset"
-      }
-    }, 200)
-    
+    this.swipe.setup()
+    this.swipeWrapTarget.style.height = `${height}px`
   }
 
   changeAction(e) {
@@ -91,15 +73,10 @@ export default class extends Controller {
     this.#restrictNextMove(index);
     this.#setActionLink(elem);
     this.#highlightCounter(index);
-    const visibleHeight = this.#countVisibleAreaForJoke();
-    if (elem.offsetHeight <= visibleHeight) {
-      elem.classList.add("fit")
-    } else {
-      elem.classList.remove("fit")
-    }
 
-    this.swipeWrapTarget.style.height = `${elem.offsetHeight}px`
+    this.fitJoke();
     elem.classList.add("selected");
+
     for (var i = this.jokeTargets.length - 1; i >= 0; i--) {
       if (this.jokeTargets[i] != elem) {
         this.jokeTargets[i].classList.remove("selected")
@@ -140,7 +117,7 @@ export default class extends Controller {
       } 
       else {
         divs[i].classList.remove("selected")
-      }
+    }
     }
   }
 
@@ -153,12 +130,37 @@ export default class extends Controller {
   }
 
   #countVisibleAreaForJoke() {
-    return this.taskTarget.offsetHeight -
-      this.descriptionTarget.offsetHeight -
-      window.getComputedStyle(this.descriptionTarget).marginBottom.slice(0, -3) - 
-      this.buttonsTarget.offsetHeight -
-      window.getComputedStyle(this.buttonsTarget).paddingTop.slice(0, -3) - 
-      window.getComputedStyle(this.buttonsTarget).paddingBottom.slice(0, -3)
+    const task = this.taskTarget.offsetHeight
+    const description = this.descriptionTarget.offsetHeight +
+      window.getComputedStyle(this.descriptionTarget).marginTop.slice(0, -3) +
+      window.getComputedStyle(this.descriptionTarget).marginBottom.slice(0, -3)
+    
+    let setup
+    if (this.hasSetupTarget) {
+      setup = this.setupTarget.offsetHeight +
+        window.getComputedStyle(this.setupTarget).marginTop.slice(0, -3) +
+        window.getComputedStyle(this.setupTarget).marginBottom.slice(0, -3)
+    } else {
+      setup = 0
+    }
+
+    // why two times? I don't know - perhaps, because it's sticky
+    const buttons = this.buttonsTarget.offsetHeight * 2
+
+    return task - description - setup - buttons
+  }
+
+  #setObserver() {
+    this.observer = new IntersectionObserver((elements) => {  
+      for (var i = elements.length - 1; i >= 0; i--) {
+        if (elements[i].isIntersecting) {
+          elements[i].target.dispatchEvent(new Event("jokesvisible", 
+            { bubbles: true }))
+        }
+      }
+    }, {
+      threshold: 0.1
+    })
   }
 }
 

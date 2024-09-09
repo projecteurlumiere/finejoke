@@ -7,3 +7,9 @@
     display: none !important;
   }
 }
+
+@media(min-width: 951px) {
+  .shown-when-mobile {
+    display: none !important;
+  }
+}

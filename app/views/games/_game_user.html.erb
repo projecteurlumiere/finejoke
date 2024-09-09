@@ -13,15 +13,15 @@
     <div class="score press-font" >
       <span class="current"><%= user.current_score %></span>
       <% if votes_change.any? %>
-        <span class="change red">+<%= votes_change[user.id] || 0 %></span>
+        <span class="change accent-alert">+<%= votes_change[user.id] || 0 %></span>
       <% end %>
     </div>
     <div class="username">
       <%= user.username.truncate(14) %>
     </div>
     <div class="settings">
-      <%= link_to t(".to_profile"), profile_path(user), data: { turbo_stream: true } %>
-      <%= button_to(t(".kick"), game_kick_path(game, params: { user_id: user.id }), class: :hidden, form_class: :hidden ) %>
+      <%= link_to t(:".to_profile"), profile_path(user), data: { turbo_stream: true } %>
+      <%= button_to(t(:".kick"), game_kick_path(game, params: { user_id: user.id }), class: :hidden, form_class: :hidden ) %>
     </div>
   <% end %>
 <% else %> 
@@ -30,7 +30,7 @@
       <%= user_counter + 1 %>
     </div>
     <div>
-      <%= t ".empty" %>
+      <%= t :".empty" %>
     </div>
   <% end %>
 <% end %>

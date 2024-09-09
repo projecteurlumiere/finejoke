@@ -12,10 +12,10 @@
   <% end %>
 
   <%# form.label :setup, style: "display: block" %>
-  <%= form.text_area :setup, placeholder: t(".enter_text"), aria_label: t(".enter_text_full") %>
+  <%= form.text_area :setup, placeholder: t(:".enter_text"), aria_label: t(:".enter_text_full") %>
 
   <% content_for(:action) do %>
-    <input type="button" form="new-setup" value="<%= t(".ask_ai") %>">
-    <input type="submit" form="new-setup" value="<%= t(".done") %>">
+    <input type="button" form="new-setup" value="<%= t(:".ask_ai") %>">
+    <input type="submit" form="new-setup" value="<%= t(:".done") %>">
   <% end %>
 <% end %>

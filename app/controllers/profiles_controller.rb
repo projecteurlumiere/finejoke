@@ -24,10 +24,10 @@ class ProfilesController < ApplicationController
     authorize_user_profile!
 
     if @user.update(profile_params)
-      flash[:notice] = t(".profile_updated")
+      flash[:notice] = t(:".profile_updated")
       redirect_to profile_path(@user)
     else
-      flash[:alert] = t(".profile_not_updated")
+      flash[:alert] = t(:".profile_not_updated")
       render :edit, status: :unprocessable_entity
     end
   end

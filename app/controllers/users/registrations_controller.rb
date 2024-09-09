@@ -40,7 +40,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       end
 
     else
-      flash.now[:alert] = t("devise.registrations.not_updated")
+      flash.now[:alert] = t(:"devise.registrations.not_updated")
       response.status = :unprocessable_entity
       clean_up_passwords resource
       set_minimum_password_length
@@ -62,10 +62,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def destroy
     skip_authorization
     if resource.destroy_with_password(params[:user][:current_password])
-      flash[:notice] = t("devise.registrations.destroyed")
+      flash[:notice] = t(:"devise.registrations.destroyed")
       turbo_redirect_to root_path
     else
-      flash.now[:alert] = t("devise.registrations.not_destroyed")
+      flash.now[:alert] = t(:"devise.registrations.not_destroyed")
       render_turbo_flash(status: :unprocessable_entity)
     end 
   end

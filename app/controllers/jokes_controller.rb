@@ -1,8 +1,8 @@
 class JokesController < ApplicationController
-  before_action :set_game, only: %i[ show create update]
-  before_action :set_round, only: %i[ show create update ]
-  before_action :set_joke, only: %i[ show update ]
-  before_action :authorize_joke!, only: %i[ show update ]
+  before_action :set_game, only: %i[ show create vote]
+  before_action :set_round, only: %i[ show create vote ]
+  before_action :set_joke, only: %i[ show vote ]
+  before_action :authorize_joke!, only: %i[ show vote ]
 
   def index
     raise "not implemented"
@@ -19,25 +19,25 @@ class JokesController < ApplicationController
     
     if @joke.save
       response.status = :ok
-      flash.now[:notice] = t(".joke_created")
+      flash.now[:notice] = t(:".joke_created")
       reload_game_state
       render "rounds/show", layout: false, formats: %i[turbo_stream], locals: { game: @game, round: @round }
     else
       response.status = :unprocessable_entity
-      flash.now[:alert] = t(".joke_not_created")
+      flash.now[:alert] = t(:".joke_not_created")
       render_turbo_flash
     end
 
   end
 
   # registers a vote
-  def update
+  def vote
     if @joke.register_vote(by: current_or_guest_user)
       response.status = :ok
-      flash.now[:notice] = t(".vote_counted")
+      flash.now[:notice] = t(:".vote_counted")
     else
       response.status = :unprocessable_entity
-      flash.now[:alert] = t(".vote_not_counted")
+      flash.now[:alert] = t(:".vote_not_counted")
     end
     
     render_turbo_flash

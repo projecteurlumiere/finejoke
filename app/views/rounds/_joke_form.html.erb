@@ -11,10 +11,10 @@
     </div>
   <% end %>
 
-  <%= form.text_area :punchline, placeholder: t(".enter_text"), aria_label: t(".enter_text_full"), minrows: 1, rows: 1 %>
+  <%= form.text_area :punchline, placeholder: t(:".enter_text"), aria_label: t(:".enter_text_full"), minrows: 1, rows: 1 %>
 
   <% content_for(:action) do %>
-    <input type="button" form="new-joke" value="<%= t(".ask_ai") %>">
-    <input type="submit" form="new-joke" value="<%= t(".done") %>">
+    <input type="button" form="new-joke" value="<%= t(:".ask_ai") %>">
+    <input type="submit" form="new-joke" value="<%= t(:".done") %>">
   <% end %>
 <% end %>

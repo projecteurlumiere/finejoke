@@ -1,4 +1,4 @@
-<div id="catalogue" class="bg-red hidden-when-mobile" 
+<div id="catalogue" class="bg-accent-alert hidden-when-mobile" 
   data-controller="catalogue" 
   data-containers-target="container" 
   data-container-name="catalogue">
@@ -10,14 +10,14 @@
           catalogue_target: "form" }) do |form| %>
         <%= form.select :order_by, 
               options_for_select(
-                [[t(".best"), "n_votes"], [t(".recent"), "created_at"]], 
+                [[t(:".best"), "n_votes"], [t(:".recent"), "created_at"]], 
                 params[:order_by] || "created_at"),
               {},
               { data: { action: "catalogue#submit" } } %>
         <br>
         <%= form.select :property, 
               options_for_select(
-                [[t(".jokes"), "jokes"], [t(".setups"), "started_jokes"], [t(".punchlines"), "finished_jokes"]], 
+                [[t(:".jokes"), "jokes"], [t(:".setups"), "started_jokes"], [t(:".punchlines"), "finished_jokes"]], 
                 params[:property] || "finished_jokes"),
               {}, 
               { data: { action: "catalogue#submit" } } %>
@@ -30,7 +30,7 @@
       </ul>
       <div class="pagination">
         <p>
-          <%= t(".downloading_jokes") %>
+          <%= t(:".downloading_jokes") %>
         </p>
       </div>
     </div>

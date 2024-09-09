@@ -6,14 +6,14 @@
       <%= f.email_field :email, 
         autofocus: true, 
         autocomplete: "email", 
-        placeholder: t(".email"), 
-        aria_label: t(".email_aria") %>
+        placeholder: t(:".email"), 
+        aria_label: t(:".email_aria") %>
       <%= render_errors(resource, :email) %>
     </div>
   <% end %>
 
-  <input class="selected" type="submit" form="new-password" value="<%= t(".restore_password") %>" data-turbo-frame="_top">
+  <input class="selected" type="submit" form="new-password" value="<%= t(:".restore_password") %>" data-turbo-frame="_top">
   
   <%= render "devise/shared/links" %>
-  <%= link_to t(".back"), new_session_path(resource_name), class: "button", data: { turbo_action: :advance } %>
+  <%= link_to t(:".back"), new_session_path(resource_name), class: "button", data: { turbo_action: :advance } %>
 </turbo-frame>

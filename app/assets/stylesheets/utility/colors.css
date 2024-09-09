@@ -1,11 +1,11 @@
-.bg-red {
-  background-color: var(--red) !important;
+.bg-accent-alert {
+  background-color: var(--accent-alert) !important;
   color: var(--white) !important;
 }
 
-.red {
-  color: var(--red) !important;
-  border-color: var(--red) !important;
+.accent-alert {
+  color: var(--accent-alert) !important;
+  border-color: var(--accent-alert) !important;
 }
 
 .black {

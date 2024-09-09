@@ -1,16 +1,16 @@
 <turbo-frame id="summary" data-controller="profile-form" data-containers-target="container" data-container-name="summary">
   <h2>
-    <div class="label black">
-      <%= t(".profile") %>
+    <div class="label black hidden-when-mobile">
+      <%= t(:".profile") %>
     </div>
-    <div class="value">
+    <div class="value" aria_label="<%= t(:".username") %>">
       <%= user.username.truncate(14) %>
     </div>
   </h2>
   <div class="statistics-container">
     <div>
       <div class="label">
-        <%= t(".in_game_since") %>
+        <%= t(:".in_game_since") %>
       </div>
       <div class="value black">
         <% date = user.created_at %>
@@ -19,71 +19,71 @@
     </div>
     <div>
       <div class="label">
-        <%= t(".awards_received") %>
+        <%= t(:".awards_received") %>
       </div>
-      <div class="value red">
+      <div class="value accent-alert">
         0
       </div>
     </div>
     <div>
       <div class="label">
-        <%= t(".points_received") %>
+        <%= t(:".points_received") %>
       </div>
-      <div class="value red">
+      <div class="value accent-alert">
         <%= user.total_score %>
       </div>
     </div>
     <div>
       <div class="label">
-        <%= t(".games_won") %>
+        <%= t(:".games_won") %>
       </div>
-      <div class="value red">
+      <div class="value accent-alert">
         <%= user.total_wins %>
       </div>
     </div>
     <div>
       <div class="label">
-        <%= t(".games_finished") %>
+        <%= t(:".games_finished") %>
       </div>
-      <div class="value red">
+      <div class="value accent-alert">
         <%= user.total_games %>
       </div>
     </div>
     <div>
       <div class="label">
-        <%= t(".setups_created") %>
+        <%= t(:".setups_created") %>
       </div>
-      <div class="value red">
+      <div class="value accent-alert">
         <%= user.total_setups %>
       </div>
     </div>
     <div>
       <div class="label">
-        <%= t(".punchlines_created") %>
+        <%= t(:".punchlines_created") %>
       </div>
-      <div class="value red">
+      <div class="value accent-alert">
         <%= user.total_punchlines %>
       </div>
     </div>
   </div>
   <div class="buttons-container">
     <% if user == current_user %>
-        <%= link_to t(".profile_settings"), 
+        <%= link_to t(:".profile_settings"), 
           edit_self_profile_path, 
           class: "button highlighted", 
             data: { 
               turbo_action: :advance } %>
         <% unless user.guest? %>
-          <%= button_to t(".sign_out"), 
+          <%= button_to t(:".sign_out"), 
             destroy_user_session_path, 
             method: :delete, 
             class: "danger", 
               data: { 
-                turbo_confirm: t(".sign_out_confirm"), 
+                turbo_confirm: t(:".sign_out_confirm"), 
                 turbo_frame: "_top" } %>
         <% end %>
     <% elsif user == current_or_guest_user %>
-      <%= link_to t(".sign_up"), 
+      <%= link_to t(:".sign_up"), 
         new_user_registration_path, 
         class: "button highlighted", 
         data: { turbo_frame: "_top"} %>

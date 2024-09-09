@@ -1,21 +1,31 @@
-<%= tag.div class: [:joke, (:vote if round.vote_stage?)].compact.join(" "), 
+<%= tag.div class: [:joke, (:vote if round&.vote_stage?)].compact.join(" "), 
               data: { 
-              vote_path: game_round_joke_path(round.game, round, joke),
+              vote_path: (game_round_joke_vote_path(game, round, joke) if !game.finished?),
               jokes_target: :joke
             } do %>
-  <% if round.vote_stage? || round.results_stage? || round.game.finished? %>
-    <% unless round.vote_stage? %>
-      <div class="user">
-        <%= tag.div(joke.punchline_author.username) %>
-        <%= tag.div("+#{joke.n_votes}", class: "press-font red") %>
+  <div class="joke-content-wrapper">
+    
+    <% if game.finished? %>
+      <div class="setup">
+        <div class="username">
+          <%= joke.setup_author.username %>
+        </div>
+        <p class="bubble top shadow">
+          <%= joke.setup %>
+        </p>
       </div>
     <% end %>
-    <p class="setup">
-      <%= joke.setup %>
-    </p>
-  <% end %>
 
-  <p class="punchline">
-    <%= joke.punchline %>
-  </p>
+    <div class="punchline">
+      <div class="username-container">
+        <%= tag.div("+#{joke.n_votes}", class: "n-votes") unless round&.vote_stage? %>
+        <div class="username">
+          <%= round&.vote_stage? ? t(:".anon") : joke.punchline_author.username %>
+        </div>
+      </div>
+      <p class="bubble top flip shadow">
+        <%= joke.punchline %>
+      </p>
+    </div>
+  </div>
 <% end %>

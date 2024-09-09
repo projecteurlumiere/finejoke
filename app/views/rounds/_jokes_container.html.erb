@@ -1,0 +1,36 @@
+<div class="jokes-container" data-jokes-target="jokes">
+  <% if jokes.any? %>
+    <div id="swipe" class="swipe">
+      <div class="swipe-wrap" data-jokes-target="swipeWrap">
+        <%= render partial: "rounds/joke", collection: jokes, as: :joke, locals: { game:,  round: } %>
+      </div>
+    </div>
+  <% else %>
+    <div id="swipe" class="swipe">
+      <div class="swipe-wrap" data-jokes-target="swipeWrap">
+        <%= render partial: "rounds/no_jokes" %>        
+      </div>
+    </div>
+  <% end %>
+  <%= render partial: "rounds/jokes_container_buttons", locals: { jokes: } %>
+</div>
+<% content_for(:action) do %>
+  <% if game && 
+        !game.finished? && 
+        round &&
+        round.vote_stage? && 
+        (user.can_vote?(round) && user.not_voted?(round)) %>
+    <%= button_to t(:".vote"), 
+          game_round_joke_vote_path(game, round, jokes.first), 
+          method: :patch, 
+          form: { 
+            data: { 
+              jokes_target: "action",
+              action: "turbo:submit-end->jokes#changeAction",
+              disabled_text: t(:".wait"),
+              revote_texts: t(:".revote")
+            } 
+          } %>
+    <%= render_join(game) unless user.playing?(game) %>
+  <% end %>
+<% end %>

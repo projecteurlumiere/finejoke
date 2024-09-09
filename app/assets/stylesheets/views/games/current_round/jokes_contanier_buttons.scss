@@ -1,0 +1,67 @@
+.jokes-container {
+  .buttons {
+    flex: 0;
+    visibility: hidden; // becomes something with js
+    display: flex;
+    justify-content: space-between;
+
+    overflow: hidden;
+
+    background: var(--white);
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    min-height: clamp(1rem, var(--adaptive-font-size), 1.75rem);
+    padding-bottom: var(--task-vertical-padding);
+    padding: 
+      1rem 
+      var(--task-horizontal-padding) 
+      var(--task-vertical-padding) 
+      var(--task-horizontal-padding);
+    margin-bottom: 0;
+
+    svg {
+      height: clamp(1rem, var(--adaptive-font-size), 1.75rem);
+    }
+
+    > * {
+      cursor: pointer;
+      path {
+        color: var(--black);
+      }
+    }
+
+
+    > .disabled {
+      cursor: unset;
+
+      * { 
+        cursor: unset; 
+      }
+
+      path {
+        color: var(--white-dim);
+      }
+    }
+
+    .counter {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      @container task (max-width: 300px) { gap: 0.5rem }
+
+      div {
+        background-color: var(--black);
+        height: 0.5rem;
+        width: 0.5rem;
+        transition: transform 0.33s, background-color 0.33s;
+
+        &.selected {
+          background-color: var(--accent-notice);
+          transform: scale(2, 2);
+          transition: transform 0.33s, background-color 0.33s;
+        }
+      }
+    }
+  }
+}

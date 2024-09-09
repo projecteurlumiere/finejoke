@@ -7,10 +7,10 @@ class AwardsController < ApplicationController
     authorize @award
     respond_to do |format|
       if @award.save
-        flash[:notice] = t(".award_given")
+        flash[:notice] = t(:".award_given")
         format.html { redirect_to profile_path(@award.user) }
       else
-        flash[:alert] = t(".award_not_given")
+        flash[:alert] = t(:".award_not_given")
         format.turbo_stream { render_turbo_flash(status: :unprocessable_entity) }
       end
     end

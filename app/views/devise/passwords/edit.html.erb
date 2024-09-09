@@ -1,20 +1,20 @@
 <div style="display: flex; flex-direction: column; row-gap: 1rem;">
   <h2>
-    <%= t(".heading") %>
+    <%= t(:".heading") %>
   </h2>
   
   <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
     <%# render "devise/shared/error_messages", resource: resource %>
     <%= f.hidden_field :reset_password_token %>
     <% if resource.errors.messages[:reset_password_token] %> 
-      <%= render_errors resource, :reset_password_token, t(".token_expired") %>
+      <%= render_errors resource, :reset_password_token, t(:".token_expired") %>
     <% end %>
   
     <div>
       <%= f.password_field :password, 
           autocomplete: "new-password", 
-          placeholder: t(".password"), 
-          aria_label: t(".password_aria", min_length: @minimum_password_length),
+          placeholder: t(:".password"), 
+          aria_label: t(:".password_aria", min_length: @minimum_password_length),
           required: true,
           minlength: @minimum_password_length %>
       <%= render_errors(resource, :password) %>
@@ -23,16 +23,16 @@
     <div>
       <%= f.password_field :password_confirmation, 
         autocomplete: "new-password", 
-        placeholder: t(".password_confirm"), 
-        aria_label: t(".password_confirm_aria"),
+        placeholder: t(:".password_confirm"), 
+        aria_label: t(:".password_confirm_aria"),
         required: true,
         minlength: @minimum_password_length %>
       <%= render_errors(resource, :password_confirmation) %>
     </div>
   
     <div class="actions" style="display: flex; flex-direction: column; row-gap: 1rem;">
-      <%= f.submit t(".save") %>
-      <%= link_to t(".back"), new_session_path(resource_name), class: "button", data: { turbo_action: :advance } %>
+      <%= f.submit t(:".save") %>
+      <%= link_to t(:".back"), new_session_path(resource_name), class: "button", data: { turbo_action: :advance } %>
     </div>
   <% end %>
   

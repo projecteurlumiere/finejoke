@@ -9,6 +9,10 @@
   scrollbar-width: none;  /* Firefox */
 } 
 
+p {
+  margin: 1rem 0;
+}
+
 ul, ol, li {
   list-style: none;
   margin: unset;
@@ -48,7 +52,7 @@ textarea:focus {
 
 input:focus,
 select:focus {
-  outline: 2px solid var(--teal);
+  outline: 2px solid var(--accent-notice);
   outline-offset: -2px;
   border-color: transparent;
 }
@@ -58,11 +62,11 @@ input::placeholder {
 }
 
 input:invalid:not(:placeholder-shown) {
-  border-color: var(--red);
+  border-color: var(--accent-alert);
 }
 
 input:invalid:focus:not(:placeholder-shown) {
-  outline-color: var(--red);
+  outline-color: var(--accent-alert);
 }
 
 input[type=image] {
