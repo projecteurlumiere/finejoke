@@ -57,7 +57,7 @@ ru:
       enter_text_full: Введите текст развязки к шутке
       ask_ai: Придумать
       done: Готово
-    vote:
+    jokes_container:
       vote: Проголосовать
       revote: Переголосовать
       wait: Ждём

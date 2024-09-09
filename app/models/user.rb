@@ -19,7 +19,7 @@ class User < ApplicationRecord
   validates :username, presence: true, length: { in: 1..14 }
 
   def random_name
-    self.username = "Joker_#{SecureRandom.hex(10)}".slice(0, 14)
+    self.username = "#{I18n.t(:"round.joker")}_#{SecureRandom.hex(10)}".slice(0, 13)
   end
 
   def jokes

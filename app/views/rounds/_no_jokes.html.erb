@@ -1,12 +1,16 @@
 <%= tag.div class: :joke, data: { jokes_target: :joke } do %>
-  <div class="user">
-    <%= t(:".players") %>
+  <div class="joke-content-wrapper">
+    <div class="punchline">
+      <div class="username-container">
+        <div class="username">
+          <%= t(:".players") %>
+        </div>
+      </div>
+      <p class="bubble top flip shadow">
+        <%= t(:".join_the_game") %>
+        <br>
+        <%= t(:".and_do_not_play") %>
+      </p>
+    </div>
   </div>
-  <p class="setup press-font">
-    <%= t(:".join_the_game") %>
-  </p>
-
-  <p class="punchline">
-    <%= t(:".and_do_not_play") %>
-  </p>
 <% end %>

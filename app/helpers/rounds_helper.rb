@@ -7,7 +7,7 @@ module RoundsHelper
     }
 
     attributes.merge!({
-      n_rounds: round.game.n_rounds,
+      n_rounds: game.n_rounds,
       stage: round.stage,
       change_scheduled_at: round.change_scheduled_at.to_f * 1000,
       change_deadline: round.change_deadline.to_f * 1000,
@@ -164,43 +164,43 @@ module RoundsHelper
     return render_game_over_for(user, round, game) if game.finished?
     return render_rules_action_for(user, game) if round.nil?
 
-    render_turns_form_for(user, round) || 
-      render_votes_form_for(user, round) ||
-      render_results_for(user, round)
+    render_turns_form_for(user, round, game) || 
+      render_votes_form_for(user, round, game) ||
+      render_results_for(user, round, game)
   end
 
   # only for players
-  def render_turns_form_for(user, round)
+  def render_turns_form_for(user, round, game)
     return unless user.playing?(round)
     return if user.finished_turn?
 
     if user.lead? && round.setup_stage?
-      render partial: "rounds/setup_form", locals: { game: round.game, round: round }
+      render partial: "rounds/setup_form", locals: { game: game, round: round }
     elsif !user.lead? && round.punchline_stage?
-      render partial: "rounds/joke_form", locals: { game: round.game, round: round, joke: round.jokes.build }
+      render partial: "rounds/joke_form", locals: { game: game, round: round, joke: round.jokes.build }
     end
   end
 
   # for players and viewers and those who hot joined if voting is allowed for viewers 
-  def render_votes_form_for(user, round)
+  def render_votes_form_for(user, round, game)
     return unless round.vote_stage?
 
     jokes = round.jokes.order("RANDOM()")
 
-    render partial: "rounds/vote", locals: { round: round, jokes: jokes, user: user }
+    render partial: "rounds/jokes_container", locals: { user:, round:, game:, jokes:}
   end
 
   # for everyone
-  def render_results_for(user, round)
+  def render_results_for(user, round, game)
     return unless round.results_stage?
 
     jokes = round.jokes.order(n_votes: :desc)
-    render partial: "rounds/vote", locals: { round: round, jokes: jokes, user: user }
+    render partial: "rounds/jokes_container", locals: { user:, round:, game:, jokes:}
   end
 
   def render_game_over_for(user, round, game)
     jokes = game.jokes.order(n_votes: :desc).limit(10)
-    render partial: "rounds/vote", locals: { round: round, jokes: jokes, user: user }
+    render partial: "rounds/jokes_container", locals: { user:, round:, game:, jokes:}
   end
   
   # for everyone
