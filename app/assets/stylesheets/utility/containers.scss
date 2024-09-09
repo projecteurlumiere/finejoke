@@ -31,7 +31,7 @@
 
     @keyframes blink {
        0% { border-color: var(--white); }
-       50% { border-color: var(--red) }
+       50% { border-color: var(--accent-alert) }
        100% { border-color: var(--white) }
     }
   }

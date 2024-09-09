@@ -5,7 +5,7 @@ body:has(main > #authentication) {
 #authentication {
   > a.sign-in:has(~ #authentication-form > #new-session),
   > a.sign-up:has(~ #authentication-form > #new-registration) {
-    background-color: var(--red);
+    background-color: var(--accent-alert);
     border: none;
     pointer-events: none;
     box-shadow: none;

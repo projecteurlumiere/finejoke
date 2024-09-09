@@ -13,7 +13,7 @@
     <div class="score press-font" >
       <span class="current"><%= user.current_score %></span>
       <% if votes_change.any? %>
-        <span class="change red">+<%= votes_change[user.id] || 0 %></span>
+        <span class="change accent-alert">+<%= votes_change[user.id] || 0 %></span>
       <% end %>
     </div>
     <div class="username">

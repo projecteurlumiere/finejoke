@@ -28,7 +28,7 @@
 
 .message > p {
   border: 1px solid var(--white);
-  background: var(--teal-dimmest);
+  background: var(--accent-notice-dimmest);
   padding: 1ch;
   overflow-wrap: anywhere;
   grid-row: 2 / 3;

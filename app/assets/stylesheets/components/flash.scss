@@ -10,14 +10,14 @@
 
   &.alert {
     .message {
-      background-color: var(--red);
+      background-color: var(--accent-alert);
       color: var(--white);
     }
   }
 
   &.notice {
     .message {
-      background-color: var(--teal);
+      background-color: var(--accent-notice);
       color: var(--black);
     }
   }

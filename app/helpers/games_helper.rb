@@ -21,15 +21,15 @@ module GamesHelper
                     if user.lead? 
                       nil
                     elsif user.finished_turn?
-                      :teal
+                      :"accent-notice"
                     else
-                      :red
+                      :"accent-alert"
                     end
                   elsif round.vote_stage?
                     if user.voted?(round)
-                      :teal
+                      :"accent-notice"
                     else
-                      :red
+                      :"accent-alert"
                     end
                   end
 

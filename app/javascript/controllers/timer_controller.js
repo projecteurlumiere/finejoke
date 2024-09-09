@@ -77,9 +77,9 @@ export default class extends Controller {
       let bar = this.barTargets[i]
 
       if (time < 10 && this.interval > 15) {
-       bar.classList.add("red")
+       bar.classList.add("accent-alert")
       } else {
-       bar.classList.remove("red")
+       bar.classList.remove("accent-alert")
       }
 
       // 100 - because we set width in percents 
@@ -93,9 +93,9 @@ export default class extends Controller {
   #updateDigits(time) {
     for (var i = this.digitsTargets.length - 1; i >= 0; i--) {
       if (time < 10 && this.interval > 15) {
-        this.digitsTargets[i].classList.add("red")
+        this.digitsTargets[i].classList.add("accent-alert")
       } else {
-        this.digitsTargets[i].classList.remove("red")
+        this.digitsTargets[i].classList.remove("accent-alert")
       }
 
       this.digitsTargets[i].innerText = time;

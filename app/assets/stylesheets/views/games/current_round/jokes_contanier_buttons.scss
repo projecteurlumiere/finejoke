@@ -57,7 +57,7 @@
         transition: transform 0.33s, background-color 0.33s;
 
         &.selected {
-          background-color: var(--teal);
+          background-color: var(--accent-notice);
           transform: scale(2, 2);
           transition: transform 0.33s, background-color 0.33s;
         }
