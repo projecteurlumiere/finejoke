@@ -184,7 +184,7 @@ AFK_ROUNDS_THRESHOLD = 1
 
   def on_halt!
     schedule_game_conclude
-    current_round.update_attribute(:current, false)
+    current_round&.update_attribute(:current, false)
     broadcast_current_round
     super
   end
