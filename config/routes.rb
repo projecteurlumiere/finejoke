@@ -8,7 +8,8 @@ Rails.application.routes.draw do
     
     get "rounds/current", to: "rounds#show_current"
     resources :rounds, only: %i[show create update] do  
-      resources :jokes, only: %i[index show create update]
+      resources :jokes, only: %i[index show create]
+      patch "/jokes/:id/vote", to: "jokes#vote", as: :joke_vote
     end
 
     resources :messages, only: %i[create]

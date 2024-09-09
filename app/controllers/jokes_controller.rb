@@ -1,8 +1,8 @@
 class JokesController < ApplicationController
-  before_action :set_game, only: %i[ show create update]
-  before_action :set_round, only: %i[ show create update ]
-  before_action :set_joke, only: %i[ show update ]
-  before_action :authorize_joke!, only: %i[ show update ]
+  before_action :set_game, only: %i[ show create vote]
+  before_action :set_round, only: %i[ show create vote ]
+  before_action :set_joke, only: %i[ show vote ]
+  before_action :authorize_joke!, only: %i[ show vote ]
 
   def index
     raise "not implemented"
@@ -31,7 +31,7 @@ class JokesController < ApplicationController
   end
 
   # registers a vote
-  def update
+  def vote
     if @joke.register_vote(by: current_or_guest_user)
       response.status = :ok
       flash.now[:notice] = t(:".vote_counted")

@@ -1,6 +1,6 @@
 <%= tag.div class: [:joke, (:vote if round.vote_stage?)].compact.join(" "), 
               data: { 
-              vote_path: game_round_joke_path(round.game, round, joke),
+              vote_path: game_round_joke_vote_path(round.game, round, joke),
               jokes_target: :joke
             } do %>
   <div class="joke-content-wrapper">

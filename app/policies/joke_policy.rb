@@ -14,7 +14,7 @@ class JokePolicy < ApplicationPolicy
       !@user.lead? && !@user.finished_turn?
   end
 
-  def update?
+  def vote?
     (@user.playing?(@game) || @game.viewers_vote?) &&
       @round.current? &&
       @user.can_vote?(@round)
