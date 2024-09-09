@@ -14,7 +14,7 @@ module ErrorHandling
       if request.formats.include?(:turbo_stream)
         render_turbo_flash(status:)
       else
-        render file: "#{Rails.root}/public/404.html", layout: false, status:
+        render file: "#{Rails.root}/public/404.#{I18n.locale}.html", layout: false, status:
       end
     end
 
@@ -25,7 +25,7 @@ module ErrorHandling
       if request.formats.include?(:turbo_stream)
         render_turbo_flash(status:)
       else
-        render file: "#{Rails.root}/public/403.html", layout: false, status:
+        render file: "#{Rails.root}/public/403.#{I18n.locale}.html", layout: false, status:
       end
     end
   end
