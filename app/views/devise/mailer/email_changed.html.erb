@@ -1,9 +1,9 @@
 <%= render partial: "hello" %>
 
 <% if @resource.try(:unconfirmed_email?) %>
-  <p><%= t(".email_is_being_changed") %> <%= @resource.unconfirmed_email %>.</p>
+  <p><%= t(:".email_is_being_changed") %> <%= @resource.unconfirmed_email %>.</p>
 <% else %>
-  <p><%= t(".email_has_been_changed") %> <%= @resource.email %>.</p>
+  <p><%= t(:".email_has_been_changed") %> <%= @resource.email %>.</p>
 <% end %>
 
 <%= render partial: "signature" %>

@@ -8,8 +8,8 @@
   </div>
   <% if current_or_guest_user.guest? %>
     <div class="notice">
-      <%= t(".you_are_guest") %> 
-      <%= link_to t(".wanna_sign_in"), new_user_registration_path %>
+      <%= t(:".you_are_guest") %> 
+      <%= link_to t(:".wanna_sign_in"), new_user_registration_path %>
     </div>
   <% end %>
 <% end %>

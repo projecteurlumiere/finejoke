@@ -8,7 +8,7 @@
     data-containers-target="container" 
     data-container-name="catalogue">
     <h2 class="hidden-when-mobile">
-      <%= t ".rooms" %>
+      <%= t :".rooms" %>
     </h2>
     <div class="scrollable">
       <ul id="games" class="list">
@@ -20,7 +20,7 @@
     data-containers-target="container" 
     data-container-name="form">
     <h2 class="hidden-when-mobile">
-      <%= t ".new_game" %>
+      <%= t :".new_game" %>
     </h2>
     <%= render partial: "form", locals: { game: @game } %>
   </div>
@@ -28,10 +28,10 @@
   <div class="buttons-container <%= hide_in_mobile_when("create") %>" 
     data-containers-target="container" data-container-name="catalogue">
     <a class="button disabled" data-catalogue-target="connect" data-turbo-stream>
-      <%= t ".connect" %>
+      <%= t :".connect" %>
     </a>
     <a class="button disabled" data-catalogue-target="view" data-turbo-stream>
-      <%= t ".view" %>
+      <%= t :".view" %>
     </a>
   </div>
 
@@ -40,18 +40,18 @@
     <input 
       type="submit" 
       form="new-game" 
-      value="<%= t ".create" %>" 
+      value="<%= t :".create" %>" 
       data-action="click->new-game#validate">
   </div>
 
   <div class="buttons-container mobile-navigation">
     <a class="button selected" 
       data-containers-target="button" data-container-name="catalogue" data-action="click->containers#show">
-      <%= t ".create" %>
+      <%= t :".create" %>
     </a>
     <a class="button" 
       data-containers-target="button" data-container-name="form" data-action="click->containers#show">
-      <%= t ".new" %>
+      <%= t :".new" %>
     </a>
   </div>
 </div>

@@ -44,13 +44,13 @@ module RoundsHelper
   def game_over_task_for(game)
     if game.winner
       [
-        "#{t(".winner_is")} #{game.winner.username}",
-        "#{t(".his_score_is")} #{game.winner_score}"
+        "#{t(:".winner_is")} #{game.winner.username}",
+        "#{t(:".his_score_is")} #{game.winner_score}"
       ]
     else
       [
-        t(".game_over"),
-        t(".congratulations")
+        t(:".game_over"),
+        t(:".congratulations")
       ]
     end
   end
@@ -60,46 +60,46 @@ module RoundsHelper
     when :setup
       if user.lead?
         [
-          t(".create_setup"),
-          t(".create_setup_subheading")
+          t(:".create_setup"),
+          t(:".create_setup_subheading")
         ]
       else
         [
-          t(".setup_is_being_created"),
-          t(".setup_is_being_created_subheading")
+          t(:".setup_is_being_created"),
+          t(:".setup_is_being_created_subheading")
         ]
       end
     when :punchline
       unless user.finished_turn? || user.lead?
         [
-          t(".create_punchline"),
-          nil, # t(".create_punchline_subheading")
+          t(:".create_punchline"),
+          nil, # t(:".create_punchline_subheading")
           :setup
         ]
       else
         [
-          t(".punchlines_are_being_created"),
-          t(".punchlines_are_being_created_subheading")
+          t(:".punchlines_are_being_created"),
+          t(:".punchlines_are_being_created_subheading")
         ]
       end
     when :vote
       if user.can_vote?(round)
         [
-          t(".vote_for_joke"),
-          nil, # t(".vote_for_joke_subheading")
+          t(:".vote_for_joke"),
+          nil, # t(:".vote_for_joke_subheading")
           :setup
         ]
       else
         [
-          t(".players_are_voting"),
-          nil, # t(".players_are_voting_subheading"),
+          t(:".players_are_voting"),
+          nil, # t(:".players_are_voting_subheading"),
           :setup
         ]
       end
     when :results
       [
-        t(".round_results"),
-        nil, # t(".round_results.subheading"),
+        t(:".round_results"),
+        nil, # t(:".round_results.subheading"),
         :setup
       ]
     end
@@ -109,25 +109,25 @@ module RoundsHelper
     case round.stage.to_sym
     when :setup
       [
-        t(".viewer.setup_is_being_created"),
-        t(".viewer.setup_is_being_created_subheading")
+        t(:".viewer.setup_is_being_created"),
+        t(:".viewer.setup_is_being_created_subheading")
       ]
 
     when :punchline
       [
-        t(".viewer.punchlines_are_being_created"),
-        nil, # t(".viewer.punchlines_are_being_created_subheading"),
+        t(:".viewer.punchlines_are_being_created"),
+        nil, # t(:".viewer.punchlines_are_being_created_subheading"),
         :setup
       ]
     when :vote
       [
-        t(".viewer.players_are_voting"),
-        nil, # t(".viewer.players_are_voting_subheading")
+        t(:".viewer.players_are_voting"),
+        nil, # t(:".viewer.players_are_voting_subheading")
         :setup
       ]
     when :results
       [
-        t(".viewer.round_results"),
+        t(:".viewer.round_results"),
         nil,
         :setup
       ]
@@ -206,8 +206,8 @@ module RoundsHelper
   # for everyone
   def render_rules_for(_game)
     [
-      tag.h2(t(".rules")),
-      tag.div(tag.p(t(".rules_content")), class: "rules")
+      tag.h2(t(:".rules")),
+      tag.div(tag.p(t(:".rules_content")), class: "rules")
     ].join(" ").html_safe
   end
 
@@ -216,7 +216,7 @@ module RoundsHelper
     return unless game.host == user
 
     content_for(:action) do 
-      button_to(t(".start"), game_rounds_path(game))
+      button_to(t(:".start"), game_rounds_path(game))
     end
   end
 
@@ -228,15 +228,15 @@ module RoundsHelper
   end
 
   def render_join(game)
-    link_to(t(".join"), game_join_path(game), class: "button").html_safe
+    link_to(t(:".join"), game_join_path(game), class: "button").html_safe
   end
 
   def render_game_over_button
-    tag.button(t(".game_over"), class: "disabled", disabled: true).html_safe
+    tag.button(t(:".game_over"), class: "disabled", disabled: true).html_safe
   end
 
   def render_wait_for(user, round, game)
-    message = user.hot_joined?(game) && !round.last? ? t(".wait_for_new_round") : t(".wait")
+    message = user.hot_joined?(game) && !round.last? ? t(:".wait_for_new_round") : t(:".wait")
     tag.button(message, class: "disabled", disabled: true).html_safe
   end
 end

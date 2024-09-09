@@ -33,7 +33,7 @@ class ApplicationController < ActionController::Base
   helper_method :new_guest?
 
   def welcome_guest
-    flash[:notice] = t("application.welcome_guest")
+    flash[:notice] = t(:"application.welcome_guest")
 
     unless devise_controller? || controller_name == "guests"
       store_referrer

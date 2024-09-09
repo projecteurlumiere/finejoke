@@ -2,7 +2,7 @@
   data-controller="profile-edit" 
   data-two-containers-target="leftContainer">
   <h2 class="black">
-    <%= t(".edit") %>
+    <%= t(:".edit") %>
   </h2>
 
   <%# delete form: %>
@@ -41,25 +41,25 @@
       (resource.pending_reconfirmation? || !resource.confirmed?) %>
       <fieldset class="email-not-confirmed">
         <legend>
-          <%= t(".email_not_confirmed") %>
+          <%= t(:".email_not_confirmed") %>
         </legend>
         <p>
-          <%= t(".awaiting_email_confirmation_html") %>
+          <%= t(:".awaiting_email_confirmation_html") %>
         </p>
         <input type="submit" form="resend-confirmation" 
-          value="<%= t(".send_confirmation") %>" data-turbo-frame="_top"> 
+          value="<%= t(:".send_confirmation") %>" data-turbo-frame="_top"> 
       </fieldset>
     <% end %>
 
     <fieldset>
       <legend>
-        <%= t(".important_settings") %>
+        <%= t(:".important_settings") %>
       </legend>
       <div>
         <%= f.text_field :username, 
           value: nil, 
-          placeholder: t(".new_username"), 
-          aria_label: t(".new_username_aria"), 
+          placeholder: t(:".new_username"), 
+          aria_label: t(:".new_username_aria"), 
           autocomplete: "off",
           minlength: 1,
           maxlength: 14 %>
@@ -69,16 +69,16 @@
       <div>
         <%= f.email_field :email, 
           value: nil, 
-          placeholder: t(".new_email"), 
-          aria_label: t(".new_email_aria"), 
+          placeholder: t(:".new_email"), 
+          aria_label: t(:".new_email_aria"), 
           autocomplete: "off" %>
         <%= render_errors(resource, :email) %>
       </div>
 
       <div>
         <%= f.password_field :password, 
-          placeholder: t(".new_password"), 
-          aria_label: t(".new_password_aria"), 
+          placeholder: t(:".new_password"), 
+          aria_label: t(:".new_password_aria"), 
           autocomplete: "new-password",
           minlength: 8 %>
         <%= render_errors(resource, :password) %>
@@ -86,8 +86,8 @@
 
       <div>
         <%= f.password_field :password_confirmation, 
-          placeholder: t(".confirm_password"), 
-          aria_label: t(".confirm_password_aria"), 
+          placeholder: t(:".confirm_password"), 
+          aria_label: t(:".confirm_password_aria"), 
           autocomplete: "new-password",
           minlength: @minimum_password_length %>
         <%= render_errors(resource, :password_confirmation) %>
@@ -97,22 +97,22 @@
         <input type="submit" 
           class="unstyled red" 
           form="delete-account" 
-          value="<%= t(".delete_account") %>" 
-          data-turbo-confirm="<%= t(".delete_account_prompt") %>">
+          value="<%= t(:".delete_account") %>" 
+          data-turbo-confirm="<%= t(:".delete_account_prompt") %>">
       </div>
     </fieldset>
 
     <fieldset class="switch-container">
       <legend>
-        <%= t(".privacy_settings") %>
+        <%= t(:".privacy_settings") %>
       </legend>
       <div>
         <div>
-          <%= t(".show_jokes") %>
+          <%= t(:".show_jokes") %>
         </div>
          <div class="switch">
           <%= f.label :show_jokes_allowed, 
-            aria_label: t(".show_jokes"), 
+            aria_label: t(:".show_jokes"), 
             style: "display: block" do %>
             <%= f.check_box :show_jokes_allowed %>
             <span class="slider"></span>
@@ -122,11 +122,11 @@
 
       <div>
         <div>
-          <%= t(".show_awards") %>
+          <%= t(:".show_awards") %>
         </div>
          <div class="switch">
           <%= f.label :show_awards_allowed, 
-            aria_label: t(".show_awards"), 
+            aria_label: t(:".show_awards"), 
             style: "display: block" do %>
             <%= f.check_box :show_awards_allowed %>
             <span class="slider"></span>
@@ -137,14 +137,14 @@
 
     <fieldset>
       <legend>
-        <%= t(".confirm") %>
+        <%= t(:".confirm") %>
       </legend>
       <div>
         <%= f.password_field :current_password, 
           required: true,
-          placeholder: t(".current_password"), 
+          placeholder: t(:".current_password"), 
           autocomplete: "password",
-          aria_label: t(".current_password_aria"),
+          aria_label: t(:".current_password_aria"),
           data: { 
             profile_edit_target: "passwordField", 
             action: "profile-edit#copyPassword" } %>
@@ -156,9 +156,9 @@
   <div class="buttons-container">
     <input type="submit" 
       form="edit-registration" 
-      value="<%= t(".save") %>" 
+      value="<%= t(:".save") %>" 
       class="highlighted">
-    <%= link_to t(".back"), 
+    <%= link_to t(:".back"), 
       profile_path(current_or_guest_user), 
       class: "button", 
       data: { turbo_action: :advance } %>

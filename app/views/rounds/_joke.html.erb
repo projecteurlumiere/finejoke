@@ -8,7 +8,7 @@
       <div class="username-container">
         <%= tag.div("+#{joke.n_votes}", class: "n-votes") unless round.vote_stage? %>
         <div class="username">
-          <%= round.vote_stage? ? t(".anon") : joke.punchline_author.username %>
+          <%= round.vote_stage? ? t(:".anon") : joke.punchline_author.username %>
         </div>
       </div>
       <p class="bubble top flip shadow">

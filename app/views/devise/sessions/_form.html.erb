@@ -6,16 +6,16 @@
       <%= f.email_field :email, 
         autofocus: true, 
         autocomplete: "email", 
-        placeholder: t(".email"), 
-        aria_label: t(".email_aria"), 
+        placeholder: t(:".email"), 
+        aria_label: t(:".email_aria"), 
         required: true %>
       <%= render_errors(resource, :email) %>
     </div>
     <div>
       <%= f.password_field :password, 
         autocomplete: "current-password", 
-        placeholder: t(".password"), 
-        aria_label: t(".password_aria"), 
+        placeholder: t(:".password"), 
+        aria_label: t(:".password_aria"), 
         required: true, 
         maxlength: 128 %>
       <%= render_errors(resource, :password) %>
@@ -26,15 +26,15 @@
   <% end %>
   <input type="submit" 
     form="new-session" 
-    value="<%= t(".sign_in") %>" 
+    value="<%= t(:".sign_in") %>" 
     data-turbo-frame="_top">
   <%= render "devise/shared/links" %>
   
-  <%= button_to t(".remain_guest"), guests_path, 
+  <%= button_to t(:".remain_guest"), guests_path, 
     params: { referrer: session[:referrer] || root_path }, 
     data: { turbo_frame: "_top"} %>
 
-  <%# link_to t(".remain_guest"), session[:referrer] || root_path, 
+  <%# link_to t(:".remain_guest"), session[:referrer] || root_path, 
     class: "button", 
     data: { turbo_frame: "_top" } %>
 </turbo-frame>

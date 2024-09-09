@@ -1,11 +1,11 @@
 <div id="user-status">
   <% if game&.persisted? %>
     <% if current_page?(game_path(game)) %>
-      <%= button_to t(".quit_game"), 
+      <%= button_to t(:".quit_game"), 
         game_leave_path(game), 
         class: "button black-and-white" %>
     <% else %>
-      <%= link_to t(".currently_in_game"), 
+      <%= link_to t(:".currently_in_game"), 
         game_path(game), 
         class: "button black-and-white" %>
     <% end %>

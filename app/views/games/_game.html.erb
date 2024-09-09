@@ -7,7 +7,7 @@
             action: "chat:unseen->containers#blink chat:seen->containers#unblink"
           })) do %>
   <%= content_for(:nav_button) do %>
-    <%= link_to t(".back_to_lobby"), games_path, class: "button black-and-white" %>
+    <%= link_to t(:".back_to_lobby"), games_path, class: "button black-and-white" %>
   <% end %>
 
   <div class="mobile-navigation">
@@ -22,13 +22,13 @@
       data-container-name="round" 
       data-containers-target="button" 
       data-action="click->containers#show">
-      <%= t(".game") %>
+      <%= t(:".game") %>
     </div>
     <div class="button" 
       data-container-name="chat" 
       data-containers-target="button" 
       data-action="click->containers#show">
-      <%= t(".chat") %>
+      <%= t(:".chat") %>
     </div>
   </div>
 

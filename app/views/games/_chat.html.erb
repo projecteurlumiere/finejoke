@@ -13,17 +13,17 @@
     }
 
     .chat-container #chat:empty:before {
-      content: "<%= t(".empty") %>";
+      content: "<%= t(:".empty") %>";
     }
 
     @container (max-width: 160px) { 
       .chat-container #chat:empty:before {
-        content: "<%= t(".empty_short") %>";
+        content: "<%= t(:".empty_short") %>";
       }
     }
   </style>
   <h2>
-    <%= t ".chat" %>
+    <%= t :".chat" %>
   </h2>
   <div id="chat" data-chat-target="messages">
   </div>
