@@ -4,6 +4,18 @@
               jokes_target: :joke
             } do %>
   <div class="joke-content-wrapper">
+    
+    <% if game.finished? %>
+      <div class="setup">
+        <div class="username">
+          <%= joke.setup_author.username %>
+        </div>
+        <p class="bubble top shadow">
+          <%= joke.setup %>
+        </p>
+      </div>
+    <% end %>
+
     <div class="punchline">
       <div class="username-container">
         <%= tag.div("+#{joke.n_votes}", class: "n-votes") unless round&.vote_stage? %>

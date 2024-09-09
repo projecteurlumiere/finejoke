@@ -130,23 +130,32 @@ export default class extends Controller {
   }
 
   #countVisibleAreaForJoke() {
-    return this.taskTarget.offsetHeight -
-      this.descriptionTarget.offsetHeight -
-      window.getComputedStyle(this.descriptionTarget).marginTop.slice(0, -3) -
-      window.getComputedStyle(this.descriptionTarget).marginBottom.slice(0, -3) -
-      this.setupTarget.offsetHeight -
-      window.getComputedStyle(this.setupTarget).marginTop.slice(0, -3) -
-      window.getComputedStyle(this.setupTarget).marginBottom.slice(0, -3) -
-      this.buttonsTarget.offsetHeight - 
-      this.buttonsTarget.offsetHeight
-      // why two times? I don't know - perhaps, because it's sticky
+    const task = this.taskTarget.offsetHeight
+    const description = this.descriptionTarget.offsetHeight +
+      window.getComputedStyle(this.descriptionTarget).marginTop.slice(0, -3) +
+      window.getComputedStyle(this.descriptionTarget).marginBottom.slice(0, -3)
+    
+    let setup
+    if (this.hasSetupTarget) {
+      setup = this.setupTarget.offsetHeight +
+        window.getComputedStyle(this.setupTarget).marginTop.slice(0, -3) +
+        window.getComputedStyle(this.setupTarget).marginBottom.slice(0, -3)
+    } else {
+      setup = 0
+    }
+
+    // why two times? I don't know - perhaps, because it's sticky
+    const buttons = this.buttonsTarget.offsetHeight * 2
+
+    return task - description - setup - buttons
   }
 
   #setObserver() {
     this.observer = new IntersectionObserver((elements) => {  
       for (var i = elements.length - 1; i >= 0; i--) {
         if (elements[i].isIntersecting) {
-          elements[i].target.dispatchEvent(new Event("jokesvisible", {bubbles: true}))
+          elements[i].target.dispatchEvent(new Event("jokesvisible", 
+            { bubbles: true }))
         }
       }
     }, {

@@ -52,7 +52,8 @@
   }
 
   // when there is no .setup in setup stage, for instance
-  &:not(:has(> .setup)) {
+  // either as direct child or as in .joke > .setup
+  &:not(:has(.setup)) {
     > .description {
       flex: 1;
     }

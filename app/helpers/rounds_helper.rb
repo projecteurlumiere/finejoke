@@ -45,7 +45,7 @@ module RoundsHelper
     if game.winner
       [
         "#{t(:".winner_is")} #{game.winner.username}",
-        "#{t(:".his_score_is")} #{game.winner_score}"
+        "#{t(:".his_score_is")} <span class='red'>#{game.winner_score}</span>".html_safe
       ]
     else
       [

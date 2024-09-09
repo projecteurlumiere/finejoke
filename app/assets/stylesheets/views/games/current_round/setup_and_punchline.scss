@@ -29,8 +29,13 @@
       
       display: flex;
       justify-content: flex-end;
-      gap: 1rem;
+      column-gap: 1rem;
+      row-gap: 0.5rem;
       text-align: right;
+
+      @media(max-width: 350px) {
+        flex-direction: column;
+      }
 
       .n-votes {
         text-align: right;
