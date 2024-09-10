@@ -8,6 +8,7 @@ class Joke < ApplicationRecord
 
   validate -> { game.present? && round.present? }, if: :new_record?
   SETUP_MAX_LENGTH = 350
+  SETUP_TRUNCATE_LENGTH = 50
   PUNCHLINE_MAX_LENGTH = 350
 
   validates :setup, length: { in: 1..SETUP_MAX_LENGTH }

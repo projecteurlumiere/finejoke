@@ -15,8 +15,7 @@ class Round < ApplicationRecord
   enum stage: %i[setup punchline vote results], _suffix: true
   attr_accessor :votes_change
 
-  TRUNCATE_LENGTH = 55
-
+  delegate *%i[broadcast_current_round broadcast_round current_round reset_players], to: :game
 
   # tidying up and choosing lead player:
   before_create -> {
@@ -43,8 +42,6 @@ class Round < ApplicationRecord
     move_to_vote and return if time_to_vote?
     move_to_results and return if time_for_results?
   }
-
-  delegate *%i[broadcast_current_round broadcast_round current_round reset_players], to: :game
 
   def move_to_punchline
     user.finished_turn!
@@ -168,7 +165,7 @@ class Round < ApplicationRecord
   end
 
   def truncate_setup
-    return if setup.length < TRUNCATE_LENGTH
+    return if setup.length < Joke::SETUP_TRUNCATE_LENGTH
 
     string = setup.dup
 
@@ -176,22 +173,22 @@ class Round < ApplicationRecord
                      string.concat(".")
                      true
                    end
-    
+
     sentences = string.scan(/[^\.!?]+[\.!?:# ]/).map(&:strip)
     last_sentence = sentences.pop
     last_sentence.slice!(-1) if str_modified
 
-    self.setup_short = if last_sentence.length > TRUNCATE_LENGTH
+    self.setup_short = if last_sentence.length > Joke::SETUP_TRUNCATE_LENGTH
       shorter_sentence = []
 
       last_sentence.split(" ").reverse.inject(0) do |sum, word|
         length = sum + word.length
-        length > TRUNCATE_LENGTH ? break : shorter_sentence << word
+        length > Joke::SETUP_TRUNCATE_LENGTH ? break : shorter_sentence << word
         length
       end
 
       if shorter_sentence.none?
-        shorter_sentence << last_sentence.slice(-TRUNCATE_LENGTH..-1)
+        shorter_sentence << last_sentence.slice(-Joke::SETUP_TRUNCATE_LENGTH..-1)
       else 
         shorter_sentence.reverse
       end.join(" ")

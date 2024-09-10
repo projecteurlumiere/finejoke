@@ -2,6 +2,7 @@ class CreateJokes < ActiveRecord::Migration[7.1]
   def change
     create_table :jokes do |t|
       t.string :setup
+      t.string :setup_short
       t.string :punchline
       t.string :text
       t.integer :n_votes, default: 0
