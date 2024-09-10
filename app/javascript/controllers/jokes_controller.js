@@ -47,17 +47,13 @@ export default class extends Controller {
     this.observer.unobserve(this.jokesTarget)
   }
 
+
   fitJoke() {
-    if (!this.hasJokesTarget || 
-        window.getComputedStyle(this.element).display === "none") return
-
-    const jokeHeight = this.jokeTargets[this.swipe.getPos()].offsetHeight
-    const visibleArea = this.#countVisibleAreaForJoke();
-
-    const height = jokeHeight > visibleArea ? jokeHeight : visibleArea
-
-    this.swipe.setup()
-    this.swipeWrapTarget.style.height = `${height}px`
+    // to make resize snappy, it should be counted instantaneously
+    this.#setJokeHeight();
+    // but in the case of window dragging. wrong dimensions are supplied by the api
+    // thus, the joke doesn't get resized properly unless the action is postponed 
+    this.#refitJoke();
   }
 
   changeAction(e) {
@@ -84,6 +80,24 @@ export default class extends Controller {
     }
 
     this.taskTarget.scrollTo(0, 0);
+  }
+
+  // or actually swipe's
+  #setJokeHeight() {
+    if (!this.hasJokesTarget || 
+        window.getComputedStyle(this.element).display === "none") return
+
+    const jokeHeight = this.jokeTargets[this.swipe.getPos()].offsetHeight
+    const visibleArea = this.#countVisibleAreaForJoke();
+
+    const height = jokeHeight > visibleArea ? jokeHeight : visibleArea
+
+    this.swipe.setup()
+    this.swipeWrapTarget.style.height = `${height}px`
+  }
+
+  #refitJoke() {
+    setTimeout(() => { this.#setJokeHeight() }, 200)
   }
 
   #restrictNextMove(i) {
