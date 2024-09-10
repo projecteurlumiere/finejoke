@@ -27,7 +27,7 @@
 
   @container task (min-height: 0) {
     * {
-      font-size: clamp(14px, calc(1.6cqw + 1.6cqh), 1.75rem)
+      font-size: clamp(14px, calc(1.6cqw + 1.6cqh), 1.5rem)
     }
   }
 

@@ -1,4 +1,10 @@
-<%= form_with(model: round, url: game_round_path(game, round), method: :patch, id: "new-setup") do |form| %>
+<%= form_with(model: round, 
+  url: game_round_path(game, round), 
+  method: :patch, 
+  id: "new-setup", 
+  data: { 
+    controller: "symbol-counter"
+  }) do |form| %>
   <% if false && round.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(round.errors.count, "error") %> prohibited this round from being saved:</h2>
@@ -11,8 +17,15 @@
     </div>
   <% end %>
 
-  <%# form.label :setup, style: "display: block" %>
-  <%= form.text_area :setup, placeholder: t(:".enter_text"), aria_label: t(:".enter_text_full") %>
+  <%= form.text_area :setup, 
+    placeholder: t(:".enter_text"), 
+    aria_label: t(:".enter_text_full"),
+    maxlength: Joke::SETUP_MAX_LENGTH,
+    data: {
+      action: "input->symbol-counter#update"
+    } %>
+  <%# :round_setup - because the id above is generated like this: modelname_paramname %>
+  <div class="symbol-counter" data-symbol-counter-target="counter" data-input="<%= :round_setup %>"></div>
 
   <% content_for(:action) do %>
     <input type="button" form="new-setup" value="<%= t(:".ask_ai") %>">

@@ -47,11 +47,8 @@
   --accent-alert-dimmest: #{rgba($accent-alert, 0.4)};
   --accent-alert-most-dimmest: #{rgba($accent-alert, 0.2)};
 
-  --section-background: #{$section-bg};
-
   --background: #{$bg};
-
-  --slider-width: 5rem;
+  --section-background: #{$section-bg};
 }
 
 html, body {
