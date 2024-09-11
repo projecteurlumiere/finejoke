@@ -19,6 +19,8 @@ module TurboRendering
       render partial: "shared/flash", formats: %i[turbo_stream], status: status
     end
 
+    helper_method :render_turbo_flash
+
     # very dirty! but since there are no before render callbacks...
     def render(*args)
       extract_flash if flashes_stored?

@@ -7,13 +7,16 @@ Rails.application.routes.draw do
     get "over", to: "games#game_over"
     
     get "rounds/current", to: "rounds#show_current"
-    resources :rounds, only: %i[show create update] do  
+    resources :rounds, only: %i[show create update] do
       resources :jokes, only: %i[index show create]
       patch "/jokes/:id/vote", to: "jokes#vote", as: :joke_vote
     end
 
     resources :messages, only: %i[create]
   end
+
+  post "suggest_setup", to: "suggestions#suggest_setup", as: :suggest_setup
+  post "suggest_punchline", to: "suggestions#suggest_punchline", as: :suggest_punchline
 
   resources :profiles, only: %i[show]
   resource :profile, only: %i[update], as: :self_profile

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_22_113326) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_11_135807) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -43,6 +43,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_22_113326) do
     t.string "host_username", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "ai_allowed", default: true
     t.index ["host_id"], name: "index_games_on_host_id"
     t.index ["winner_id"], name: "index_games_on_winner_id"
   end

@@ -1,0 +1,9 @@
+<%= turbo_stream.append("suggestion-response") do %>
+  <% if @suggested_reply %>
+    <div class="suggestion" data-suggestion-target="response">
+      <%= @suggested_reply %>
+    </div>
+  <% end %>
+<% end %>
+
+<%= render_turbo_flash %>

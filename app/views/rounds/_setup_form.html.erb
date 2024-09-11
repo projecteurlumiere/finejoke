@@ -22,13 +22,14 @@
     aria_label: t(:".enter_text_full"),
     maxlength: Joke::SETUP_MAX_LENGTH,
     data: {
-      action: "input->symbol-counter#update"
+      suggestion_target: :userInput,
+      action: "input->symbol-counter#update input->suggestion#copy"
     } %>
   <%# :round_setup - because the id above is generated like this: modelname_paramname %>
   <div class="symbol-counter" data-symbol-counter-target="counter" data-input="<%= :round_setup %>"></div>
 
   <% content_for(:action) do %>
-    <input type="button" form="new-setup" value="<%= t(:".ask_ai") %>">
-    <input type="submit" form="new-setup" value="<%= t(:".done") %>">
+    <%= render partial: "rounds/suggestion_form", locals: { game:, round:, suggestion_for: :setup } %>
+    <input type="submit" form="new-setup" value="<%= t(:".done") %>" data-suggestion-target="userSubmit">
   <% end %>
 <% end %>

@@ -1,7 +1,8 @@
 <%= form_with(model: joke, 
   url: [game, round, joke], 
   id: "new-joke",
-  data: { controller: "symbol-counter"
+  data: { 
+    controller: "symbol-counter"
   }) do |form| %>
   <% if false && joke.errors.any? %>
     <div style="color: red">
@@ -22,12 +23,13 @@
     rows: 1,
     maxlength: Joke::PUNCHLINE_MAX_LENGTH,
     data: {
-      action: "input->symbol-counter#update"
+      suggestion_target: :userInput,
+      action: "input->symbol-counter#update input->suggestion#copy"
     } %>
   <div class="symbol-counter" data-symbol-counter-target="counter" data-input="<%= :joke_punchline %>"></div>
 
   <% content_for(:action) do %>
-    <input type="button" form="new-joke" value="<%= t(:".ask_ai") %>">
-    <input type="submit" form="new-joke" value="<%= t(:".done") %>">
+    <%= render partial: "rounds/suggestion_form", locals: { game:, round:, suggestion_for: :punchline } %>
+    <input type="submit" form="new-joke" value="<%= t(:".done") %>" data-suggestion-target="userSubmit">
   <% end %>
 <% end %>

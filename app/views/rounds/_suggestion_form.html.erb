@@ -1,0 +1,26 @@
+<% if game.ai_allowed? %>
+  <div class="suggest-wrapper">
+    <% path = if suggestion_for == :setup %>
+                <% suggest_setup_path %>
+              <% elsif suggestion_for == :punchline %>
+                <% suggest_punchline_path %>
+              <% end %>
+    
+    <%= form_with(url: path, 
+          method: :post, 
+          html: { 
+            id: "new-suggestion",
+            data: {
+              suggestion_target: :form
+            }
+          }) do |f| %>
+      <%= f.hidden_field :game_id, name: "suggestion[game_id]", value: game.id %>
+      <%= f.hidden_field :round_id, name: "suggestion[round_id]", value: round.id %>
+      <%= f.hidden_field :for, name: "suggestion[for]", value: suggestion_for %>
+      <%= f.hidden_field :user_input, name: "suggestion[user_input]", 
+        data: { suggestion_target: "suggestionFormInput" } %>
+    <% end %>
+    <input type="submit" form="new-suggestion" value="<%= t(:".ask_ai") %>">
+    <div id="suggestion-response" style="height: 0; width: 0; overflow: hidden;"></div>
+  </div>
+<% end %>

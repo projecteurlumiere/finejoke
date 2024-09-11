@@ -37,3 +37,8 @@ ru:
     round_not_created: Раунд не создан # игра не началась и не продолжилась?
     setup_created: Завязка создана
     setup_not_created: Завязка не создана
+  suggestions:
+    setup_suggested: Подсказка-завязка получена
+    setup_not_suggested: Подсказка-завязка не была получена
+    punchline_suggested: Подсказка-развязка получена
+    punchline_not_suggested: Подсказка-развязка не была получена

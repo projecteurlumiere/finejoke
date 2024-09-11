@@ -51,13 +51,13 @@ ru:
     setup_form:
       enter_text: Введите текст...
       enter_text_full: Введите текст завязки
-      ask_ai: Придумать
       done: Готово
     joke_form:
       enter_text: Введите текст...
       enter_text_full: Введите текст развязки к шутке
-      ask_ai: Придумать
       done: Готово
+    suggestion_form:
+      ask_ai: Придумать
     jokes_container:
       vote: Проголосовать
       revote: Переголосовать
