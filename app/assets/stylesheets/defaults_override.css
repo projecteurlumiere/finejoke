@@ -45,6 +45,7 @@ input[data-autocompleted] {
 }
 /* autofill hackery end */
 
+.textarea:focus,
 textarea:focus {
   outline: 2px solid var(--black);
   outline-offset: 0;
@@ -74,6 +75,7 @@ input[type=image] {
   width: unset;
 }
 
+.textarea,
 textarea {
   box-sizing: border-box;
   width: 100%;

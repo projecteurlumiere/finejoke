@@ -10,7 +10,9 @@ export default class extends Controller {
 
   update(event) {
     const input = event.target
-    this.#setCount(input, this.#getCounter(input))
+    const length = event.detail && event.detail.length ? event.detail.length : undefined
+
+    this.#setCount(input, this.#getCounter(input), length)
   }
 
   #getInput(counterNode) {
@@ -27,7 +29,9 @@ export default class extends Controller {
     }
   }
 
-  #setCount(input, counter) {
-    counter.innerHTML = input.maxLength - input.value.length
+  #setCount(input, counter, length = undefined) {
+    length = length || input.value.length
+
+    counter.innerHTML = input.maxLength - length
   }
 }

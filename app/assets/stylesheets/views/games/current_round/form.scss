@@ -3,12 +3,27 @@
     display: flex;
     position: relative;
 
+    .textarea,
     textarea {
       border: none;
       padding-bottom: 1.5rem;
       // min-height: 4ch;
       // width: calc(100% - (var(--task-vertical-padding) * 2));
     }
+
+    // typed.js does not work well with textarea, so it types in this div.textarea
+    // which should look exactly like regular textarea
+
+    .textarea {
+      position: absolute;
+      // compensates for form's paddings
+      width: calc(100% - (var(--task-horizontal-padding) * 2);
+      height: calc(100% - (var(--task-horizontal-padding) * 2);
+      // scrolling
+      overflow: auto;
+      user-select: none; // don't want user to select text being typed
+    }
+
 
     .symbol-counter {
       position: absolute;

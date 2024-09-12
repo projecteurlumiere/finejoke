@@ -20,7 +20,7 @@
       <%= f.hidden_field :user_input, name: "suggestion[user_input]", 
         data: { suggestion_target: "suggestionFormInput" } %>
     <% end %>
-    <input type="submit" form="new-suggestion" value="<%= t(:".ask_ai") %>">
+    <input type="submit" form="new-suggestion" value="<%= t(:".ask_ai") %>" data-suggestion-target="suggestionSubmit">
     <div id="suggestion-response" style="height: 0; width: 0; overflow: hidden;"></div>
   </div>
 <% end %>
