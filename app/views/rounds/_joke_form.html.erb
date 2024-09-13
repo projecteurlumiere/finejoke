@@ -19,8 +19,7 @@
   <%= form.text_area :punchline, 
     placeholder: t(:".enter_text"), 
     aria_label: t(:".enter_text_full"), 
-    minrows: 1, 
-    rows: 1,
+    rows: 4,
     maxlength: Joke::PUNCHLINE_MAX_LENGTH,
     data: {
       suggestion_target: :userInput,

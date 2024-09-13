@@ -21,6 +21,7 @@
     placeholder: t(:".enter_text"), 
     aria_label: t(:".enter_text_full"),
     maxlength: Joke::SETUP_MAX_LENGTH,
+    rows: 4,
     data: {
       suggestion_target: :userInput,
       action: "input->symbol-counter#update input->suggestion#copy"
