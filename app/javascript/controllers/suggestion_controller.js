@@ -10,6 +10,10 @@ export default class extends Controller {
     "response"
   ]
 
+  disconnect() {
+    abortTyping();
+  }
+
   copy() {
     if (!this.hasUserInputTarget) return
 
@@ -49,7 +53,10 @@ export default class extends Controller {
     this.#scrollPlaceholder(placeholder, typeSpeed, suggestion)
   }
 
-  
+  abortTyping() {
+    if (this.typed) this.typed.destroy()
+  }
+
   #toggleInput(directive) {
     [this.userInputTarget, this.userSubmitTarget, this.suggestionSubmitTarget].forEach((el) => {
       el.disabled = directive === "disable" ? true : false
@@ -64,7 +71,7 @@ export default class extends Controller {
     const placeholder = document.createElement("div")
 
     placeholder.classList.add("textarea")
-    placeholder.dataset.action = "input->symbol-counter#update"
+    placeholder.dataset.action = "input->symbol-counter#update click->suggestion#abortTyping"
     placeholder.innerHTML = textarea.value
 
     this.userInputTarget.insertAdjacentElement("afterend", placeholder)
