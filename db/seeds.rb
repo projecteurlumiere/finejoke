@@ -10,6 +10,8 @@
 
 return unless Rails.env.development?
 
+ActionMailer::Base.perform_deliveries = false
+
 user, user_2 = nil, nil
 user = User.new(email: "abc@abc.com", username: "Joker-1", password: "12345678") unless User.find_by(username: "Joker-1")
 user_2 = User.new(email: "def@def.com", username: "Joker-2", password: "12345678") unless User.find_by(username: "Joker-2")
