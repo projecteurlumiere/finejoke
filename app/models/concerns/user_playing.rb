@@ -56,7 +56,8 @@ module UserPlaying
         lead: false,
         voted: false,
         finished_turn: false,
-        current_score: 0
+        current_score: 0,
+        suggestions: []
       })
     end
   end

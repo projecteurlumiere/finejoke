@@ -59,9 +59,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_11_135807) do
     t.bigint "setup_author_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "setup_suggested", default: false, null: false
+    t.boolean "punchline_suggested", default: false, null: false
     t.index ["punchline_author_id"], name: "index_jokes_on_punchline_author_id"
     t.index ["round_id"], name: "index_jokes_on_round_id"
     t.index ["setup_author_id"], name: "index_jokes_on_setup_author_id"
+  end
+
+  create_table "jokes_suggestions", id: false, force: :cascade do |t|
+    t.bigint "joke_id", null: false
+    t.bigint "suggestion_id", null: false
+    t.index ["joke_id"], name: "index_jokes_suggestions_on_joke_id"
+    t.index ["suggestion_id"], name: "index_jokes_suggestions_on_suggestion_id"
   end
 
   create_table "presents", force: :cascade do |t|
@@ -84,8 +93,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_11_135807) do
     t.string "setup_short"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "suggestions", default: [], array: true
     t.index ["game_id"], name: "index_rounds_on_game_id"
     t.index ["user_id"], name: "index_rounds_on_user_id"
+  end
+
+  create_table "suggestions", force: :cascade do |t|
+    t.string "output", null: false
+    t.integer "target", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -124,6 +141,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_11_135807) do
     t.boolean "show_jokes_allowed", default: true
     t.boolean "show_awards_allowed", default: true
     t.boolean "guest", default: false
+    t.integer "credits", default: 0
+    t.datetime "unlimited_credits_deadline", default: "3024-09-13 14:43:22"
+    t.integer "suggestions", default: [], array: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

@@ -1,6 +1,8 @@
 class Joke < ApplicationRecord
   include JokePlaying
 
+  has_and_belongs_to_many :suggestions, dependent: :nullify
+
   paginates_per 5
 
   belongs_to :punchline_author, class_name: :User

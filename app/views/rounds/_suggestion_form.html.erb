@@ -16,7 +16,7 @@
           }) do |f| %>
       <%= f.hidden_field :game_id, name: "suggestion[game_id]", value: game.id %>
       <%= f.hidden_field :round_id, name: "suggestion[round_id]", value: round.id %>
-      <%= f.hidden_field :for, name: "suggestion[for]", value: suggestion_for %>
+      <%= f.hidden_field :target, name: "suggestion[target]", value: suggestion_for %>
       <%= f.hidden_field :user_input, name: "suggestion[user_input]", 
         data: { suggestion_target: "suggestionFormInput" } %>
     <% end %>

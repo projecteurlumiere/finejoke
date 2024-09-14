@@ -46,6 +46,7 @@ class Round < ApplicationRecord
   def move_to_punchline
     user.finished_turn!
     setup.nil? ? random_setup : user.increment!(:total_setups)
+    self.suggestions = user.suggestions
     punchline_stage!
     broadcast_current_round
     schedule_next_stage

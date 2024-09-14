@@ -126,7 +126,8 @@ AFK_ROUNDS_THRESHOLD = 1
     users.update_all(
       finished_turn: false,
       lead: false,
-      voted: false
+      voted: false,
+      suggestions: []
     )
   end
 

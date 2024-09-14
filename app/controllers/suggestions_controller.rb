@@ -3,7 +3,7 @@ class SuggestionsController < ApplicationController
   before_action :authorize_suggestion!
 
   def suggest_setup
-    if @suggestion.valid? && @suggested_reply = @suggestion.generate
+    if @suggestion
       flash.now[:notice] = t(:".setup_suggested")
     else
       flash.now[:alert] = t(:".setup_not_suggested")
@@ -12,7 +12,7 @@ class SuggestionsController < ApplicationController
   end
 
   def suggest_punchline
-    if @suggestion.valid? && @suggested_reply = @suggestion.generate
+    if @suggestion
       flash.now[:notice] = t(:".punchline_suggested")
     else
       flash.now[:alert] = t(:".punchline_not_suggested")
@@ -23,15 +23,14 @@ class SuggestionsController < ApplicationController
   private
 
   def set_suggestion
-    @suggestion = Suggestion.new(user: current_or_guest_user, **suggestion_params)
+    @suggestion = Suggestion.create(user: current_or_guest_user, **suggestion_params)
   end
 
   def suggestion_params
-    params.require(:suggestion).permit(:user_input, :game_id, :round_id, :for)
+    params.require(:suggestion).permit(:user_input, :game_id, :round_id, :target)
   end
   
   def authorize_suggestion!
     authorize(@suggestion || Suggestion)
   end
-
 end

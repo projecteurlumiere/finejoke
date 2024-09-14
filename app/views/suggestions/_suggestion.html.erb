@@ -1,7 +1,7 @@
 <%= turbo_stream.append("suggestion-response") do %>
-  <% if @suggested_reply %>
+  <% if @suggestion.output %>
     <div class="suggestion" data-suggestion-target="response">
-      <%= @suggested_reply %>
+      <%= @suggestion.output %>
     </div>
   <% end %>
 <% end %>

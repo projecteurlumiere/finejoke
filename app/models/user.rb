@@ -25,4 +25,14 @@ class User < ApplicationRecord
   def jokes
     finished_jokes.or(started_jokes)
   end
+
+  def pay(price:) 
+    return unless enough_credits?(price:)
+
+    unlimited_credits_deadline&.>(Time.now) || decrement!(:credits, price)
+  end
+
+  def enough_credits?(price:)
+    credits >= price || unlimited_credits_deadline&.>(Time.now)
+  end
 end
