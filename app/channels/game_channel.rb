@@ -15,7 +15,7 @@ class GameChannel < ApplicationCable::Channel
   end
 
   def unsubscribed
-    @game.decrement!(:n_viewers)
+    @game&.decrement!(:n_viewers)
   end
 
   private
