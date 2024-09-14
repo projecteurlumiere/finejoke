@@ -11,7 +11,7 @@ export default class extends Controller {
   ]
 
   disconnect() {
-    abortTyping();
+    this.abortTyping();
   }
 
   copy() {
