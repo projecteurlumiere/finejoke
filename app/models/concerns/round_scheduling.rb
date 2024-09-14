@@ -28,9 +28,11 @@ module RoundScheduling
     end
 
     def next_stage!
-      stage_number = Round.stages[stage]
-      raise "cannot go past the last stage" if stage_number.nil?
-      self.send("move_to_#{Round.stages.to_a[stage_number + 1][0]}")
+      transaction do 
+        stage_number = Round.stages[stage]
+        raise "cannot go past the last stage" if stage_number.nil?
+        self.send("move_to_#{Round.stages.to_a[stage_number + 1][0]}")
+      end
     end
   end
 end
