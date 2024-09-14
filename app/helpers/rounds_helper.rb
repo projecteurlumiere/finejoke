@@ -6,7 +6,8 @@ module RoundsHelper
       timer_target: :timings,
       jokes_target: :state,
       game_id: game.id,
-      game_status: game.status
+      game_status: game.status,
+      user_playing: user.playing?(game)
     }
 
     @attributes.merge!({
@@ -21,7 +22,7 @@ module RoundsHelper
       user_lead: user.lead?,
       user_voted: user.voted?(round),
       user_finished_turn: user.finished_turn?
-    }) if user.playing?(game)
+    }) if user.playing?(round)
 
     @attributes
   end
