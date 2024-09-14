@@ -1,22 +1,29 @@
 module RoundsHelper
   def round_data_attributes(user, round, game)
-    attributes = {
+    return @attributes if @attributes
+
+    @attributes = {
       timer_target: :timings,
       jokes_target: :state,
+      game_id: game.id,
       game_status: game.status
     }
 
-    attributes.merge!({
+    @attributes.merge!({
+      round_id: round.id,
       n_rounds: game.n_rounds,
       stage: round.stage,
       change_scheduled_at: round.change_scheduled_at.to_f * 1000,
       change_deadline: round.change_deadline.to_f * 1000,
+    }) if round
+
+    @attributes.merge!({
       user_lead: user.lead?,
       user_voted: user.voted?(round),
       user_finished_turn: user.finished_turn?
-    }) if round
+    }) if user.playing?(game)
 
-    attributes
+    @attributes
   end
 
   def round_task_for(user, round, game)
