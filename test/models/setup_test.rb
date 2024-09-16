@@ -1,16 +1,13 @@
 require "test_helper"
 
-class RoundTest < ActiveSupport::TestCase
+class SetupTest < ActiveSupport::TestCase
   def setup
-    Round.send(:remove_const, :TRUNCATE_LENGTH)
-    Round.const_set(:TRUNCATE_LENGTH, 20)
-    @round = Round.new
+    Setup.send(:remove_const, :TRUNCATE_LENGTH)
+    Setup.const_set(:TRUNCATE_LENGTH, 20)
   end
 
   def truncate(string)
-    @round.setup = string
-    @round.truncate_setup
-    @round.setup_short
+    Setup.truncate(string)
   end
 
   def test_truncate
@@ -38,7 +35,7 @@ class RoundTest < ActiveSupport::TestCase
     )
 
     assert_equal(
-      "I am a truncated test.",
+      "I am a truncated test...",
       truncate("Hello! I am a truncated test...")
     )
 
@@ -46,13 +43,18 @@ class RoundTest < ActiveSupport::TestCase
       "I am a truncated test:",
       truncate("Hello! I am a truncated test:")
     )
+
+    assert_equal(
+      'a truncated test...".',
+      truncate('And it said: "I am a good person. I am a truncated test...".')
+    )
   end
 
   def test_long_word
     string = "I am very looooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong"
 
     assert_equal(
-      string.slice(-Round::TRUNCATE_LENGTH..-1),
+      string.slice(-Setup::TRUNCATE_LENGTH..-1),
       truncate(string)
       )
 
@@ -66,7 +68,7 @@ class RoundTest < ActiveSupport::TestCase
 
     assert -> {
       truncated_str = truncate(string) 
-      truncated_str.length <= Round::TRUNCATE_LENGTH..-1 &&
+      truncated_str.length <= Setup::TRUNCATE_LENGTH..-1 &&
         string.end_with?(truncated_str)
     }
   end
