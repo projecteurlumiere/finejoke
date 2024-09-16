@@ -40,6 +40,7 @@ ru:
         # FOR RESULTS
         round_results: Результаты раунда
         # round_results_subheading:
+      anon_host: Господин ведущий
       # INPUT:
       rules: Правила
       rules_content: Какие-то правила
@@ -65,6 +66,7 @@ ru:
       join: Присоединиться
     joke:
       anon: Некто
+      anon_host: Господин ведущий
     no_jokes:
       players: Игроки
       join_the_game: Заходят игрок в игру-нейм

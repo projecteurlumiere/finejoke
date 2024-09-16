@@ -23,7 +23,7 @@ group :default do
   gem "normalize-rails"
   gem "pundit"
   gem "rails-i18n"
-  # gem "ruby-openai"
+  gem "ruby-openai"
   gem "sassc-rails"
   gem "terser"
 
@@ -43,6 +43,8 @@ end
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[mri windows]
+
+  gem 'dotenv', groups: [:development, :test]
 end
 
 group :development do

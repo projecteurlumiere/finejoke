@@ -3,7 +3,7 @@ class SuggestionsController < ApplicationController
   before_action :authorize_suggestion!
 
   def suggest_setup
-    if @suggestion
+    if @suggestion.persisted?
       flash.now[:notice] = t(:".setup_suggested")
     else
       flash.now[:alert] = t(:".setup_not_suggested")
@@ -12,7 +12,7 @@ class SuggestionsController < ApplicationController
   end
 
   def suggest_punchline
-    if @suggestion
+    if @suggestion.persisted?
       flash.now[:notice] = t(:".punchline_suggested")
     else
       flash.now[:alert] = t(:".punchline_not_suggested")

@@ -8,7 +8,7 @@
     <% if game.finished? %>
       <div class="setup">
         <div class="username">
-          <%= joke.setup_author.username %>
+          <%= joke.setup_author&.username || t(".anon_host") %>
         </div>
         <p class="bubble top shadow">
           <%= joke.setup %>

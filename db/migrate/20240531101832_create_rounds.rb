@@ -10,6 +10,7 @@ class CreateRounds < ActiveRecord::Migration[7.1]
       t.integer :stage, default: 0
       t.string :setup
       t.string :setup_short
+      t.boolean :setup_randomized, default: false
       t.references :setup_model, foreign_key: { to_table: :setups }
 
       t.timestamps

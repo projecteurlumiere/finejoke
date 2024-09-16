@@ -146,6 +146,8 @@ module RoundsHelper
     # declared in round_task_for
     return unless @setup
 
+    username = round.setup_model&.user&.username  || t(".anon_host")
+
     setup_p = tag.p(class: "bubble top shadow", 
                     data: {
                       action: "click->setup#toggleView"
@@ -160,9 +162,9 @@ module RoundsHelper
       ].compact.join(" ").html_safe
     end
 
-    tag.div(class: "setup", data: { controller: "setup", jokes_target: "setup" }) do 
+    tag.div(class: "setup", data: { controller: "setup", jokes_target: "setup" }) do
       [
-        tag.div(round.user.username, class: :username),
+        tag.div(username, class: :username),
         setup_p
       ].join(" ").html_safe
     end

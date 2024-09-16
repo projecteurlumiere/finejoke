@@ -57,8 +57,7 @@ class Round < ApplicationRecord
   def create_setup_model
     self.setup_model = Setup.create(
       text: setup,
-      text_short: setup_short,
-      user_id: user.id
+      user_id: setup_randomized ? nil : user.id
     )
   end
 
@@ -146,7 +145,12 @@ class Round < ApplicationRecord
   end
 
   def random_setup
-    self.setup = "i am a random setup to be implemented later"
+    self.setup = Suggestion.create(
+      target: :setup, 
+      user_input: "", 
+      force_creation: true
+    ).output
+    self.setup_randomized = true
   end
 
   def max_points_achieved?(user)
