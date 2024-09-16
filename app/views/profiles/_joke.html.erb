@@ -1,8 +1,13 @@
 <li>
+  <div class="meta">
+    <div class="date">
+      <%= render_date joke.created_at %>
+    </div>
+    <div class="points">
+      <%= joke.n_votes > 0 ? "+#{joke.n_votes}" : 0 %>
+    </div>
+  </div>
   <p>
     <%= joke.text %>
   </p>
-  <div class="press-font">
-    <%= joke.n_votes > 0 ? "+#{joke.n_votes}" : 0 %>
-  </div>
 </li>

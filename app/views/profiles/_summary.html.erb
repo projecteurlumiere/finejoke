@@ -13,8 +13,7 @@
         <%= t(:".in_game_since") %>
       </div>
       <div class="value black">
-        <% date = user.created_at %>
-        <%= [date.year, date.month, date.day].join("-") %>
+        <%= render_date(user.created_at) %>
       </div>
     </div>
     <div>

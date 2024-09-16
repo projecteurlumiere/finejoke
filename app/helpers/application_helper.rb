@@ -25,5 +25,9 @@ module ApplicationHelper
         error_messages.join(", ")
       end
     end.html_safe
-  end 
+  end
+
+  def render_date(time)
+    [time.year, time.month, time.day].join("-")
+  end
 end
