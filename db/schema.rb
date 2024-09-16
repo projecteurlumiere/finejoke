@@ -91,7 +91,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_11_135807) do
     t.bigint "setup_model_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "suggestions", default: [], array: true
+    t.integer "suggestions", default: [], null: false, array: true
     t.index ["game_id"], name: "index_rounds_on_game_id"
     t.index ["setup_model_id"], name: "index_rounds_on_setup_model_id"
     t.index ["user_id"], name: "index_rounds_on_user_id"
@@ -128,7 +128,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_11_135807) do
     t.string "unconfirmed_email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "username"
+    t.string "username", null: false
     t.integer "game_id"
     t.boolean "connected", default: false
     t.boolean "subscribed_to_game", default: false
@@ -142,14 +142,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_11_135807) do
     t.integer "total_score", default: 0
     t.integer "total_setups", default: 0
     t.integer "total_punchlines", default: 0
+    t.integer "total_suggestions", default: 0
     t.integer "total_games", default: 0
     t.integer "total_wins", default: 0
     t.boolean "show_jokes_allowed", default: true
     t.boolean "show_awards_allowed", default: true
     t.boolean "guest", default: false
-    t.integer "credits", default: 0
-    t.datetime "unlimited_credits_deadline", default: "3024-09-16 08:54:33"
-    t.integer "suggestions", default: [], array: true
+    t.integer "credits", default: 0, null: false
+    t.datetime "unlimited_credits_deadline", default: "2024-09-23 09:23:39"
+    t.integer "suggestions", default: [], null: false, array: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

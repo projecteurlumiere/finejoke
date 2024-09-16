@@ -2,18 +2,18 @@ class AddAiSuggestions < ActiveRecord::Migration[7.1]
   def change
     add_column :games, :ai_allowed, :boolean, default: true
 
-    add_column :users, :credits, :integer, default: 0
-    add_column :users, :unlimited_credits_deadline, :datetime, default: Time.now + 1000.year
+    change_table :users, bulk: true do |t|
+      t.integer :credits, null: false, default: 0
+      t.datetime :unlimited_credits_deadline, default: Time.now + 1.week
 
-    add_column :users, :suggestions, :integer, array: true, default: []
-    add_column :rounds, :suggestions, :integer, array: true, default: []
+      t.integer :suggestions, array: true, null: false, default: []
+    end
 
-    add_column :jokes, :setup_suggested, :boolean, null: false, default: false
-    add_column :jokes, :punchline_suggested, :boolean, null: false, default: false
+    add_column :rounds, :suggestions, :integer, array: true, null: false, default: []
 
-    create_join_table :jokes, :suggestions do |t|
-      t.index :joke_id
-      t.index :suggestion_id
+    change_table :jokes, bulk: true do |t|
+      t.boolean :setup_suggested, null: false, default: false
+      t.boolean :punchline_suggested, null: false, default: false 
     end
 
     create_table :suggestions do |t|
@@ -21,6 +21,11 @@ class AddAiSuggestions < ActiveRecord::Migration[7.1]
       t.integer :target, null: false
 
       t.timestamps
+    end
+
+    create_join_table :jokes, :suggestions do |t|
+      t.index :joke_id
+      t.index :suggestion_id
     end
   end
 end

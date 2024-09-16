@@ -2,29 +2,34 @@
 
 class AddAttributesToUsers < ActiveRecord::Migration[7.1]
   def change
-    add_column :users, :username, :string
-    add_column :users, :game_id, :integer
+    change_table :users, bulk: true do |t|
+      t.string :username, null: false
+      t.integer :game_id
 
-    # ws related (unused)
-    add_column :users, :connected, :boolean, default: false
-    add_column :users, :subscribed_to_game, :boolean, default: false
+      # ws related (unused)
+      t.boolean :connected, default: false
+      t.boolean :subscribed_to_game, default: false
 
-    # game related
-    add_column :users, :host, :boolean, default: false
-    add_column :users, :hot_join, :boolean, default: false # when user joins in the middle of the game
-    add_column :users, :lead, :boolean, default: false # his/her turn
-    add_column :users, :was_lead, :boolean, default: false # his/her turn recently
-    add_column :users, :finished_turn, :boolean, default: false
-    add_column :users, :voted, :boolean, default: false
-    add_column :users, :current_score, :integer, default: 0
-    add_column :users, :total_score, :integer, default: 0
-    add_column :users, :total_setups, :integer, default: 0
-    add_column :users, :total_punchlines, :integer, default: 0
-    add_column :users, :total_games, :integer, default: 0
-    add_column :users, :total_wins, :integer, default: 0
+      # game related
+      t.boolean :host, default: false
+      t.boolean :hot_join, default: false
+      t.boolean :lead, default: false
+      t.boolean :was_lead, default: false
+      t.boolean :finished_turn, default: false
+      t.boolean :voted, default: false
+      t.integer :current_score, default: false
 
-    # profile related
-    add_column :users, :show_jokes_allowed, :boolean, default: true
-    add_column :users, :show_awards_allowed, :boolean, default: true
+      # statistics:
+      t.integer :total_score, default: 0
+      t.integer :total_setups, default: 0
+      t.integer :total_punchlines, default: 0
+      t.integer :total_suggestions, default: 0
+      t.integer :total_games, default: 0
+      t.integer :total_wins, default: 0
+
+      # profile related:
+      t.boolean :show_jokes_allowed, default: true
+      t.boolean :show_awards_allowed, default: true
+    end
   end
 end

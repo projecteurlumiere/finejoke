@@ -48,7 +48,11 @@ class Suggestion < ApplicationRecord
     self.context = round&.setup
   }, if: :new_record?
 
-  after_create -> { user.suggestions << id; user.save! }
+  after_create -> { 
+    user.suggestions << id
+    user.total_suggestions += 1
+    user.save!
+  }
 
   def user_playing?
     user&.playing?(game) && user&.playing?(round)

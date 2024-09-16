@@ -65,6 +65,14 @@
         <%= user.total_punchlines %>
       </div>
     </div>
+    <div>
+      <div class="label">
+        <%= t(:".suggestions_requested") %>
+      </div>
+      <div class="value accent-alert">
+        <%= user.total_suggestions %>
+      </div>
+    </div>
   </div>
   <div class="buttons-container">
     <% if user == current_user %>
