@@ -58,8 +58,10 @@ export default class extends Controller {
   }
 
   #toggleInput(directive) {
+    const action = directive === "disable" ? true : false;
+
     [this.userInputTarget, this.userSubmitTarget, this.suggestionSubmitTarget].forEach((el) => {
-      el.disabled = directive === "disable" ? true : false
+      el.disabled = action
     })
   }
 
@@ -94,19 +96,24 @@ export default class extends Controller {
     const timeLimit = typeSpeed * suggestion.length * 2
     let timePassed = 0;
 
-    while (this.typed || timePassed > timeLimit) {
-      // scrolling bottom
-      placeholder.scrollTop = placeholder.scrollHeight
+    // timeout is neccesary so that it doesn't start count too early
+    // when placeholder has the entire content in it, 
+    // i.e. before typed is initialized
+    setTimeout(async () => {
+      while (this.typed || timePassed > timeLimit) {
+        // scrolling bottom
+        placeholder.scrollTop = placeholder.scrollHeight
 
-      // to update counter
-      this.userInputTarget.dispatchEvent(new CustomEvent("input", {
-        detail: {
-          length: placeholder.innerHTML.length
-        }
-      }))
+        // to update counter
+        this.userInputTarget.dispatchEvent(new CustomEvent("input", {
+          detail: {
+            length: placeholder.innerHTML.length
+          }
+        }))
 
-      await new Promise(r => setTimeout(r, typeSpeed));
-      timePassed += typeSpeed
-    }
+        await new Promise(r => setTimeout(r, typeSpeed));
+        timePassed += typeSpeed
+      }
+    }, typeSpeed * 2)
   }
 }
