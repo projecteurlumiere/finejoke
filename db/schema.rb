@@ -49,21 +49,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_11_135807) do
   end
 
   create_table "jokes", force: :cascade do |t|
-    t.string "setup"
-    t.string "setup_short"
-    t.string "punchline"
-    t.string "text"
-    t.integer "n_votes", default: 0
+    t.bigint "setup_model_id", null: false
+    t.string "punchline", null: false
+    t.integer "n_votes", default: 0, null: false
     t.bigint "round_id"
-    t.bigint "punchline_author_id"
-    t.bigint "setup_author_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "setup_suggested", default: false, null: false
     t.boolean "punchline_suggested", default: false, null: false
-    t.index ["punchline_author_id"], name: "index_jokes_on_punchline_author_id"
     t.index ["round_id"], name: "index_jokes_on_round_id"
-    t.index ["setup_author_id"], name: "index_jokes_on_setup_author_id"
+    t.index ["setup_model_id"], name: "index_jokes_on_setup_model_id"
+    t.index ["user_id"], name: "index_jokes_on_user_id"
   end
 
   create_table "jokes_suggestions", id: false, force: :cascade do |t|
@@ -91,11 +88,20 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_11_135807) do
     t.integer "stage", default: 0
     t.string "setup"
     t.string "setup_short"
+    t.bigint "setup_model_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "suggestions", default: [], array: true
     t.index ["game_id"], name: "index_rounds_on_game_id"
+    t.index ["setup_model_id"], name: "index_rounds_on_setup_model_id"
     t.index ["user_id"], name: "index_rounds_on_user_id"
+  end
+
+  create_table "setups", force: :cascade do |t|
+    t.string "text", null: false
+    t.string "text_short", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_setups_on_user_id"
   end
 
   create_table "suggestions", force: :cascade do |t|
@@ -142,7 +148,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_11_135807) do
     t.boolean "show_awards_allowed", default: true
     t.boolean "guest", default: false
     t.integer "credits", default: 0
-    t.datetime "unlimited_credits_deadline", default: "3024-09-13 14:43:22"
+    t.datetime "unlimited_credits_deadline", default: "3024-09-16 08:54:33"
     t.integer "suggestions", default: [], array: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -165,8 +171,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_11_135807) do
   add_foreign_key "games", "users", column: "host_id"
   add_foreign_key "games", "users", column: "winner_id"
   add_foreign_key "jokes", "rounds"
-  add_foreign_key "jokes", "users", column: "punchline_author_id"
-  add_foreign_key "jokes", "users", column: "setup_author_id"
+  add_foreign_key "jokes", "setups", column: "setup_model_id"
   add_foreign_key "rounds", "games"
+  add_foreign_key "rounds", "setups", column: "setup_model_id"
   add_foreign_key "rounds", "users"
 end

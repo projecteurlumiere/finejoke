@@ -7,15 +7,9 @@ module JokePlaying
 
     delegate :truncate_setup, to: :round
 
-    before_save :compose_full_joke
-    before_save -> { self.setup_short = round&.setup_short || truncate_setup }, if: %i[setup_changed?]
     after_create :account_for_suggestions
     after_create :finish_user_turn
     after_create { user.increment!(:total_punchlines) }
-
-    def compose_full_joke
-      self.text = [setup, punchline].join(" ")
-    end
 
     def finish_user_turn
       self.user.finished_turn!

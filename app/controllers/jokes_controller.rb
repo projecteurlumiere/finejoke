@@ -14,7 +14,11 @@ class JokesController < ApplicationController
 
   # creates a joke with punchline
   def create
-    @joke = @round.jokes.build(punchline_author_id: current_or_guest_user.id, setup_author_id: @round.user.id, setup: @round.setup, **joke_params)
+    @joke = @round.jokes.build(
+      user_id: current_or_guest_user.id, 
+      setup_model_id: @round.setup_model.id, 
+      **joke_params
+    )
     authorize_joke!
     
     if @joke.save

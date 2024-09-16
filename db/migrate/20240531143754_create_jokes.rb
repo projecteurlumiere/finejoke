@@ -1,14 +1,11 @@
 class CreateJokes < ActiveRecord::Migration[7.1]
   def change
     create_table :jokes do |t|
-      t.string :setup
-      t.string :setup_short
-      t.string :punchline
-      t.string :text
-      t.integer :n_votes, default: 0
+      t.references :setup_model, null: false, foreign_key: { to_table: :setups }
+      t.string :punchline, null: false
+      t.integer :n_votes, null: false, default: 0
       t.references :round, foreign_key: true
-      t.references :punchline_author, foreign_key: { to_table: :users }
-      t.references :setup_author, foreign_key: { to_table: :users }
+      t.references :user
 
       t.timestamps
     end

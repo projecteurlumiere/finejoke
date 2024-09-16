@@ -3,6 +3,7 @@ class Round < ApplicationRecord
   
   belongs_to :game, touch: true
   belongs_to :user, optional: true # lead
+  belongs_to :setup_model, class_name: :Setup, optional: true
   
    validates :setup, length: { in: 1..Joke::SETUP_MAX_LENGTH }, if: :setup_changed?
    # validates :setup_short, length: { in: 1..55 }, if: %i[setup setup_changed?]
@@ -35,8 +36,8 @@ class Round < ApplicationRecord
   }
 
   # when lead updated round with setup:
+  before_update -> { self.setup_short = Setup.truncate(setup) }, if: %i[setup? setup_changed?]
   before_update -> { move_to_punchline }, if: %i[setup_stage? setup? setup_changed?]
-  before_update :truncate_setup, if: %i[setup? setup_changed?]
 
   after_touch -> {
     move_to_vote and return if time_to_vote?
@@ -47,9 +48,18 @@ class Round < ApplicationRecord
     user.finished_turn!
     setup.nil? ? random_setup : user.increment!(:total_setups)
     self.suggestions = user.suggestions
+    create_setup_model
     punchline_stage!
     broadcast_current_round
     schedule_next_stage
+  end
+
+  def create_setup_model
+    self.setup_model = Setup.create(
+      text: setup,
+      text_short: setup_short,
+      user_id: user.id
+    )
   end
 
   def time_to_vote?
@@ -163,38 +173,5 @@ class Round < ApplicationRecord
 
   def votes_finished?
     game.users.find_by(voted: false, hot_join: false) ? false : true
-  end
-
-  def truncate_setup
-    return if setup.length < Joke::SETUP_TRUNCATE_LENGTH
-
-    string = setup.dup
-
-    str_modified = if !string.end_with?(*%w[. ! ?])
-                     string.concat(".")
-                     true
-                   end
-
-    sentences = string.scan(/[^\.!?]+[\.!?:# ]/).map(&:strip)
-    last_sentence = sentences.pop
-    last_sentence.slice!(-1) if str_modified
-
-    self.setup_short = if last_sentence.length > Joke::SETUP_TRUNCATE_LENGTH
-      shorter_sentence = []
-
-      last_sentence.split(" ").reverse.inject(0) do |sum, word|
-        length = sum + word.length
-        length > Joke::SETUP_TRUNCATE_LENGTH ? break : shorter_sentence << word
-        length
-      end
-
-      if shorter_sentence.none?
-        shorter_sentence << last_sentence.slice(-Joke::SETUP_TRUNCATE_LENGTH..-1)
-      else 
-        shorter_sentence.reverse
-      end.join(" ")
-    else
-      last_sentence
-    end
   end
 end
