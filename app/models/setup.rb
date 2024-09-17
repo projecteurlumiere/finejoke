@@ -13,11 +13,13 @@ class Setup < ApplicationRecord
   def self.truncate(setup)
     return if setup.length < TRUNCATE_LENGTH
 
-    str_modified = if !setup.end_with?(*%w[. ! ?])
-                     setup.concat(".")
+    string = setup.dup
+
+    str_modified = if !string.end_with?(*%w[. ! ?])
+                     string.concat(".")
                      true
                    end
-    sentences = setup.scan(/[^\.!?]+[\.!?:»'"# ]+/).map(&:strip)
+    sentences = string.scan(/[^\.!?]+[\.!?:»'"# ]+/).map(&:strip)
     last_sentence = sentences.pop
     last_sentence.slice!(-1) if str_modified
 
@@ -27,6 +29,7 @@ class Setup < ApplicationRecord
       last_sentence.split(" ").reverse.inject(0) do |sum, word|
         length = sum + word.length
         length > TRUNCATE_LENGTH ? break : shorter_sentence << word
+
         length
       end
 

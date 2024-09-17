@@ -14,7 +14,7 @@ class Joke < ApplicationRecord
   PUNCHLINE_MAX_LENGTH = 350
 
   # validates :setup, length: { in: 1..SETUP_MAX_LENGTH }
-  validates :punchline, length: { in: 1...PUNCHLINE_MAX_LENGTH }
+  validates :punchline, length: { in: 1..PUNCHLINE_MAX_LENGTH }
 
   alias_method :punchline_author=, :user=
   alias_method :punchline_author, :user
