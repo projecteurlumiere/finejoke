@@ -108,6 +108,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_11_135807) do
   create_table "suggestions", force: :cascade do |t|
     t.string "output", null: false
     t.integer "target", null: false
+    t.string "context"
+    t.string "user_input"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -150,7 +152,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_11_135807) do
     t.boolean "show_awards_allowed", default: true
     t.boolean "guest", default: false
     t.integer "credits", default: 0, null: false
-    t.datetime "unlimited_credits_deadline", default: "2024-09-23 13:59:48"
+    t.datetime "unlimited_credits_deadline", default: "2024-09-24 08:01:58"
     t.integer "suggestions", default: [], null: false, array: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

@@ -149,7 +149,7 @@ class Round < ApplicationRecord
       target: :setup, 
       user_input: "", 
       force_creation: true
-    ).output
+    ).generate
     self.setup_randomized = true
   end
 

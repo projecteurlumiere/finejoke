@@ -41,6 +41,8 @@ class User < ApplicationRecord
   end
 
   def enough_credits?(price:)
-    credits >= price || unlimited_credits_deadline&.>(Time.now)
+    ENV["FREE_AI"].present? ||
+      unlimited_credits_deadline&.>(Time.now) ||
+      credits >= price 
   end
 end

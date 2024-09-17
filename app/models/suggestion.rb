@@ -3,6 +3,8 @@ class Suggestion < ApplicationRecord
 
   SETUP_MAX_TOKENS = Joke::SETUP_MAX_LENGTH / 4 * 3
   PUNCHLINE_MAX_TOKENS = Joke::PUNCHLINE_MAX_LENGTH / 4 * 3
+  CONTEXT_MAX_LENGTH = 500
+  USER_INPUT_MAX_LENGTH = 500
 
   enum target: %i[setup punchline], _prefix: :for 
 
@@ -10,7 +12,6 @@ class Suggestion < ApplicationRecord
     user 
     game_id game 
     round_id round 
-    context user_input
     force_creation
     error
   ]
@@ -45,7 +46,13 @@ class Suggestion < ApplicationRecord
   validates :target, presence: true
 
   before_validation :generate, if: :new_record?
+  before_validation -> { 
+    self.context = nil unless context.present?
+    self.user_input = nil unless user_input.present?
+  }
   validates :output, presence: true
+  validates :context, length: { in: 1..CONTEXT_MAX_LENGTH }, if: :context
+  validates :user_input, length: { in: 1..USER_INPUT_MAX_LENGTH }, if: :user_input
 
   after_initialize -> {
     self.game = Game.find_by(id: game_id)
@@ -53,11 +60,7 @@ class Suggestion < ApplicationRecord
     self.context = round&.setup
   }, if: :new_record?
 
-  after_create -> { 
-    user.suggestions << id
-    user.total_suggestions += 1
-    user.save!
-  }
+  after_create :add_suggestion_to_user
 
   def user_playing?
     user&.playing?(game) && user&.playing?(round)
@@ -72,9 +75,21 @@ class Suggestion < ApplicationRecord
   end
 
   def generate
+    return self.output if self.output
     return unless force_creation || user.pay(price: 1)
+    return reuse_previous_suggestion if error.present?
 
-    params = if for_setup? 
+    params = prepare_params
+      
+    ai_response = make_request(**params)
+    self.output = ai_response["choices"][0]["message"]["content"]
+  rescue => e
+    self.error = e
+    throw :abort
+  end
+
+  def prepare_params
+    if for_setup?
       {
         max_tokens: SETUP_MAX_TOKENS,
         system_message: request_setup_message
@@ -85,13 +100,6 @@ class Suggestion < ApplicationRecord
         system_message: request_punchline_message
       }
     end
-      
-    ai_response = make_request(**params)
-
-    self.output = ai_response["choices"][0]["message"]["content"]
-  rescue => e
-    self.error = e
-    throw :abort
   end
 
   def request_setup_message
@@ -148,12 +156,24 @@ class Suggestion < ApplicationRecord
     )
   end
 
-  def generate_dev
-    self.output = (case self.target.to_sym
-    when :setup
-      "I am a funny and very very very very very very very very very long and longing setup"
-    when :punchline
-      "I am a funny and very very very very very very very very very long and longing punch"
-    end + " your previous response was: #{user_input || "there was not any"}").slice(0..(Joke::SETUP_MAX_LENGTH - 1))
+  def reuse_previous_suggestion
+    return unless for_setup?
+
+    old_suggestion = Suggestion
+                     .where(user_input: nil)
+                     .order("RANDOM()")
+                     .limit(1)
+                     .pluck(:id, :output)[0]
+
+    add_suggestion_to_user(old_suggestion[0])
+    self.output = old_suggestion[1]
+  end
+
+  def add_suggestion_to_user(id = self.id)
+    return unless user
+    
+    user.suggestions << id
+    user.total_suggestions += 1
+    user.save!
   end
 end

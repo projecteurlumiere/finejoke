@@ -18,6 +18,6 @@ class SuggestionPolicy < ApplicationPolicy
   private 
 
   def ai_allowed?
-    ENV["OPENAI_ACCESS_TOKEN"].present? && @game&.ai_allowed? && @game&.ai_allowed?
+    ENV["OPENAI_ACCESS_TOKEN"].present? && @game&.ai_allowed?
   end
 end

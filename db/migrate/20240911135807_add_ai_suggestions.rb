@@ -4,7 +4,7 @@ class AddAiSuggestions < ActiveRecord::Migration[7.1]
 
     change_table :users, bulk: true do |t|
       t.integer :credits, null: false, default: 0
-      t.datetime :unlimited_credits_deadline, default: Time.now + 1.week
+      t.datetime :unlimited_credits_deadline
 
       t.integer :suggestions, array: true, null: false, default: []
     end
@@ -19,6 +19,8 @@ class AddAiSuggestions < ActiveRecord::Migration[7.1]
     create_table :suggestions do |t|
       t.string :output, null: false
       t.integer :target, null: false
+      t.string :context # usually setup
+      t.string :user_input # usually whatever user writes in the input field
 
       t.timestamps
     end
