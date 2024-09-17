@@ -41,6 +41,7 @@ env:
   secret:
     - RAILS_MASTER_KEY
     - POSTGRES_PASSWORD
+    - OPENAI_ACCESS_TOKEN
 
 # Use accessory services (secrets come from .env).
 accessories:
