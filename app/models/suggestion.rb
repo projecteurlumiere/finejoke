@@ -82,6 +82,7 @@ class Suggestion < ApplicationRecord
     params = prepare_params
       
     ai_response = make_request(**params)
+    
     self.output = ai_response["choices"][0]["message"]["content"]
   rescue => e
     self.error = e

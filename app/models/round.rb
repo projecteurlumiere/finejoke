@@ -1,5 +1,6 @@
 class Round < ApplicationRecord
   include Rounds::Scheduling
+  include Rounds::VirtualHost
   
   belongs_to :game, touch: true
   belongs_to :user, optional: true # lead

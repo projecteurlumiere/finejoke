@@ -1,6 +1,7 @@
 class Game < ApplicationRecord
   include Games::Scheduling
   include Games::Broadcasting
+  include Games::VirtualHost
 
   has_many :users, dependent: :nullify # players
   belongs_to :winner, required: false, class_name: :User

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_11_135807) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_17_111935) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -76,6 +76,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_11_135807) do
     t.string "icon"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "prompts", force: :cascade do |t|
+    t.string "role", null: false
+    t.string "content", null: false
+    t.bigint "virtual_host_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["virtual_host_id"], name: "index_prompts_on_virtual_host_id"
   end
 
   create_table "rounds", force: :cascade do |t|
@@ -152,10 +161,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_11_135807) do
     t.boolean "show_awards_allowed", default: true
     t.boolean "guest", default: false
     t.integer "credits", default: 0, null: false
-    t.datetime "unlimited_credits_deadline", default: "2024-09-24 08:01:58"
+    t.datetime "unlimited_credits_deadline"
     t.integer "suggestions", default: [], null: false, array: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "virtual_hosts", force: :cascade do |t|
+    t.bigint "game_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_virtual_hosts_on_game_id"
   end
 
   create_table "votes", force: :cascade do |t|
