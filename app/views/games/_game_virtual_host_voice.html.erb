@@ -1,0 +1,7 @@
+<div id="virtual-host-voice" class="hidden">
+  <% if prompt %>
+    <audio autoplay data-virtual-host-target="audio">
+      <source src="<%= url_for(prompt.audio) %>" type="audio/mpeg">
+    </audio>
+  <% end %>
+</div>

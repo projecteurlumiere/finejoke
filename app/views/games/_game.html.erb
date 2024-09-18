@@ -3,12 +3,20 @@
       class: "game-container three-columns", 
         data: game_data_attributes(game).merge(
           { user_id: current_or_guest_user.id,
-            controller: "containers timer",
+            controller: [
+                          "containers", 
+                          "timer", 
+                          ("virtual-host" if game.virtual_host)
+                        ].compact.join(" "),
             action: "chat:unseen->containers#blink chat:seen->containers#unblink"
           })) do %>
   <%= content_for(:nav_button) do %>
     <%= link_to t(:".back_to_lobby"), games_path, class: "button black-and-white" %>
   <% end %>
+
+  <%= render partial: "games/game_virtual_host_voice", 
+    format: [:html],
+    locals: { prompt: nil} %>
 
   <div class="mobile-navigation">
     <div class="button" 
@@ -37,7 +45,9 @@
     data-containers-target="container" 
     data-container-name="data" 
     data-game-data-id-value="<%= current_or_guest_user.id %>">
-    <%= render partial: "games/game_users", formats: %i[html], locals: { game: game, votes_change: {} } %>
+    <%= render partial: "games/game_users", 
+      formats: %i[html], 
+      locals: { game: game, votes_change: {} } %>
     <button class="viewers black">
       <%= inline_svg("icons/eye.svg") %>
       <%= render partial: "games/game_n_viewers", locals: { game: game } %>
@@ -45,7 +55,10 @@
     <%# render partial: "games/game_settings", locals: { game: game } %>  
   </div>
 
-  <%= render partial: "rounds/current_round", formats: %i[html], locals: { game: game, round: game.current_round } %>
+  <%= render partial: "rounds/current_round", 
+    formats: %i[html], 
+    locals: { game: game, round: game.current_round } %>
 
-  <%= render partial: "games/chat", locals: { game: game, user: current_or_guest_user } %>
+  <%= render partial: "games/chat", 
+  locals: { game: game, user: current_or_guest_user } %>
 <% end %>

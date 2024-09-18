@@ -7,14 +7,26 @@ class VirtualHost < ApplicationRecord
     # talk_later if Set[:].include?(situation)
 
     generate_comment_message
-    request_prompt
-    game.broadcast_message(@output, from: User.new(username: "AI"))
+    prompt = request_prompt
+
+    game.broadcast_message(prompt.content, from: User.new(username: "AI"))
+    prompt.voice if self.voiced?
   end
 
   def talk_later(round = game.current_round)
     @current_round ||= round 
 
     TalkJob.perform_later(self.id, situation)
+  end
+
+  def reply(username, msg)
+    @message = {
+      role: "user",
+      content: "User #{username} writes: #{msg}"
+    }
+
+    prompt = request_prompt
+    game.broadcast_message(prompt.content, from: User.new(username: "AI"))
   end
 
   def generate_comment_message
@@ -157,8 +169,7 @@ class VirtualHost < ApplicationRecord
     response = request(messages)
     message = response["choices"][0]["message"]
 
-    prompts.create(role: message["role"], content: message["content"])
-    @output = message["content"]
+    @prompt = prompts.create(role: message["role"], content: message["content"])
   end
 
   def request(messages)

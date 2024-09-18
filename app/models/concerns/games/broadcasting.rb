@@ -4,6 +4,10 @@ module Games
     include Rails.application.routes.url_helpers
 
     included do 
+      def stream_name
+        GameChannel.broadcasting_for(self)
+      end
+
       def broadcast_current_round
         broadcast_round(current_round)
       end
@@ -18,7 +22,7 @@ module Games
       end
 
       def broadcast_user_change(votes_change: {})
-        broadcast_render_later_to(["game", self], 
+        broadcast_render_later_to(stream_name, 
             partial: "games/game_users", 
             formats: %i[turbo_stream],
             locals: { 
@@ -31,7 +35,7 @@ module Games
       end
 
       def broadcast_message(text, from:)
-        broadcast_render_later_to(["game", self], partial: "messages/chat_message", 
+        broadcast_render_later_to(stream_name, partial: "messages/chat_message", 
           locals: { id: from.id || "", username: from.username, text: text })
       end
 
@@ -47,11 +51,11 @@ module Games
 
       # either { notice: "your_string" } or { alert: "your_string" }
       def broadcast_flash(flashable = { alert: "no flash message was supplied" })
-        broadcast_render_later_to(["game", self], partial: "shared/flash", locals: { flashable: })
+        broadcast_render_later_to(stream_name, partial: "shared/flash", locals: { flashable: })
       end
 
       def broadcast_redirect_to(path)
-        broadcast_render_to(["game", self], partial: "shared/redirect_to", locals: { path: })
+        broadcast_render_to(stream_name, partial: "shared/redirect_to", locals: { path: })
       end
 
       def broadcast_create_to_lobby

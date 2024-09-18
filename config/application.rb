@@ -46,5 +46,7 @@ module Finejoke
     config.action_view.sanitized_allowed_attributes = []
     
     config.action_view.automatically_disable_submit_tag = false
+
+    config.active_storage.service = :local
   end
 end

@@ -2,6 +2,7 @@ class CreateHostsAndPrompts < ActiveRecord::Migration[7.1]
   def change
     create_table :virtual_hosts do |t|
       t.references :game
+      t.boolean :voiced, null: false, default: false
 
       t.timestamps
     end
