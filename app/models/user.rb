@@ -1,7 +1,7 @@
 class User < ApplicationRecord
-  include UserMergeable
-  include UserPlaying
-  include UserBroadcasting
+  include Users::Mergeable
+  include Users::Playing
+  include Users::Broadcasting
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -44,5 +44,9 @@ class User < ApplicationRecord
     ENV["FREE_AI"].present? ||
       unlimited_credits_deadline&.>(Time.now) ||
       credits >= price 
+  end
+
+  def to_s
+    username
   end
 end

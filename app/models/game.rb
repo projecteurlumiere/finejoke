@@ -1,6 +1,6 @@
 class Game < ApplicationRecord
-  include GameScheduling
-  include GameBroadcasting
+  include Games::Scheduling
+  include Games::Broadcasting
 
   has_many :users, dependent: :nullify # players
   belongs_to :winner, required: false, class_name: :User
@@ -8,6 +8,7 @@ class Game < ApplicationRecord
   belongs_to :host, class_name: :User
 
   has_many :rounds, dependent: :destroy
+  has_one :current_round, -> { where(current: true) }, class_name: :Round
   has_many :jokes, through: :rounds
 
   enum status: %i[waiting ongoing on_halt finished]
@@ -99,10 +100,6 @@ AFK_ROUNDS_THRESHOLD = 1
       super(user)
       save
     end
-  end
-
-  def current_round 
-    rounds.find_by(current: true)
   end
 
   def choose_lead

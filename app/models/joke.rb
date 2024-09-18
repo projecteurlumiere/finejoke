@@ -1,5 +1,5 @@
 class Joke < ApplicationRecord
-  include JokePlaying
+  include Jokes::Playing
 
   has_and_belongs_to_many :suggestions, dependent: :nullify
 

@@ -1,5 +1,5 @@
 class Round < ApplicationRecord
-  include RoundScheduling
+  include Rounds::Scheduling
   
   belongs_to :game, touch: true
   belongs_to :user, optional: true # lead
