@@ -21,7 +21,8 @@ module RoundsHelper
     @attributes.merge!({
       user_lead: user.lead?,
       user_voted: user.voted?(round),
-      user_finished_turn: user.finished_turn?
+      user_finished_turn: user.finished_turn?,
+      user_wants_to_skip_results: user.wants_to_skip_results?
     }) if user.playing?(round)
 
     @attributes
@@ -231,8 +232,9 @@ module RoundsHelper
   end
 
   def render_default_action_for(user, round, game)
-    return render_join(game) if game.joinable?(by: user)
     return render_game_over_button if game.finished?
+    return render_join(game) if game.joinable?(by: user)
+    return render_skip_results(game, round) if round.results_stage? && !user.wants_to_skip_results?
 
     render_wait_for(user, round, game)
   end
@@ -243,6 +245,18 @@ module RoundsHelper
 
   def render_game_over_button
     tag.button(t(:".game_over"), class: "disabled", disabled: true).html_safe
+  end
+
+  def render_skip_results(game, round)
+    button_to(t(:".skip_results"), 
+      game_round_skip_results_path(game, round),
+      form: {
+          data: { 
+          controller: "skip-results",
+          action: "turbo:submit-end->skip-results#disable",
+          disabled_text: t(:".wait")
+        }
+      }).html_safe
   end
 
   def render_wait_for(user, round, game)

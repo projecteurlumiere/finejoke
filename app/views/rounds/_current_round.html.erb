@@ -12,7 +12,7 @@
           containers_target: "container", 
           container_name: "round" 
         } do %>
-    <%= tag.div data: round_data_attributes(current_or_guest_user, round, game), class: "hidden state" %>
+    <%= tag.div data: round_data_attributes(current_or_guest_user, round, game), id: "round-state", class: "hidden state" %>
     <div class="task" data-jokes-target="task">
       <%# <div class="timer-wrapper"> %>
       <%# </div> %>

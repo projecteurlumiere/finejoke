@@ -8,7 +8,7 @@ export default class extends Controller {
     "jokes", "joke", "previous", "next", "action", "counter",
     "task", "description", "setup", "buttons",
     "swipeWrap"
-    ]
+  ]
 
   next() {
     this.swipe.next()

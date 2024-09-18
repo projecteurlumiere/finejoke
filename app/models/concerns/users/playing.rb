@@ -57,6 +57,7 @@ module Users
           lead: false,
           voted: false,
           finished_turn: false,
+          wants_to_skip_results: false,
           current_score: 0,
           suggestions: []
         })

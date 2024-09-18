@@ -28,4 +28,10 @@ class RoundPolicy < ApplicationPolicy
       @game.current_round == @round &&
       @user.lead?
   end
+
+  def skip_results?
+    @user.playing?(@game) &&
+      @game.current_round == @round &&
+      @game.current_round.results_stage?
+  end
 end

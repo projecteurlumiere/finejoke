@@ -47,6 +47,7 @@ ru:
       # buttons:
       start: Старт!
       join: Присоединиться
+      skip_results: Новый раунд
       wait: Ждём
       wait_for_new_round: Ждём новый раунд
     setup_form:

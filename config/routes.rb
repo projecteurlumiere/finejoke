@@ -7,6 +7,8 @@ Rails.application.routes.draw do
     get "over", to: "games#game_over"
     
     get "rounds/current", to: "rounds#show_current"
+    post "rounds/:id/skip_results", to: "rounds#skip_results", as: :round_skip_results
+    
     resources :rounds, only: %i[show create update] do
       resources :jokes, only: %i[index show create]
       patch "/jokes/:id/vote", to: "jokes#vote", as: :joke_vote

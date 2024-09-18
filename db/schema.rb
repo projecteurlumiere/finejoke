@@ -177,6 +177,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_18_111714) do
     t.boolean "lead", default: false
     t.boolean "was_lead", default: false
     t.boolean "finished_turn", default: false
+    t.boolean "wants_to_skip_results", default: false
     t.boolean "voted", default: false
     t.integer "current_score", default: 0
     t.integer "total_score", default: 0

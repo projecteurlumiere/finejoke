@@ -16,6 +16,7 @@ class AddAttributesToUsers < ActiveRecord::Migration[7.1]
       t.boolean :lead, default: false
       t.boolean :was_lead, default: false
       t.boolean :finished_turn, default: false
+      t.boolean :wants_to_skip_results, default: false
       t.boolean :voted, default: false
       t.integer :current_score, default: false
 

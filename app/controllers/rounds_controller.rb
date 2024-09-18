@@ -1,7 +1,8 @@
 class RoundsController < ApplicationController
-  before_action :set_game, only: %i[ show show_current create update ]
-  before_action :set_round, only: %i[ show update ]
-  before_action :authorize_round!, only: %i[show show_current update]
+  before_action :set_game, only: %i[ show show_current create update skip_results ]
+  before_action :set_round, only: %i[ show update skip_results ]
+  before_action :authorize_round!, only: %i[show show_current update skip_results]
+  after_action :try_to_force_new_round, only: %i[skip_results]
 
   # GET /rounds/1
   # shows round (for current round mainly)s
@@ -45,6 +46,12 @@ class RoundsController < ApplicationController
     render_turbo_flash
   end
 
+  def skip_results
+    response.status = :accepted
+    flash.now[:notice] = t(:".you_voted_to_skip_results")
+    render_turbo_flash
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -70,5 +77,15 @@ class RoundsController < ApplicationController
       user: current_or_guest_user,
       game: @game
     }
+  end
+
+  def try_to_force_new_round
+    Game.transaction do
+      current_or_guest_user.update_attribute(:wants_to_skip_results, true)
+
+      if @game.users.pluck(:wants_to_skip_results).all?(true)
+        CreateNewRoundJob.perform_now(@game.id)
+      end
+    end
   end
 end
