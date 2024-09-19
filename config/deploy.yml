@@ -43,6 +43,7 @@ env:
     - POSTGRES_PASSWORD
     - OPENAI_ACCESS_TOKEN
     - FREE_AI
+    - HOST_NAME
 
 # Use accessory services (secrets come from .env).
 accessories:
