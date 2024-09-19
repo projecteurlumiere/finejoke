@@ -29,7 +29,6 @@ ru:
   messages:
     message_sent: Сообщение отправлено
     message_not_sent: Сообщение не отправлено
-    virtual_host_fancy_name: Господин ведущий
   profile:
     profile_updated: Настройки профиля сохранены
     profile_not_updated: Настройки профиля не были сохранены

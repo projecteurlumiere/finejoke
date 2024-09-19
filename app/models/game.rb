@@ -15,16 +15,16 @@ class Game < ApplicationRecord
   enum status: %i[waiting ongoing on_halt finished]
 
   # time in seconds
-         MIN_PLAYERS = 2
-         MAX_PLAYERS = 10
-      MIN_ROUND_TIME = 1
-      MAX_ROUND_TIME = 180 
-AFK_ROUNDS_THRESHOLD = 1
-  RESULTS_STAGE_TIME = 60
-  FINISHED_GAME_TIME = 180
-      IDLE_GAME_TIME = 180
-          MIN_POINTS = 2
-          MAX_POINTS = 999
+           MIN_PLAYERS = 2
+           MAX_PLAYERS = 10
+        MIN_ROUND_TIME = 1
+        MAX_ROUND_TIME = 180 
+  AFK_ROUNDS_THRESHOLD = 1
+    RESULTS_STAGE_TIME = 60
+    FINISHED_GAME_TIME = 180
+        IDLE_GAME_TIME = 180
+            MIN_POINTS = 2
+            MAX_POINTS = 999
 
   validates :name, presence: true, length: { in: 1..14 }
   validates :max_players, numericality: { only_integer: true },

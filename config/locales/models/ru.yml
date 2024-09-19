@@ -1,3 +1,5 @@
 ru:
   round:
     joker: Шутник
+  message:
+    virtual_host_address: Господин ведущий

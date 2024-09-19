@@ -1,6 +1,5 @@
 class MessagesController < ApplicationController
   before_action :set_game, only: %i[ create ]
-  after_action :virtual_host_replies, only: %i[ create ]
 
   # creates game
   def create
@@ -32,11 +31,5 @@ class MessagesController < ApplicationController
 
   def authorize_message!
     authorize @message || Message
-  end
-
-  def virtual_host_replies
-    return unless @game.virtual_host.present? && @message.text.start_with?(t(:".virtual_host_fancy_name"))
-
-    @game.virtual_host.reply(@message.user.username, @message.text)
   end
 end
