@@ -173,7 +173,7 @@ class VirtualHost < ApplicationRecord
   end
 
   def request(messages)
-    OpenAI::Client.new(log_errors: true).chat(
+    OpenAI::Client.new.chat(
       parameters: { 
         model: "gpt-4o-mini",
         temperature: 0.8,
@@ -182,12 +182,46 @@ class VirtualHost < ApplicationRecord
     )
   end
 
+  # look for summary
+  # if there is summary, look for everything that is later than summary
+  # if there is summary and summary + the latter >= 10 then make another summary
+  # if there is no summary, give 10 last
   def prompts_history
-    self.prompts.limit(10).map do |p| 
+    summary_prompt = self.prompts.where(summary: true).last
+    prompts = if summary_prompt 
+                self.prompts.where("id > ?", summary_prompt.id)
+              else
+                self.prompts.last(10)
+              end
+
+    if prompts.length >= 10
+      messages = summary_messages(prompts)
+      prompts = [ request_summary(messages) ]
+    end
+
+    prompts.map do |p|
       {
         role: p.role,
         content: p.content
       }
     end
+  end
+
+  def summary_messages(prompts)
+    [
+      *prompts,
+      { role: "system", content: "Write summary of the messages above. Focus on game-related details, names and other interactions" } 
+    ]
+  end
+
+  def request_summary(messages)
+    response = request(messages)
+    message = response["choices"][0]["message"]
+
+    prompts.create(
+      summary: true,
+      role: "system", 
+      content: "Here is the summary of some previous messages: #{message["content"]}",
+    )
   end
 end

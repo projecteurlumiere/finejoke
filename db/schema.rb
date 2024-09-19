@@ -109,6 +109,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_18_111714) do
   create_table "prompts", force: :cascade do |t|
     t.string "role", null: false
     t.string "content", null: false
+    t.boolean "summary", default: false, null: false
     t.bigint "virtual_host_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
