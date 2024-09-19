@@ -24,7 +24,7 @@ export default class extends Controller {
     this.copy()
   }
 
-  async responseTargetConnected(el) {
+  responseTargetConnected(el) {
     const suggestion = el.innerText
     el.remove()
 
@@ -91,7 +91,7 @@ export default class extends Controller {
     placeholder.remove()
   }
 
-  async #scrollPlaceholder(placeholder, typeSpeed, suggestion) {
+  #scrollPlaceholder(placeholder, typeSpeed, suggestion) {
     // if something goes wrong it will turn off
     const timeLimit = typeSpeed * suggestion.length * 2
     let timePassed = 0;
