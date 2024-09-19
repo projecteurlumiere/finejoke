@@ -7,6 +7,8 @@ ru:
       view: Смотреть
       create: Создать
       new: Новая
+    catalogue:
+      rooms: Комнаты
     game:
       back_to_lobby: В лобби
       game: Игра

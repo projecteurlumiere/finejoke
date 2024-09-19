@@ -1,0 +1,16 @@
+<turbo-frame id="catalogue" class="bg-accent-alert <%= hide_in_mobile_when("create") %>" 
+    data-containers-target="container" 
+    data-container-name="catalogue"
+    data-autoscroll-block="start">
+  <div class="heading">
+    <h2 class="hidden-when-mobile">
+      <%= t :".rooms" %>
+    </h2>
+    <%= button_to "Обновить", games_path, method: :get, class: "unstyled" %>
+  </div>
+  <div class="scrollable">
+    <ul id="games" class="list">
+      <%= render partial: "game_entry", collection: @games, as: :game %>
+    </ul>
+  </div>
+</turbo-frame>

@@ -5,10 +5,14 @@ class GamesController < ApplicationController
 
   # GET /games
   def index
-    @game = Game.new
-
     @games = Game.where.not(status: :finished).order(n_players: :desc, created_at: :desc).all
-    # clean_up_games
+
+    if turbo_frame_request?
+      render partial: "games/catalogue"
+    else
+      @game = Game.new
+      render :index
+    end
   end
 
   # joins game

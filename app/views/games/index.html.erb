@@ -4,18 +4,8 @@
 
 <div id="lobby" class="two-columns" 
   data-controller="catalogue new-game containers">  
-  <div id="catalogue" class="bg-accent-alert <%= hide_in_mobile_when("create") %>" 
-    data-containers-target="container" 
-    data-container-name="catalogue">
-    <h2 class="hidden-when-mobile">
-      <%= t :".rooms" %>
-    </h2>
-    <div class="scrollable">
-      <ul id="games" class="list">
-        <%= render partial: "game_entry", collection: @games, as: :game %>
-      </ul>
-    </div>
-  </div>
+  <%= render partial: "catalogue" %>
+
   <div class="<%= hide_in_mobile_when("index") %> form" 
     data-containers-target="container" 
     data-container-name="form">
