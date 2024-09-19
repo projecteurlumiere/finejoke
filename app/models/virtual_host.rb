@@ -1,5 +1,5 @@
 class VirtualHost < ApplicationRecord
-  belongs_to :game
+  belongs_to :game, optional: true
   has_many :prompts
 
   def talk(round = game.current_round)

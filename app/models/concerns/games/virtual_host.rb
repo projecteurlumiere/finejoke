@@ -3,7 +3,7 @@ module Games
     extend ActiveSupport::Concern
     
     included do 
-      has_one :virtual_host
+      has_one :virtual_host, dependent: :nullify
 
       after_save :virtual_host_takes_mic
 
