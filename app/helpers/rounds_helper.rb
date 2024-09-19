@@ -7,7 +7,8 @@ module RoundsHelper
       jokes_target: :state,
       game_id: game.id,
       game_status: game.status,
-      user_playing: user.playing?(game)
+      user_playing: user.playing?(game),
+      user_host: game.host == user,
     }
 
     @attributes.merge!({
@@ -234,7 +235,7 @@ module RoundsHelper
   def render_default_action_for(user, round, game)
     return render_game_over_button if game.finished?
     return render_join(game) if game.joinable?(by: user)
-    return render_skip_results(game, round) if round.results_stage? && !user.wants_to_skip_results?
+    return render_skip_results(game, round) if round&.results_stage? && !user.wants_to_skip_results?
 
     render_wait_for(user, round, game)
   end

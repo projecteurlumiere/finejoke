@@ -65,26 +65,27 @@ AFK_ROUNDS_THRESHOLD = 1
   end
 
   def remove_user(user)
-    transaction do 
+    transaction do
       self.users.include?(user) ? self.users.delete(user) : (return false)
       self.decrement!(:n_players)
-      on_halt! if ongoing? && not_enough_players?
+      on_halt! if (ongoing? || waiting?) && not_enough_players?
       skip_round if ongoing? && user.lead?
       was_host = user.host?
 
       user.reset_game_attributes
-      user.broadcast_status_change
 
       self.destroy and return true if n_players.zero?
 
-      self.host = users.first if was_host
+      self.host = users.first; broadcast_current_round if was_host
+
       save!
       touch
+
+      broadcast_user_change
+      user.broadcast_status_change
+
+      true
     end
-
-    broadcast_user_change
-
-    true
   rescue ActiveRecord::RecordInvalid
     return false
   end
@@ -186,6 +187,7 @@ AFK_ROUNDS_THRESHOLD = 1
   def on_halt!
     schedule_game_conclude
     current_round&.update_attribute(:current, false)
+    reset_current_round
     broadcast_current_round
     super
   end
