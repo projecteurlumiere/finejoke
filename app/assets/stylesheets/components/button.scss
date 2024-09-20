@@ -59,14 +59,14 @@ input[type=button],
 
   &.black {
     background-color: transparent;
-    border-color: var(--black);
-    color: var(--black);
+    border-color: var(--secondary-control-color);
+    color: var(--secondary-control-color);
   }
 
   &.black-and-white {
     background-color: transparent;
     border-color: var(--white);
-    color: var(--black);
+    color: var(--secondary-control-color);
   }
 
   @media(hover: hover) {

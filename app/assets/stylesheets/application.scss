@@ -27,8 +27,11 @@
   $black: #323876;
   $accent-notice: #00ffdd;
   $accent-alert: #ef3c5c;
-  $bg: linear-gradient(270.00deg, rgb(83, 217, 216),rgb(31, 182, 199) 100%);
-  $section-bg: $white; // to make it work remove the respective .accent-alert from elements
+  $secondary-control-color: $black;
+  $bg-color: linear-gradient(270.00deg, rgb(83, 217, 216),rgb(31, 182, 199) 100%);
+  $section-bg-color: $accent-alert;
+  $header-color: $black;
+
 
   --white: #{$white};
   --white-dimmer: #{rgba($white, 0.7)};
@@ -47,8 +50,11 @@
   --accent-alert-dimmest: #{rgba($accent-alert, 0.4)};
   --accent-alert-most-dimmest: #{rgba($accent-alert, 0.2)};
 
-  --background: #{$bg};
-  --section-background: #{$section-bg};
+  --secondary-control-color: #{$secondary-control-color};
+
+  --bg-color: #{$bg-color};
+  --section-bg-color: #{$section-bg-color};
+  --header-color: #{$header-color};
 }
 
 html, body {
@@ -57,7 +63,7 @@ html, body {
 }
 
 body {
-  background: var(--background);
+  background: var(--bg-color);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
