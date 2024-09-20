@@ -6,7 +6,19 @@
     <h2 class="hidden-when-mobile">
       <%= t :".rooms" %>
     </h2>
-    <%= button_to "Обновить", games_path, method: :get, class: "unstyled" %>
+
+    <%= form_with(url: games_path, method: :get, 
+        html: { 
+          class: "refresh", 
+          onsubmit: "this.classList.add('spinning')"
+        }) do |f| %>
+      <label>
+        <%= f.submit %>
+        <%= inline_svg "icons/reload.svg" %>
+      </label>
+    <% end %>
+
+    <%# button_to "Обновить", games_path, method: :get, class: "unstyled" %>
   </div>
   <div class="scrollable">
     <ul id="games" class="list">

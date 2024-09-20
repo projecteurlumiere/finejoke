@@ -19,6 +19,30 @@
     }
   }
 
+  .refresh {
+    label {
+      cursor: pointer;
+
+      input[type=submit] {
+        display: none;
+      }
+    }
+
+    &.spinning {
+      animation: spin 4s linear infinite;
+    }
+  }
+
+  .refresh.spinning {
+    animation: spin 0.25s linear infinite;
+  }
+
+  @keyframes spin {
+    100% {
+      transform: rotate(360deg);
+    }
+  } 
+
   li {
     font-family: var(--nunito-sans);
     margin-bottom: 1rem;
