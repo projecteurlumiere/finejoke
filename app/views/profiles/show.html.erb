@@ -1,6 +1,6 @@
 <div id="profile" class="two-columns" data-controller="containers">
   <%= content_for(:nav_button) do %>
-    <%= link_to t(:".to_lobby"), games_path, class: :button %>
+    <%= link_to t(:".to_lobby"), games_path, class: "button secondary" %>
   <% end %>
   <%= render partial: "catalogue", locals: { user: @user, jokes: @jokes } %>
   <%= render partial: "summary", locals: { user: @user, current_or_guest_user: current_or_guest_user } %>

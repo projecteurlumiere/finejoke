@@ -3,7 +3,13 @@
   overflow-y: hidden;
   display: flex;
   flex-direction: column;
+
   background-color: var(--section-bg-color);
+  * { 
+    color: var(--section-color); 
+    border-color: var(--section-color) 
+  }
+
 
   h2 {
     flex: 0;
@@ -60,7 +66,7 @@
       display: flex;
       column-gap: 1rem;
       padding: 1rem 1rem;
-      border: solid 1px var(--white);
+      border: solid 1px var(--section-color);
 
       font-weight: 600;
 

@@ -63,9 +63,9 @@ input[type=button],
     color: var(--secondary-control-color);
   }
 
-  &.black-and-white {
+  &.secondary {
     background-color: transparent;
-    border-color: var(--white);
+    border-color: var(--secondary-btn-border-color);
     color: var(--secondary-control-color);
   }
 

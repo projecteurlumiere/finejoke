@@ -3,11 +3,11 @@
     <% if current_page?(game_path(game)) %>
       <%= button_to t(:".quit_game"), 
         game_leave_path(game), 
-        class: "button black-and-white" %>
+        class: "button secondary" %>
     <% else %>
       <%= link_to t(:".currently_in_game"), 
         game_path(game), 
-        class: "button black-and-white" %>
+        class: "button secondary" %>
     <% end %>
   <% else %>
     <%= yield(:nav_button) %>

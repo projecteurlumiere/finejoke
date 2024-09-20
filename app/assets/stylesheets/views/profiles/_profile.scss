@@ -20,9 +20,12 @@
 
         @media(max-width: 950px) {
           margin-left: 0;
-          color: var(--black);
         }
       }
+    }
+
+    .accent {
+      color: var(--summary-accent-color);
     }
 
     .statistics-container {

@@ -11,7 +11,7 @@
             action: "chat:unseen->containers#blink chat:seen->containers#unblink"
           })) do %>
   <%= content_for(:nav_button) do %>
-    <%= link_to t(:".back_to_lobby"), games_path, class: "button black-and-white" %>
+    <%= link_to t(:".back_to_lobby"), games_path, class: "button secondary" %>
   <% end %>
 
   <%= render partial: "games/game_virtual_host_voice", 
@@ -48,7 +48,7 @@
     <%= render partial: "games/game_users", 
       formats: %i[html], 
       locals: { game: game, votes_change: {} } %>
-    <button class="viewers black">
+    <button class="viewers secondary">
       <%= inline_svg("icons/eye.svg") %>
       <%= render partial: "games/game_n_viewers", locals: { game: game } %>
     </button>

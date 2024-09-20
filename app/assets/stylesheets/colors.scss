@@ -1,0 +1,69 @@
+:root {
+  // // default color scheme:
+  // $white: #ffffff; 
+  // $black: #323876;
+  // $accent-notice: #00ffdd;
+  // $accent-alert: #ef3c5c;
+  // $secondary-control-color: $black;
+  // $bg-color: linear-gradient(270.00deg, rgb(83, 217, 216),rgb(31, 182, 199) 100%);
+  // $section-color: $white;
+  // $section-bg-color: $accent-alert;
+  // $header-color: $black;
+  // $summary-accent-color: $black;
+  // $secondary-btn-border-color: $white; 
+  // $chat-msg-color: $black;
+  // $chat-msg-border-color: $white;
+  // $chat-msg-bg-color: var(--accent-notice-dimmest);
+  // $chat-self-msg-bg-color: var(--white-dimmest);
+
+  // purple color scheme:
+  $white: #EBEBE0; 
+  $black: #280C4D;
+  $accent-notice: #24E166;
+  $accent-alert: #EA577C;
+  $secondary-control-color: #9DC3EA;
+  $bg-color: $black;
+  $section-color: $black;
+  $section-bg-color: #EBEBE0;
+  $header-color: $white;
+  $summary-accent-color: $white;
+  $secondary-btn-border-color: $secondary-control-color; 
+  $chat-msg-color: $white;
+  $chat-msg-border-color: $white;
+  $chat-msg-bg-color: var(--white-supreme-dimmest); // more backgroundish
+  $chat-self-msg-bg-color: var(--white-dimmester); // less backgroudnish
+
+  --white: #{$white};
+  --white-dimmer: #{rgba($white, 0.7)};
+  --white-dim: #{rgba($white, 0.5)};
+  --white-dimmest: #{rgba($white, 0.4)};
+  --white-dimmester: #{rgba($white, 0.25)};
+  --white-most-dimmest: #{rgba($white, 0.2)};
+  --white-supreme-dimmest: #{rgba($white, 0.1)};
+
+  --black: #{$black};
+  --black-dimmer: #{rgba($black, 0.7)};
+  --black-dim: #{rgba($black, 0.5)};
+
+  --accent-notice: #{$accent-notice};
+  --accent-notice-dimmest: #{rgba($accent-notice, 0.4)};
+
+  --accent-alert: #{$accent-alert};
+  --accent-alert-dim: #{rgba($accent-alert, 0.5)};
+  --accent-alert-dimmest: #{rgba($accent-alert, 0.4)};
+  --accent-alert-most-dimmest: #{rgba($accent-alert, 0.2)};
+
+  --secondary-control-color: #{$secondary-control-color};
+
+  --bg-color: #{$bg-color};
+
+  --section-color: #{$section-color};
+  --section-bg-color: #{$section-bg-color};
+  --header-color: #{$header-color};
+  --summary-accent-color: #{$summary-accent-color};
+  --secondary-button-border-color: #{$secondary-btn-border-color};
+  --chat-msg-color: #{$chat-msg-color};
+  --chat-msg-border-color: #{$chat-msg-border-color};
+  --chat-msg-bg-color: #{$chat-msg-bg-color};
+  --chat-self-msg-bg-color: #{$chat-self-msg-bg-color};
+}

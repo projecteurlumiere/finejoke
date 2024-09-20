@@ -1,7 +1,7 @@
 <turbo-frame id="summary" 
   data-controller="profile-edit" 
   data-two-containers-target="leftContainer">
-  <h2 class="black">
+  <h2 class="accent">
     <%= t(:".edit") %>
   </h2>
 
@@ -43,7 +43,7 @@
         <legend>
           <%= t(:".email_not_confirmed") %>
         </legend>
-        <p>
+        <p class="accent">
           <%= t(:".awaiting_email_confirmation_html") %>
         </p>
         <input type="submit" form="resend-confirmation" 

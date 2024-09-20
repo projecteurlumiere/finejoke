@@ -9,7 +9,8 @@
   margin: 0;
   padding: 0;
   font-size: 14px;
-  color: var(--black);
+  color: var(--chat-msg-color);
+  font-weight: 600;
 }
 
 .message > .username {
@@ -23,12 +24,11 @@
   justify-self: right;
   align-self: center;
   font-size: 12px;
-  font-weight: 600;
 }
 
 .message > p {
-  border: 1px solid var(--white);
-  background: var(--accent-notice-dimmest);
+  border: 1px solid var(--chat-msg-border-color);
+  background: var(--chat-msg-bg-color);
   padding: 1ch;
   overflow-wrap: anywhere;
   grid-row: 2 / 3;

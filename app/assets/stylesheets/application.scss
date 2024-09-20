@@ -11,6 +11,7 @@
  * It is generally better to create a new file per style scope.
  *
  *= require normalize-rails
+ *= require colors
  *= require_self
  *= require defaults_override
  *= require fonts
@@ -19,43 +20,6 @@
  *= require_directory ./layouts
  *= require_directory ./views
  */
-
-
-:root {
-  // default color scheme:
-  $white: #ffffff; 
-  $black: #323876;
-  $accent-notice: #00ffdd;
-  $accent-alert: #ef3c5c;
-  $secondary-control-color: $black;
-  $bg-color: linear-gradient(270.00deg, rgb(83, 217, 216),rgb(31, 182, 199) 100%);
-  $section-bg-color: $accent-alert;
-  $header-color: $black;
-
-
-  --white: #{$white};
-  --white-dimmer: #{rgba($white, 0.7)};
-  --white-dim: #{rgba($white, 0.5)};
-  --white-dimmest: #{rgba($white, 0.4)};
-
-  --black: #{$black};
-  --black-dimmer: #{rgba($black, 0.7)};
-  --black-dim: #{rgba($black, 0.5)};
-
-  --accent-notice: #{$accent-notice};
-  --accent-notice-dimmest: #{rgba($accent-notice, 0.4)};
-
-  --accent-alert: #{$accent-alert};
-  --accent-alert-dim: #{rgba($accent-alert, 0.5)};
-  --accent-alert-dimmest: #{rgba($accent-alert, 0.4)};
-  --accent-alert-most-dimmest: #{rgba($accent-alert, 0.2)};
-
-  --secondary-control-color: #{$secondary-control-color};
-
-  --bg-color: #{$bg-color};
-  --section-bg-color: #{$section-bg-color};
-  --header-color: #{$header-color};
-}
 
 html, body {
   height: 100dvh;

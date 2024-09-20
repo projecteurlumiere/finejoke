@@ -1,6 +1,6 @@
 <turbo-frame id="summary" data-controller="profile-form" data-containers-target="container" data-container-name="summary">
   <h2>
-    <div class="label black hidden-when-mobile">
+    <div class="label accent hidden-when-mobile">
       <%= t(:".profile") %>
     </div>
     <div class="value" aria_label="<%= t(:".username") %>">
@@ -12,7 +12,7 @@
       <div class="label">
         <%= t(:".in_game_since") %>
       </div>
-      <div class="value black">
+      <div class="value accent">
         <%= render_date(user.created_at) %>
       </div>
     </div>
