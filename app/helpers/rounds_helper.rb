@@ -261,7 +261,7 @@ module RoundsHelper
   end
 
   def render_wait_for(user, round, game)
-    message = user.hot_joined?(game) && !round.last? ? t(:".wait_for_new_round") : t(:".wait")
+    message = user.hot_joined?(game) && round && !round.last? ? t(:".wait_for_new_round") : t(:".wait")
     tag.button(message, class: "disabled", disabled: true).html_safe
   end
 end
