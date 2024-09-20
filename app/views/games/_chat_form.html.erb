@@ -15,8 +15,13 @@
       autocomplete: :off,
       required: true,
       minlength: 1 %> 
-    <%= form.submit type: :image, 
+    <label aria-label="<%= t(:".send_message") %>">
+      <input type="submit">
+        <%= inline_svg("icons/send_message.svg") %>
+    </label>
+
+<%#     <%= form.submit type: :image, 
       src: asset_path("icons/send-message.svg"), 
       aria_label: t(:".send_message") %>
-  </div>
+  </div> 
 <% end %>

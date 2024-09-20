@@ -15,7 +15,18 @@
     outline: none;
   }
 
-  input[type=image] {
+  label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  input[type=submit] {
+    display: none;
+  }
+
+  svg {
+    height: 1rem;
     padding: 0.5rem;
   }
 
