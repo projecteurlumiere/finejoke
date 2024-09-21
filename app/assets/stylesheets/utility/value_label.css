@@ -1,0 +1,13 @@
+.label {
+  font-family: var(--nunito-sans);
+  font-weight: 600;
+}
+
+.value {
+  margin-left: 0;
+}
+
+.value,
+.value * {
+  text-transform: none;
+}
