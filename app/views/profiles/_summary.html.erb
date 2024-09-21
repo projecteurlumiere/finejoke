@@ -77,7 +77,7 @@
     <% if user == current_user %>
         <%= link_to t(:".profile_settings"), 
           edit_self_profile_path, 
-          class: "button highlighted", 
+          class: "button notice", 
             data: { 
               turbo_action: :advance } %>
         <% unless user.guest? %>
@@ -92,7 +92,7 @@
     <% elsif user == current_or_guest_user %>
       <%= link_to t(:".sign_up"), 
         new_user_registration_path, 
-        class: "button highlighted", 
+        class: "button notice", 
         data: { turbo_frame: "_top"} %>
       <%# <button class="highlighted">Подарок</button> %>
     <% end %>

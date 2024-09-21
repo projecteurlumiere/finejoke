@@ -23,7 +23,6 @@
 
 html, body {
   height: 100dvh;
-  overflow: hidden;
 }
 
 body {
@@ -60,7 +59,6 @@ main {
 
 @media(max-height: 725px) {
   html, body {
-    overflow-y: auto;
     max-height: unset;
   }
 }

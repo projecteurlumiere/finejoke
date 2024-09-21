@@ -3,8 +3,18 @@
 
   #user-list {
     height: 100%;
-    overflow-y: auto;
+
     overflow-x: hidden;
+    overflow-y: auto;
+
+    // to accomodate for shadows and overflow-y at the same time
+    // this hacky thing prevents shadow clipping. But only side ones
+
+    // TODO: How to make the last card's shadow not get clipped
+    // yet maintain the alignment with other grid boxes on scroll?
+    margin: 0 -1rem;
+    padding: 0 1rem;
+
 
     > li {
       display: flex;
@@ -12,7 +22,7 @@
       padding-left: 0.5ch;
       padding-right: 0.5ch;
       margin-bottom: 1rem;
-      border: solid 1px var(--white);
+      // border: solid 1px var(--white);
       column-gap: 0.5ch;
 
       * {
@@ -71,8 +81,6 @@
     }
 
     > li.clicked:has(> .settings) {
-      box-shadow: var(--hover-shadow);
-
       .score {
         span {
           display: none;
