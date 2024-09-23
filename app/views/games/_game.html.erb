@@ -48,11 +48,14 @@
     <%= render partial: "games/game_users", 
       formats: %i[html], 
       locals: { game: game, votes_change: {} } %>
-    <button class="viewers secondary">
-      <%= inline_svg("icons/eye.svg") %>
-      <%= render partial: "games/game_n_viewers", locals: { game: game } %>
-    </button>
-    <%# render partial: "games/game_settings", locals: { game: game } %>  
+    <div class="panel">
+      <%= button_to "?", game_rules_path(game), method: :get, 
+        class: %w[button secondary rules], data: { turbo_stream: true } %>
+      <button class="viewers secondary">
+        <%= inline_svg("icons/eye.svg") %>
+        <%= render partial: "games/game_n_viewers", locals: { game: game } %>
+      </button>
+    </div>
   </div>
 
   <%= render partial: "rounds/current_round", 

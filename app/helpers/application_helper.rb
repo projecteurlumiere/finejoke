@@ -28,6 +28,10 @@ module ApplicationHelper
   end
 
   def render_date(time)
-    [time.year, time.month, time.day].join("-")
+    [
+      time.year, 
+      time.month.to_s.rjust(2, "0"),
+      time.day.to_s.rjust(2, "0")
+    ].join(".")
   end
 end

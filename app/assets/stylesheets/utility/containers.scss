@@ -35,18 +35,11 @@
     display: none;
 
     .unseen {
-       animation: blink 3s infinite;
-       animation-fill-mode: both;
+       animation: var(--blinking-animation);
        
        &.selected {
         animation: none;
        }
-    }
-
-    @keyframes blink {
-       0% { border-color: var(--white); }
-       50% { border-color: var(--accent-alert) }
-       100% { border-color: var(--white) }
     }
   }
 

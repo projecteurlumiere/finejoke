@@ -18,20 +18,35 @@ export default class extends Controller {
     }
   }
 
+  stopForceShowingRules() {
+    document.querySelector("#current-round > div").dataset.forceShowingRules = ""
+  }
+
   checkResponse(e) {
     if (e.detail.newStream.target != "current-round") return
 
-    const presentString = document.querySelector("#current-round > div").outerHTML
-    
-    const stream = e.detail.newStream.querySelector("template").content
-    const incomingString = stream.querySelector("#current-round > div").outerHTML
+    const presentRoundAttr = document.querySelector("#current-round > div");
+    if (presentRoundAttr.dataset.forceShowingRules === "true") {
+      document.querySelector(".action button").classList.add("blinking")
+      e.preventDefault()
+      return
+    }
 
-    const presentHash = this.#digest(presentString.replace(/\n/g, ''))
-    const incomingHash = this.#digest(incomingString.replace(/\n/g, ''))
+    const stream = e.detail.newStream.querySelector("template").content;
+    const incomingRoundAttr = stream.querySelector("#current-round > div");
 
-    if (presentHash === incomingHash) {
+
+    if (this.#attributesEqual(presentRoundAttr, incomingRoundAttr)) {
       e.preventDefault()
     }
+  }
+
+  #attributesEqual(presentRoundAttr, incomingRoundAttr) {
+    const presentHash = this.#digest(presentRoundAttr.outerHTML.replace(/\n/g, ''))
+    const incomingHash = this.#digest(incomingRoundAttr.outerHTML.replace(/\n/g, ''))
+
+    presentHash === incomingHash
+    
   }
 
   // // this is async digest using browser's in-built crypto api  

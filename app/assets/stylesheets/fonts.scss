@@ -1,9 +1,10 @@
 :root {
   font-size: 16px;
   --adaptive-font-size: calc(1.25vh + 1.25vw);
+  --global-font-size: clamp(1rem, var(--adaptive-font-size), 1.25rem);
 
   * {
-    font-size: clamp(1rem, var(--adaptive-font-size), 1.25rem);
+    font-size: var(--global-font-size);
   }
 
   --nunito-sans: "Nunito Sans", system-ui;

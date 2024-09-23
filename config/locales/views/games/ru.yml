@@ -28,7 +28,7 @@ ru:
     form:
       name: Название
       enter_name: Введите название
-      extra_settings: Доп настройки
+      extra_settings: Параметры
       max_players: Макс игроков
       max_round_time: Время раунда, сек
       victory_conditions: Условия победы

@@ -9,6 +9,7 @@ module RoundsHelper
       game_status: game.status,
       user_playing: user.playing?(game),
       user_host: game.host == user,
+      force_showing_rules: round.nil? && game.ongoing?
     }
 
     @attributes.merge!({
@@ -225,7 +226,7 @@ module RoundsHelper
 
   # only for host
   def render_rules_action_for(user, game)
-    return unless game.host == user
+    return if game.host != user || game.ongoing?
 
     content_for(:action) do 
       button_to(t(:".start"), game_rounds_path(game))
@@ -233,6 +234,7 @@ module RoundsHelper
   end
 
   def render_default_action_for(user, round, game)
+    return render_exit_from_rules(game) if @attributes[:force_showing_rules]
     return render_game_over_button if game.finished?
     return render_join(game) if game.joinable?(by: user)
     return render_skip_results(game, round) if round&.results_stage? && !user.wants_to_skip_results?
@@ -240,12 +242,20 @@ module RoundsHelper
     render_wait_for(user, round, game)
   end
 
-  def render_join(game)
-    link_to(t(:".join"), game_join_path(game), class: "button").html_safe
+  def render_exit_from_rules(game)
+    button_to(t(:".back"), game_rounds_current_path(game), method: :get, 
+      data: { 
+        action: "click->round-refresh#stopForceShowingRules",
+        turbo_stream: true
+      }) 
   end
 
   def render_game_over_button
     tag.button(t(:".game_over"), class: "disabled", disabled: true).html_safe
+  end
+
+  def render_join(game)
+    button_to(t(:".join"), game_join_path(game), class: "button").html_safe
   end
 
   def render_skip_results(game, round)
