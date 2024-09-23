@@ -63,6 +63,7 @@ input::placeholder {
 }
 
 input:invalid:not(:placeholder-shown) {
+  color: var(--accent-alert);
   border-color: var(--accent-alert);
 }
 

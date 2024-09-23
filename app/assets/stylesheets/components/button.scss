@@ -54,10 +54,14 @@ input[type=button],
     --color: var(--accent-alert);
   }
 
+  --selected-color: var(--black);
+  --selected-bg-color: var(--accent-notice);
+  --selected-border-color: var(--selected-bg-color);
+
   &.selected {
-    color: var(--white);
-    background-color: var(--accent-alert);
-    border-color: var(--accent-alert);
+    color: var(--selected-color);
+    background-color: var(--selected-bg-color);
+    border-color: var(--selected-border-color);
   }
 
   &.secondary {

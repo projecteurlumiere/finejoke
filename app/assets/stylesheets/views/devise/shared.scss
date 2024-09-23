@@ -5,8 +5,11 @@ body:has(main > #authentication) {
 #authentication {
   > a.sign-in:has(~ #authentication-form > #new-session),
   > a.sign-up:has(~ #authentication-form > #new-registration) {
-    background-color: var(--accent-alert);
-    border: none;
+    // defined in button.scss
+    color: var(--selected-color);
+    background-color: var(--selected-bg-color);
+    border-color: var(--selected-border-color);
+
     pointer-events: none;
     box-shadow: none;
   }
