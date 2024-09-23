@@ -6,7 +6,8 @@
     .textarea,
     textarea {
       border: none;
-      padding-bottom: 1.5rem;
+      // padding-bottom: 1.5rem;
+      padding: var(--task-horizontal-padding) 1ch;
       // min-height: 4ch;
       // width: calc(100% - (var(--task-vertical-padding) * 2));
     }
@@ -17,8 +18,8 @@
     .textarea {
       position: absolute;
       // compensates for form's paddings
-      width: calc(100% - (var(--task-horizontal-padding) * 2);
-      height: calc(100% - (var(--task-horizontal-padding) * 2);
+      width: calc(100% - (var(--task-horizontal-padding) * 1);
+      height: calc(100% - (var(--task-horizontal-padding) * 1);
       // scrolling
       overflow: auto;
       user-select: none; // don't want user to select text being typed

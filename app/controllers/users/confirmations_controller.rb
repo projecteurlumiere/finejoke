@@ -8,6 +8,8 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
 
   # POST /resource/confirmation
   def create
+    verify_turbo_stream_format
+    
     self.resource = resource_class.send_confirmation_instructions(resource_params)
     yield resource if block_given?
 

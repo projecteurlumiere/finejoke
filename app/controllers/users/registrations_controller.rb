@@ -21,6 +21,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # PUT /resource
   def update
+    verify_turbo_stream_format
+    
     skip_authorization
     remove_empty_params(%i[email username])
 

@@ -1,18 +1,17 @@
 class AwardsController < ApplicationController
-  
+  before_action :verify_turbo_stream_format
+
   # =create
   def gift
     @user = User.find(params[:award][:user_id])
     @award = @user.awards.build(award_params)
     authorize @award
-    respond_to do |format|
-      if @award.save
-        flash[:notice] = t(:".award_given")
-        format.html { redirect_to profile_path(@award.user) }
-      else
-        flash[:alert] = t(:".award_not_given")
-        format.turbo_stream { render_turbo_flash(status: :unprocessable_entity) }
-      end
+    if @award.save
+      flash[:notice] = t(:".award_given")
+      redirect_to profile_path(@award.user)
+    else
+      flash.now[:alert] = t(:".award_not_given")
+      render_turbo_flash(status: :unprocessable_entity)
     end
   end
 

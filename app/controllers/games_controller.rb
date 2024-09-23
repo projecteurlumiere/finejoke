@@ -1,5 +1,7 @@
 class GamesController < ApplicationController
   include ActionView::RecordIdentifier
+
+  before_action :verify_turbo_stream_format, only: %i[create kick show_rules]
   before_action :set_game, only: %i[ show destroy ]
   before_action :authorize_game!, only: %i[ index show destroy game_over]
 
@@ -22,13 +24,7 @@ class GamesController < ApplicationController
       redirect_to games_path
     end
   end
-
-  # new game form
-  def new
-    @game = Game.new
-    authorize_game!
-  end
-
+  
   # creates game
   def create
     @game = Game.new(game_params)
@@ -73,14 +69,15 @@ class GamesController < ApplicationController
       redirect_to(games_path)
       return
     end 
-
+    
+    verify_turbo_stream_format
     authorize_game!
 
     if @game.remove_user(current_or_guest_user)
-      flash[:notice] = t(:".leave_game")
+      flash.now[:notice] = t(:".leave_game")
       render :leave, formats: %i[turbo_stream] # removes turbo_stream that streams the game and then issues a redirect!
     else
-      flash[:alert] = t(:".leave_game_failed")
+      flash.now[:alert] = t(:".leave_game_failed")
       response.status = :unprocessable_entity
       render_turbo_flash
     end

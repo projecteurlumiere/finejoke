@@ -1,4 +1,5 @@
 class SuggestionsController < ApplicationController
+  before_action :verify_turbo_stream_format 
   before_action :set_suggestion
   before_action :authorize_suggestion!
 

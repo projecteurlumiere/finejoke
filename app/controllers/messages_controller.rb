@@ -1,4 +1,5 @@
 class MessagesController < ApplicationController
+  before_action :verify_turbo_stream_format
   before_action :set_game, only: %i[ create ]
 
   # creates game

@@ -1,4 +1,5 @@
 class RoundsController < ApplicationController
+  before_action :verify_turbo_stream_format
   before_action :set_game, only: %i[ show show_current create update skip_results ]
   before_action :set_round, only: %i[ show update skip_results ]
   before_action :authorize_round!, only: %i[show show_current update skip_results]

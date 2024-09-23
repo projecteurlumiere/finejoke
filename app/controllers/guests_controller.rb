@@ -6,6 +6,8 @@ class GuestsController < ApplicationController
     redirect_to params[:referrer]
   end
 
+  private
+
   def guest_welcomed
     true
   end

@@ -79,6 +79,8 @@
     flex-shrink: 0;
     flex-basis: 4ch;
     padding: var(--task-horizontal-padding);
+    padding-top: 0;
+    margin-top: var(--task-horizontal-padding);
   }
 
   > .jokes-container {

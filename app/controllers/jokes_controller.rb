@@ -1,4 +1,6 @@
 class JokesController < ApplicationController
+  before_action :verify_turbo_stream_format
+
   before_action :set_game, only: %i[ show create vote]
   before_action :set_round, only: %i[ show create vote ]
   before_action :set_joke, only: %i[ show vote ]
@@ -31,7 +33,6 @@ class JokesController < ApplicationController
       flash.now[:alert] = t(:".joke_not_created")
       render_turbo_flash
     end
-
   end
 
   # registers a vote
