@@ -16,6 +16,25 @@ export default class extends Controller {
   // see game_data.scss  for the problem the following two functions solve
   userListTargetConnected(el) {
     this.adjustPaddingForShadows();
+    if (!this.shadowObserver) { 
+      this.shadowObserver = new IntersectionObserver((elements) => {  
+        for (var i = elements.length - 1; i >= 0; i--) {
+          if (elements[i].isIntersecting) {
+            this.adjustPaddingForShadows();
+          }
+        }
+      }, {
+        threshold: 0.1
+      })
+    }
+
+    this.shadowObserver.observe(el);
+  }
+
+  userListTargetDisconnected(el) {
+    if (this.shadowObserver) { 
+      this.shadowObserver.unobserve(el)
+    }
   }
 
   adjustPaddingForShadows(e) {
