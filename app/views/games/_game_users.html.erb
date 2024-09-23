@@ -1,4 +1,4 @@
-<ul id="user-list">
+<ul id="user-list" data-game-data-target="userList" data-action="scroll->game-data#adjustPaddingForShadows">
   <% locals = { game: game, votes_change: votes_change.transform_keys(&:to_i) } %>
 
   <%= render partial: "games/game_user", 

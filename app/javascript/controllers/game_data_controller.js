@@ -7,10 +7,40 @@ export default class extends Controller {
     host: Boolean
   }
 
-  static targets = [ "user" ]
+  static targets = [ "user", "userList" ]
 
   connect(){
     this.timeouts = {}
+  }
+
+  // see game_data.scss  for the problem the following two functions solve
+  userListTargetConnected(el) {
+    this.adjustPaddingForShadows();
+  }
+
+  adjustPaddingForShadows(e) {
+    const list = this.userListTarget;
+    const scrolledToTop = list.scrollTop === 0;
+    const scrolledToBottom = (list.scrollTop === (list.scrollHeight - list.offsetHeight));
+
+    if (scrolledToTop) {
+      // enables shadow of the first user entry
+      list.style.marginTop = "-1rem";
+      list.style.paddingTop = "1rem";
+    } else {
+     list.style.marginTop = "0";
+     list.style.paddingTop = "0";
+    }
+
+    // enables shadow of the last user entry
+    if (scrolledToBottom) {
+      list.style.marginBottom = "-1rem";
+      list.style.paddingBottom = "1rem";
+    } 
+    else {
+      list.style.marginBottom = "0";
+      list.style.paddingBottom = "0";
+    }
   }
 
   showSettings(e) {
