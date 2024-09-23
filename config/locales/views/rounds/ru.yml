@@ -51,13 +51,10 @@ ru:
       skip_results: Новый раунд
       wait: Ждём
       wait_for_new_round: Ждём новый раунд
-    setup_form:
+    form:
       enter_text: Введите текст...
-      enter_text_full: Введите текст завязки
-      done: Готово
-    joke_form:
-      enter_text: Введите текст...
-      enter_text_full: Введите текст развязки к шутке
+      enter_text_full_for_setup: Введите текст завязки
+      enter_text_full_for_setup: Введите текст развязки к шутке
       done: Готово
     suggestion_form:
       ask_ai: Придумать

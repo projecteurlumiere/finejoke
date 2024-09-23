@@ -1,0 +1,31 @@
+<%= form_with(model:, 
+  url:, 
+  method:, 
+  id:, 
+  data: { 
+    controller: "symbol-counter"
+  }) do |form| %>
+
+  <%= form.text_area text_for, 
+    placeholder: t(:".enter_text"), 
+    aria_label: t(:".enter_text_full_for_#{text_for}"),
+    maxlength: Joke.const_get(:"#{text_for.upcase}_MAX_LENGTH"),
+    rows: 4,
+    data: {
+      suggestion_target: :userInput,
+      action: "input->symbol-counter#update input->suggestion#copy"
+    } %>
+  
+  <%# "#{model.class.to_s.downcase}_#{text_for}" because the id above  %>
+  <%# is generated like this: modelname_paramname %>
+  <div class="symbol-counter" 
+    data-symbol-counter-target="counter" 
+    data-input="<%= :"#{model.class.to_s.downcase}_#{text_for}" %>"></div>
+
+  <% content_for(:action) do %>
+    <%= render partial: "rounds/suggestion_form", 
+      locals: { game:, round:, suggestion_for: text_for } %>
+    <input type="submit" form="<%= id %>" value="<%= t(:".done") %>" 
+      data-suggestion-target="userSubmit">
+  <% end %>
+<% end %>

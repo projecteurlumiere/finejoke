@@ -6,8 +6,8 @@
     .textarea,
     textarea {
       border: none;
-      // padding-bottom: 1.5rem;
-      padding: var(--task-horizontal-padding) 1ch;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
       // min-height: 4ch;
       // width: calc(100% - (var(--task-vertical-padding) * 2));
     }
@@ -18,8 +18,8 @@
     .textarea {
       position: absolute;
       // compensates for form's paddings
-      width: calc(100% - (var(--task-horizontal-padding) * 1);
-      height: calc(100% - (var(--task-horizontal-padding) * 1);
+      width: calc(100% - (var(--task-horizontal-padding) * 2);
+      height: calc(100% - (var(--task-horizontal-padding));
       // scrolling
       overflow: auto;
       user-select: none; // don't want user to select text being typed
@@ -30,8 +30,8 @@
       position: absolute;
       color: var(--black-dim);
       font-family: var(--press-start-2p);
-      top: 0.25rem;
-      right: 2rem;
+      top: -1.75rem;
+      right: 3rem;
       font-size: 1rem;
     }
   }

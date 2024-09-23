@@ -188,9 +188,27 @@ module RoundsHelper
     return if user.finished_turn?
 
     if user.lead? && round.setup_stage?
-      render partial: "rounds/setup_form", locals: { game: game, round: round }
+      render partial: "rounds/form", 
+        locals: { 
+          game:, 
+          round:,
+          model: round,
+          url: game_round_path(game, round),
+          method: :patch,
+          id: :"new-setup",
+          text_for: :setup
+      }
     elsif !user.lead? && round.punchline_stage?
-      render partial: "rounds/joke_form", locals: { game: game, round: round, joke: round.jokes.build }
+      render partial: "rounds/form", 
+        locals: { 
+          game:, 
+          round:,
+          model: round.jokes.build, 
+          url: game_round_jokes_path(game, round),
+          method: :create,
+          id: :"new-joke",
+          text_for: :punchline
+        }
     end
   end
 
