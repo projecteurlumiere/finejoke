@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   before_action :welcome_guest, if: :new_guest?, unless: :guest_welcomed?
   before_action :configure_permitted_parameters, if: :devise_controller?
   after_action :verify_authorized, unless: :devise_controller?
-  after_action :remove_referrer, unless: %i[devise_controller? new_guest?] 
+  after_action :remove_referrer, unless: %i[devise_controller? new_guest?]
 
   def no_authentication_required?
     false
