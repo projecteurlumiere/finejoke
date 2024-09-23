@@ -159,7 +159,7 @@ module RoundsHelper
         tag.span(round.setup, 
           data: { setup_target: :long },
           class: ("hidden" if !round.punchline_stage? && round.setup_short)),
-        (tag.span("...#{round.setup_short}", 
+        (tag.span("<...> #{round.setup_short}", 
           data: { setup_target: :short },
           class: ("hidden" if round.punchline_stage?)) if round.setup_short)
       ].compact.join(" ").html_safe
