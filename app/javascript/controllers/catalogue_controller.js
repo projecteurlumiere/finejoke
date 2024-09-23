@@ -19,7 +19,7 @@ export default class extends Controller {
     if (e.currentTarget.classList.contains("select")) { this.#deselect(e); return }
     this.#deselectTheRest();
 
-    this.connectTarget.href = e.currentTarget.dataset.joinPath;
+    this.connectTarget.parentNode.action = e.currentTarget.dataset.joinPath;
     this.viewTarget.href = e.currentTarget.dataset.viewPath;
     e.currentTarget.classList.add("select")
 
@@ -30,7 +30,7 @@ export default class extends Controller {
     this.#addDisabled();
     e.currentTarget.classList.remove("select")
 
-    this.connectTarget.href = "";
+    this.connectTarget.parentNode.action = "";
     this.viewTarget.href = "";
   }
 
@@ -41,7 +41,7 @@ export default class extends Controller {
   }
 
   #removeDisabled() {
-    this.connectTarget.classList.remove("disabled");
+    this.connectTarget.disabled = false;
     this.viewTarget.classList.remove("disabled");
   }
 

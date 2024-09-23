@@ -74,7 +74,8 @@ class GamesController < ApplicationController
     authorize_game!
 
     if @game.remove_user(current_or_guest_user)
-      flash.now[:notice] = t(:".leave_game")
+      flash[:notice] = t(:".leave_game")
+      response.status = :see_other
       render :leave, formats: %i[turbo_stream] # removes turbo_stream that streams the game and then issues a redirect!
     else
       flash.now[:alert] = t(:".leave_game_failed")

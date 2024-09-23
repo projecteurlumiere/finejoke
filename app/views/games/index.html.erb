@@ -17,9 +17,8 @@
 
   <div class="buttons-container <%= hide_in_mobile_when("create") %>" 
     data-containers-target="container" data-container-name="catalogue">
-    <a class="button disabled" data-catalogue-target="connect" data-turbo-stream>
-      <%= t :".connect" %>
-    </a>
+    <%= button_to t(:".connect"), false, action: nil, 
+      disabled: true, method: :post, data: { catalogue_target: :connect } %>
     <a class="button disabled" data-catalogue-target="view" data-turbo-stream>
       <%= t :".view" %>
     </a>
