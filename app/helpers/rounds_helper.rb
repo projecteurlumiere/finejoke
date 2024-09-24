@@ -153,7 +153,7 @@ module RoundsHelper
 
     setup_p = tag.p(class: "bubble top shadow", 
                     data: {
-                      action: "click->setup#toggleView"
+                      action: "mouseup->setup#toggleView"
                     }) do
       [
         tag.span(round.setup, 
