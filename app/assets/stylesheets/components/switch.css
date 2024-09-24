@@ -1,10 +1,4 @@
-.switch-container > div {
-  display: grid;
-  grid-template-columns: auto var(--slider-width);
-}
-
-/* label */
-.switch-container > div > div:first-child {
+.switch > label {
   margin-bottom: 0 !important;
 }
 

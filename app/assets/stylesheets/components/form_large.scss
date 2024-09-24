@@ -28,6 +28,33 @@
       margin-bottom: 0.5rem;
     }
 
+    > .switch-container {
+      grid-template-columns: auto var(--slider-width);
+    }
+
+    > .circle-select-container {
+      grid-template-columns: 2rem auto var(--slider-width);
+
+      .circle {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        border: solid 1px var(--white);
+        border-radius: 50%;
+
+        &:not(:has(~ select > option[value=""]:checked)) {
+          background-color: var(--accent-notice);
+        }
+      }
+
+      @container form-large (max-width: 290px) {
+        grid-template-columns: auto var(--slider-width);
+
+        .circle {
+          display: none;
+        }
+      }
+    }
+
     > *:last-child {
       margin-bottom: 0;
     }
@@ -44,34 +71,6 @@
   .settings {
     > * {
       grid-template-columns: var(--slider-width) auto;
-    }
-  }
-
-  .conditions {
-    > * {
-      grid-template-columns: 2rem auto var(--slider-width);
-    }
-
-    .circle {
-      width: 100%;
-      aspect-ratio: 1 / 1;
-      border: solid 1px var(--white);
-      border-radius: 50%;
-
-      &:not(:has(~ select > option[value=""]:checked)) {
-        background-color: var(--accent-notice);
-      }
-    }
-
-    @container form-large (max-width: 290px) {
-      > * {
-        grid-template-columns: auto var(--slider-width);
-      }
-
-      .circle {
-        display: none;
-      }
-
     }
   }
 }

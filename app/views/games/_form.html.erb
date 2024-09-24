@@ -41,7 +41,7 @@
     <legend>
       <%= t(:".victory_conditions") %>
     </legend>
-    <div>
+    <div class="circle-select-container">
       <%# form.check_box :max_rounds_enabled, aria_label: "Включить условие победы по раундам" %>
       <div class="circle"></div>
       <%= form.label :max_rounds, 
@@ -55,7 +55,7 @@
         placeholder: t(:".none") %>
     </div>
     
-    <div>
+    <div class="circle-select-container">
       <%# form.check_box :max_points_enabled aria_label: "Включить условие победы по очкам %>
       <div class="circle"></div>
       <%= form.label :max_points, 
@@ -70,31 +70,48 @@
     </div>
   </fieldset>
 
-  <fieldset class="switch-container">
+  <fieldset>
     <legend>
       <%= t(:".access") %>
     </legend>
-    <div>
+    <div class="switch-container">
       <div>
-        <%= t(:".open_for_viewers") %>
+        <%= t(:".private") %>
       </div>
       <div class="switch">
-        <%= form.label :viewable, aria_label: "Открыта для зрителей" do %>
-          <%= form.check_box :viewable, 
-            data: { 
-              new_game_target: :viewable, 
-              action: "click->new-game#toggleViewable" } %>
+        <%= form.label :private, aria_label: t(:".private") do %>
+          <%= form.check_box :private %>
           <span class="slider"></span>
         <% end %>
       </div>
     </div>
 
-    <div>
+    <%# if this ever to make comeback: %>
+    <%# 1. don't forget to put parameter in the gamescontroller %>
+    <%# 2. don't forget to remove return from the new-game#toggleViewable %>
+    <% if false %>
+      <div class="switch-container">
+        <div>
+          <%= t(:".open_for_viewers") %>
+        </div>
+        <div class="switch">
+          <%= form.label :viewable, aria_label: "Открыта для зрителей" do %>
+            <%= form.check_box :viewable, 
+              data: { 
+                new_game_target: :viewable, 
+                action: "click->new-game#toggleViewable" } %>
+            <span class="slider"></span>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="switch-container">
       <div>
         <%= t(:".viewers_vote") %>
       </div>
       <div class="switch">
-        <%= form.label :viewers_vote, aria_label: "Зрители голосуют" do %>
+        <%= form.label :viewers_vote, aria_label: t(:".viewers_vote") do %>
           <%= form.check_box :viewers_vote, 
             data: { 
               new_game_target: "viewersVote", 

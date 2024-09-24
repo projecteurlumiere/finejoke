@@ -7,7 +7,10 @@ class GamesController < ApplicationController
 
   # GET /games
   def index
-    @games = Game.where.not(status: :finished).order(n_players: :desc, created_at: :desc).all
+    @games = Game.where(private: false)
+                 .where.not(status: :finished)
+                 .order(n_players: :desc, created_at: :desc)
+                 .all
 
     if turbo_frame_request?
       render partial: "games/catalogue"
@@ -127,7 +130,12 @@ class GamesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def game_params
-    params.require(:game).permit(:name, :viewable, :viewers_vote, :max_players, :max_rounds, :max_round_time, :max_points)
+    params.require(:game).permit(*%i[
+      name
+      private
+      viewers_vote
+      max_players max_rounds max_round_time max_points
+    ])
   end
 
   def create_game

@@ -37,10 +37,18 @@ class Game < ApplicationRecord
                          comparison: { greater_than_or_equal_to: MIN_POINTS, less_than_or_equal_to: MAX_POINTS }, allow_nil: true
   validate -> { errors.add(:viewers_vote, "игра должна быть открыта для зрителей") if !viewable? && viewers_vote? }
 
+  before_create :generate_id
+
   after_create :schedule_idle_game_destroy
 
-  after_create_commit :broadcast_game_start
+  after_create_commit :broadcast_game_start, if: :public?
   after_destroy_commit -> { broadcast_redirect_to(game_over_path(self)) }
+
+  # careful of local id vs model's self.id
+  def generate_id
+    id = SecureRandom.hex(4) until id.present? && Game.where(id:).none?
+    self.id = id
+  end
 
   def add_user(user, is_host: false)
     transaction do
@@ -199,5 +207,9 @@ class Game < ApplicationRecord
 
   def ready_to_play?
     !(finished? && on_halt?) && enough_players?
+  end
+
+  def public?
+    !private?
   end
 end

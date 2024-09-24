@@ -15,8 +15,10 @@ export default class extends Controller {
 
     if (this.invalid) { e.preventDefault(); }
   }
-
+ 
   toggleViewable(e = undefined) {
+    return // because viewableTarget is absent. see new game form partial: games/_form
+    
     if (!e) {
       if (!this.viewableTarget.checked && this.viewersVoteTarget.checked) {
         this.viewableTarget.checked = true

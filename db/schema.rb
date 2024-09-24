@@ -52,12 +52,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_18_111714) do
     t.index ["user_id"], name: "index_awards_on_user_id"
   end
 
-  create_table "games", force: :cascade do |t|
+  create_table "games", id: :string, force: :cascade do |t|
     t.integer "max_players", default: 10, null: false
     t.integer "max_round_time", default: 90, null: false
     t.integer "max_rounds"
     t.integer "max_points"
     t.string "name", null: false
+    t.boolean "private", default: false, null: false
     t.boolean "viewable", default: true, null: false
     t.boolean "viewers_vote", default: false, null: false
     t.bigint "winner_id"
@@ -73,6 +74,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_18_111714) do
     t.datetime "updated_at", null: false
     t.boolean "ai_allowed", default: true
     t.index ["host_id"], name: "index_games_on_host_id"
+    t.index ["id"], name: "index_games_on_id", unique: true
     t.index ["winner_id"], name: "index_games_on_winner_id"
   end
 
@@ -117,7 +119,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_18_111714) do
   end
 
   create_table "rounds", force: :cascade do |t|
-    t.bigint "game_id", null: false
+    t.string "game_id", null: false
     t.bigint "user_id", null: false
     t.boolean "current", default: true
     t.boolean "last", default: false
@@ -170,7 +172,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_18_111714) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "username", null: false
-    t.integer "game_id"
+    t.string "game_id"
     t.boolean "connected", default: false
     t.boolean "subscribed_to_game", default: false
     t.boolean "host", default: false
