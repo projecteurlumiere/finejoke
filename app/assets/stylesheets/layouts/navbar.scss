@@ -17,6 +17,12 @@ header {
         font-size: unset;
       }
       
+      .locale-select {
+        select {
+          width: 5ch;
+        }
+      }
+
       .button,
       button {
         box-sizing: border-box;

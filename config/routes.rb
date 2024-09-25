@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   end
 
   resources :guests, only: %i[create]
+  resource :locale, only: %i[update]
 
   post "award", to: "awards#gift"
   
@@ -45,5 +46,5 @@ Rails.application.routes.draw do
   
   get "turbo_redirect_to", controller: "application"
 
-  root "games#index"
+  root "root#show"
 end

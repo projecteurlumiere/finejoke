@@ -48,11 +48,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_18_111714) do
     t.string "signature"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "locale", default: 0, null: false
     t.index ["present_id"], name: "index_awards_on_present_id"
     t.index ["user_id"], name: "index_awards_on_user_id"
   end
 
   create_table "games", id: :string, force: :cascade do |t|
+    t.bigint "host_id"
     t.integer "max_players", default: 10, null: false
     t.integer "max_round_time", default: 90, null: false
     t.integer "max_rounds"
@@ -60,19 +62,19 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_18_111714) do
     t.string "name", null: false
     t.boolean "private", default: false, null: false
     t.boolean "viewable", default: true, null: false
+    t.boolean "suggestable", default: true, null: false
     t.boolean "viewers_vote", default: false, null: false
-    t.bigint "winner_id"
-    t.integer "winner_score"
     t.integer "status", default: 0, null: false
     t.integer "afk_rounds", default: 0, null: false
     t.integer "n_rounds", default: 0, null: false
     t.integer "n_players", default: 0, null: false
     t.integer "n_viewers", default: 0, null: false
-    t.bigint "host_id"
-    t.string "host_username", null: false
+    t.bigint "winner_id"
+    t.integer "winner_score"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "ai_allowed", default: true
+    t.integer "locale", default: 0, null: false
     t.index ["host_id"], name: "index_games_on_host_id"
     t.index ["id"], name: "index_games_on_id", unique: true
     t.index ["winner_id"], name: "index_games_on_winner_id"
@@ -88,6 +90,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_18_111714) do
     t.datetime "updated_at", null: false
     t.boolean "setup_suggested", default: false, null: false
     t.boolean "punchline_suggested", default: false, null: false
+    t.integer "locale", default: 0, null: false
     t.index ["round_id"], name: "index_jokes_on_round_id"
     t.index ["setup_model_id"], name: "index_jokes_on_setup_model_id"
     t.index ["user_id"], name: "index_jokes_on_user_id"
@@ -115,6 +118,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_18_111714) do
     t.bigint "virtual_host_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "locale", default: 0, null: false
     t.index ["virtual_host_id"], name: "index_prompts_on_virtual_host_id"
   end
 
@@ -142,6 +146,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_18_111714) do
     t.string "text", null: false
     t.string "text_short"
     t.bigint "user_id"
+    t.integer "locale", default: 0, null: false
     t.index ["user_id"], name: "index_setups_on_user_id"
   end
 
@@ -195,15 +200,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_18_111714) do
     t.integer "credits", default: 0, null: false
     t.datetime "unlimited_credits_deadline"
     t.integer "suggestions", default: [], null: false, array: true
+    t.integer "locale", default: 0, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   create_table "virtual_hosts", force: :cascade do |t|
-    t.bigint "game_id"
+    t.string "game_id"
     t.boolean "voiced", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "locale", default: 0, null: false
     t.index ["game_id"], name: "index_virtual_hosts_on_game_id"
   end
 

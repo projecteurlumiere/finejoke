@@ -1,14 +1,20 @@
 class Setup < ApplicationRecord
+  include Localizable
+
   MAX_LENGTH = Joke::SETUP_MAX_LENGTH
   TRUNCATE_LENGTH = Joke::SETUP_TRUNCATE_LENGTH
 
   validates :text, length: { in: 1..MAX_LENGTH }
   has_one :round
+  has_one :game, through: :round
   has_many :jokes, dependent: :destroy
   belongs_to :user, optional: true
 
   before_save -> { self.text_short = self.class.truncate(text) }, if: :text_changed?
 
+  def set_default_locale
+    self.locale = game.locale
+  end
 
   def self.truncate(setup)
     return if setup.length < TRUNCATE_LENGTH

@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  include LocalesHandling
   include Pundit::Authorization
   include TurboRendering
   include ErrorHandling
@@ -60,7 +61,7 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:username])
-    devise_parameter_sanitizer.permit(:account_update, keys: %i[username email show_awards_allowed show_jokes_allowed])
+    devise_parameter_sanitizer.permit(:account_update, keys: %i[username email show_awards_allowed show_jokes_allowed locale])
   end
 
   def transfer_guest_to_user

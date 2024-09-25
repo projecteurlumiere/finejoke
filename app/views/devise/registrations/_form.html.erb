@@ -40,6 +40,8 @@
         minlength: @minimum_password_length %>
       <%= render_errors(resource, :password_confirmation) %>
     </div>
+
+    <%= f.hidden_field :locale, value: I18n.locale %>
   <% end %>
 
    <input type="submit" 

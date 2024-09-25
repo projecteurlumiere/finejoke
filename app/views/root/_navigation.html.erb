@@ -1,0 +1,4 @@
+<nav class="" data-containers-target="container" data-container-name="navigation">
+  <%= link_to "Мой профиль", profile_path(current_user), class: :button if current_user %>
+  <%= link_to "В лобби", games_path, class: :button %>
+</nav>

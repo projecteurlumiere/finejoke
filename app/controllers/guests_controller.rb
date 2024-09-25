@@ -3,7 +3,7 @@ class GuestsController < ApplicationController
     skip_authorization
     session[:guest_welcomed] = true
     flash[:notice] = t(:".you_are_guest")
-    redirect_to params[:referrer]
+    redirect_to params[:referrer] === root_path ? games_path : params[:referrer]
   end
 
   private

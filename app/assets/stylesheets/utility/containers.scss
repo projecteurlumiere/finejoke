@@ -6,7 +6,12 @@
   // height: 100%;
 
   > * {
-    h2, 
+    // for wrapping buttons
+    h2.wrapper {
+      margin: 0;
+    }
+
+    h2:not(.wrapper), 
     .heading {
       background-color: inherit;
       position: sticky;

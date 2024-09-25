@@ -1,4 +1,5 @@
 class Game < ApplicationRecord
+  include Localizable
   include Games::Scheduling
   include Games::Broadcasting
   include Games::VirtualHost
@@ -43,6 +44,10 @@ class Game < ApplicationRecord
 
   after_create_commit :broadcast_game_start, if: :public?
   after_destroy_commit -> { broadcast_redirect_to(game_over_path(self)) }
+
+  def set_default_locale
+    self.locale = host&.locale
+  end
 
   # careful of local id vs model's self.id
   def generate_id

@@ -28,6 +28,10 @@
       margin-bottom: 0.5rem;
     }
 
+    > .select-container {
+      grid-template-columns: var(--slider-width) auto;
+    }
+
     > .switch-container {
       grid-template-columns: auto var(--slider-width);
     }

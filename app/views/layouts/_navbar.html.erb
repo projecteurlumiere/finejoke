@@ -1,9 +1,9 @@
 <nav class="three-columns">
   <div class="start">
-    <%= render partial: "layouts/user_status", formats: %i[html], locals: { game: current_or_guest_user.game } unless new_guest? %>
+    <%= render partial: "layouts/user_status", formats: %i[html], locals: { game: current_or_guest_user.game } %>
   </div>
   <h1 class="center">
-    <%= link_to "Лого", root_path %>
+    <%= link_to "Лого", root_path(locale: I18n.locale) %>
   </h1>
   <div class="end">
     <%= render partial: "layouts/user_profile" %>

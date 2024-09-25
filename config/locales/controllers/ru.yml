@@ -12,6 +12,8 @@ ru:
   games:
     cannot_show_game: Игру нельзя смотреть
     game_created: Игра создана
+    game_created_with_virtual_host: Игра создана и господин ведущий будет на месте
+    game_created_without_virtual_host: Игра создана, но господин ведущий сейчас занят
     game_not_created: Игра не была создана
     game_destroyed: Игра удалена
     join_game: Вы присоединились к игре

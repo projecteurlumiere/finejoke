@@ -1,4 +1,6 @@
 class Suggestion < ApplicationRecord
+  include Localizable
+
   has_and_belongs_to_many :jokes, dependent: :nullify
 
   SETUP_MAX_TOKENS = Joke::SETUP_MAX_LENGTH / 4 * 3
@@ -61,6 +63,10 @@ class Suggestion < ApplicationRecord
   }, if: :new_record?
 
   after_create :add_suggestion_to_user
+
+  def set_default_locale
+    self.locale = user&.locale || game.locale
+  end
 
   def user_playing?
     user&.playing?(game) && user&.playing?(round)

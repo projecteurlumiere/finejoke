@@ -7,7 +7,7 @@ class GamesController < ApplicationController
 
   # GET /games
   def index
-    @games = Game.where(private: false)
+    @games = Game.where(private: false, locale: I18n.locale)
                  .where.not(status: :finished)
                  .order(n_players: :desc, created_at: :desc)
                  .all
@@ -30,7 +30,7 @@ class GamesController < ApplicationController
   
   # creates game
   def create
-    @game = Game.new(game_params)
+    @game = Game.new(locale: current_or_guest_user.locale, **game_params)
     authorize_game!
 
     if create_game

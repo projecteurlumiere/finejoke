@@ -1,6 +1,12 @@
 class VirtualHost < ApplicationRecord
+  include Localizable
+
   belongs_to :game, optional: true
   has_many :prompts
+
+  def set_default_locale
+    self.locale = game.locale
+  end
 
   def talk(round = game.current_round)
     @current_round ||= round
@@ -151,7 +157,7 @@ class VirtualHost < ApplicationRecord
       composing jokes.
       When they are done, everyone votes to choose the funniest joke of all.
       After that, they see the result and a new round to be started unless one of the winning condition procs.
-      Your replies must be in #{I18n.locale} language.
+      Your replies must be in #{locale} language.
     HEREDOC
     }
   end

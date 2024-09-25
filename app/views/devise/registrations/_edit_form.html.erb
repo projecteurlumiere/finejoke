@@ -1,5 +1,5 @@
 <turbo-frame id="summary" 
-  data-controller="profile-edit" 
+  data-controller="profile-edit locale" 
   data-two-containers-target="leftContainer">
   <h2 class="accent">
     <%= t(:".edit") %>
@@ -18,6 +18,19 @@
     <%= f.hidden_field :current_password, name: "user[current_password]", 
       data: { profile_edit_target: "passwordHiddenField" } %>
     <% @delete_account_password_errors = render_errors(resource, :current_password) %>
+  <% end %>
+
+  <%= form_with(url: locale_path, 
+        method: :patch, 
+        html: { 
+          id: "change-locale",
+          data: { 
+            turbo: "false",
+            locale_target: "form"
+          } 
+        }) do |f| %>
+    <%= f.hidden_field :locale %>
+    <%= f.hidden_field :current_page, value: request.path %>
   <% end %>
 
   <%# email confirmation form: %>
@@ -51,6 +64,21 @@
       </fieldset>
     <% end %>
 
+    <fieldset>
+      <legend>
+        <%= t(:".locale_settings") %>
+      </legend>
+    
+      <div class="select-container">
+        <%= f.select :locale, 
+          options_for_select(
+            [*User.locales.keys], 
+            I18n.locale),
+          {}, 
+          { data: { action: "change->locale#submit"} } %>
+        <%= f.label :locale, t(:".language"), style: "display: block" %>
+      </div>
+    </fieldset>
     <fieldset>
       <legend>
         <%= t(:".important_settings") %>
@@ -102,11 +130,11 @@
       </div>
     </fieldset>
 
-    <fieldset class="switch-container">
+    <fieldset>
       <legend>
         <%= t(:".privacy_settings") %>
       </legend>
-      <div>
+      <div class="switch-container">
         <div>
           <%= t(:".show_jokes") %>
         </div>
@@ -120,7 +148,7 @@
         </div>
       </div>
 
-      <div>
+      <div class="switch-container">
         <div>
           <%= t(:".show_awards") %>
         </div>

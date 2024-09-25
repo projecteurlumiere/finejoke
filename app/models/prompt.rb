@@ -1,7 +1,13 @@
 class Prompt < ApplicationRecord
+  include Localizable
+
   belongs_to :virtual_host
   has_one :game, through: :virtual_host
   has_one_attached :audio
+
+  def set_default_locale
+    self.locale = virtual_host.locale
+  end
 
   def voice
     generate_audio

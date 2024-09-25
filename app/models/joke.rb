@@ -1,4 +1,5 @@
 class Joke < ApplicationRecord
+  include Localizable
   include Jokes::Playing
 
   has_and_belongs_to_many :suggestions, dependent: :nullify
@@ -18,6 +19,10 @@ class Joke < ApplicationRecord
 
   alias_method :punchline_author=, :user=
   alias_method :punchline_author, :user
+
+  def set_default_locale
+    self.locale = game.locale
+  end
 
   def text
     "#{setup} #{punchline}"

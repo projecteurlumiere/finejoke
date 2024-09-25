@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  include Localizable
   include Users::Mergeable
   include Users::Playing
   include Users::Broadcasting
@@ -9,7 +10,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :confirmable, :trackable
 
-
   before_create :random_name, if: %i[new_record? guest?] 
   has_many :awards, dependent: :destroy
 
@@ -17,6 +17,10 @@ class User < ApplicationRecord
   has_many :setups, dependent: :nullify
 
   validates :username, presence: true, length: { in: 1..14 }
+
+  def set_default_locale
+    self.locale = I18n.locale
+  end
 
   def random_name
     self.username = "#{I18n.t(:"round.joker")}_#{SecureRandom.hex(10)}".slice(0, 13)

@@ -1,0 +1,9 @@
+<%= form_with url: locale_path, method: :patch, class: "locale-select", data: { controller: :locale } do |f| %>
+    <%= f.select :locale, 
+      options_for_select(
+        [*User.locales.keys], 
+        I18n.locale),
+      {}, 
+      { data: { action: "change->locale#submit"} } %>
+    <%= f.hidden_field :current_page, value: request.path %>
+<% end %>
