@@ -122,7 +122,48 @@
     </div>
   </fieldset>
 
-  <%# <div> %>
-    <%# form.submit %>
-  <%# </div> %>
+  <fieldset>
+    <legend>
+      <%= t(:".ai") %>
+    </legend>
+    <div class="switch-container">
+      <div>
+        <%= t(:".suggestable") %>
+      </div>
+      <div class="switch">
+        <%= form.label :suggestable, aria_label: t(:".suggestable") do %>
+          <%= form.check_box :suggestable %>
+          <span class="slider"></span>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="switch-container">
+      <div>
+        <%= t(:".virtual_host") %>
+      </div>
+      <div class="switch">
+        <%= form.label :create_with_virtual_host, aria_label: t(:".virtual_host") do %>
+          <%= form.check_box :create_with_virtual_host %>
+          <span class="slider"></span>
+        <% end %>
+      </div>
+    </div>
+
+    <% if false %>
+      <div class="circle-select-container">
+        <%# form.check_box :max_points_enabled aria_label: "Включить условие победы по очкам %>
+        <div class="circle"></div>
+        <%= form.label :max_points, 
+          t(:".max_points"), 
+          aria_label: t(:".max_points_aria"), 
+          style: "display: block" %>
+        <%# form.number_field :max_points, min: 10, max: 999, value: nil, placeholder: "Нет" %>
+        <%= form.select :max_points, 
+          [[t(:".none"), nil], 10, 50, 100, 150, 200, 400, 600, 800, 999], 
+          value: t(:".none"), 
+          placeholder: t(:".none") %>
+      </div>
+    <% end %>
+  </fieldset>
 <% end %>

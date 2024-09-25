@@ -34,7 +34,7 @@ class GamesController < ApplicationController
     authorize_game!
 
     if create_game
-      flash[:notice] = t(:".game_created")
+      flash[:notice] = game_params[:create_with_virtual_host] ? flash_about_virtual_host : t(:".game_created")
       turbo_redirect_to game_path(@game)
     else
       flash.now[:alert] = t(:".game_not_created")
@@ -134,12 +134,22 @@ class GamesController < ApplicationController
       name
       private
       viewers_vote
+      suggestable
+      create_with_virtual_host
       max_players max_rounds max_round_time max_points
     ])
   end
 
   def create_game
     @game.add_user(current_or_guest_user, is_host: true)
+  end
+
+  def flash_about_virtual_host
+    if @game.virtual_host 
+      t(:".game_created_with_virtual_host")
+    else
+      t(:".game_created_without_virtual_host")
+    end
   end
 
   def authorize_game!
