@@ -107,7 +107,6 @@ class Game < ApplicationRecord
   def host=(user)
     transaction do
       user.update(host: true)
-      self.host_username = user.username
       super(user)
       save
     end

@@ -9,6 +9,5 @@
             view_path: (game_path(game) if game.viewable?) 
            } do %>
   <span><%= game.name %></span>
-  <span class="hidden"><%= game.host_username %></span>
   <span><%= game.n_players %> / <%= game.max_players %></span>
 <% end %>
