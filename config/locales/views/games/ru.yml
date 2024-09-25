@@ -9,6 +9,7 @@ ru:
       new: Новая
     catalogue:
       rooms: Комнаты
+      no_games: Игр нет...
     game:
       back_to_lobby: В лобби
       game: Игра

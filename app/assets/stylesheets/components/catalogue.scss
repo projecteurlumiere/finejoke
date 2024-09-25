@@ -58,8 +58,13 @@
     flex: 1;
     overflow-y: auto;
     
-    ul {
-    
+    ul:empty:before { 
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      text-transform: lowercase;
+      font-family: var(--press-start-2p);
     }
 
     li {

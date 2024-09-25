@@ -13,7 +13,7 @@
           onsubmit: "this.classList.add('spinning')"
         }) do |f| %>
       <label>
-        <%= f.submit %>
+        <%= f.submit name: nil, value: nil %>
         <%= inline_svg "icons/reload.svg" %>
       </label>
     <% end %>
@@ -21,8 +21,13 @@
     <%# button_to "Обновить", games_path, method: :get, class: "unstyled" %>
   </div>
   <div class="scrollable">
-    <ul id="games" class="list">
-      <%= render partial: "game_entry", collection: @games, as: :game %>
-    </ul>
+    <%= tag.ul id: :games, class: :list do %>
+      <%- render partial: "game_entry", collection: @games, as: :game %>
+    <% end %>
   </div>
 </turbo-frame>
+<style>
+  #games:empty:before {
+    content: "<%= t :".no_games" %>";
+  }
+</style>
