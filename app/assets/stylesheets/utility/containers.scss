@@ -19,6 +19,11 @@
       margin: 0;
       margin-bottom: 1rem;
       padding: 1.5em 1em 0.5rem 0;
+
+      h2 {
+        margin: 0;
+        padding: 0;
+      }
     }
   }
 
@@ -27,11 +32,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-    * {
-      padding: 0;
-      margin: 0;
-    }
   }
 
 
