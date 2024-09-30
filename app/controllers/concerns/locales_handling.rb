@@ -7,8 +7,7 @@ module LocalesHandling
     def switch_locale(&action)
       user = current_user || (!new_guest? && current_or_guest_user)
 
-      locale = user && 
-               (user.locale || params[:locale] || I18n.default_locale)
+      locale = (user && user.locale) || params[:locale] || I18n.default_locale
 
       I18n.with_locale(locale, &action)
     end
