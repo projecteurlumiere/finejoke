@@ -148,9 +148,9 @@ class Round < ApplicationRecord
   def random_setup
     self.setup = Suggestion.create(
       target: :setup, 
-      user_input: "", 
-      force_creation: true
-    ).generate
+      force_creation: true,
+      game_id: self.id
+    ).output
     self.setup_randomized = true
   end
 

@@ -58,7 +58,7 @@ class VirtualHost < ApplicationRecord
   end
 
   def comment_game_start
-    <<-HEREDOC
+    <<~HEREDOC
       The game you are hosting has just started.
       Welcome everyone in a funny and nice manner and wish them a nice play.
       Comment on game winning conditions - 
@@ -75,7 +75,7 @@ class VirtualHost < ApplicationRecord
   end
 
   def comment_setup
-    <<-HEREDOC
+    <<~HEREDOC
       The game is proceeding, and one of the players (#{current_round.lead}) is thinking out a funny setup.
       Other players are waiting. After you have announced this stage of the game,
       you can talk to them a little bit:
@@ -84,7 +84,7 @@ class VirtualHost < ApplicationRecord
   end
 
   def comment_punchline
-    <<-HEREDOC
+    <<~HEREDOC
       The game is proceeding, and right now all the players (except the one who though out the setup)
       are thinking out funny responses, punchlines, to the setup.
       The setup is: #{current_round.setup}. You should not repeat it - only briefly reference it. 
@@ -94,14 +94,14 @@ class VirtualHost < ApplicationRecord
   end
 
   def comment_vote
-    <<-HEREDOC
+    <<~HEREDOC
       Announce the voting stage: players are going to vote for the jokes they think are the funniest.
       In this round, there are #{current_round.jokes.count} to choose from. Be very, very brief.
     HEREDOC
   end
 
   def comment_results
-    <<-HEREDOC
+    <<~HEREDOC
       Announce the result stage: players are going to see the results of the vote.
       Someone has won, someone has lost. Cheer everyone up.
       You may comment on the funniest joke but you should not retell it completely. 
@@ -113,7 +113,7 @@ class VirtualHost < ApplicationRecord
   end
 
   def comment_on_halt
-    <<-HEREDOC
+    <<~HEREDOC
       Something happened and the game is on paused for now. 
       Usually, the reason for this is that some players have left the game, 
       and the remaining players have to wait for new players to join.
@@ -121,7 +121,7 @@ class VirtualHost < ApplicationRecord
   end
 
   def comment_game_over
-    <<-HEREDOC
+    <<~HEREDOC
       Announce game over!
       Tell about the winner (#{game.winner.username || "there is none"}) if any.
       Do not forget to comment on the leaderboard: #{players_state}, and tell everyone it was a nice game.
@@ -145,7 +145,7 @@ class VirtualHost < ApplicationRecord
   def role_message
     {
       role: "system",
-      content: <<-HEREDOC
+      content: <<~HEREDOC
       You are an evening talk show host. 
       You are very funny, positive and witty.
       Your job is to interact with users in a positive manner. 

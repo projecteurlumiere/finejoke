@@ -18,41 +18,22 @@ class Suggestion < ApplicationRecord
     error
   ]
 
-  with_options if: :new_record?, unless: :force_creation do |model| 
+  with_options if: :new_record?, unless: :force_creation do |model|
     model.validates :user, presence: true
     model.validates :game_id, presence: true
     model.validates :game, presence: true
     model.validates :round_id, presence: true
     model.validates :round, presence: true
-    model.validate -> { 
-      errors.add(:game, "user must be playing the game and round")
-    }, unless: :user_playing?
-    
-    model.validate -> { 
-      errors.add(:context, "not allowed to have context for setup generation")
-    }, if: %i[for_setup? context] 
-
-    model.validate -> { 
-      errors.add(:for, "user must be lead to request setup suggestion")
-    }, if: :for_setup?, unless: :user_lead?
-
-    model.validate -> { 
-      errors.add(:for, "user must not be lead to request punchline suggestion") unless !user.lead? 
-    }, if: %i[for_punchline? user_lead?]
-
-    model.validate -> {
-      errors.add(:user, "not enough credits")
-    }, unless: :user_can_afford?
   end
 
   validates :target, presence: true
 
-  before_validation :generate, if: :new_record?
   before_validation -> { 
     self.context = nil unless context.present?
     self.user_input = nil unless user_input.present?
   }
-  validates :output, presence: true
+
+  validates_with SuggestionValidator, on: :create, if: :new_record?, unless: :force_creation
   validates :context, length: { in: 1..CONTEXT_MAX_LENGTH }, if: :context
   validates :user_input, length: { in: 1..USER_INPUT_MAX_LENGTH }, if: :user_input
 
@@ -62,10 +43,12 @@ class Suggestion < ApplicationRecord
     self.context = round&.setup
   }, if: :new_record?
 
+  before_create :generate
+
   after_create :add_suggestion_to_user
 
   def set_default_locale
-    self.locale = user&.locale || game.locale
+    self.locale = game.locale
   end
 
   def user_playing?
@@ -81,18 +64,12 @@ class Suggestion < ApplicationRecord
   end
 
   def generate
-    return self.output if self.output
-    return unless force_creation || user.pay(price: 1)
-    return reuse_previous_suggestion if error.present?
-
     params = prepare_params
-      
     ai_response = make_request(**params)
-    
     self.output = ai_response["choices"][0]["message"]["content"]
   rescue => e
     self.error = e
-    throw :abort
+    reuse_previous_suggestion
   end
 
   def prepare_params
@@ -110,7 +87,7 @@ class Suggestion < ApplicationRecord
   end
 
   def request_setup_message
-    %Q(
+    <<~HEREDOC
       You are a comedian assistant.
       Your job is to suggest funniest and spiciest jokes. Topics can be any.
       Right now you have to suggest a funny setup.
@@ -119,13 +96,13 @@ class Suggestion < ApplicationRecord
       into something funnier or you may discard it altogether.
       You do not write punchline or anything else. Setup only.
       It must be structured so that user can continue it.
-      Your response must be in #{I18n.locale} language.
+      Your response must be in #{locale} language.
       Your response may be short or long, but no more than #{Joke::SETUP_MAX_LENGTH} symbols.
-    )
+    HEREDOC
   end
 
   def request_punchline_message
-    %Q(
+    <<~HEREDOC
       You are a comedian assistant.
       Your job is to suggest funniest and spiciest jokes.
       The first message you receive is a setup.
@@ -134,9 +111,9 @@ class Suggestion < ApplicationRecord
       into something funnier or you may discard it altogether.
       You respond by one punchline connected to the setup only.
       You do not write setup or anything else. Punchline only.
-      Your response must be in #{I18n.locale} language.
+      Your response must be in #{locale} language.
       Your response may be short or long, but no more than #{Joke::PUNCHLINE_MAX_LENGTH} symbols.
-    )
+    HEREDOC
   end
 
   def make_request(system_message:, max_tokens:)
@@ -154,23 +131,25 @@ class Suggestion < ApplicationRecord
             role: "user",
             content: context
           } if context),
-          {
+          ({
             role: "user",
             content: user_input
-          }
+          } if user_input)
         ].compact
       }
     )
   end
 
   def reuse_previous_suggestion
-    return unless for_setup?
+    throw :abort unless for_setup?
 
     old_suggestion = Suggestion
                      .where(user_input: nil)
                      .order("RANDOM()")
                      .limit(1)
                      .pluck(:id, :output)[0]
+
+    throw :abort if old_suggestion.none?
 
     add_suggestion_to_user(old_suggestion[0])
     self.output = old_suggestion[1]

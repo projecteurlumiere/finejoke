@@ -157,6 +157,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_18_111714) do
     t.string "user_input"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "locale", default: 0, null: false
   end
 
   create_table "users", force: :cascade do |t|
