@@ -57,6 +57,7 @@ class Round < ApplicationRecord
 
   def create_setup_model
     self.setup_model = Setup.create(
+      locale: game.locale,
       text: setup,
       user_id: setup_randomized ? nil : user.id
     )
