@@ -34,7 +34,7 @@ class GamesController < ApplicationController
     authorize_game!
 
     if create_game
-      flash[:notice] = game_params[:create_with_virtual_host] ? flash_about_virtual_host : t(:".game_created")
+      flash[:notice] =  @game.create_with_virtual_host ? flash_about_virtual_host : t(:".game_created")
       turbo_redirect_to game_path(@game)
     else
       flash.now[:alert] = t(:".game_not_created")
