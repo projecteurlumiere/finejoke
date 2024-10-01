@@ -18,6 +18,7 @@ class ApplicationController < ActionController::Base
     current_or_guest_user
   end
 
+  # overriide this in controller to bypass authentication
   def no_authentication_required?
     devise_controller? || current_user || guest_welcomed?
   end
@@ -63,6 +64,8 @@ class ApplicationController < ActionController::Base
   end
 
   def transfer_guest_to_user
+    return if (Time.now - User.last.created_at) / 86400 > 1 # should not merge user is at least 1 days old
+
     ActiveRecord::Base.transaction do
       guest_user.game&.remove_user(guest_user)
       current_user.merge(guest_user)
