@@ -8,7 +8,7 @@ class GuestsController < ApplicationController
 
   private
 
-  def guest_welcomed
+  def no_authentication_required?
     true
   end
 end

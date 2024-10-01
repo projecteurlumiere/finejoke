@@ -7,20 +7,21 @@ class ApplicationController < ActionController::Base
   layout "layouts/application"
   
   before_action :welcome_guest, if: :new_guest?, unless: :guest_welcomed?
+  before_action :authenticate_user!, unless: %i[no_authentication_required?] 
   before_action :configure_permitted_parameters, if: :devise_controller?
   after_action :verify_authorized, unless: :devise_controller?
   after_action :remove_referrer, unless: %i[devise_controller? new_guest?]
 
-  def no_authentication_required?
-    false
-  end
-
+  private
+  
   def pundit_user
     current_or_guest_user
   end
 
-  private
-  
+  def no_authentication_required?
+    devise_controller? || current_user || guest_welcomed?
+  end
+
   def guest_welcomed?
     session[:guest_welcomed]
   end
@@ -36,10 +37,7 @@ class ApplicationController < ActionController::Base
   def welcome_guest
     flash[:notice] = t(:"application.welcome_guest")
 
-    unless devise_controller? || controller_name == "guests"
-      store_referrer
-      authenticate_user!
-    end
+    store_referrer unless no_authentication_required?
   end
 
   def store_referrer

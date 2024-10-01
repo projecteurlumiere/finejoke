@@ -119,10 +119,6 @@ class GamesController < ApplicationController
 
   private
 
-  def no_authentication_required?
-    action_name == "index"
-  end
-
   # Use callbacks to share common setup or constraints between actions.
   def set_game
     @game = Game.includes(:users).find(params[:id])

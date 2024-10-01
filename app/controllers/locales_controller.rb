@@ -9,4 +9,10 @@ class LocalesController < ApplicationController
 
     redirect_to((params[:current_page] || root_path), params: { locale: I18n.locale }, status: :see_other)
   end
+
+  private
+
+  def no_authentication_required?
+    true
+  end
 end

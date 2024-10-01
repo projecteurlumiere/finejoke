@@ -12,9 +12,7 @@ class Setup < ApplicationRecord
 
   before_save -> { self.text_short = self.class.truncate(text) }, if: :text_changed?
 
-  def set_default_locale
-    return
-  end
+  def set_default_locale; end
 
   def self.truncate(setup)
     return if setup.length < TRUNCATE_LENGTH
