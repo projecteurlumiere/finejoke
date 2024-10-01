@@ -27,6 +27,9 @@ module Finejoke
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
     # Common ones are `templates`, `generators`, or `middleware`, for example.
     config.autoload_lib(ignore: %w(assets tasks))
+
+    # NEVER change the order of the locales as the locales enum depend on it
+    I18n.available_locales = %i[en ru fr es]
     config.i18n.default_locale = :ru
 
     # Configuration for the application, engines, and railties goes here.

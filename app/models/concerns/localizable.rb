@@ -3,7 +3,7 @@ module Localizable
 
   included do
     # NEVER change order - append only
-    enum locale: %i[en ru fr es]
+    enum locale: I18n.available_locales
 
     before_create :set_default_locale, unless: :locale_changed?
 
