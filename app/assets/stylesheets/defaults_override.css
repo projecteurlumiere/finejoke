@@ -100,7 +100,7 @@ fieldset > legend {
 input[type=number],
 select {
   font-size: inherit;
-  background-color: transparent;
+  background-color: var(--black);
   border: solid 1px var(--white);
   padding: 0.5em;
   padding-right: 0;
@@ -117,5 +117,5 @@ select {
 }
 
 option {
-  color: var(--black);
+  color: var(--white);
 }

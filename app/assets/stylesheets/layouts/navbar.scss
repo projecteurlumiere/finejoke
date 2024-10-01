@@ -1,5 +1,5 @@
 header {
-  * {
+  *:not(option) {
     color: var(--header-color);
   }
 
@@ -19,7 +19,7 @@ header {
       
       .locale-select {
         select {
-          font-size: 1rem;
+          font-size: var(--global-font-size);
           min-width: 5ch;
         }
       }
