@@ -51,5 +51,7 @@ module Finejoke
     config.action_view.automatically_disable_submit_tag = false
 
     config.active_storage.service = :local
+    
+    config.exceptions_app = self.routes
   end
 end

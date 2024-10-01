@@ -4,6 +4,7 @@ ru:
     not_found: Не найдено
     forbidden: У вас здесь нет прав
     unknown_format: Неверный формат запроса 
+    internal_server_error: Что-то пошло не так
   guests:
     you_are_guest: Вы теперь гость!
   awards:

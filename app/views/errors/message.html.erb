@@ -1,0 +1,5 @@
+<% content_for(:main_class) { "error" } %>
+<%= render partial: "errors/#{code}" %>
+<a class="button" href="/">
+  <%= t :"errors.shared.to_lobby" %>
+</a>

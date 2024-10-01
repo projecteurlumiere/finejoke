@@ -47,5 +47,10 @@ Rails.application.routes.draw do
   
   get "turbo_redirect_to", controller: "application"
 
+  match "/403", via: :all, to: "errors#not_authorized"
+  match "/404", via: :all, to: "errors#not_found"
+  match "/415", via: :all, to: "errors#unknown_format"
+  match "/500", via: :all, to: "errors#internal_server_error"
+
   root "root#show"
 end
