@@ -10,7 +10,6 @@
     border-color: var(--section-color) 
   }
 
-
   h2 {
     flex: 0;
     select {
@@ -22,6 +21,7 @@
       padding-right: 2ch;
       padding-top: 0;
       padding-bottom: 1rem;
+      background-color: inherit;
     }
   }
 
