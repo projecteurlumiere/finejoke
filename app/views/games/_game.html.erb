@@ -41,7 +41,7 @@
   </div>
 
   <div class="data-container hidden-when-mobile" 
-    data-controller="game-data" 
+    data-controller="game-data game-settings" 
     data-containers-target="container" 
     data-container-name="data" 
     data-game-data-id-value="<%= current_or_guest_user.id %>">
@@ -50,7 +50,13 @@
       locals: { game: game, votes_change: {} } %>
     <div class="panel">
       <%= button_to "?", game_rules_path(game), method: :get, 
-        class: %w[button secondary rules], data: { turbo_stream: true } %>
+        class: %w[button secondary rules], 
+        data: { turbo_stream: true }, 
+        form: { 
+          data: { 
+            action:  "turbo:submit-end->game-settings#showRules" 
+          }
+        } %>
       <button class="viewers secondary">
         <%= inline_svg("icons/eye.svg") %>
         <%= render partial: "games/game_n_viewers", locals: { game: game } %>
