@@ -2,25 +2,25 @@
   <h2 class="hidden-when-mobile">F.A.Q.</h2>
 
   <h3 class="white">
-    Привет, <span><%= current_or_guest_user %></span>!
+    <%= t :".hello_user_html", username: current_or_guest_user.username %>
   </h3>
   <section>
     <h4>
-      Что нового на Finejoke?
+      <%= t :".what_is_new" %>
     </h4>
     <p>
-      Пока ничего.
+      <%= t :".no_news" %>
     </p>
   </section>
   <section>
     <h4>
-      Как мне связаться?
+      <%= t :".how_to_contact" %>
     </h4>
     <p>
-      Ознакомиться с исходным кодом можно <a href="">здесь</a>
+      <%= t :".source_code_html", link: "" %>
     </p>
     <p>
-      Также можно связаться по почте: <a href="">здесь</a>
+      <%= t :".email_html", link: "" %>
     </p>
   </section>
 </article>
