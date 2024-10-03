@@ -124,3 +124,8 @@ select {
 option {
   color: var(--white);
 }
+
+strong {
+  font-weight: 800;
+  color: inherit;
+}

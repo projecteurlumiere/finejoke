@@ -3,16 +3,42 @@ body:has(main > #authentication) {
 }
 
 #authentication {
-  > a.sign-in:has(~ #authentication-form > #new-session),
-  > a.sign-up:has(~ #authentication-form > #new-registration) {
-    // defined in button.scss
-    color: var(--selected-color);
-    background-color: var(--selected-bg-color);
-    border-color: var(--selected-border-color);
+  grid-template-rows: min-content 9fr;
 
-    pointer-events: none;
-    box-shadow: none;
+  .buttons {
+    border: none;
+    display: flex;
+    gap: 1rem;
+    padding: 0;
+
+    &:has(~ #authentication-form > #new-session) {
+      > a.sign-in {
+        color: var(--selected-color);
+        background-color: var(--selected-bg-color);
+        border-color: var(--selected-border-color);
+      }
+    }
+
+    &:has(~ #authentication-form > #new-registration) {
+      > a.sign-up {
+        color: var(--selected-color);
+        background-color: var(--selected-bg-color);
+        border-color: var(--selected-border-color);
+      }
+    }
   }
+
+
+  // > a.sign-in:has(~ #authentication-form > #new-session),
+  // > a.sign-up:has(~ #authentication-form > #new-registration) {
+  //   // defined in button.scss
+  //   color: var(--selected-color);
+  //   background-color: var(--selected-bg-color);
+  //   border-color: var(--selected-border-color);
+
+  //   pointer-events: none;
+  //   box-shadow: none;
+  // }
 
   #authentication-form {
     display: flex;
@@ -22,6 +48,7 @@ body:has(main > #authentication) {
     padding-bottom: 1rem;
     border: none;
     grid-row: 2 / 3;
+    grid-column: 2 / 3;
 
     form:not(.button_to) {
       display: flex;
@@ -38,21 +65,14 @@ body:has(main > #authentication) {
     }
   }
 
-  #authentication-form:has(> .new-session) {
-    grid-column: 1 / 2;
-  }
+  article.welcome {
+    grid-row: 1 / 3;
 
-  #authentication-form:has(> .new-registration) {
-    grid-column: 2 / 3;
-  }
-
-  .welcome {
-    grid-row: 2 / 3;
-
-    border: none;
-
-    @media(max-width: 950px) {
-      display: none;
+    h2 {
+      padding-top: 0;
+      padding-right: 0;
+      font-size: 1.17em;
     }
   }
 }
+

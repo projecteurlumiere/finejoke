@@ -8,6 +8,14 @@
   border-color: var(--accent-alert) !important;
 }
 
+.accent-notice {
+  color: var(--accent-notice);
+}
+
 .black {
   color: var(--black) !important;
+}
+
+.white {
+  color:  var(--white) !important;
 }

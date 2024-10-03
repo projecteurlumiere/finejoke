@@ -3,11 +3,28 @@
     border: none;
   }
 
+  h2:not(.wrapper) {
+    padding-top: 0;
+    margin-bottom: 2rem;
+    padding-right: 0;
+    font-size: 1.17em;
+    color: var(--white);
+  }
+
   nav {
-    margin-top: 3rem;
+    margin-top: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 1rem;
+
+    div {
+      margin-bottom: 2rem;
+    }
+  }
+
+  article.welcome {
+    grid-column: 1 / 2;
+    @media(max-width: 950px) { padding-top: 0 }
   }
 }

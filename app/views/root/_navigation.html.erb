@@ -1,4 +1,28 @@
 <nav class="" data-containers-target="container" data-container-name="navigation">
+  <h2 class="hidden-when-mobile">Меню</h2>
+  <div>
+    <%= link_to "В лобби", games_path, class: %i[button secondary] %>
+    <% if current_user.game %>
+      <%= link_to t(:".currently_in_game"), 
+        game_path(game), 
+        class: "button notice" %>
+    <% end %>
+  </div>
+
   <%= link_to "Мой профиль", profile_path(current_user), class: :button if current_user %>
-  <%= link_to "В лобби", games_path, class: :button %>
+  <%= link_to t(:"profiles.summary.profile_settings"), 
+    edit_self_profile_path, 
+    class: "button", 
+      data: { 
+        turbo_action: :advance } %>
+  <% unless current_user.guest? %>
+    <%= button_to t(:"profiles.summary.sign_out"), 
+      destroy_user_session_path, 
+      method: :delete, 
+      class: "danger", 
+        data: { 
+          turbo_confirm: t(:"profiles.summary.sign_out_confirm"), 
+          turbo_frame: "_top" } %>
+  <% end %>
+
 </nav>

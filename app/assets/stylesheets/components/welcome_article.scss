@@ -1,0 +1,16 @@
+article.welcome {
+  padding: 0 1rem;
+
+  border: none;
+  margin-bottom: 2rem;
+
+  h2, h3, h4 { 
+    color: var(--accent-alert)
+  }
+
+  > *:nth-child(even) {
+    p, li {
+      color: var(--secondary-control-color);
+    }
+  }
+}

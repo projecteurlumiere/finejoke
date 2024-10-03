@@ -7,8 +7,11 @@
         }
 
         * { 
-          font-weight: 600;
           font-family: var(--nunito-sans);
+        }
+
+        p, li {
+          font-weight: 600;
         }
 
         ul {

@@ -1,8 +1,26 @@
-<div class="hidden-when-mobile welcome" data-containers-target="container" data-container-name="welcome">
-  <p>
-    <%= t(:".p_1") %>
-  </p>
-  <p>
-    <%= t(:".p_2") %>
-  </p>
-</div>
+<article class="welcome hidden-when-mobile" data-containers-target="container" data-container-name="welcome">
+  <h2 class="hidden-when-mobile">F.A.Q.</h2>
+
+  <h3 class="white">
+    Привет, <span><%= current_or_guest_user %></span>!
+  </h3>
+  <section>
+    <h4>
+      Что нового на Finejoke?
+    </h4>
+    <p>
+      Пока ничего.
+    </p>
+  </section>
+  <section>
+    <h4>
+      Как мне связаться?
+    </h4>
+    <p>
+      Ознакомиться с исходным кодом можно <a href="">здесь</a>
+    </p>
+    <p>
+      Также можно связаться по почте: <a href="">здесь</a>
+    </p>
+  </section>
+</article>
