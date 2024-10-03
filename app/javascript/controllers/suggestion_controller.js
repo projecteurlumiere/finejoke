@@ -28,29 +28,38 @@ export default class extends Controller {
     const suggestion = el.innerText
     el.remove()
 
-    this.#toggleInput("disable")
-    if (this.typed) this.typed.destroy()
+    try {
+      this.#toggleInput("disable")
+      if (this.typed) this.typed.destroy()
 
-    const placeholder = this.#injectPlaceholder(this.userInputTarget)
-    this.userInputTarget.value = suggestion
+      const placeholder = this.#injectPlaceholder(this.userInputTarget)
+      this.userInputTarget.value = suggestion
 
-    const typeSpeed = 15 // ms
+      const typeSpeed = 15 // ms
 
-    this.typed = new Typed(placeholder, {
-      strings: [suggestion],
-      typeSpeed: typeSpeed,
-      showCursor: false,
-      loop: false,
-      onComplete: () => { 
-        this.typed.destroy() 
-      },
-      onDestroy: () => {
-        this.#removePlaceholder(placeholder);
-        this.typed = undefined
-      }
-    });
+      this.typed = new Typed(placeholder, {
+        strings: [suggestion],
+        typeSpeed: typeSpeed,
+        showCursor: false,
+        loop: false,
+        onComplete: () => { 
+          this.typed.destroy() 
+        },
+        onDestroy: () => {
+          this.#removePlaceholder(placeholder);
+          this.typed = undefined
+        }
+      });
 
-    this.#scrollPlaceholder(placeholder, typeSpeed, suggestion)
+      this.#scrollPlaceholder(placeholder, typeSpeed, suggestion)
+    } catch (error) {
+       if (this.typed) {
+         this.typed.destroy()
+         this.typed = undefined
+       }
+       console.log(error);
+       this.userInputTarget.value = suggestion
+    }
   }
 
   abortTyping() {
