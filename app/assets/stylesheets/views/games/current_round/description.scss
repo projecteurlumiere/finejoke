@@ -4,5 +4,8 @@
     position: sticky;
     top: 0;
     background: var(--white);
+    * {
+      font-family: var(--press-start-2p);
+    }
   }
 }

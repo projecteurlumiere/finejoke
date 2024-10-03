@@ -13,10 +13,15 @@ p {
   margin: 1rem 0;
 }
 
-ul, ol, li {
+ul,
+ul li {
   list-style: none;
   margin: unset;
   padding: unset;
+}
+
+ol {
+
 }
 
 input {

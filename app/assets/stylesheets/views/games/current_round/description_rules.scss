@@ -1,0 +1,26 @@
+  .task {
+    .description {
+      article.rules {
+        h2, h3, h4 {
+          color: var(--accent-alert);
+          font-family: var(--press-start-2p);
+        }
+
+        * { 
+          font-weight: 600;
+          font-family: var(--nunito-sans);
+        }
+
+        ul {
+          li {
+            list-style: square;
+          }
+        }
+
+        ul, ol {
+          margin-left: 2rem;
+          padding-left: 0;
+        }
+      }
+    }
+  }

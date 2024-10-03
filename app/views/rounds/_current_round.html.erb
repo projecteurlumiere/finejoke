@@ -16,8 +16,8 @@
     <div class="task" data-jokes-target="task">
       <%# <div class="timer-wrapper"> %>
       <%# </div> %>
-      <div class="description press-font" data-jokes-target="description">
-        <div class="timer press-font" data-timer-target="bar"></div>
+      <div class="description" data-jokes-target="description">
+        <div class="timer" data-timer-target="bar"></div>
         <%= round_task_for(current_or_guest_user, round, game) %>
       </div>
       <%= render_setup_for(round) %>

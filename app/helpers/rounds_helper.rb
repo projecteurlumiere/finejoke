@@ -235,11 +235,8 @@ module RoundsHelper
   end
   
   # for everyone
-  def render_rules_for(_game)
-    [
-      tag.h2(t(:".rules")),
-      tag.div(tag.p(t(:".rules_content")), class: "rules")
-    ].join(" ").html_safe
+  def render_rules_for(game)
+    render partial: "games/rules", locals: { game: }
   end
 
   # only for host
