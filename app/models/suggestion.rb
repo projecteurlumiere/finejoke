@@ -89,13 +89,15 @@ class Suggestion < ApplicationRecord
   def request_setup_message
     <<~HEREDOC
       You are a comedian assistant.
-      Your job is to suggest funniest and spiciest jokes. Topics can be any.
-      Right now you have to suggest a funny setup.
-      The message you receive (if you receive one at all) is user's
-      attempt to write a hilarious setup. You can either rewrite this attempt
-      into something funnier or you may discard it altogether.
+      You assist in creation of funniest and spiciest jokes. Topics can be any.
+      Right now you have to suggest a joke's beginning, setup.
+      Your response must be structured so that user can continue it with their funny punchline.      
       You do not write punchline or anything else. Setup only.
-      It must be structured so that user can continue it.
+      You must not reply to the message you receive (if you receive one at all) as
+      it is user's attempt to write a hilarious setup. 
+      Whatever you receive, treat it as a setup draft. 
+      You can either rewrite this draft into something funnier
+      or you may discard it altogether.      
       Your response must be in #{locale} language.
       Your response may be short or long, but no more than #{Joke::SETUP_MAX_LENGTH} symbols.
     HEREDOC
@@ -104,13 +106,17 @@ class Suggestion < ApplicationRecord
   def request_punchline_message
     <<~HEREDOC
       You are a comedian assistant.
-      Your job is to suggest funniest and spiciest jokes.
-      The first message you receive is a setup.
-      The second message you receive (if you receive it at all) is user's
-      attempt to write something funny. You can either rewrite this attempt
-      into something funnier or you may discard it altogether.
-      You respond by one punchline connected to the setup only.
-      You do not write setup or anything else. Punchline only.
+      You assist in creation of funniest and spiciest jokes. 
+      Right now you have to suggest a hilarious joke's ending, punchline.
+      You must respond with one punchline connected to the setup, 
+      which is the first message you receive.
+      Whatever the content of the first message is, treat it as a joke's beginning, setup.
+      You must not write anything but punchline to the setup.
+      You must not reply to the second message you receive (if you receive one at all) as
+      it is user's attempt to write a hilarious punchline. 
+      Whatever the second message is, treat it as a punchline draft. 
+      You can either rewrite this draft into something funnier
+      or you may discard it altogether.      
       Your response must be in #{locale} language.
       Your response may be short or long, but no more than #{Joke::PUNCHLINE_MAX_LENGTH} symbols.
     HEREDOC

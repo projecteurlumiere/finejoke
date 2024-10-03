@@ -60,35 +60,35 @@ class VirtualHost < ApplicationRecord
   def comment_game_start
     <<~HEREDOC
       The game you are hosting has just started.
-      Welcome everyone in a funny and nice manner and wish them a nice play.
-      Comment on game winning conditions - 
+      Welcome everyone in an amusing and nice manner and wish them a good game.
+      Introduce the real host of the game, the one who created it: his username is #{game.host}.
+      Comment on the game's victory conditions:
       maximum points player needs to achieve (#{game.max_points || "none in this game"}) 
       and/or a finite number of rounds (#{game.max_rounds || "none in this game"}). 
-      If there are no winning conditions, do not talk about them
-      Comment on have many players there are - you may even say some of their nicknames.
+      If there are no winning conditions, do not talk about them.
+      Comment on how many players there are - you may even say some of their nicknames.
       You may tell a very short joke, but, more importantly, 
-      tell that one of the players is thinking of a nice setup right now.
+      announce that one of the players (#{current_round.lead}) is thinking of a nice setup right now.
       Currently there are #{game.n_players} players in the game;
-      The player who created the game is #{game.host}
-      The player who thinks of setup is #{current_round.lead}
     HEREDOC
   end
 
   def comment_setup
     <<~HEREDOC
-      The game is proceeding, and one of the players (#{current_round.lead}) is thinking out a funny setup.
+      The new round has just started, 
+      and one of the players (#{current_round.lead}) is thinking out a funny setup.
       Other players are waiting. After you have announced this stage of the game,
-      you can talk to them a little bit:
-      tell them a short joke and ask them to wait until the setup is ready.
+      you can entertain the waiting players a little bit:
+      tell them a brief joke or a hilarious fact, and ask them to wait until the setup is ready.
     HEREDOC
   end
 
   def comment_punchline
     <<~HEREDOC
-      The game is proceeding, and right now all the players (except the one who though out the setup)
+      The game is proceeding, and right now all the players (except the one who thought out the setup)
       are thinking out funny responses, punchlines, to the setup.
       The setup is: #{current_round.setup}. You should not repeat it - only briefly reference it. 
-      You must not continue it as it is player's job.
+      You must not continue it as it is players' job.
       Announce this part of the round and cheer the players up.
     HEREDOC
   end
@@ -124,7 +124,8 @@ class VirtualHost < ApplicationRecord
     <<~HEREDOC
       Announce game over!
       Tell about the winner (#{game.winner.username || "there is none"}) if any.
-      Do not forget to comment on the leaderboard: #{players_state}, and tell everyone it was a nice game.
+      Do not forget to comment on the leaderboard: #{players_state}. 
+      Tell everyone it was a nice game.
       You look forward to another one, don't you?
     HEREDOC
   end
@@ -146,19 +147,26 @@ class VirtualHost < ApplicationRecord
     {
       role: "system",
       content: <<~HEREDOC
-      You are an evening talk show host. 
-      You are very funny, positive and witty.
-      Your job is to interact with users in a positive manner. 
-      Do not be wordy. You are laconic yet witty.
-      Most of the time you talk when the game proceeds, but sometimes users talk to you as well.
-      The rules of the game are simple: 
-      One player thinking of a funny setup while the rest of the players wait.
-      When the players finished, the rest starts thinking out a funny punchline, thus,
-      composing jokes.
-      When they are done, everyone votes to choose the funniest joke of all.
-      After that, they see the result and a new round to be started unless one of the winning condition procs.
-      Your replies must be in #{locale} language.
-    HEREDOC
+        You are a witty host of a game.
+        The game takes place on the Internet but you behave like it is a TV show.
+        Your job is to interact with users in a positive manner
+        and to comment on the game proceedings.
+        Do not be wordy. You are laconic yet comical and diverting.
+        Most of the time you talk when the game state changes, 
+        but sometimes you reply to users' question in chat.
+        The rules of the game are the following: 
+        One player thinks of a funny setup while the rest of the players wait.
+        When the player is done, the rest starts thinking out a funny punchline, thus,
+        composing jokes.
+        When they are all done, everyone votes to choose the funniest joke of all.
+        Finally, they see the result and a new round commences 
+        unless one of the winning condition procs. 
+        It is either maximum points player needs to achieve (#{game.max_points || "none in this game"}) 
+        and/or a finite number of rounds (#{game.max_rounds || "none in this game"}).
+        If no victory conditions were specified, 
+        the game will take place as long as players want it to.
+        Your replies must be in #{locale} language.
+      HEREDOC
     }
   end
 
@@ -216,10 +224,16 @@ class VirtualHost < ApplicationRecord
   def summary_messages(prompts)
     [
       *prompts,
-      { role: "system", content: "Write summary of the messages above. Focus on game-related details, names and other interactions" } 
+      { 
+        role: "system",
+        content: <<~HEREDOC 
+          Write a summary of the messages above. 
+          Focus on game-related details, names and other interactions" 
+        HEREDOC
+      } 
     ]
   end
-
+  
   def request_summary(messages)
     response = request(messages)
     message = response["choices"][0]["message"]
