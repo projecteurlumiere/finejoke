@@ -45,3 +45,23 @@ ru:
       ai: Искусственный интеллект
       suggestable: ИИ подсказки
       virtual_host: Господин ведущий
+    rules:
+      rules: Правила
+      common: Общие
+      setup_step: Один игрок придумывает завязку к шутке - сетап;
+      punchline_step: Затем остальные игроки придумывают остроумные развязки к сетапу - панчлайны;
+      vote_step: Когда шутки готовы, проходит голосование за лучшую шутку. Один голос равен одному очку.
+      configurable: Настраеваемые
+      host_html: <strong>%{host_link}</strong> - хост игры. Он может выгонять других игроков.
+      private_html: Это <strong>приватная</strong> игра. Она не отображается списке игр. Поделитесь ссылкой в адресной строке, чтобы кого-то пригласить.
+      public_html: Это <strong>публичная</strong> игра. Она отображается в списке игр.
+      viewers_vote_html: Зрители <strong>могут</strong> голосовать.
+      viewers_do_not_vote_html: Зрители <strong>не могут</strong> голосовать.
+      no_victory_conditions_html: Условий победы <strong>нет</strong>.
+      victory_conditions_are: "Условия победы:"
+      # no punctuation needed in the following:
+      max_rounds_html: "Максимум раундов: <strong>%{n}</strong>"
+      max_points_html: "Максимум очков: <strong>%{n}</strong>."
+      max_round_time_html: "Длительность раунда: <strong>%{t} сек</strong>."
+      suggestable_html: "В игре <strong>включены ИИ подсказки</strong>."
+      virtual_host_html: "Напишите в чат сообщение, начинающееся с <strong>\"Господин ведущий\"</strong>, чтобы обратиться к виртуальному ведущему игры."

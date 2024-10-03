@@ -1,63 +1,80 @@
 <!-- Make two pages? -->
 
 <article class="rules">
-  <h2>Правила</h2>
-  <h3>Общие</h3>
+  <h2>
+    <%= t :".rules" %>
+  </h2>
+  <h3>
+    <%= t :".common" %>
+  </h3>
   <ol>
     <li>
-      Один игрок придумывает завязку к шутке - сетап;
+      <%= t :".setup_step" %>
     </li>
     <li>
-      Затем остальные игроки придумывают остроумные развязки к сетапу - панчлайны;
+      <%= t :".punchline_step" %>
     </li>
     <li>
-      Когда шутки готовы, проходит голосование за лучшую шутку. Один голос равен одному очку.
+      <%= t :".vote_step" %>
     </li>
   </ol>
-  <h3>Настраиваемые</h3>
+  <h3>
+    <%= t :".configurable" %>
+  </h3>
   <ul>
     <li>
-      <strong><%= link_to game.host.to_s, profile_path(game.host) %></strong> - хост игры. Он может выгонять других игроков. 
+      <%= t :".host_html", host_link: link_to(game.host.to_s, profile_path(game.host)) %>
     </li>
     <li>
       <% if game.private? %>
-        Это <strong>приватная</strong> игра. Она не отображается списке игр. Поделитесь ссылкой в адресной строке, чтобы кого-то пригласить.
+        <%= t :".private_html" %>
       <% else %>
-        Это <strong>публичная</strong> игра. Она отображается в списке игр.
+        <%= t :".public_html" %>
+      <% end %>
+    </li>
+    <li>
+      <% if game.viewers_vote? %>
+        <%= t :".viewers_vote_html" %>
+      <% else %>
+        <%= t :".viewers_do_not_vote_html" %>
       <% end %>
     </li>
     <% if !game.max_rounds && !game.max_points %>
       <li>
-        Условий победы <strong>нет</strong>.
+        <%= t :".no_victory_conditions_html" %>
       </li>
     <% else %>
+    <%# careful li starts here and ends... %>
       <li>
-        Условия для победы:
+        <%= t :".victory_conditions_are" %>
         <ul>
     <% end %>
       <% if game.max_rounds %>
-        <li>Максимум раундов: <strong><%= game.max_rounds %></strong><%= ";" if game.max_points %></li>
+        <li>
+          <%= t(:".max_rounds_html", n: game.max_rounds) %><%= ";" if game.max_points %>  
+        </li>
       <% end %>
       <% if game.max_points %>
         <li>
-          Максимум очков: <strong><%= game.max_points %></strong>.
+          <%= t(:".max_points_html", n: game.max_points) %>
         </li>
       <% end %>
     <% if game.max_rounds || game.max_points %>
         </ul>
+      <%# ...and li ends here %>
       </li>
     <% end %>
     <li>
-      Длительность раунда: <strong><%= game.max_round_time %> сек</strong>.
+      <%= t :".max_round_time_html", t: game.max_round_time %>
     </li>
     <% if game.suggestable %>
       <li>
-        В игре <strong>включены ИИ подсказки</strong>.
+        <%= t :".suggestable_html" %>
       </li>
     <% end %>
     <% if game.virtual_host %>
       <li>
-        Напишите в чат сообщение, начинающееся с <strong>"Господин ведущий"</strong>, чтобы обратиться к виртуальному ведущему игры.
+        <%= t :".virtual_host_html" %>
       </li>
     <% end %>
   </ul>
