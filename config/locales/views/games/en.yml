@@ -1,0 +1,67 @@
+en:
+  games:
+    index:
+      rooms: Rooms
+      new_game: New game
+      connect: Connect
+      view: View
+      create: Create
+      new: New
+    catalogue:
+      rooms: Rooms
+      no_games: No games...
+    game:
+      back_to_lobby: To lobby
+      game: Game
+      chat: Chat
+    game_user:
+      to_profile: To profile
+      kick: Kick
+      empty: Empty
+    chat:
+      chat: Chat
+      empty: Empty...
+      empty_short: Empty
+    chat_form:
+      hello: Hello!
+      message_text: Message text
+      send_message: Send message
+    form:
+      name: Name
+      enter_name: Enter name
+      extra_settings: Settings
+      max_players: Max players
+      max_round_time: Round time (seconds)
+      victory_conditions: Victory conditions
+      max_rounds: Max rounds
+      max_rounds_aria: Enable maximum rounds victory condition
+      max_points: Max points
+      max_points_aria: Enable maximum points victory condition
+      none: "No"
+      access: Access
+      private: Private (does not show up in lobby)
+      open_for_viewers: Open for viewers
+      viewers_vote: Viewers vote
+      ai: Artificial Intelligence
+      suggestable: AI suggestions
+      virtual_host: Mister Host
+    rules:
+      rules: Rules
+      common: Common
+      setup_step: "One player composes a joke's setup;"
+      punchline_step: "Then the rest of the players think out funny punchlines to the setup;"
+      vote_step: When the jokes are ready, a vote takes place to choose the funniest one. One vote equals one point.
+      configurable: Configurable
+      host_html: <strong>%{host_link}</strong> - is the host. He can kick other players.
+      private_html: This game is <strong>private</strong>. It does not show up in the lobby. Share the link to this page with you friends to invite them.
+      public_html: This game is <strong>public</strong>. It is visible in the lobby.
+      viewers_vote_html: The viewers <strong>can</strong> vote.
+      viewers_do_not_vote_html: The viewers <strong>cannot</strong> vote.
+      no_victory_conditions_html: There are <strong>no</strong> victory conditions.
+      victory_conditions_are: "Victory conditions:"
+      # no punctuation needed in the following:
+      max_rounds_html: "Maximum number of rounds: <strong>%{n}</strong>"
+      max_points_html: "Мaximum number of points: <strong>%{n}</strong>."
+      max_round_time_html: "Round duration: <strong>%{t} seconds</strong>."
+      suggestable_html: "AI suggestions are <strong>available</strong> in this game."
+      virtual_host_html: "Begin you chat message with <strong>\"Mister Host\"</strong>, to address the virtual host of this game."

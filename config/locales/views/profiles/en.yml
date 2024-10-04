@@ -1,0 +1,32 @@
+en:
+  profiles:
+    show:
+      to_lobby: To lobby
+      jokes: Jokes
+      profile: Profile
+      jokes_hidden: User %{username} jokes are hidden!
+      no_jokes: No jokes
+      no_more_jokes: No more jokes
+      get_more_jokes: Get more jokes
+    catalogue:
+      best: Best
+      recent: Recent
+      jokes: Jokes
+      setups: Setups
+      punchlines: Punchlines
+      downloading_jokes: Requesting jokes
+    summary:
+      profile: Profile
+      username: Username
+      in_game_since: In game since
+      awards_received: Awards received
+      points_received: Points received
+      games_won: Games won
+      games_finished: Games finished
+      setups_created: Setups created
+      punchlines_created: Punchlines created
+      suggestions_requested: Suggestions requested
+      profile_settings: Settings
+      sign_out: Sign out
+      sign_out_confirm: Are you sure you want to sign out?
+      sign_up: Sign up

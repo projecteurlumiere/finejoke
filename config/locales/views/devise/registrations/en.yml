@@ -1,0 +1,47 @@
+en:
+  devise:
+    registrations:
+      edit:
+        to_lobby: "To lobby"
+      # edit profile:
+      edit_form:
+        edit: Edit
+        important_settings: Important settings (you can skip them)
+        email_not_confirmed: Email not confirmed! 
+        awaiting_email_confirmation_html: >
+          Some features may be unavailable to you!
+          If you have not received the confirmation message,
+          either press "Resend" button below,
+          or update your email address on this page and save the changes.
+        send_confirmation: Resend
+        locale_settings: Language settings
+        language: Language
+        new_username: New username?
+        new_username_aria: Enter new username if you wish to change it
+        new_email: New email?
+        new_email_aria: Enter new email address if you wish to change it
+        new_password: New password?
+        new_password_aria: Enter new password if you wish to change it
+        confirm_password: Once more
+        confirm_password_aria: Confirm the password if you wish to change it
+        delete_account: Delete account?
+        delete_account_prompt: Are you sure you want to delete your account? Statistics and awards will be lost!
+        privacy_settings: Privacy settings
+        show_jokes: Show jokes
+        show_awards: Show awards
+        confirm: Confirmation
+        current_password: Current password
+        current_password_aria: Confirm the changes by entering your current password
+        save: Save
+        back: Back
+      # new registration:
+      form: 
+        email: Email
+        email_aria: Email address
+        username: Username
+        username_aria: Username
+        password: Password
+        password_aria: Password (%{min_length} symbols)
+        password_confirm: Once more
+        password_confirm_aria: Confirm password
+        create_account: Create

@@ -57,7 +57,7 @@ ru:
       enter_text_full_for_setup: Введите текст развязки к шутке
       done: Готово
     suggestion_form:
-      ask_ai: Придумать
+      ask_ai: Подсказка
     jokes_container:
       vote: Проголосовать
       revote: Переголосовать

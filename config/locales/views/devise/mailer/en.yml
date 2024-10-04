@@ -1,0 +1,20 @@
+en:
+  devise:
+    mailer:
+      shared:
+        hello: Hi %{username}!
+        sign_off: Kind regards,
+        signature: Finejoke
+      confirmation_instructions:
+        welcome: Welcome %{username}!
+        you_can_confirm: "You can confirm your email address by clicking on the following link:"
+        confirm_link: Confirm email
+      email_changed:
+        email_is_being_changed: "Your email is being changed to the following:"
+        email_has_been_changed: "Your email has been changed to the following:"
+      password_change:
+        password_changed: You password has been changed.
+      reset_password_instructions:
+        link_was_requested: "Forgot password? You can change it by clicking on the following link:"
+        reset_link: Reset password
+        ignore: Please, ignore this email if you have not requested the reset. Your password will remain intact.

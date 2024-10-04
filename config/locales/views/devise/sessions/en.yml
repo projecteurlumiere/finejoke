@@ -1,0 +1,10 @@
+en:
+  devise:
+    sessions:
+      form:
+        email: Email
+        email_aria: Email address
+        password: Password
+        password_aria: Password
+        sign_in: Sign in
+        remain_guest: Remain a guest

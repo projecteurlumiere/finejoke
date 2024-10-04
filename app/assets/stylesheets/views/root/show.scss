@@ -11,14 +11,15 @@
     color: var(--white);
   }
 
-  nav {
+  nav,
+  nav > div {
     margin-top: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 1rem;
 
-    div {
+    > div {
       margin-bottom: 2rem;
     }
   }

@@ -1,0 +1,17 @@
+en:
+  devise:
+    passwords:
+      form:
+        email: Email
+        email_aria: Email address
+        restore_password: Reset Password
+        back: I remember now
+      edit:
+        heading: Password reset
+        token_expired: "Password reset token expired. Please, request password reset again"
+        password: New password
+        password_aria: Enter new password (%{min_length} symbols minimum)
+        password_confirm: Once more
+        password_confirm_aria: Confirm password
+        save: Save
+        back: Back

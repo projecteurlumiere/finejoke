@@ -1,0 +1,76 @@
+en:
+  rounds:
+    current_round:
+      # game over: 
+      winner_is: The winner is
+      his_score_is: With the score
+      game_over: Game over
+      congratulations: Congratulations!
+      # ROUND TASK FOR PLAYER:
+      # FOR SETUP:
+      create_setup: Compose a setup
+      create_setup_subheading: A good joke needs a good beginning
+      setup_is_being_created: The player composes a setup
+      setup_is_being_created_subheading: Your turn will be soon
+      # FOR PUNCHLINE:
+      create_punchline: Continue
+      create_punchline_subheading: A good punchline is all you need # unused
+      punchlines_are_being_created: Players write punchlines
+      punchlines_are_being_created_subheading: Vote will commence soon
+      # FOR VOTE:
+      vote_for_joke: Vote
+      # vote_for_joke_subheading: 
+      players_are_voting: Players vote
+      # players_are_voting_subheading:
+      # FOR RESULTS
+      round_results: Results
+      # round_results_subheading:
+      # ROUND TASK FOR VIEWER:
+      viewer:
+        # FOR SETUP:
+        setup_is_being_created: The player composes a setup
+        setup_is_being_created_subheading: Let's hope he comes up with a nice one
+        # FOR PUNCHLINES
+        punchlines_are_being_created: Players compose pucnhlines
+        # punchlines_are_being_created_subheading: 
+        # FOR VOTE
+        players_are_voting: Players are voting
+        vote_for_joke: Vote
+        # players_are_voting_subheading:
+        # FOR RESULTS
+        round_results: Round results
+        # round_results_subheading:
+      anon_host: Mister Host
+      # INPUT:
+      rules: Rules
+      rules_content: Some rules # unused
+      # buttons:
+      start: Start!
+      join: Join
+      back: Back to game
+      skip_results: New round
+      wait: Wait
+      wait_for_new_round: Wait for the next round
+    form:
+      enter_text: Enter text...
+      enter_text_full_for_setup: Enter setup text
+      enter_text_full_for_setup: Enter punchline text
+      done: Done
+    suggestion_form:
+      ask_ai: AI, help me!
+    jokes_container:
+      vote: Vote
+      revote: Revote
+      wait: Wait
+      join: Join
+    joke:
+      anon: Anon
+      anon_host: Mister Host
+    no_jokes:
+      players: Players
+      join_the_game: Join the game
+      and_do_not_play: And do not play! Everyone, laugh now.
+
+
+
+
