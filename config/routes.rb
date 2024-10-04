@@ -24,6 +24,16 @@ Rails.application.routes.draw do
   resource :profile, only: %i[update], as: :self_profile
   devise_scope :user do
     get "profile/edit", to: "devise/registrations#edit", as: :edit_self_profile
+    
+    # prettier paths but still use old helpers:
+    get "/users/sign_in", to: redirect(path: "/sign_in")
+    get "/sign_in", to: "devise/sessions#new"
+    
+    get "users/sign_up", to: redirect(path: "/sign_up")
+    get "/sign_up", to: "devise/registrations#new"
+
+    get "/users/password/new", to: redirect(path: "/forgot_password")
+    get "/forgot_password", to: "devise/passwords#new"
   end
 
   resources :guests, only: %i[create]

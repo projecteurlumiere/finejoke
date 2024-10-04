@@ -5,7 +5,11 @@ class RootController < ApplicationController
     redirect_to_devise if !current_user
   end
 
-  private 
+  private
+
+  def no_authentication_required?
+    true
+  end
 
   def redirect_to_devise
     locale = params.fetch(:locale, I18n.locale)
