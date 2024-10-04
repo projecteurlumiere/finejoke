@@ -1,0 +1,9 @@
+<div id="authentication" class="two-columns" data-controller="scroll" data-action="turbo:frame-load->scroll#scrollToTop">
+  <%= render partial: "devise/shared/log_in_buttons" %>
+
+  <%= content_for(:devise_form) %>
+
+  <%= render partial: "devise/shared/welcome" %>
+
+  <%= render partial: "devise/shared/locale_button" %>
+</div>

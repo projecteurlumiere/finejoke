@@ -1,7 +1,5 @@
-<div id="authentication" class="two-columns">
-  <%= render partial: "devise/shared/log_in_buttons" %>
-
+<% content_for(:devise_form) do %>
   <%= render partial: "form" %>
+<% end %>
 
-  <%= render partial: "root/welcome" %>
-</div>
+<%= render partial: "devise/shared/authentication" %>
