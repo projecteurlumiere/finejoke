@@ -1,7 +1,3 @@
-* {
-  // overflow: visible !important;
-}
-
 button,
 input[type=submit],
 input[type=button],
@@ -54,14 +50,29 @@ input[type=button],
     --color: var(--accent-alert);
   }
 
+  // apparently, these are needed at the devise's root page
   --selected-color: var(--black);
   --selected-bg-color: var(--accent-notice);
   --selected-border-color: var(--selected-bg-color);
+
+  --selected-active-color: var(--accent-notice);
+  --selected-active-bg-color: transparent;
+  --selected-active-border-color: var(--accent-notice);
 
   &.selected {
     color: var(--selected-color);
     background-color: var(--selected-bg-color);
     border-color: var(--selected-border-color);
+
+    &:hover {
+      --color: var(--selected-bg-color);
+    }
+
+    &:active {
+      color: var(--selected-active-color);
+      background-color: var(--selected-active-bg-color);
+      border-color: var(--selected-active-border-color);
+    }
   }
 
   &.secondary {
