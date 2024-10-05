@@ -19,6 +19,7 @@ Rails.application.routes.draw do
 
   post "suggest_setup", to: "suggestions#suggest_setup", as: :suggest_setup
   post "suggest_punchline", to: "suggestions#suggest_punchline", as: :suggest_punchline
+  get "show_quota", to: "suggestions#show_quota", as: :suggestion_quota
 
   resources :profiles, only: %i[show]
   resource :profile, only: %i[update], as: :self_profile

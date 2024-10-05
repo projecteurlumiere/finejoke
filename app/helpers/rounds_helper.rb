@@ -196,7 +196,8 @@ module RoundsHelper
           url: game_round_path(game, round),
           method: :patch,
           id: :"new-setup",
-          text_for: :setup
+          text_for: :setup,
+          suggestion_quota: user.suggestion_quota
       }
     elsif !user.lead? && round.punchline_stage?
       render partial: "rounds/form", 
@@ -207,7 +208,8 @@ module RoundsHelper
           url: game_round_jokes_path(game, round),
           method: :create,
           id: :"new-joke",
-          text_for: :punchline
+          text_for: :punchline,
+          suggestion_quota: user.suggestion_quota
         }
     end
   end

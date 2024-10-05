@@ -5,6 +5,21 @@ module Users
     included do 
       belongs_to :game, optional: true
 
+      def reset_game_attributes
+        self.update({ 
+          game_id: nil,
+          host: false,
+          hot_join: false,
+          lead: false,
+          voted: false,
+          finished_turn: false,
+          wants_to_skip_results: false,
+          current_score: 0,
+          suggestion_quota: 5,
+          suggestions: []
+        })
+      end
+
       def playing?(given_game_or_round)
          joined?(given_game_or_round) && !hot_join?
       end
@@ -47,20 +62,6 @@ module Users
       def voted!
         update_attribute(:voted, true)
         broadcast_vote_finished
-      end
-
-      def reset_game_attributes
-        self.update({ 
-          game_id: nil,
-          host: false,
-          hot_join: false,
-          lead: false,
-          voted: false,
-          finished_turn: false,
-          wants_to_skip_results: false,
-          current_score: 0,
-          suggestions: []
-        })
       end
     end
   end

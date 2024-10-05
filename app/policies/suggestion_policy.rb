@@ -4,7 +4,7 @@ class SuggestionPolicy < ApplicationPolicy
   def initialize(user, suggestion)
     @user = user
     @suggestion = suggestion
-    @game = @suggestion.game
+    @game = @suggestion.try(:game)
   end
 
   def suggest_setup?
@@ -15,6 +15,11 @@ class SuggestionPolicy < ApplicationPolicy
     ai_allowed? && @user&.playing?(@game) && @game&.current_round.punchline_stage?
   end
 
+  # it gets additionally authorized in the respective controller. careful!
+  def show_quota?
+    true
+  end
+  
   private 
 
   def ai_allowed?

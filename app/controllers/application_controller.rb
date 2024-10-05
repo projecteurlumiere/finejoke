@@ -23,6 +23,10 @@ class ApplicationController < ActionController::Base
     devise_controller? || current_user || guest_welcomed?
   end
 
+  def authentication_required_for_ai?
+    ENV.fetch("ENABLE_AUTHENTICATION_FOR_AI", "").present?
+  end
+
   def guest_welcomed?
     session[:guest_welcomed]
   end

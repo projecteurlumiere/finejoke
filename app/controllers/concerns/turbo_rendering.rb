@@ -33,6 +33,10 @@ module TurboRendering
       raise ActionController::UnknownFormat unless request.formats.include?(:turbo_stream)
     end
 
+    def verify_turbo_frame_format
+      raise ActionController::UnknownFormat unless turbo_frame_request?
+    end
+
     def turbo_redirect?
       @turbo_redirect
     end

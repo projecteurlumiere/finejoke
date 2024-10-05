@@ -6,6 +6,25 @@
 
     @media(max-height: 550px) {
       gap: 0.5rem;
-    } 
+    }
+
+    .suggestion-wrapper {
+      .submit-wrapper {
+        position: relative;
+        
+        #suggestion-quota {
+          position: absolute;
+
+          font-family: var(--press-start-2p);
+
+          right: 10%;
+          top: 0;
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+    }
   }
 }

@@ -7,6 +7,7 @@ export default class extends Controller {
     "userInput", "suggestionFormInput",
     "userSubmit", "suggestionSubmit",
     "form",
+    "quota",
     "response"
   ]
 
@@ -18,6 +19,11 @@ export default class extends Controller {
     if (!this.hasUserInputTarget) return
 
     this.#cloneInput();
+  }
+
+  quotaTargetConnected(el) {
+    if (this.typed) return
+    this.#checkSuggestionSubmit()
   }
 
   inputTargetConnected() {
@@ -68,10 +74,23 @@ export default class extends Controller {
 
   #toggleInput(directive) {
     const action = directive === "disable" ? true : false;
+    const inputs = [this.userInputTarget, this.userSubmitTarget, this.suggestionSubmitTarget]
 
-    [this.userInputTarget, this.userSubmitTarget, this.suggestionSubmitTarget].forEach((el) => {
-      el.disabled = action
+    inputs.forEach((el) => {
+      if (action === false && el === this.suggestionSubmitTarget) {
+        this.#checkSuggestionSubmit()
+      } else {
+        el.disabled = action
+      }
     })
+  }
+
+  #checkSuggestionSubmit() {
+    if (this.quotaTarget.innerHTML.trim() === "0") {
+      this.suggestionSubmitTarget.disabled = true
+    } else {
+      this.suggestionSubmitTarget.disabled = false
+    }
   }
 
   #cloneInput() {

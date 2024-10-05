@@ -1,5 +1,5 @@
-<% if game.ai_allowed? %>
-  <div class="suggest-wrapper">
+<% if game.suggestable? %>
+  <div class="suggestion-wrapper">
     <% path = if suggestion_for == :setup %>
                 <% suggest_setup_path %>
               <% elsif suggestion_for == :punchline %>
@@ -20,7 +20,11 @@
       <%= f.hidden_field :user_input, name: "suggestion[user_input]", 
         data: { suggestion_target: "suggestionFormInput" } %>
     <% end %>
-    <input type="submit" form="new-suggestion" value="<%= t(:".ask_ai") %>" data-suggestion-target="suggestionSubmit">
+    <div class="submit-wrapper">
+      <input type="submit" disabled="true" form="new-suggestion" value="<%= t(:".ask_ai") %>" data-suggestion-target="suggestionSubmit">
+      <%# the following is requested lazily so that there is no need to modify caching rules %>
+      <turbo-frame id="suggestion-quota-frame" src="<%= suggestion_quota_path %>"></turbo-frame>
+    </div>
     <div id="suggestion-response" style="height: 0; width: 0; overflow: hidden;"></div>
   </div>
 <% end %>

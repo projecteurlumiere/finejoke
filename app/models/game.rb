@@ -140,6 +140,7 @@ class Game < ApplicationRecord
       wants_to_skip_results: false,
       lead: false,
       voted: false,
+      suggestion_quota: 5,
       suggestions: []
     )
   end

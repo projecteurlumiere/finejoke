@@ -13,7 +13,8 @@ class CreateGames < ActiveRecord::Migration[7.1]
 
       t.boolean :private, null: false, default: false
       t.boolean :viewable, null: false, default: true
-      t.boolean :suggestable, null: false, default: true
+      # defined later in add_ai_suggestions
+      # t.boolean :suggestable, null: false, default: true
       t.boolean :viewers_vote, null: false, default: false
 
       t.integer :status, null: false, default: 0

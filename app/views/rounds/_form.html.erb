@@ -25,8 +25,10 @@
     data-input="<%= :"#{model.class.to_s.downcase}_#{text_for}" %>"></div>
 
   <% content_for(:action) do %>
-    <%= render partial: "rounds/suggestion_form", 
-      locals: { game:, round:, suggestion_for: text_for } %>
+    <% if game.suggestable? && Suggestion.enabled? %>
+      <%= render partial: "rounds/suggestion_form", 
+        locals: { game:, round:, suggestion_quota:, suggestion_for: text_for } %>
+    <% end %>
     <input type="submit" form="<%= id %>" value="<%= t(:".done") %>" 
       data-suggestion-target="userSubmit">
   <% end %>

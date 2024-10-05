@@ -48,6 +48,7 @@ class Suggestion < ApplicationRecord
     self.context = round&.setup
   }, if: :new_record?
 
+  before_create :charge_user, unless: :force_creation
   before_create :generate
 
   after_create :add_suggestion_to_user
@@ -64,8 +65,8 @@ class Suggestion < ApplicationRecord
     user&.lead?
   end
 
-  def user_can_afford?
-    user&.enough_credits?(price: 1)
+  def charge_user
+    user.decrement!(:suggestion_quota)
   end
 
   def generate

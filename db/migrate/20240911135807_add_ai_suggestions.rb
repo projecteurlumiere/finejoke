@@ -1,10 +1,9 @@
 class AddAiSuggestions < ActiveRecord::Migration[7.1]
   def change
-    add_column :games, :ai_allowed, :boolean, default: true
+    add_column :games, :suggestable, :boolean, null: false, default: true
 
     change_table :users, bulk: true do |t|
-      t.integer :credits, null: false, default: 0
-      t.datetime :unlimited_credits_deadline
+      t.integer :suggestion_quota, default: 5, null: false
 
       t.integer :suggestions, array: true, null: false, default: []
     end

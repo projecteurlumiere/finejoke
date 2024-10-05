@@ -38,18 +38,6 @@ class User < ApplicationRecord
     started_jokes.or(finished_jokes)
   end
 
-  def pay(price:) 
-    return unless enough_credits?(price:)
-
-    unlimited_credits_deadline&.>(Time.now) || decrement!(:credits, price)
-  end
-
-  def enough_credits?(price:)
-    ENV["FREE_AI"].present? ||
-      unlimited_credits_deadline&.>(Time.now) ||
-      credits >= price 
-  end
-
   def to_s
     username
   end

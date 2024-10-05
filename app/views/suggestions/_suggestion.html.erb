@@ -6,4 +6,10 @@
   <% end %>
 <% end %>
 
+<% if @suggestion.output %>
+  <%= turbo_stream.replace("suggestion-quota") do %>
+    <%= render partial: "suggestions/quota", locals: { quota: current_or_guest_user.suggestion_quota } %>
+  <% end %>
+<% end %>
+
 <%= render_turbo_flash %>
