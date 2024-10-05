@@ -12,9 +12,10 @@ module Games
       after_save :virtual_host_takes_mic
 
       def invite_host
-        return if ::VirtualHost.where(locale: locale)
-                             .where.not(game_id: nil)
-                             .count >= 1
+        return if ::VirtualHost.disabled? ||
+                  ::VirtualHost.where(locale: locale)
+                               .where.not(game_id: nil)
+                               .count >= 1
         
         self.virtual_host = ::VirtualHost.new(locale:)
         save!

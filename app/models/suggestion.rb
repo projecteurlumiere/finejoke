@@ -1,7 +1,12 @@
 class Suggestion < ApplicationRecord
   include Localizable
+  include Disableable
 
+  # when disabled, suggestions won't be visible & won't pass pundit check
+  DISABLEABLE_KEY = "DISABLE_SUGGESTION".freeze
+  
   has_and_belongs_to_many :jokes, dependent: :nullify
+
 
   SETUP_MAX_TOKENS = Joke::SETUP_MAX_LENGTH / 4 * 3
   PUNCHLINE_MAX_TOKENS = Joke::PUNCHLINE_MAX_LENGTH / 4 * 3

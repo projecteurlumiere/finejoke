@@ -42,8 +42,10 @@ env:
     - RAILS_MASTER_KEY
     - POSTGRES_PASSWORD
     - OPENAI_ACCESS_TOKEN
-    - FREE_AI
     - HOST_NAME
+    - DISABLE_SUGGESTION
+    - DISABLE_VIRTUAL_HOST
+    - ENABLE_AUTHENTICATION_FOR_AI
 
 # Use accessory services (secrets come from .env).
 accessories:

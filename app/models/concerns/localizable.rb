@@ -12,4 +12,3 @@ module Localizable
     end
   end
 end
-

@@ -1,5 +1,9 @@
 class VirtualHost < ApplicationRecord
   include Localizable
+  include Disableable
+
+  # when disabled, virtual host won't get created in the game#invite_virtual_host method
+  DISABLEABLE_KEY = "DISABLE_VIRTUAL_HOST".freeze
 
   belongs_to :game, optional: true
   has_many :prompts
