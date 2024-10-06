@@ -10,7 +10,7 @@ class Message
   def broadcast
     game.broadcast_message(text, from: user)
 
-    return true unless game.virtual_host.present? && text.start_with?(I18n.t(:"message.virtual_host_address"))
+    return true unless game.virtual_host.present? && text.downcase.start_with?(I18n.t(:"message.virtual_host_address").downcase)
 
     ReplyJob.perform_later(game.virtual_host.id, user.username, text)
   end
