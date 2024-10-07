@@ -46,7 +46,7 @@ export default class extends Controller {
   }
 
   #addDisabled(){
-    this.connectTarget.classList.add("disabled");
+    this.connectTarget.disabled = true;
     this.viewTarget.classList.add("disabled");
   }
 }
