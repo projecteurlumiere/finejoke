@@ -80,7 +80,7 @@ class ProfilesController < ApplicationController
     else 
       params[:property] = nil
       @user.jokes
-    end
+    end.where(locale: I18n.locale)
   end
 
   def set_order(property)
