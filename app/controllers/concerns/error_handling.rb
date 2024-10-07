@@ -2,9 +2,9 @@ module ErrorHandling
   extend ActiveSupport::Concern
   
   included do
-    rescue_from Pundit::NotAuthorizedError, with: :render_not_authorized
-    rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
-    rescue_from ActionController::UnknownFormat, with: :render_unknown_format
+    # rescue_from Pundit::NotAuthorizedError, with: :render_not_authorized
+    # rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
+    # rescue_from ActionController::UnknownFormat, with: :render_not_acceptable
 
     private
 
@@ -30,11 +30,11 @@ module ErrorHandling
       end
     end
 
-    def render_unknown_format
-      response.status = :unsupported_media_type
+    def render_not_acceptable
+      response.status = :not_acceptable
       flash.now[:alert] ||= t(:"application.unknown_format")
 
-      render "errors/message", locals: { code: 415 }
+      render "errors/message", locals: { code: 406 }
     end
 
     def render_internal_server_error

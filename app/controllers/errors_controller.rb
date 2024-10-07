@@ -7,11 +7,11 @@ class ErrorsController < ApplicationController
 
   def not_authorized; end
 
-  def unknown_format; end
+  def not_acceptable; end
 
   def internal_server_error; end
 
-  private 
+  private
 
   def no_authentication_required?
     true
