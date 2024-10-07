@@ -4,6 +4,9 @@ module Users
 
     included do 
       belongs_to :game, optional: true
+      
+      # Do not check bans via association commands. only via Ban class methods!
+      has_many :bans, dependent: :destroy
 
       def reset_game_attributes
         self.update({ 

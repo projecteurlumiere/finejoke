@@ -25,7 +25,7 @@ class GamePolicy < ApplicationPolicy
   end
 
   def join?
-    @user &&
+    @user && has_no_ban?(@user, @game) &&
       @game.joinable?(by: @user)
   end
 
@@ -44,5 +44,12 @@ class GamePolicy < ApplicationPolicy
 
   def game_over?
     true
+  end
+
+  private 
+
+  def has_no_ban?(user, game)
+    !(Ban.user_banned_from_joining_games?(user) ||
+      Ban.user_banned_in_game?(user, game))
   end
 end

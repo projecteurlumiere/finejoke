@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_18_111713) do
+ActiveRecord::Schema[7.1].define(version: 2024_10_05_132159) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -23,6 +23,19 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_18_111713) do
     t.integer "locale", default: 0, null: false
     t.index ["present_id"], name: "index_awards_on_present_id"
     t.index ["user_id"], name: "index_awards_on_user_id"
+  end
+
+  create_table "bans", force: :cascade do |t|
+    t.string "game_id"
+    t.bigint "user_id"
+    t.string "ip"
+    t.integer "n_times_kicked", default: 1
+    t.boolean "enforced", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_bans_on_game_id"
+    t.index ["ip"], name: "index_bans_on_ip"
+    t.index ["user_id"], name: "index_bans_on_user_id"
   end
 
   create_table "games", id: :string, force: :cascade do |t|
@@ -199,6 +212,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_18_111713) do
 
   add_foreign_key "awards", "presents"
   add_foreign_key "awards", "users"
+  add_foreign_key "bans", "games"
+  add_foreign_key "bans", "users"
   add_foreign_key "games", "users", column: "host_id"
   add_foreign_key "games", "users", column: "winner_id"
   add_foreign_key "jokes", "rounds"

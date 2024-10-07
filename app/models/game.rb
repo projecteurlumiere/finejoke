@@ -5,6 +5,7 @@ class Game < ApplicationRecord
   include Games::VirtualHost
 
   has_many :users, dependent: :nullify # players
+  has_many :bans, dependent: :nullify
   belongs_to :winner, required: false, class_name: :User
 
   belongs_to :host, class_name: :User
@@ -103,7 +104,12 @@ class Game < ApplicationRecord
     return false
   end
 
-  alias_method :kick_user, :remove_user
+  def kick_user(user)
+    transaction do
+      Ban.issue(user, self)
+      remove_user(user)
+    end
+  end
 
   def integrate_hot_joined
     users.update_all(hot_join: false)

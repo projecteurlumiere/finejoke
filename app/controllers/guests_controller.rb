@@ -5,6 +5,7 @@ class GuestsController < ApplicationController
 
     session[:guest_welcomed] = true
     flash[:notice] = t(:".you_are_guest")
+    current_or_guest_user.update_tracked_fields!(request)
     redirect_to params[:referrer] === root_path ? games_path : params[:referrer]
   end
 
