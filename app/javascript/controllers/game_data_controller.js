@@ -82,16 +82,24 @@ export default class extends Controller {
     }, "2000");
   }
 
+  // checks whether or not to show the host button
   userTargetConnected(node) {
-    if (node.dataset.id == this.idValue) {
+    if (node.dataset.id === this.idValue) {
       this.hostValue = node.dataset.host
-    } else if (this.hostValue == true) {
+
+      if (this.hostValue === true) {
+        for (var i = this.userTargets.length - 1; i >= 0; i--) {
+          if (this.userTargets[i] === node) continue
+          this.#hostButtons("show", this.userTargets[i]) 
+        }
+      }
+    } else if (this.hostValue === true) {
       this.#hostButtons("show", node)
     }     
   }
 
   userTargetDisconnected(node) {
-    if (node.dataset.id == this.idValue) this.hostValue = false 
+    if (node.dataset.id === this.idValue) this.hostValue = false 
   }
 
   #hostValueChanged() {
