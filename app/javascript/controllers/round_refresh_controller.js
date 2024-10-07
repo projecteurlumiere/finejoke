@@ -35,7 +35,6 @@ export default class extends Controller {
     const stream = e.detail.newStream.querySelector("template").content;
     const incomingRoundAttr = stream.querySelector("#current-round > div");
 
-
     if (this.#attributesEqual(presentRoundAttr, incomingRoundAttr)) {
       e.preventDefault()
     }
@@ -46,7 +45,6 @@ export default class extends Controller {
     const incomingHash = this.#digest(incomingRoundAttr.outerHTML.replace(/\n/g, ''))
 
     presentHash === incomingHash
-    
   }
 
   // // this is async digest using browser's in-built crypto api  

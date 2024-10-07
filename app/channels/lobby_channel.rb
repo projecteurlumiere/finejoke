@@ -1,6 +1,8 @@
 class LobbyChannel < ApplicationCable::Channel
   def subscribed
-    stream_from "lobby"
+    latest_locale = User.where(id: current_or_guest_user.id).pluck(:locale)[0]
+
+    stream_from "lobby_#{latest_locale}"
   end
 
   def unsubscribed

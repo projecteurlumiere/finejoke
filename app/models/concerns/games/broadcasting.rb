@@ -8,6 +8,10 @@ module Games
         GameChannel.broadcasting_for(self)
       end
 
+      def lobby_stream_name
+        "lobby_#{locale}"
+      end
+
       def broadcast_current_round
         broadcast_round(current_round)
       end
@@ -59,11 +63,11 @@ module Games
       end
 
       def broadcast_create_to_lobby
-        broadcast_prepend_later_to "lobby", partial: "games/game_entry"
+        broadcast_prepend_later_to lobby_stream_name, partial: "games/game_entry"
       end
       
       def broadcast_remove_to_lobby
-        broadcast_remove_to "lobby"
+        broadcast_remove_to lobby_stream_name
       end
     end
   end
