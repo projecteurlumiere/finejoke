@@ -44,9 +44,14 @@ class SuggestionsController < ApplicationController
   # this is done because there is no neat way to specify custom error messages from
   # pundit's poolicies
   def authenticate_for_ai
-    return if current_user
+    return if current_user&.confirmed?
 
-    flash.now[:alert] = t :"devise.failure.unauthenticated"
+    if current_user
+      flash.now[:alert] = t :"devise.failure.unconfirmed"
+    else
+      flash.now[:alert] = t :"devise.failure.unauthenticated"
+    end
+
     raise Pundit::NotAuthorizedError
   end
 end

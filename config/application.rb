@@ -53,5 +53,6 @@ module Finejoke
     config.active_storage.service = :local
     
     config.exceptions_app = self.routes
+    config.action_dispatch.rescue_responses["Pundit::NotAuthorizedError"] = :forbidden
   end
 end
