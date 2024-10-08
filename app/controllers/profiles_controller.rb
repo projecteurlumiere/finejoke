@@ -1,9 +1,10 @@
 class ProfilesController < ApplicationController
   before_action :set_user, except: %i[show]
-  before_action :authorize_user_profile!, except: %i[update]
+  before_action :authorize_user_profile!
 
   def show
     @user = params[:id].nil? ? set_user : User.find(params[:id])
+    @title_vars = { username: @user.username }
     
     set_jokes
 
@@ -13,22 +14,6 @@ class ProfilesController < ApplicationController
       else
         format.turbo_stream
       end
-    end
-  end
-
-  def edit
-  end
-
-  # creates game
-  def update
-    authorize_user_profile!
-
-    if @user.update(profile_params)
-      flash[:notice] = t(:".profile_updated")
-      redirect_to profile_path(@user)
-    else
-      flash[:alert] = t(:".profile_not_updated")
-      render :edit, status: :unprocessable_entity
     end
   end
 

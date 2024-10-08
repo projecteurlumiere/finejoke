@@ -12,6 +12,7 @@ class ApplicationController < ActionController::Base
   before_action :relog_guest, if: :guest_session_expired?
   before_action :authenticate_user!, unless: %i[no_authentication_required?] 
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :set_title_key
   after_action :verify_authorized, unless: :devise_controller?
   after_action :remove_referrer, unless: %i[devise_controller? new_guest?]
 
@@ -30,6 +31,7 @@ class ApplicationController < ActionController::Base
     ENV.fetch("ENABLE_AUTHENTICATION_FOR_AI", "").present?
   end
 
+  # for authentication-related redirection
   def store_referrer
     session[:referrer] = request.path
   end
@@ -49,5 +51,12 @@ class ApplicationController < ActionController::Base
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:username])
     devise_parameter_sanitizer.permit(:account_update, keys: %i[username email show_awards_allowed show_jokes_allowed locale])
+  end
+
+  # if translation exists - sets custom title 
+  # or fallbacks to the default in ApplicationHelper#set_title
+  def set_title_key
+    key = :"#{controller_name}.#{action_name}_title"
+    @title_key = key if I18n.exists?(key)
   end
 end

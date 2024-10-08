@@ -34,4 +34,10 @@ module ApplicationHelper
       time.day.to_s.rjust(2, "0")
     ].join(".")
   end
+
+  # see application#set_title_key
+  def set_title
+    return t(:".title") if @title_key.blank?
+    "#{t(@title_key, **(@title_vars || {}))} | #{t :".title"}"
+  end
 end

@@ -32,7 +32,7 @@ module ErrorHandling
 
     def render_not_acceptable
       response.status = :not_acceptable
-      flash.now[:alert] ||= t(:"application.unknown_format")
+      flash.now[:alert] ||= t(:"application.unacceptable")
 
       render "errors/message", locals: { code: 406 }
     end

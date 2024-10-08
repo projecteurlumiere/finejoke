@@ -48,16 +48,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
       set_minimum_password_length
       render :edit
     end
-
-    # if resource.update_with_password(devise_parameter_sanitizer.sanitize(:account_update))
-    #   # flash[:notice] = "Изменения сохранены"
-    #   bypass_sign_in resource, scope: resource_name if sign_in_after_change_password?
-    #   turbo_redirect_to edit_self_profile_path
-    # else
-    #   # flash.now[:alert] = "Изменения не были сохранены"
-    #   response.status = :unprocessable_entity
-    #   render :edit
-    # end 
   end
 
   # DELETE /resource

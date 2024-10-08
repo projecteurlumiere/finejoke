@@ -22,7 +22,6 @@ Rails.application.routes.draw do
   get "show_quota", to: "suggestions#show_quota", as: :suggestion_quota
 
   resources :profiles, only: %i[show]
-  resource :profile, only: %i[update], as: :self_profile
   devise_scope :user do
     get "profile/edit", to: "devise/registrations#edit", as: :edit_self_profile
     

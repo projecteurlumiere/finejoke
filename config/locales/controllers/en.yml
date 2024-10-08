@@ -3,7 +3,7 @@ en:
     welcome_guest: Log in or be our guest
     not_found: Not found
     forbidden: You have no rights to perform this action
-    unknown_format: Wrong request format
+    unacceptable: Unacceptable format requested
     internal_server_error: Something went wrong
   guests:
     you_are_guest: You have logged in as a guest
@@ -11,6 +11,8 @@ en:
     award_given: Award given
     award_not_given: "Failed to give an award"
   games:
+    index_title: Lobby
+    show_title: In Game
     cannot_show_game: The game is not viewable
     game_created: Your game has been created
     game_created_with_virtual_host: Your game has been created, and Mister Host will attend
@@ -33,9 +35,8 @@ en:
   messages:
     message_sent: Your message has been sent
     message_not_sent: Failed to send a message
-  profile:
-    profile_updated: Profile settings have been updated and saved
-    profile_not_updated: Failed to save new profile settings
+  profiles:
+    show_title: "%{username} Profile"
   rounds:
     round_created: Round created # game starts/continues?
     round_not_created: Failed to create a round # game failed to start/continue?
@@ -47,3 +48,25 @@ en:
     setup_not_suggested: Failed to receive setup suggestion
     punchline_suggested: Punchline suggestion has been received
     punchline_not_suggested: Failed to receive punchline suggestion
+  confirmation:
+    # new_title: Resend Confirmation Letter
+    # show_title: Email Confirmation
+  passwords:
+    new_title: Reset Password
+    edit_title: Reset Password
+  registrations:
+    new_title: Sign Up
+    edit_title: Edit Profile
+  sessions:
+    new_title: Log In
+  # unlocks:
+    # new: 
+    # show:
+  errors:
+    not_found_title: 404 Not Found
+    not_authorized_title: 403 Not Authorized
+    not_acceptable_title: 406 Not Acceptable
+    internal_server_error_title: 500 Internal Server Error
+  root:
+    show_title: Menu
+
