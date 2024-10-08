@@ -7,8 +7,8 @@
     font-size: var(--global-font-size);
   }
 
-  --nunito-sans: "Nunito Sans", system-ui;
-  --press-start-2p: "Press Start 2P", system-ui;
+  --nunito-sans: "Nunito Sans", "Segoe UI", "Arial", system-ui;
+  --press-start-2p: "Press Start 2P", "Segoe UI Black", "Arial Black", system-ui;
 }
 
 @media (max-width: 375px) {
