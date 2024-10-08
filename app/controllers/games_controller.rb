@@ -26,6 +26,8 @@ class GamesController < ApplicationController
       flash[:alert] = t(:".cannot_show_game")
       redirect_to games_path
     end
+
+    @title_vars = { game_name: @game.name }
   end
   
   # creates game

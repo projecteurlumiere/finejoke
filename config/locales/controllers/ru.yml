@@ -11,6 +11,8 @@ ru:
     award_given: Подарок подарен
     award_not_given: "Подарок не удалось подарить"
   games:
+    index_title: Лобби
+    show_title: Игра %{game_name}
     cannot_show_game: Игру нельзя смотреть
     game_created: Игра создана
     game_created_with_virtual_host: Игра создана и господин ведущий будет на месте
@@ -33,9 +35,8 @@ ru:
   messages:
     message_sent: Сообщение отправлено
     message_not_sent: Сообщение не отправлено
-  profile:
-    profile_updated: Настройки профиля сохранены
-    profile_not_updated: Настройки профиля не были сохранены
+  profiles:
+    show_title: "Профиль %{username}"
   rounds:
     round_created: Раунд создан # игра началась/продолжилась?
     round_not_created: Раунд не создан # игра не началась и не продолжилась?
@@ -47,3 +48,24 @@ ru:
     setup_not_suggested: Подсказка-завязка не была получена
     punchline_suggested: Подсказка-развязка получена
     punchline_not_suggested: Подсказка-развязка не была получена
+  confirmation:
+    # new_title: Resend Confirmation Letter
+    # show_title: Email Confirmation
+  passwords:
+    new_title: Восстановление пароля
+    edit_title: Восстановление пароля
+  registrations:
+    new_title: Регистрация
+    edit_title: Редактировать профиль
+  sessions:
+    new_title: Вход
+  # unlocks:
+    # new: 
+    # show:
+  errors:
+    not_found_title: 404 Не найдено
+    not_authorized_title: 403 Нет прав
+    not_acceptable_title: 406 Недопустимый формат
+    internal_server_error_title: 500 Что-то пошло не так
+  root:
+    show_title: Меню

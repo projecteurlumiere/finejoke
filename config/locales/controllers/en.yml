@@ -12,7 +12,7 @@ en:
     award_not_given: "Failed to give an award"
   games:
     index_title: Lobby
-    show_title: In Game
+    show_title: In Game %{game_name}
     cannot_show_game: The game is not viewable
     game_created: Your game has been created
     game_created_with_virtual_host: Your game has been created, and Mister Host will attend
