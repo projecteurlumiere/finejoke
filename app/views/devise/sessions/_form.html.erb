@@ -1,12 +1,15 @@
-<turbo-frame id="authentication-form">
+<turbo-frame aria-labelledby="sign-in-button" id="authentication-form">
   <%= form_for(resource, as: resource_name, url: session_path(resource_name), 
-    html: { id: "new-session", class: "new-session" }) do |f| %>
+    html: { 
+      :"aria-label" => t(:".form_aria"),
+      id: "new-session", 
+      class: "new-session" }) do |f| %>
     <%# render "devise/shared/error_messages", resource: resource %>
     <div>
       <%= f.email_field :email, 
         autocomplete: "email", 
         placeholder: t(:".email"), 
-        aria_label: t(:".email_aria"), 
+        :"aria-label" => t(:".email_aria"), 
         required: true %>
       <%= render_errors(resource, :email) %>
     </div>
@@ -14,7 +17,7 @@
       <%= f.password_field :password, 
         autocomplete: "current-password", 
         placeholder: t(:".password"), 
-        aria_label: t(:".password_aria"), 
+        :"aria-label" => t(:".password_aria"), 
         required: true, 
         maxlength: 128 %>
       <%= render_errors(resource, :password) %>

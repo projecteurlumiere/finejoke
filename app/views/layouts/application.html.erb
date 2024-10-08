@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="<%= I18n.locale %>">
   <head>
+    <meta charset="utf-8"> 
     <title>
       <%= t(:".title") %>
     </title>
-    <meta charset="utf-8"> 
+    <meta name="decription" content="<%= t(:".description") %>">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-prefetch" content="false">
     <meta name="turbo-cache-control" content="no-cache">
@@ -16,7 +17,6 @@
     <%= javascript_importmap_tags %>
     <%= turbo_stream_from ["user", current_or_guest_user], channel: UserChannel unless new_guest? %>
   </head>
-
   <body>
     <header>
       <%= render partial: "layouts/navbar" %>

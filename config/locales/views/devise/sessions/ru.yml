@@ -2,6 +2,7 @@ ru:
   devise:
     sessions:
       form:
+        form_aria: Форма входа в аккаунт
         email: Эмейл
         email_aria: Электронная почта
         password: Пароль

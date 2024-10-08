@@ -2,6 +2,7 @@ en:
   devise:
     sessions:
       form:
+        form_aria: Log in form
         email: Email
         email_aria: Email address
         password: Password

@@ -10,7 +10,7 @@
               ) do |form| %>
   <div class="message-input">
     <%= form.text_field :text, class: "nunito-font", 
-      aria_label: t(:".message_text"), 
+      :"aria-label" => t(:".message_text"), 
       placeholder:t(:".hello"), 
       autocomplete: :off,
       required: true,
@@ -22,6 +22,6 @@
 
 <%#     <%= form.submit type: :image, 
       src: asset_path("icons/send-message.svg"), 
-      aria_label: t(:".send_message") %>
+      :"aria-label" => t(:".send_message") %>
   </div> 
 <% end %>

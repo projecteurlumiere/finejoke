@@ -1,7 +1,8 @@
 <div id="authentication" class="two-columns" data-controller="scroll" data-action="turbo:frame-load->scroll#scrollToTop">
-  <%= render partial: "devise/shared/log_in_buttons" %>
-
-  <%= content_for(:devise_form) %>
+  <section class="authentication-wrapper" aria-label="<%= t :".authentication" %>">
+    <%= render partial: "devise/shared/log_in_buttons" %>
+    <%= content_for(:devise_form) %>
+  </section>
 
   <%= render partial: "devise/shared/welcome" %>
 

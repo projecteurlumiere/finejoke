@@ -2,15 +2,8 @@
   <%= content_for(:nav_button) do %>
     <%= link_to t(:".to_lobby"), games_path, class: "button secondary" %>
   <% end %>
+  <%= render partial: "mobile_navigation" %>
+
   <%= render partial: "catalogue", locals: { user: @user, jokes: @jokes } %>
   <%= render partial: "summary", locals: { user: @user, current_or_guest_user: current_or_guest_user } %>
-
-  <div class="buttons-container mobile-navigation">
-    <a class="button" data-containers-target="button" data-container-name="catalogue" data-action="click->containers#show">
-      <%= t(:".jokes") %>
-    </a>
-    <a class="button selected" data-containers-target="button" data-container-name="summary" data-action="click->containers#show">
-      <%= t(:".profile") %>
-    </a>
-  </div>
 </div>

@@ -30,5 +30,8 @@ ru:
       sign_out: Выход
       sign_out_confirm: Вы уверены, что хотите выйти из аккаунта?
       sign_up: Регистрация
+    mobile_navigation:
+      jokes: Шутки
+      profile: Профиль
 
 

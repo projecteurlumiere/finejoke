@@ -1,0 +1,5 @@
+ru:
+  locale:
+    edit:
+      form_aria: Изменить язык
+      select_aria: Выбор языка

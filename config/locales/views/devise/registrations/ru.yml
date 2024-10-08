@@ -28,12 +28,13 @@ ru:
         privacy_settings: Приватность профиля
         show_jokes: Показывать шутки
         show_awards: Показывать награды
-        confirm: Подтверждение
-        current_password: Нынешний пароль
+        confirm: Подтвердите изменения действующим паролем
+        current_password: Пароль
         current_password_aria: Подтвердите изменения действующим паролем
         save: Сохранить
         back: Назад
       form:
+        form_aria: Форма создания нового аккаунта
         email: Эмейл
         email_aria: Электронный адрес
         username: Имя

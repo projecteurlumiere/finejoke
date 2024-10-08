@@ -1,6 +1,8 @@
 ru:
   devise:
     shared:
+      authentication: 
+        authentication: Authentication
       links:
         forgot_password: Забыли пароль?
       log_in_buttons:

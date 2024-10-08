@@ -29,19 +29,20 @@ en:
         privacy_settings: Privacy settings
         show_jokes: Show jokes
         show_awards: Show awards
-        confirm: Confirmation
-        current_password: Current password
+        confirm: Confirm the changes by entering your current password
+        current_password: Password
         current_password_aria: Confirm the changes by entering your current password
         save: Save
         back: Back
       # new registration:
       form: 
+        form_aria: New account form
         email: Email
         email_aria: Email address
         username: Username
         username_aria: Username
         password: Password
-        password_aria: Password (%{min_length} symbols)
+        password_aria: Password (%{min_length} symbols minimum)
         password_confirm: Once more
         password_confirm_aria: Confirm password
         create_account: Create

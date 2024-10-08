@@ -1,11 +1,15 @@
-<turbo-frame id="authentication-form">
-  <%= form_for(resource, url: registration_path(resource_name), html: { id: "new-registration", class: "new-registration" }) do |f| %>
+<turbo-frame aria-labelled-by="sign-up-button" id="authentication-form">
+  <%= form_for(resource, url: registration_path(resource_name), 
+    html: { 
+      id: "new-registration",
+      :"aria-label" => t(:".form_aria"), 
+      class: "new-registration" }) do |f| %>
     <%# render "devise/shared/error_messages", resource: resource %>
     <div>
       <%= f.email_field :email, 
         autocomplete: "email", 
         placeholder: t(:".email"), 
-        aria_label: t(:".email_aria"), 
+        :"aria-label" => t(:".email_aria"), 
         required: true %>
       <%= render_errors(resource, :email) %>
     </div>
@@ -14,7 +18,7 @@
       <%= f.text_field :username, 
         autocomplete: "username", 
         placeholder: t(:".username"), 
-        aria_label: t(:".username_aria"), 
+        :"aria-label" => t(:".username_aria"), 
         required: true,
         minlength: 1, 
         maxlength: 14 %>
@@ -25,7 +29,7 @@
       <%= f.password_field :password, 
           autocomplete: "new-password", 
           placeholder: t(:".password"), 
-          aria_label: t(:".password_aria", min_length: @minimum_password_length),
+          :"aria-label" => t(:".password_aria", min_length: @minimum_password_length),
           required: true,
           minlength: @minimum_password_length %>
       <%= render_errors(resource, :password) %>
@@ -35,7 +39,7 @@
       <%= f.password_field :password_confirmation, 
         autocomplete: "new-password", 
         placeholder: t(:".password_confirm"), 
-        aria_label: t(:".password_confirm_aria"),
+        :"aria-label" => t(:".password_confirm_aria"),
         required: true,
         minlength: @minimum_password_length %>
       <%= render_errors(resource, :password_confirmation) %>

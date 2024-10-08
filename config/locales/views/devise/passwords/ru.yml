@@ -2,6 +2,7 @@ ru:
   devise:
     passwords:
       form:
+        form_aria: Форма восстановления пароля
         email: Эмейл
         email_aria: Электронная почта
         restore_password: Напомнить пароль

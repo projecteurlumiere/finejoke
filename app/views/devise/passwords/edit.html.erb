@@ -14,7 +14,7 @@
       <%= f.password_field :password, 
           autocomplete: "new-password", 
           placeholder: t(:".password"), 
-          aria_label: t(:".password_aria", min_length: @minimum_password_length),
+          :"aria-label" => t(:".password_aria", min_length: @minimum_password_length),
           required: true,
           minlength: @minimum_password_length %>
       <%= render_errors(resource, :password) %>
@@ -24,7 +24,7 @@
       <%= f.password_field :password_confirmation, 
         autocomplete: "new-password", 
         placeholder: t(:".password_confirm"), 
-        aria_label: t(:".password_confirm_aria"),
+        :"aria-label" => t(:".password_confirm_aria"),
         required: true,
         minlength: @minimum_password_length %>
       <%= render_errors(resource, :password_confirmation) %>

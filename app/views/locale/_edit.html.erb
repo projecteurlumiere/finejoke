@@ -1,9 +1,15 @@
-<%= form_with url: locale_path, method: :patch, class: "locale-select", data: { controller: :locale } do |f| %>
+<%= form_with url: locale_path, method: :patch, class: "locale-select", data: { controller: :locale },
+  html: { :"aria-label" => t(:".form_aria") } do |f| %>
     <%= f.select :locale, 
       options_for_select(
         [*User.locales.keys], 
         I18n.locale),
       {}, 
-      { data: { action: "change->locale#submit"} } %>
+      { 
+        :"aria-label" => t(:".select_aria"),
+        data: { 
+          action: "change->locale#submit" 
+        } 
+      } %>
     <%= f.hidden_field :current_page, value: request.path %>
 <% end %>
