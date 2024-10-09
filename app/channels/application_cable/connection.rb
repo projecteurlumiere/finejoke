@@ -13,8 +13,8 @@ module ApplicationCable
     end
 
     def disconnect
-      current_or_guest_user.update(subscribed_to_game: false)
-      current_or_guest_user.toggle!(:connected) unless @already_connected
+      current_or_guest_user&.update(subscribed_to_game: false)
+      current_or_guest_user&.toggle!(:connected) unless @already_connected
     end
 
     private
