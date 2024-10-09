@@ -27,10 +27,10 @@ header {
       display: grid;
       grid-template-rows: 1fr 1fr 1fr;
       align-items: center;
+      position: relative;
       
-      div {
+      > *:not(.notice) {
         grid-row: 2 / 3;
-        white-space: nowrap;
       }
 
       .profile-short {
@@ -57,9 +57,13 @@ header {
         }
       }
 
+      // guest account
       .notice {
+        position: absolute;
+        right: 0;
+        bottom: 0;
         font-size: 1rem;
-        grid-row: 3 / 4;
+        white-space: nowrap;
       }
     }
 
