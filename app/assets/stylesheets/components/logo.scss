@@ -1,0 +1,27 @@
+.logo,
+.logo * {
+  text-transform: lowercase;
+  text-decoration: none;
+  font-family: var(--press-start-2p);
+  font-size: 1.75rem;
+
+  .full,
+  .short {
+    span:nth-child(odd) {
+      color: var(--accent-alert);
+    }
+
+    span:nth-child(even) {
+      color: var(--secondary-control-color);
+    }
+  }
+
+  .short {
+    display: none;
+  }
+
+  @media(max-width: 500px) {
+    .full { display: none; }
+    .short { display: block; }
+  }
+}
