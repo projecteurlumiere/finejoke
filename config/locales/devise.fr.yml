@@ -1,0 +1,63 @@
+fr:
+  devise:
+    confirmations:
+      confirmed: "Votre e-mail a été confirmé avec succès."
+      send_instructions: "Vous recevrez une lettre avec des instructions pour confirmer votre e-mail."
+      send_paranoid_instructions: "Vous recevrez une lettre avec des instructions pour confirmer votre e-mail."
+    failure:
+      already_authenticated: "Vous êtes déjà connecté."
+      inactive: "Votre compte n'est pas encore activé."
+      invalid: "Email ou mot de passe invalides."
+      locked: "Votre compte est verrouillé."
+      last_attempt: "Il vous reste une tentative avant que votre compte ne soit verrouillé."
+      not_found_in_database: "Email ou mot de passe invalides."
+      timeout: "Votre session a expiré. Veuillez vous reconnecter pour continuer."
+      unauthenticated: "Vous devez vous connecter ou vous inscrire avant de continuer."
+      unconfirmed: "Vous devez confirmer votre adresse e-mail avant de continuer."
+    mailer:
+      confirmation_instructions:
+        subject: "Instructions de confirmation"
+      reset_password_instructions:
+        subject: "Instructions de réinitialisation du mot de passe"
+      unlock_instructions:
+        subject: "Instructions de déverrouillage"
+      email_changed:
+        subject: "E-mail changé"
+      password_change:
+        subject: "Mot de passe changé"
+    omniauth_callbacks:
+      failure: "Impossible de vous authentifier via %{kind} car \"%{reason}\"."
+      success: "Authentification réussie via le compte %{kind}."
+    passwords:
+      no_token: "Échec de la réinitialisation du mot de passe. Êtes-vous sûr d'avoir cliqué sur le lien correct ?"
+      send_instructions: "Vous recevrez un e-mail avec des instructions sur la façon de réinitialiser votre mot de passe."
+      send_paranoid_instructions: "Vous recevrez un e-mail avec des instructions sur la façon de réinitialiser votre mot de passe."
+      updated: "Votre mot de passe a été changé avec succès. Vous êtes maintenant connecté."
+      updated_not_active: "Votre mot de passe a été changé avec succès."
+    registrations:
+      destroyed: "Votre compte a été supprimé avec succès."
+      signed_up: "Bienvenue ! Vous vous êtes inscrit avec succès."
+      signed_up_but_inactive: "Vous vous êtes inscrit avec succès. Cependant, votre compte n'est pas encore activé."
+      signed_up_but_locked: "Vous vous êtes inscrit avec succès. Cependant, votre compte est verrouillé."
+      signed_up_but_unconfirmed: "Un message avec un lien de confirmation a été envoyé à votre adresse e-mail."
+      update_needs_confirmation: "Vous avez mis à jour votre compte avec succès, mais nous devons vérifier votre nouvelle adresse e-mail."
+      updated: "Votre compte a été mis à jour avec succès."
+      updated_but_not_signed_in: "Votre compte a été mis à jour avec succès, mais comme votre mot de passe a été changé, vous devez vous reconnecter."
+    sessions:
+      signed_in: "Connecté avec succès."
+      signed_out: "Déconnecté avec succès."
+      already_signed_out: "Déconnecté avec succès."
+    unlocks:
+      send_instructions: "Vous recevrez un e-mail avec des instructions sur la façon de déverrouiller votre compte."
+      send_paranoid_instructions: "Vous recevrez un e-mail avec des instructions sur la façon de déverrouiller votre compte."
+      unlocked: "Votre compte a été déverrouillé avec succès. Veuillez vous connecter pour continuer."
+  errors:
+    messages:
+      already_confirmed: "a déjà été confirmé, veuillez essayer de vous connecter"
+      confirmation_period_expired: "doit être confirmé dans un délai de %{period}, veuillez en demander un nouveau"
+      expired: "a expiré, veuillez en demander un nouveau"
+      not_found: "non trouvé"
+      not_locked: "n'était pas verrouillé"
+      not_saved:
+        one: "1 erreur a empêché cette %{resource} d'être enregistrée :"
+        other: "%{count} erreurs ont empêché cette %{resource} d'être enregistrée :"

@@ -1,0 +1,72 @@
+fr:
+  rounds:
+    current_round:
+      # game over: 
+      winner_is: Le gagnant est
+      his_score_is: Avec le score
+      game_over: Fin de la partie
+      congratulations: Félicitations !
+      # ROUND TASK FOR PLAYER:
+      # FOR SETUP:
+      create_setup: Composez un setup
+      create_setup_subheading: Une bonne blague a besoin d'un bon début
+      setup_is_being_created: Le joueur compose un setup
+      setup_is_being_created_subheading: Votre tour approche
+      # FOR PUNCHLINE:
+      create_punchline: Continuez
+      create_punchline_subheading: Une bonne punchline est tout ce dont vous avez besoin # unused
+      punchlines_are_being_created: Les joueurs écrivent des punchlines
+      punchlines_are_being_created_subheading: Le vote commencera bientôt
+      # FOR VOTE:
+      vote_for_joke: Voter
+      # vote_for_joke_subheading: 
+      players_are_voting: Les joueurs votent
+      # players_are_voting_subheading:
+      # FOR RESULTS
+      round_results: Résultats
+      # round_results_subheading:
+      # ROUND TASK FOR VIEWER:
+      viewer:
+        # FOR SETUP:
+        setup_is_being_created: Le joueur compose un setup
+        setup_is_being_created_subheading: Espérons qu'il propose quelque chose de bien
+        # FOR PUNCHLINES
+        punchlines_are_being_created: Les joueurs composent des punchlines
+        # punchlines_are_being_created_subheading: 
+        # FOR VOTE
+        players_are_voting: Les joueurs votent
+        vote_for_joke: Voter
+        # players_are_voting_subheading:
+        # FOR RESULTS
+        round_results: Résultats de la tour
+        # round_results_subheading:
+      anon_host: Monsieur l'Hôte
+      # INPUT:
+      rules: Règles
+      rules_content: Quelques règles # unused
+      # buttons:
+      start: Commencer !
+      join: Rejoindre
+      back: Retour au jeu
+      skip_results: Nouvelle tour
+      wait: Attendre
+      wait_for_new_round: Attendre la prochaine ronde
+    form:
+      enter_text: Entrez du texte...
+      enter_text_full_for_setup: Entrez le texte du setup
+      enter_text_full_for_setup: Entrez le texte de la punchline
+      done: Prêt
+    suggestion_form:
+      ask_ai: IA, aide-moi !
+    jokes_container:
+      vote: Voter
+      revote: Revoter
+      wait: Attendre
+      join: Rejoindre
+    joke:
+      anon: Anon
+      anon_host: Monsieur l'Animateur
+    no_jokes:
+      players: Joueurs
+      join_the_game: Rejoignent le jeu et ne jouent pas !
+      and_do_not_play: et ne jouent pas ! Tout le monde, riez maintenant.

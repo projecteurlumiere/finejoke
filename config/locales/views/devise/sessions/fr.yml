@@ -1,0 +1,11 @@
+fr:
+  devise:
+    sessions:
+      form:
+        form_aria: Formulaire de connexion
+        email: Email
+        email_aria: Adresse e-mail
+        password: Mot de passe
+        password_aria: Mot de passe
+        sign_in: Se connecter
+        remain_guest: Compte invité

@@ -4,21 +4,31 @@ en:
       authentication: 
         authentication: Authentication
       links:
-        forgot_password: Forgot password?
+        forgot_password_html: Forgot password?
       log_in_buttons:
         sign_in: Log in
         sign_up: Sign up
       welcome:
         welcome: Welcome!
         where_am_i: Where am I?
-        finejoke_is_html: Finejoke is a <strong>free</strong> game, where players come up with funny jokes. Most laughable jokes get most points.        
+        finejoke_is_html: >
+          Finejoke is a <strong>free</strong> game, where players come up with funny jokes. 
+          Most laughable jokes get most points.        
         rules: And how do I play?
-        rules_description_html: Finejoke is similar to <em>Cards Against Humanity</em> and to <em>Quiplash</em> from <em>The Jackbox Party Pack</em>. The main difference is that Finejoke players are tasked to think out jokes completely on their <strong>own</strong>.
+        rules_description_html: >
+          Finejoke is similar to <em>Cards Against Humanity</em> and to <em>Quiplash</em> from <em>The Jackbox Party Pack</em>. 
+          The main difference is that Finejoke players are tasked to think out jokes completely on their <strong>own</strong>.
         setup_step: "One player composes a joke's setup;"
         punchline_step: "Then the rest of the players think out funny punchlines to the setup;"
         vote_step: When the jokes are ready, a vote takes place to choose the funniest one. One vote equals one point.
-        additional_rules: Games may have additional rules. You can find them by clicking on the big question mark button on the relevant game's page.
+        additional_rules: >
+          Games may have additional rules. 
+          You can find them by clicking on the big question mark button on the relevant game's page.
         anything_else: Anything else?
-        ai_html: "Sure! If you sign up, you will be able to use <strong>artificial intelligence</strong> features: ChatGPT can help you create an amusing setup entry or come up with some ridiculous punchlines. Moreover, AI can take a role of a virtual host in your game commenting the game live." 
+        ai_html: >
+          Sure! 
+          If you sign up, you will be able to use <strong>artificial intelligence</strong> features: 
+          ChatGPT can help you create an amusing setup entry or come up with some ridiculous punchlines. 
+          Moreover, AI can take a role of a virtual host in your game commenting the game live.
         who_are_authors: Who made this?
         authors_html: You can find source code <strong><a href="%{link}">here</a></strong>.

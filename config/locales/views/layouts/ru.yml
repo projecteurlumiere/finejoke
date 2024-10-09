@@ -2,7 +2,9 @@ ru:
   layouts:
     application:
       title: Файнджоук
-      description: Finejoke - это бесплатная игра, в которой игроки придумывают шутки. Чья шутка смешнее, тот и побеждает.
+      description: >
+        Finejoke - это бесплатная игра, в которой игроки придумывают шутки. 
+        Чья шутка смешнее, тот и побеждает.
     user_profile:
       you_are_guest: Вы гость
       wanna_sign_in: Войти?

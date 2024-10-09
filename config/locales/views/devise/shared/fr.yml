@@ -1,0 +1,34 @@
+fr:
+  devise:
+    shared:
+      authentication: 
+        authentication: Authentification
+      links:
+        forgot_password_html: Mot de passe <br> oublié ?
+      log_in_buttons:
+        sign_in: Entrer
+        sign_up: S'inscrire
+      welcome:
+        welcome: Bienvenue !
+        where_am_i: Où suis-je ?
+        finejoke_is_html: >
+          Finejoke est un jeu <strong>gratuit</strong>, où les joueurs inventent des blagues drôles. 
+          Les blagues les plus comiques obtiennent le plus de points.        
+        rules: Et comment jouer ?
+        rules_description_html: >
+          Finejoke est similaire à <em>Cards Against Humanity</em> et à <em>Quiplash</em> du <em>The Jackbox Party Pack</em>. 
+          La principale différence est que les joueurs de Finejoke doivent penser à des blagues complètement <strong>par eux-mêmes</strong>.
+        setup_step: "Un joueur compose le setup – le début d'une blague ;"
+        punchline_step: "Puis le reste des joueurs doit inventer des punchlines – les fins drôles de cette blague ;"
+        vote_step: "Lorsque les blagues sont prêtes, un vote a lieu pour choisir la plus amusante. Un vote équivaut à un point."
+        additional_rules: >
+          Les jeux peuvent avoir des règles supplémentaires. 
+          Vous pouvez les trouver en cliquant sur le grand bouton point d'interrogation sur la page du jeu concerné.
+        anything_else: Autre chose ?
+        ai_html: >
+          Bien sûr ! 
+          Si vous vous inscrivez, vous pourrez utiliser des fonctionnalités <strong>d'intelligence artificielle</strong> : 
+          ChatGPT peut vous aider à créer une introduction amusante ou à trouver des chutes ridicules. 
+          De plus, l'IA peut jouer le rôle d'un animateur virtuel dans votre jeu en commentant le jeu en direct.
+        who_are_authors: Qui a créé cela ?
+        authors_html: Vous pouvez trouver le code source <strong><a href="%{link}">ici</a></strong>.

@@ -1,0 +1,71 @@
+fr:
+  application:
+    welcome_guest: Connectez-vous ou soyez notre invité
+    not_found: Non trouvé
+    forbidden: Vous n'avez pas les droits pour effectuer cette action
+    unacceptable: Format inacceptable demandé
+    internal_server_error: Quelque chose s'est mal passé
+  guests:
+    you_are_guest: Vous vous êtes connecté en tant qu'invité
+  awards:
+    award_given: Prix attribué
+    award_not_given: "Échec de l'attribution du prix"
+  games:
+    index_title: Lobby
+    show_title: En jeu %{game_name}
+    cannot_show_game: Le jeu n'est pas visible
+    game_created: Votre jeu a été créé
+    game_created_with_virtual_host: Votre jeu a été créé, et Monsieur l'Animateur sera présent
+    game_created_without_virtual_host: Votre jeu a été créé, mais Monsieur l'Animateur est occupé maintenant
+    game_not_created: Échec de la création du jeu
+    game_destroyed: Le jeu a été supprimé
+    join_game: Vous avez rejoint le jeu
+    join_game_failed: Échec de rejoindre le jeu
+    leave_game: Vous avez quitté le jeu
+    leave_game_failed: Échec de quitter le jeu
+    kick_user: Vous avez expulsé l'utilisateur
+    kick_user_fail: Échec de l'expulsion de l'utilisateur
+    game_over: Fin du jeu
+    already_in_game: Vous avez déjà rejoint un jeu
+  jokes:
+    joke_created: Votre blague a été soumise
+    joke_not_created: Échec de la soumission d'une blague
+    vote_counted: Vous avez voté
+    vote_not_counted: Échec du vote
+  messages:
+    message_sent: Votre message a été envoyé
+    message_not_sent: Échec de l'envoi du message
+  profiles:
+    show_title: "Profil de %{username}"
+  rounds:
+    round_created: Tour créé # le jeu commence / continue ?
+    round_not_created: Échec de la création d'un tour # le jeu a échoué à commencer / continuer ?
+    setup_created: Votre setup a été soumise
+    setup_not_created: Échec de la soumission de votre setup
+    you_voted_to_skip_results: Vous avez voté pour sauter les résultats
+  suggestions:
+    setup_suggested: Suggestion de setup reçue
+    setup_not_suggested: Échec de la réception de la suggestion de setup
+    punchline_suggested: Suggestion de punchline reçue
+    punchline_not_suggested: Échec de la réception de la suggestion de punchline
+  confirmation:
+    # new_title: Renvoyer la lettre de confirmation
+    # show_title: Confirmation par email
+  passwords:
+    new_title: Réinitialiser le mot de passe
+    edit_title: Réinitialiser le mot de passe
+  registrations:
+    new_title: S'inscrire
+    edit_title: Modifier le profil
+  sessions:
+    new_title: Se connecter
+  # unlocks:
+    # new: 
+    # show:
+  errors:
+    not_found_title: 404 Non trouvé
+    not_authorized_title: 403 Non autorisé
+    not_acceptable_title: 406 Non acceptable
+    internal_server_error_title: 500 Erreur interne du serveur
+  root:
+    show_title: Menu

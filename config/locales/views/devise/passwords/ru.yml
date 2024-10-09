@@ -5,7 +5,7 @@ ru:
         form_aria: Форма восстановления пароля
         email: Эмейл
         email_aria: Электронная почта
-        restore_password: Напомнить пароль
+        restore_password_html: Напомнить пароль
         back: Нет, я вспомнил
       edit:
         heading: Восстановление пароля

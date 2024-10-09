@@ -1,0 +1,18 @@
+fr:
+  errors:
+    shared: 
+      to_lobby: Vers le lobby
+    "403":
+      unauthorized: Non autorisé !
+      cannot_do_the_impossible: Il semble que vous essayiez de faire quelque chose que vous ne deviez pas faire.
+    "404":
+      wasted: Non trouvé !
+      page_does_not_exist: La page n'existe pas. Peut-être cherchiez-vous le jeu qui est maintenant terminé.
+    "406":
+      wrong_format: Format incorrect demandé !
+      reason: >
+        Peut-être que le site web ne s'est pas chargé correctement lorsque vous avez effectué cette action. 
+        Ou vous avez peut-être désactivé JavaScript.
+    "500":
+      something_went_wrong: Une erreur est survenue !
+      reason: Une erreur inattendue s'est produite sur le serveur.

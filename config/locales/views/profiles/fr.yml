@@ -1,0 +1,35 @@
+fr:
+  profiles:
+    show:
+      to_lobby: Retour
+      jokes: Blagues
+      profile: Profil
+      jokes_hidden: Les blagues de l'utilisateur %{username} sont cachées !
+      no_jokes: Aucune blague
+      no_more_jokes: Il n'y a plus de blagues
+      get_more_jokes: Obtenir plus de blagues
+    catalogue:
+      best: Meilleures
+      recent: Récentes
+      jokes: Blagues
+      setups: Setups
+      punchlines: Punchlines
+      downloading_jokes: Demande de blagues en cours
+    summary:
+      profile: Profil
+      username: Nom d'utilisateur
+      in_game_since: En jeu depuis
+      awards_received: Prix reçues
+      points_received: Points reçus
+      games_won: Jeux gagnés
+      games_finished: Jeux terminés
+      setups_created: Setups créées
+      punchlines_created: Punchlines créées
+      suggestions_requested: Suggestions demandées
+      profile_settings: Paramètres
+      sign_out: Se déconnecter
+      sign_out_confirm: Êtes-vous sûr de vouloir vous déconnecter ?
+      sign_up: S'inscrire
+    mobile_navigation:
+      jokes: Blagues
+      profile: Profil

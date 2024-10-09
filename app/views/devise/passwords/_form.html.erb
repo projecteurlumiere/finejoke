@@ -12,7 +12,9 @@
   <% end %>
 
   <h2 class="wrapper">
-    <input id="password-submit" class="selected" type="submit" form="new-password" value="<%= t(:".restore_password") %>" data-turbo-frame="_top">
+    <button id="password-submit" class="selected" type="submit" form="new-password" data-turbo-frame="_top">
+      <%= t(:".restore_password_html") %>
+    </button>
   </h2>
   
   <%= render "devise/shared/links" %>

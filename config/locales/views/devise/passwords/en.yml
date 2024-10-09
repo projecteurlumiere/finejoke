@@ -5,7 +5,7 @@ en:
         form_aria: Password reset form
         email: Email
         email_aria: Email address
-        restore_password: Reset Password
+        restore_password_html: Reset Password
         back: I remember now
       edit:
         heading: Password reset

@@ -1,0 +1,14 @@
+fr:
+  root:
+    welcome:
+      hello_user_html: Salut, <span>%{username}</span> !
+      what_is_new: Quoi de neuf chez Finejoke ?
+      no_news: Rien de spécial...
+      how_to_contact: Puis-je vous contacter ?
+      source_code_html: "Vous pouvez voir le code source <a href=\"%{link}\">ici</a>"
+      email_html: "Vous pouvez également nous contacter par : <a href=\"%{link}\">email</a>"
+    navigation:
+      menu: Menu
+      to_lobby: Vers le lobby
+      currently_in_game: En jeu
+      my_profile: Mon profil

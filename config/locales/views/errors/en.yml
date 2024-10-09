@@ -10,7 +10,9 @@ en:
       page_does_not_exist: The page does not exist. Perhaps, you were looking for the game that has been concluded by now.
     "406":
       wrong_format: Not acceptable!
-      reason: Perhaps, the website had not loaded properly when you performed this action. Or you might have JavaScript disabled.
+      reason: >
+        Perhaps, the website had not loaded properly when you performed this action. 
+        Or you might have JavaScript disabled.
     "500":
       something_went_wrong: Something went wrong!
       reason: An unexpected error happened on the server.

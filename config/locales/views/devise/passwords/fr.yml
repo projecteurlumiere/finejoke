@@ -1,0 +1,18 @@
+fr:
+  devise:
+    passwords:
+      form:
+        form_aria: Formulaire de réinitialisation du mot de passe
+        email: Email
+        email_aria: Adresse e-mail
+        restore_password_html: Réinitialiser <br> le mot de passe
+        back: Ah, je me souviens
+      edit:
+        heading: Réinitialisation du mot de passe
+        token_expired: "Le token de réinitialisation du mot de passe a expiré. Veuillez demander à nouveau la réinitialisation du mot de passe."
+        password: Nouveau mot de passe
+        password_aria: Entrez un nouveau mot de passe (minimum %{min_length} symboles)
+        password_confirm: Une fois de plus
+        password_confirm_aria: Confirmer le mot de passe
+        save: Enregistrer
+        back: Retour

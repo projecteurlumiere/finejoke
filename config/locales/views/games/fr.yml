@@ -1,0 +1,70 @@
+fr:
+  games:
+    index:
+      rooms: Salons
+      new_game: Nouveau jeu
+      connect: Connecter
+      view: Voir
+      create: Créer
+      new: Nouveau
+    catalogue:
+      rooms: Salons
+      no_games: Pas de jeux...
+    game:
+      back_to_lobby: Retour
+      game: Jeu
+      chat: Chat
+    game_user:
+      to_profile: Profil
+      kick: Expulser
+      empty: Vide
+    chat:
+      chat: Chat
+      empty: Vide...
+      empty_short: Vide
+    chat_form:
+      hello: Salut !
+      message_text: Texte du message
+      send_message: Envoyer le message
+    form:
+      name: Nom
+      enter_name: Entrer le nom
+      extra_settings: Paramètres
+      max_players: Joueurs max
+      max_round_time: Durée de tour (secondes)
+      victory_conditions: Conditions de victoire
+      max_rounds: Tours max
+      max_rounds_aria: Activer la condition de victoire par nombre maximal de tours
+      max_points: Points max
+      max_points_aria: Activer la condition de victoire par nombre maximal de points
+      none: "Non"
+      access: Accès
+      private: Privé (n'apparaît pas dans le lobby)
+      open_for_viewers: Ouvert aux spectateurs
+      viewers_vote: Les spectateurs votent
+      ai: Intelligence Artificielle
+      suggestable: Suggestions de l'IA
+      virtual_host: Monsieur L'Animateur
+    rules:
+      rules: Règles
+      common: Générales
+      setup_step: "Un joueur compose le setup – le début d'une blague ;"
+      punchline_step: "Puis le reste des joueurs doit inventer des punchlines – les fins drôles de cette blague ;"
+      vote_step: "Lorsque les blagues sont prêtes, un vote a lieu pour choisir la plus amusante. Un vote équivaut à un point."
+      configurable: Configurable
+      host_html: <strong>%{host_link}</strong> est l'hôte du jeu. Il peut expulser d'autres joueurs.
+      private_html: >
+        Ce jeu est <strong>privé</strong>. 
+        Il n'apparaît pas dans le lobby. 
+        Partagez le lien vers cette page avec vos amis pour les inviter.
+      public_html: Ce jeu est <strong>public</strong>. Il est visible dans le lobby.
+      viewers_vote_html: Les spectateurs <strong>peuvent</strong> voter.
+      viewers_do_not_vote_html: Les spectateurs <strong>ne peuvent pas</strong> voter.
+      no_victory_conditions_html: Il n'y a <strong>aucune</strong> condition de victoire.
+      victory_conditions_are: "Conditions de victoire :"
+      max_rounds_html: "Nombre maximum de tours : <strong>%{n}</strong>"
+      max_points_html: "Nombre maximum de points : <strong>%{n}</strong>."
+      max_round_time_html: "Durée de tour : <strong>%{t} secondes</strong>."
+      suggestable_html: "Les suggestions de l'IA sont <strong>disponibles</strong> dans ce jeu."
+      virtual_host_html: >
+        Commencez votre message de discussion par <strong>\"Mister Host\"</strong>, pour vous adresser à l'hôte virtuel de ce jeu.

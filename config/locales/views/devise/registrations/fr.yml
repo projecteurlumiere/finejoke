@@ -1,0 +1,46 @@
+fr:
+  devise:
+    registrations:
+      edit:
+        to_lobby: "Retour"
+      edit_form:
+        edit: Modifier
+        important_settings: Paramètres importants (vous pouvez les ignorer)
+        email_not_confirmed: Email non confirmé !
+        awaiting_email_confirmation_html: >
+          Certaines fonctionnalités peuvent ne pas être disponibles pour vous !
+          Si vous n'avez pas reçu le message de confirmation,
+          veuillez appuyer sur le bouton "Renvoyer" ci-dessous, 
+          ou mettre à jour votre adresse e-mail sur cette page et enregistrer les modifications.
+        send_confirmation: Renvoyer
+        locale_settings: Paramètres de langue
+        language: Langue
+        new_username: Nouveau nom d'utilisateur ?
+        new_username_aria: Entrez un nouveau nom d'utilisateur si vous souhaitez le changer
+        new_email: Nouvel email ?
+        new_email_aria: Entrez une nouvelle adresse e-mail si vous souhaitez la changer
+        new_password: Nouveau mot de passe ?
+        new_password_aria: Entrez un nouveau mot de passe si vous souhaitez le changer
+        confirm_password: Une fois de plus
+        confirm_password_aria: Confirmer le mot de passe si vous souhaitez le changer
+        delete_account: Supprimer le compte ?
+        delete_account_prompt: Êtes-vous sûr de vouloir supprimer votre compte ? Les statistiques et les prix seront perdues !
+        privacy_settings: Paramètres de confidentialité
+        show_jokes: Afficher les blagues
+        show_awards: Afficher les prix
+        confirm: Confirmer les modifications en entrant votre mot de passe actuel
+        current_password: Mot de passe
+        current_password_aria: Confirmer les modifications en entrant votre mot de passe actuel
+        save: Enregistrer
+        back: Retour
+      form:
+        form_aria: Formulaire de nouveau compte
+        email: Email
+        email_aria: Adresse e-mail
+        username: Nom d'utilisateur
+        username_aria: Nom d'utilisateur
+        password: Mot de passe
+        password_aria: Mot de passe (minimum %{min_length} symboles)
+        password_confirm: Une fois de plus
+        password_confirm_aria: Confirmer le mot de passe
+        create_account: Créer

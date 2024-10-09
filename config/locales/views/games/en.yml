@@ -47,13 +47,16 @@ en:
       virtual_host: Mister Host
     rules:
       rules: Rules
-      common: Common
+      common: General
       setup_step: "One player composes a joke's setup;"
       punchline_step: "Then the rest of the players think out funny punchlines to the setup;"
       vote_step: When the jokes are ready, a vote takes place to choose the funniest one. One vote equals one point.
       configurable: Configurable
-      host_html: <strong>%{host_link}</strong> - is the host. He can kick other players.
-      private_html: This game is <strong>private</strong>. It does not show up in the lobby. Share the link to this page with you friends to invite them.
+      host_html: <strong>%{host_link}</strong> is the host. He can kick other players.
+      private_html: >
+        This game is <strong>private</strong>. 
+        It does not show up in the lobby. 
+        Share the link to this page with you friends to invite them.
       public_html: This game is <strong>public</strong>. It is visible in the lobby.
       viewers_vote_html: The viewers <strong>can</strong> vote.
       viewers_do_not_vote_html: The viewers <strong>cannot</strong> vote.
@@ -64,4 +67,5 @@ en:
       max_points_html: "Мaximum number of points: <strong>%{n}</strong>."
       max_round_time_html: "Round duration: <strong>%{t} seconds</strong>."
       suggestable_html: "AI suggestions are <strong>available</strong> in this game."
-      virtual_host_html: "Begin you chat message with <strong>\"Mister Host\"</strong>, to address the virtual host of this game."
+      virtual_host_html: >
+        Begin you chat message with <strong>\"Mister Host\"</strong>, to address the virtual host of this game.
