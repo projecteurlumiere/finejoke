@@ -8,11 +8,14 @@
 
   h2 {
     flex: 0 !important;
-    font-size:clamp(1rem, var(--adaptive-font-size), 1.3rem);
+    font-size: clamp(1rem, var(--adaptive-font-size), 1.3rem);
     // font-size: clamp(1rem, var(--adaptive-font-size), 1.5rem);
     @container chat (max-width: 200px) { margin-left: 0 }
   }
 
+  &:has(:not(h2)) {
+    padding-top: 2rem;
+  }
 
   > * {
     text-align: left;
