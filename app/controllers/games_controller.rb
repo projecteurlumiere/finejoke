@@ -3,7 +3,7 @@ class GamesController < ApplicationController
 
   before_action :verify_turbo_stream_format, only: %i[create kick show_rules]
   before_action :set_game, only: %i[ show destroy ]
-  before_action :authorize_game!, only: %i[ index show destroy game_over]
+  before_action :authorize_game!, only: %i[ index show destroy leave game_over]
 
   # GET /games
   def index
@@ -69,14 +69,12 @@ class GamesController < ApplicationController
     @game = Game.includes(:users).find_by(id: params[:game_id])
 
     if @game.nil? || @game.users.exclude?(current_or_guest_user)
-      skip_authorization
       flash[:notice] = t(:".leave_game")
       redirect_to(games_path)
       return
     end 
     
     verify_turbo_stream_format
-    authorize_game!
 
     if @game.remove_user(current_or_guest_user)
       flash[:notice] = t(:".leave_game")
@@ -116,7 +114,6 @@ class GamesController < ApplicationController
   def game_over
     flash[:notice] = t(:".game_over")
     redirect_to games_path
-    return
   end
 
   private

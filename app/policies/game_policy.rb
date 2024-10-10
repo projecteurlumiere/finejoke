@@ -30,7 +30,7 @@ class GamePolicy < ApplicationPolicy
   end
 
   def leave?
-    @user && @user.joined?(@game)
+    @user
   end
 
   def kick?
