@@ -28,15 +28,6 @@ class LocalesController < ApplicationController
     return root_path(params: { locale: @locale }) unless params[:current_page]
 
     url =  params[:current_page]
-    uri = URI.parse(url)
-
-    # parsing query into hash
-    query = Rack::Utils.parse_query(uri.query)
-
-    # Replace the value
-    query["locale"] = @locale
-
-    uri.query = Rack::Utils.build_query(query)
-    uri.to_s
+    replace_query_param(url, "locale", @locale)
   end
 end

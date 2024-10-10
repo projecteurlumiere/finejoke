@@ -57,6 +57,21 @@ class ApplicationController < ActionController::Base
   # or fallbacks to the default in ApplicationHelper#set_title
   def set_title_key
     key = :"#{controller_name}.#{action_name}_title"
-    @title_key = key if I18n.exists?(key)
+    @title_key ||= key if I18n.exists?(key)
   end
+
+  def replace_query_param(uri, name, value)
+    uri = URI.parse(uri)
+
+    # parsing query into hash
+    query = Rack::Utils.parse_query(uri.query)
+
+    # Replace the value
+    query[name] = value
+
+    uri.query = Rack::Utils.build_query(query)
+    uri.to_s
+  end
+
+  helper_method :replace_query_param
 end

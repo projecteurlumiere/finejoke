@@ -3,11 +3,11 @@
   <h2 id="sign-in-button" class="wrapper">
     <%= link_to t(:".sign_in"), new_user_session_path(params: { locale: I18n.locale }), 
         class: %w[button sign-in], 
-        data: { turbo_frame: "authentication-form", turbo_action: :advance } %>
+        data: { turbo_frame: "authentication-form" } %>
   </h2>
   <h2 id="sign-up-button" class="wrapper">
   <%= link_to t(:".sign_up"), new_user_registration_path(params: { locale: I18n.locale }), 
         class: %w[button sign-up],
-          data: { turbo_frame: "authentication-form", turbo_action: :advance }  %>
+          data: { turbo_frame: "authentication-form" } %>
   </h2>
 </div>

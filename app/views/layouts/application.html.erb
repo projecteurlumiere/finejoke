@@ -5,7 +5,9 @@
     <title>
       <%= set_title %>
     </title>
-    <meta name="decription" content="<%= t(:".description") %>">
+    <%= seo_meta_tags %>
+    <%= seo_no_index_tag unless current_page?(root_path) %>
+    <meta name="description" content="<%= t(:".description") %>">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-prefetch" content="false">
     <meta name="turbo-cache-control" content="no-cache">

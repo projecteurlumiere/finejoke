@@ -1,5 +1,6 @@
 en:
   application:
+    welcome_title: Welcome!
     welcome_guest: Log in or be our guest
     not_found: Not found
     forbidden: You have no rights to perform this action

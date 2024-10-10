@@ -40,4 +40,43 @@ module ApplicationHelper
     return t(:".title") if @title_key.blank?
     "#{t(@title_key, **(@title_vars || {}))} | #{t :".title"}"
   end
+
+  SEO_EXPOSED_ACTIONS = [
+    { controller: :registrations, action: :new },
+    { controller: :sessions, action: :new },
+    { controller: :passwords, action: :new }
+  ].freeze
+
+  def seo_exposed_page?
+    controller = controller_name.to_sym
+    action = action_name.to_sym
+
+    SEO_EXPOSED_ACTIONS.any? do |args|
+      controller == args[:controller] && action == args[:action]
+    end
+  end
+
+  def seo_meta_tags
+    return unless seo_exposed_page?
+
+    canonical = if current_page?("/") 
+      <<~HTML
+        <link rel="canonical" href="#{root_url}">
+      HTML
+    end
+
+    locale_links = I18n.available_locales.map do |l|
+      <<~HTML
+        <link rel="alternate" hreflang="#{l}" href="#{replace_query_param(request.original_url, "locale", l)}">
+      HTML
+     end
+
+    [canonical, *locale_links].join(" ").html_safe
+  end
+
+  def seo_no_index_tag
+    <<~HTML.html_safe
+      <meta name="robots" content="noindex">
+    HTML
+  end
 end

@@ -22,18 +22,32 @@ Rails.application.routes.draw do
   get "show_quota", to: "suggestions#show_quota", as: :suggestion_quota
 
   resources :profiles, only: %i[show]
+  
+  devise_for :users, controllers: {
+    confirmations: "users/confirmations",
+    passwords: "users/passwords",
+    registrations: "users/registrations",
+    sessions: "users/sessions"
+  }
+
+  authenticated :user do
+    root "root#show", as: :authenticated_root
+  end
+
   devise_scope :user do
     get "profile/edit", to: "devise/registrations#edit", as: :edit_self_profile
     
     # prettier paths but still use old helpers:
     get "/users/sign_in", to: redirect(path: "/sign_in")
-    get "/sign_in", to: "devise/sessions#new"
+    get "/sign_in", to: "users/sessions#new"
     
     get "users/sign_up", to: redirect(path: "/sign_up")
-    get "/sign_up", to: "devise/registrations#new"
+    get "/sign_up", to: "users/registrations#new"
 
     get "/users/password/new", to: redirect(path: "/forgot_password")
-    get "/forgot_password", to: "devise/passwords#new"
+    get "/forgot_password", to: "users/passwords#new"
+
+    root "users/sessions#new"
   end
 
   resources :guests, only: %i[create]
@@ -47,12 +61,6 @@ Rails.application.routes.draw do
     get "users/edit", to: redirect("profile/edit")
   end
 
-  devise_for :users, controllers: {
-    confirmations: "users/confirmations",
-    passwords: "users/passwords",
-    registrations: "users/registrations"
-  }
-
   get "up" => "rails/health#show", as: :rails_health_check
   
   get "turbo_redirect_to", controller: "application"
@@ -61,6 +69,4 @@ Rails.application.routes.draw do
   match "/404", via: :all, to: "errors#not_found"
   match "/406", via: :all, to: "errors#not_acceptable"
   match "/500", via: :all, to: "errors#internal_server_error"
-
-  root "root#show"
 end

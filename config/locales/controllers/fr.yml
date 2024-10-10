@@ -1,5 +1,6 @@
 fr:
   application:
+    welcome_title: Bienvenue !
     welcome_guest: Connectez-vous ou soyez notre invité
     not_found: Non trouvé
     forbidden: Vous n'avez pas les droits pour effectuer cette action
