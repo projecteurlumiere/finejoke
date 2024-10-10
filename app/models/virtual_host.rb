@@ -127,7 +127,7 @@ class VirtualHost < ApplicationRecord
   def comment_game_over
     <<~HEREDOC
       Announce game over!
-      Tell about the winner (#{game.winner.username || "there is none"}) if any.
+      Tell about the winner (#{game.winner&.username || "there is none"}) if any.
       Do not forget to comment on the leaderboard: #{players_state}. 
       Tell everyone it was a nice game.
       You look forward to another one, don't you?
@@ -205,23 +205,25 @@ class VirtualHost < ApplicationRecord
   # if there is summary and summary + the latter >= 10 then make another summary
   # if there is no summary, give 10 last
   def prompts_history
-    summary_prompt = self.prompts.where(summary: true).last
-    prompts = if summary_prompt 
-                self.prompts.where("id > ?", summary_prompt.id)
-              else
-                self.prompts.last(10)
-              end
+    transaction do
+      summary_prompt = self.prompts.where(summary: true).last
+      prompts = if summary_prompt 
+                  self.prompts.where("id > ?", summary_prompt.id)
+                else
+                  self.prompts.last(10)
+                end
 
-    if prompts.length >= 10
-      messages = summary_messages(prompts)
-      prompts = [ request_summary(messages) ]
-    end
+      if prompts.length >= 10
+        messages = summary_messages(prompts)
+        prompts = [ request_summary(messages) ]
+      end
 
-    prompts.map do |p|
-      {
-        role: p.role,
-        content: p.content
-      }
+      prompts.map do |p|
+        {
+          role: p.role,
+          content: p.content
+        }
+      end
     end
   end
 

@@ -22,7 +22,7 @@ module Games
       end
 
       def virtual_host_takes_mic
-        virtual_host&.talk_later if finished? || on_halt?
+        virtual_host&.talk_later if status_previously_changed? && (finished? || on_halt?)
       end
     end
   end

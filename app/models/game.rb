@@ -220,6 +220,7 @@ class Game < ApplicationRecord
 
   def waiting!
     schedule_game_conclude
+    virtual_host&.talk_later
     super
   end
 
