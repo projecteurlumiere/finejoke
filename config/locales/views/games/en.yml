@@ -56,6 +56,7 @@ en:
       private_html: >
         This game is <strong>private</strong>. 
         It does not show up in the lobby. 
+        Jokes created in this game will not be appended to players profiles.
         Share the link to this page with you friends to invite them.
       public_html: This game is <strong>public</strong>. It is visible in the lobby.
       viewers_vote_html: The viewers <strong>can</strong> vote.

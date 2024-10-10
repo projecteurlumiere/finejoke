@@ -1,11 +1,35 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-# one:
-#   punchline: MyString
-#   text: MyString
-#   round: one
+# game one
+one:
+  setup_model: one
+  punchline: I am a punchline from pubilc game
+  round: one
+  user: two
+  setup_suggested: true
+  suggestions: one
 
-# two:
-#   punchline: MyString
-#   text: MyString
-#   round: two
+two:
+  setup_model: one
+  punchline: I am a punchline from pubilc game
+  round: one
+  user: three
+  setup_suggested: true
+  suggestions: one
+
+# game two
+three: 
+  setup_model: two
+  punchline: I am a punchline from private game
+  round: two
+  user: five
+  setup_suggested: true
+  suggestions: three
+
+four:
+  setup_model: two
+  punchline: I am a punchline from private game
+  round: two
+  user: six
+  setup_suggested: true
+  suggestions: three

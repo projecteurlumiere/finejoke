@@ -46,7 +46,9 @@ module Jokes
         end.join(", ")
 
         ActiveRecord::Base.connection.execute(
-          "INSERT INTO jokes_suggestions (joke_id, suggestion_id) VALUES #{values}"
+          <<~SQL
+            INSERT INTO jokes_suggestions (joke_id, suggestion_id) VALUES #{values}
+          SQL
         )
       end
     end

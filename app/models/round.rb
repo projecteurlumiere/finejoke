@@ -45,6 +45,8 @@ class Round < ApplicationRecord
     move_to_results and return if time_for_results?
   }
 
+  before_destroy :purge_history, prepend: true, if: -> { game.private? }
+
   def move_to_punchline
     user.finished_turn!
     setup.nil? ? random_setup : user.increment!(:total_setups)
@@ -179,5 +181,19 @@ class Round < ApplicationRecord
 
   def votes_finished?
     game.users.find_by(voted: false, hot_join: false) ? false : true
+  end
+
+  def purge_history
+    Suggestion.where("id IN (#{suggestions.join(", ")})").destroy_all if suggestions.present?
+
+    setup_model&.destroy if jokes.none?
+
+    jokes.each do |j|
+      suggestion_ids = j.suggestion_ids
+      j.suggestions.destroy_all
+      Suggestion.where("id IN (#{suggestion_ids.join(", ")})").destroy_all if suggestion_ids.present?
+      j.setup_model.destroy
+      j.destroy
+    end
   end
 end

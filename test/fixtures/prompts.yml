@@ -1,0 +1,9 @@
+one: 
+  virtual_host: one
+  role: assistant
+  content: hi, i am from first virtual host
+
+two:
+  virtual_host: two
+  role: assistant
+  content: hi, i am a second virtual host

@@ -1,0 +1,10 @@
+# game one
+one:
+  user: one
+  text: I am a setup from public game
+
+# game two
+two:
+  user: four
+  text: I am a setup from public game
+

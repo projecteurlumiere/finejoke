@@ -56,6 +56,7 @@ fr:
       private_html: >
         Ce jeu est <strong>privé</strong>. 
         Il n'apparaît pas dans le lobby. 
+        Les blagues créées dans ce jeu ne seront pas ajoutées aux profils des joueurs.
         Partagez le lien vers cette page avec vos amis pour les inviter.
       public_html: Ce jeu est <strong>public</strong>. Il est visible dans le lobby.
       viewers_vote_html: Les spectateurs <strong>peuvent</strong> voter.

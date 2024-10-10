@@ -9,18 +9,22 @@ module Users
       has_many :bans, dependent: :destroy
 
       def reset_game_attributes
-        self.update({ 
-          game_id: nil,
-          host: false,
-          hot_join: false,
-          lead: false,
-          voted: false,
-          finished_turn: false,
-          wants_to_skip_results: false,
-          current_score: 0,
-          suggestion_quota: 5,
-          suggestions: []
-        })
+        transaction do
+          Suggestion.where("id IN (#{suggestions.join(", ")})").destroy_all if game&.private? && suggestions.present?
+
+          self.update({ 
+            game_id: nil,
+            host: false,
+            hot_join: false,
+            lead: false,
+            voted: false,
+            finished_turn: false,
+            wants_to_skip_results: false,
+            current_score: 0,
+            suggestion_quota: 5,
+            suggestions: []
+          })
+        end
       end
 
       def playing?(given_game_or_round)

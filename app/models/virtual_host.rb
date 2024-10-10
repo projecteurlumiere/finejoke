@@ -6,7 +6,7 @@ class VirtualHost < ApplicationRecord
   DISABLEABLE_KEY = "DISABLE_VIRTUAL_HOST".freeze
 
   belongs_to :game, optional: true
-  has_many :prompts
+  has_many :prompts, dependent: :destroy
 
   def set_default_locale
     self.locale = game.locale

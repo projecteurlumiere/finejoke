@@ -44,6 +44,9 @@ class Game < ApplicationRecord
   after_create :schedule_idle_game_destroy
 
   after_create_commit :broadcast_game_start, if: :public?
+
+  before_destroy -> { virtual_host&.destroy }, prepend: true, if: :private?
+
   after_destroy_commit -> { broadcast_remove_to_lobby }, if: -> { !finished? }
   after_destroy_commit -> { broadcast_redirect_to(game_over_path(self)) }
 
@@ -88,8 +91,11 @@ class Game < ApplicationRecord
       was_host = user.host?
 
       user.reset_game_attributes
-
-      self.destroy and return true if n_players.zero?
+      if n_players.zero?
+        finished!
+        schedule_prematurely_ended_game_destroy
+        return true
+      end
 
       self.host = users.first; broadcast_current_round if was_host
 

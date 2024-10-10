@@ -1,17 +1,14 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-# one:
-#   max_players: 1
-#   max_rounds: 1
-#   max_round_time: 1
-#   max_points: 1
-#   started: false
-#   ended: false
+one:
+  name: a_game
+  host_id: one
+  status: ongoing
+  n_players: 3
 
-# two:
-#   max_players: 1
-#   max_rounds: 1
-#   max_round_time: 1
-#   max_points: 1
-#   started: false
-#   ended: false
+
+two: 
+  name: a_second_game
+  host_id: four
+  status: ongoing
+  n_players: 3

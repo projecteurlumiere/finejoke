@@ -1,0 +1,15 @@
+one:
+  output: I am a suggestion, hi
+  target: setup
+
+two:
+  output: I am suggestion two, hi
+  target: punchline
+
+three:
+  output: I am suggestion three, hi
+  target: setup
+
+four:
+  output: I am uggestion four, hi
+  target: punchline

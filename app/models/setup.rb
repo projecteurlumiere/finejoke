@@ -5,9 +5,10 @@ class Setup < ApplicationRecord
   TRUNCATE_LENGTH = Joke::SETUP_TRUNCATE_LENGTH
 
   validates :text, length: { in: 1..MAX_LENGTH }
-  # has_one :round
+  has_one :round, foreign_key: :setup_model_id, dependent: :nullify
   # has_one :game, through: :round
-  has_many :jokes, dependent: :destroy
+  # has_many :jokes, dependent: :destroy
+  has_many :jokes, foreign_key: :setup_model_id, dependent: :destroy
   belongs_to :user, optional: true
 
   before_save -> { self.text_short = self.class.truncate(text) }, if: :text_changed?

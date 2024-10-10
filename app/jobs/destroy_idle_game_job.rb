@@ -3,6 +3,7 @@ class DestroyIdleGameJob < ApplicationJob
 
   queue_as :default
 
+  # notifies first then reschedules itself with force: true
   def perform(game_id, last_updated_at = nil, notify:, force:)
     game = Game.find_by(id: game_id)
     return unless game
