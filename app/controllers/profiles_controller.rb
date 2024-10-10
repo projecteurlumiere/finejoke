@@ -65,7 +65,8 @@ class ProfilesController < ApplicationController
     else 
       params[:property] = nil
       @user.jokes
-    end.where(locale: I18n.locale)
+    end.left_outer_joins(:game).where(locale: I18n.locale)
+                               .where("games.id IS NULL OR games.private = FALSE")
   end
 
   def set_order(property)
