@@ -7,7 +7,7 @@ ru:
         Чья шутка смешнее, тот и побеждает.
     user_profile:
       you_are_guest: Вы гость
-      wanna_sign_in: Войти?
+      wanna_sign_up: Войти?
     user_status:
       quit_game: Выход
       currently_in_game: В игре

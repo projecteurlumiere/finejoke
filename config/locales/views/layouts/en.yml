@@ -7,7 +7,7 @@ en:
         Most laughable jokes get most points.
     user_profile:
       you_are_guest: You are guest
-      wanna_sign_in: Log in
+      wanna_sign_up: Sign up
     user_status:
       quit_game: Quit
       currently_in_game: In game
