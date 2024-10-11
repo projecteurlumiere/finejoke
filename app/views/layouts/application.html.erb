@@ -2,13 +2,13 @@
 <html lang="<%= I18n.locale %>">
   <head>
     <meta charset="utf-8"> 
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>
       <%= set_title %>
     </title>
-    <%= seo_meta_tags %>
     <%= seo_no_index_tag unless current_page?(root_path) %>
+    <%= seo_meta_tags %>
     <meta name="description" content="<%= t(:".description") %>">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-prefetch" content="false">
     <meta name="turbo-cache-control" content="no-cache">
     <%= csrf_meta_tags %>
@@ -18,6 +18,10 @@
     <%# preload_fonts if Rails.env.production? %>
     <%= javascript_importmap_tags %>
     <%= turbo_stream_from ["user", current_or_guest_user], channel: UserChannel unless new_guest? %>
+
+    <%= favicon_link_tag asset_path("favicon/favicon.ico") %>
+    <%= favicon_link_tag asset_path("favicon/favicon.svg"), type: "image/svg+xml" %>
+    <%= favicon_link_tag asset_path("favicon/apple-touch-icon.png"), rel: "apple-touch-icon", type: "image/png" %>
   </head>
   <body>
     <header>
