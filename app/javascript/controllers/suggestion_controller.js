@@ -70,8 +70,8 @@ export default class extends Controller {
 
       if (placeholder) { this.#removePlaceholder(placeholder); }
     } finally {
-      this.userInputTarget.value = suggestion;
       this.#toggleInput("enable")
+      this.userInputTarget.value = suggestion;
     }
   }
 

@@ -152,7 +152,8 @@ class Round < ApplicationRecord
     self.setup = Suggestion.create(
       target: :setup, 
       force_creation: true,
-      game_id: self.id
+      game_id: self.id,
+      locale: game.locale
     ).output
     self.setup_randomized = true
   end
