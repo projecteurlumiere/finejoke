@@ -288,7 +288,10 @@ module RoundsHelper
   end
 
   def render_wait_for(user, round, game)
-    message = user.hot_joined?(game) && round && !round.last? ? t(:".wait_for_new_round") : t(:".wait")
-    tag.button(message, class: "disabled", disabled: true).html_safe
+    message_key = user.hot_joined?(game) && round && !round.last? ? :".wait_for_new_round" : :".wait"
+    tag.button(t(message_key), 
+               class: "disabled", 
+               style: ("white-space: wrap" if message_key == :".wait_for_new_round"),
+               disabled: true).html_safe
   end
 end
