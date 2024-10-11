@@ -12,15 +12,19 @@
 
   h2 {
     flex: 0;
+    > *:first-child {
+      padding-top: 0;
+    }
+    
     select {
       font-family: "Press Start 2P";
       border: none;
       background-image: url("icons/dropdown_current_color.svg");
       background-repeat: no-repeat;
-      background-position: right 0 top 26%;
+      background-position: right 5% top 52%;
       padding-right: 2ch;
-      padding-top: 0;
-      padding-bottom: 1rem;
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
       background-color: inherit;
     }
   }
