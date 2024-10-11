@@ -19,7 +19,10 @@ module LocalesHandling
     private 
 
     def extract_locale_from_accept_language_header
-      locale = request.env["HTTP_ACCEPT_LANGUAGE"].scan(/^[a-z]{2}/).first.to_sym
+      lang_header = request.env["HTTP_ACCEPT_LANGUAGE"]
+      return if lang_header.blank?
+
+      locale = lang_header.scan(/^[a-z]{2}/).first.to_sym
       locale if I18n.locale_available?(locale)
     end
   end
