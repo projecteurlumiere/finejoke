@@ -4,7 +4,7 @@ fr:
       to_lobby: Retour
       jokes: Blagues
       profile: Profil
-      jokes_hidden: Les blagues de l'utilisateur %{username} sont cachées !
+      jokes_hidden: "Les blagues de l'utilisateur %{username} sont cachées\u00a0!"
       no_jokes: Aucune blague
       no_more_jokes: Il n'y a plus de blagues
       get_more_jokes: Obtenir plus de blagues
@@ -28,7 +28,7 @@ fr:
       suggestions_requested: Suggestions demandées
       profile_settings: Paramètres
       sign_out: Se déconnecter
-      sign_out_confirm: Êtes-vous sûr de vouloir vous déconnecter ?
+      sign_out_confirm: "Êtes-vous sûr de vouloir vous déconnecter\u00a0?"
       sign_up: S'inscrire
     mobile_navigation:
       jokes: Blagues

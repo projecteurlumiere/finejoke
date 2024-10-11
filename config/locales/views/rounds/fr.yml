@@ -5,7 +5,7 @@ fr:
       winner_is: Le gagnant est
       his_score_is: Avec le score
       game_over: Fin de la partie
-      congratulations: Félicitations !
+      congratulations: "Félicitations\u00a0!"
       # ROUND TASK FOR PLAYER:
       # FOR SETUP:
       create_setup: Composez un setup
@@ -45,7 +45,7 @@ fr:
       rules: Règles
       rules_content: Quelques règles # unused
       # buttons:
-      start: Commencer !
+      start: "Commencer\u00a0!"
       join: Rejoindre
       back: Retour au jeu
       skip_results: Nouvelle tour
@@ -57,7 +57,7 @@ fr:
       enter_text_full_for_setup: Entrez le texte de la punchline
       done: Prêt
     suggestion_form:
-      ask_ai: IA, aide-moi !
+      ask_ai: "IA, aide-moi\u00a0!"
     jokes_container:
       vote: Voter
       revote: Revoter
@@ -68,5 +68,5 @@ fr:
       anon_host: Monsieur l'Animateur
     no_jokes:
       players: Joueurs
-      join_the_game: Rejoignent le jeu et ne jouent pas !
-      and_do_not_play: et ne jouent pas ! Tout le monde, riez maintenant.
+      join_the_game: "Rejoignent le jeu et ne jouent pas\u00a0!"
+      and_do_not_play: "et ne jouent pas\u00a0! Tout le monde, riez maintenant."

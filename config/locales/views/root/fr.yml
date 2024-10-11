@@ -1,12 +1,12 @@
 fr:
   root:
     welcome:
-      hello_user_html: Salut, <span>%{username}</span> !
-      what_is_new: Quoi de neuf chez Finejoke ?
+      hello_user_html: "Salut, <span>%{username}</span>\u00a0!"
+      what_is_new: "Quoi de neuf chez Finejoke\u00a0?"
       no_news: Rien de spécial...
-      how_to_contact: Puis-je vous contacter ?
+      how_to_contact: "Puis-je vous contacter\u00a0?"
       source_code_html: "Vous pouvez voir le code source <a href=\"%{link}\">ici</a>"
-      email_html: "Vous pouvez également nous contacter par : <a href=\"%{link}\">email</a>"
+      email_html: "Vous pouvez également nous contacter par\u00a0: <a href=\"%{link}\">email</a>"
     navigation:
       menu: Menu
       to_lobby: Vers le lobby

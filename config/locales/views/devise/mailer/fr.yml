@@ -2,19 +2,19 @@ fr:
   devise:
     mailer:
       shared:
-        hello: Salut %{username} !
+        hello: "Salut %{username}\u00a0!"
         sign_off: Cordialement,
         signature: Finejoke
       confirmation_instructions:
-        welcome: Bienvenue %{username} !
-        you_can_confirm: "Vous pouvez confirmer votre adresse e-mail en cliquant sur le lien suivant :"
+        welcome: "Bienvenue %{username}\u00a0!"
+        you_can_confirm: "Vous pouvez confirmer votre adresse e-mail en cliquant sur le lien suivant\u00a0:"
         confirm_link: Confirmer l'email
       email_changed:
-        email_is_being_changed: "Votre email est en cours de modification vers le suivant :"
-        email_has_been_changed: "Votre email a été modifié vers le suivant :"
+        email_is_being_changed: "Votre email est en cours de modification vers le suivant\u00a0:"
+        email_has_been_changed: "Votre email a été modifié vers le suivant\u00a0:"
       password_change:
         password_changed: Votre mot de passe a été changé.
       reset_password_instructions:
-        link_was_requested: "Mot de passe oublié ? Vous pouvez le changer en cliquant sur le lien suivant :"
+        link_was_requested: "Mot de passe oublié\u00a0? Vous pouvez le changer en cliquant sur le lien suivant\u00a0:"
         reset_link: Réinitialiser le mot de passe
         ignore: Veuillez ignorer cet email si vous n'avez pas demandé la réinitialisation. Votre mot de passe restera intact.

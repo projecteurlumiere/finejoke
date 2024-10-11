@@ -1,6 +1,6 @@
 fr:
   application:
-    welcome_title: Bienvenue !
+    welcome_title: "Bienvenue\u00a0!"
     welcome_guest: Connectez-vous ou soyez notre invité
     not_found: Non trouvé
     forbidden: Vous n'avez pas les droits pour effectuer cette action
@@ -39,8 +39,8 @@ fr:
   profiles:
     show_title: "Profil de %{username}"
   rounds:
-    round_created: Tour créé # le jeu commence / continue ?
-    round_not_created: Échec de la création d'un tour # le jeu a échoué à commencer / continuer ?
+    round_created: Tour créé # "le jeu commence / continue\u00a0?"
+    round_not_created: Échec de la création d'un tour # "le jeu a échoué à commencer / continuer\u00a0?"
     setup_created: Votre setup a été soumise
     setup_not_created: Échec de la soumission de votre setup
     you_voted_to_skip_results: Vous avez voté pour sauter les résultats

@@ -23,7 +23,7 @@ fr:
       empty: Vide...
       empty_short: Vide
     chat_form:
-      hello: Salut !
+      hello: "Salut\u00a0!"
       message_text: Texte du message
       send_message: Envoyer le message
     form:
@@ -48,8 +48,8 @@ fr:
     rules:
       rules: Règles
       common: Générales
-      setup_step: "Un joueur compose le setup – le début d'une blague ;"
-      punchline_step: "Puis le reste des joueurs doit inventer des punchlines – les fins drôles de cette blague ;"
+      setup_step: "Un joueur compose le setup – le début d'une blague\u00a0;"
+      punchline_step: "Puis le reste des joueurs doit inventer des punchlines – les fins drôles de cette blague\u00a0;"
       vote_step: "Lorsque les blagues sont prêtes, un vote a lieu pour choisir la plus amusante. Un vote équivaut à un point."
       configurable: Configurable
       host_html: <strong>%{host_link}</strong> est l'hôte du jeu. Il peut expulser d'autres joueurs.
@@ -62,10 +62,10 @@ fr:
       viewers_vote_html: Les spectateurs <strong>peuvent</strong> voter.
       viewers_do_not_vote_html: Les spectateurs <strong>ne peuvent pas</strong> voter.
       no_victory_conditions_html: Il n'y a <strong>aucune</strong> condition de victoire.
-      victory_conditions_are: "Conditions de victoire :"
-      max_rounds_html: "Nombre maximum de tours : <strong>%{n}</strong>"
-      max_points_html: "Nombre maximum de points : <strong>%{n}</strong>."
-      max_round_time_html: "Durée de tour : <strong>%{t} secondes</strong>."
+      victory_conditions_are: "Conditions de victoire\u00a0:"
+      max_rounds_html: "Nombre maximum de tours\u00a0: <strong>%{n}</strong>"
+      max_points_html: "Nombre maximum de points\u00a0: <strong>%{n}</strong>."
+      max_round_time_html: "Durée de tour\u00a0: <strong>%{t} secondes</strong>."
       suggestable_html: "Les suggestions de l'IA sont <strong>disponibles</strong> dans ce jeu."
       virtual_host_html: >
         Commencez votre message de discussion par <strong>\"Mister Host\"</strong>, pour vous adresser à l'hôte virtuel de ce jeu.
