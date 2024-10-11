@@ -60,6 +60,16 @@ class ApplicationController < ActionController::Base
     @title_key ||= key if I18n.exists?(key)
   end
 
+  def strip_params(uri)
+    uri = URI.parse(uri)
+
+    uri.query = nil
+
+    uri.to_s
+  end
+
+  helper_method :strip_params
+
   def replace_query_param(uri, name, value)
     uri = URI.parse(uri)
 

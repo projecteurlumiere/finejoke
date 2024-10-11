@@ -59,19 +59,24 @@ module ApplicationHelper
   def seo_meta_tags
     return unless seo_exposed_page?
 
-    canonical = if current_page?("/") 
-      <<~HTML
-        <link rel="canonical" href="#{root_url}">
-      HTML
-    end
+    default_locale_path = strip_params(request.original_url)
+    canonical_path = params[:locale] ? replace_query_param(default_locale_path, "locale", I18n.locale) : default_locale_path
+
+    canonical = <<~HTML
+      <link rel="canonical" href="#{canonical_path}">
+    HTML
+
+    default_locale_link = <<~HTML
+      <link rel="alternate" hreflang="x-default" href="#{default_locale_path}">
+    HTML
 
     locale_links = I18n.available_locales.map do |l|
       <<~HTML
-        <link rel="alternate" hreflang="#{l}" href="#{replace_query_param(request.original_url, "locale", l)}">
+        <link rel="alternate" hreflang="#{l}" href="#{replace_query_param(default_locale_path, "locale", l)}">
       HTML
      end
 
-    [canonical, *locale_links].join(" ").html_safe
+    [canonical, default_locale_link, *locale_links].join(" ").html_safe
   end
 
   def seo_no_index_tag

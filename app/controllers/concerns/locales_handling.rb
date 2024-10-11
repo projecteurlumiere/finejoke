@@ -8,8 +8,8 @@ module LocalesHandling
       user = current_user || (!new_guest? && current_or_guest_user)
 
       # user can be false sometimes, not just nil
-      locale = (user && user.locale) || 
-               params[:locale] ||
+      locale = params[:locale] ||
+               (user && user.locale) || 
                extract_locale_from_accept_language_header ||
                I18n.default_locale
 
