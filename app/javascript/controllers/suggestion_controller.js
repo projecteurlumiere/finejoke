@@ -59,12 +59,19 @@ export default class extends Controller {
 
       this.#scrollPlaceholder(placeholder, typeSpeed, suggestion)
     } catch (error) {
-       if (this.typed) {
-         this.typed.destroy()
-         this.typed = undefined
-       }
-       console.log(error);
-       this.userInputTarget.value = suggestion
+      try {
+        if (this.typed) {
+          this.typed.destroy()
+        }
+      } catch (error) {
+        console.log(error)
+        this.typed = undefined
+      }
+
+      if (placeholder) { this.#removePlaceholder(placeholder); }
+    } finally {
+      this.userInputTarget.value = suggestion;
+      this.#toggleInput("enable")
     }
   }
 
