@@ -78,18 +78,12 @@ body:has(main > #authentication) {
   }
 }
 
-:root[lang="fr"] {
+:root[lang="ru"], 
+:root[lang="fr"],
+:root[lang="es"] {
   #authentication {
     .buttons {
-      @media(max-width: 420px) { flex-direction: column; }
-    }
-  }
-}
-
-:root[lang="ru"] {
-  #authentication {
-    .buttons {
-      @media(max-width: 374px) { flex-direction: column; }
+      @media(max-width: 450px) { flex-direction: column; }
     }
   }
 }

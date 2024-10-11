@@ -1,0 +1,18 @@
+es:
+  devise:
+    passwords:
+      form:
+        form_aria: Formulario de restablecimiento de contraseña
+        email: Correo electrónico
+        email_aria: Dirección de correo electrónico
+        restore_password_html: Restablecer contraseña
+        back: ¡Ah! Ahora lo recuerdo
+      edit:
+        heading: Restablecimiento de contraseña
+        token_expired: "El token de restablecimiento de contraseña ha expirado. Por favor, solicite el restablecimiento de contraseña nuevamente."
+        password: Nueva contraseña
+        password_aria: Ingrese la nueva contraseña (mínimo %{min_length} símbolos)
+        password_confirm: Una vez más
+        password_confirm_aria: Confirmar contraseña
+        save: Guardar
+        back: Regresar

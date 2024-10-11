@@ -1,0 +1,5 @@
+es:
+  locale:
+    edit:
+      form_aria: Cambiar idioma
+      select_aria: Elegir idioma

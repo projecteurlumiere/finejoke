@@ -1,0 +1,13 @@
+es:
+  layouts:
+    application:
+      title: Finejoke
+      description: >
+        Finejoke es un juego gratuito, donde los jugadores crean chistes divertidos. 
+        Los chistes más graciosos obtienen más puntos.
+    user_profile:
+      you_are_guest: Cuenta de invitado
+      wanna_sign_up: Regístrate
+    user_status:
+      quit_game: Salir
+      currently_in_game: En juego

@@ -1,0 +1,11 @@
+es:
+  devise:
+    sessions:
+      form:
+        form_aria: Formulario de inicio de sesión
+        email: Correo electrónico
+        email_aria: Dirección de correo electrónico
+        password: Contraseña
+        password_aria: Contraseña
+        sign_in: Acceder
+        remain_guest: Cuenta de invitado

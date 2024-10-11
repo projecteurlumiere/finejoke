@@ -9,7 +9,10 @@
 <% end %>
 
 <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-  <%= link_to t(:".forgot_password_html"), new_password_path(resource_name, params: { locale: I18n.locale }), class: "button danger", data: { turbo_frame: "authentication-form" } %>
+  <%= link_to t(:".forgot_password_html"), new_password_path(resource_name, params: { locale: I18n.locale }), 
+    class: "button danger", 
+    style: ("white-space: wrap;" if I18n.locale == :es), 
+    data: { turbo_frame: "authentication-form" } %>
 <% end %>
 
 <%# skipping %>

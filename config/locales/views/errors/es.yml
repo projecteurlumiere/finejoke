@@ -1,0 +1,18 @@
+es:
+  errors:
+    shared: 
+      to_lobby: Al lobby
+    "403":
+      unauthorized: ¡No autorizado!
+      cannot_do_the_impossible: Parece que estaba intentando hacer algo que no debería.
+    "404":
+      wasted: ¡No encontrado!
+      page_does_not_exist: La página no existe. Quizás estaba buscando el juego que ya ha concluido.
+    "406":
+      wrong_format: ¡No aceptable!
+      reason: >
+        Quizás el sitio web no se haya cargado correctamente cuando realizó esta acción. 
+        O podría tener JavaScript deshabilitado.
+    "500":
+      something_went_wrong: ¡Algo salió mal!
+      reason: Ocurrió un error inesperado en el servidor.

@@ -1,0 +1,46 @@
+es:
+  devise:
+    registrations:
+      edit:
+        to_lobby: "Al lobby"
+      edit_form:
+        edit: Editar
+        important_settings: Configuraciones importantes (puede omitirlas)
+        email_not_confirmed: ¡Correo electrónico no confirmado!
+        awaiting_email_confirmation_html: >
+          Algunas funciones pueden no estar disponibles para usted.
+          Si no ha recibido el mensaje de confirmación,
+          presione el botón "Reenviar" a continuación,
+          o actualice su dirección de correo electrónico en esta página y guarde los cambios.
+        send_confirmation: Reenviar
+        locale_settings: Configuraciones de idioma
+        language: Idioma
+        new_username: ¿Nuevo nombre de usuario?
+        new_username_aria: Ingrese un nuevo nombre de usuario si desea cambiarlo
+        new_email: ¿Nuevo correo electrónico?
+        new_email_aria: Ingrese una nueva dirección de correo electrónico si desea cambiarla
+        new_password: ¿Nueva contraseña?
+        new_password_aria: Ingrese una nueva contraseña si desea cambiarla
+        confirm_password: Una vez más
+        confirm_password_aria: Confirme la contraseña si desea cambiarla
+        delete_account: ¿Eliminar cuenta?
+        delete_account_prompt: ¿Está seguro de que desea eliminar su cuenta? ¡Se perderán estadísticas y premios!
+        privacy_settings: Configuraciones de privacidad
+        show_jokes: Mostrar chistes
+        show_awards: Mostrar premios
+        confirm: Confirme los cambios ingresando su contraseña actual
+        current_password: Contraseña
+        current_password_aria: Confirme los cambios ingresando su contraseña actual
+        save: Guardar
+        back: Regresar
+      form: 
+        form_aria: Formulario de nueva cuenta
+        email: Correo electrónico
+        email_aria: Dirección de correo electrónico
+        username: Nombre de usuario
+        username_aria: Nombre de usuario
+        password: Contraseña
+        password_aria: Contraseña (mínimo %{min_length} símbolos)
+        password_confirm: Una vez más
+        password_confirm_aria: Confirmar contraseña
+        create_account: Crear

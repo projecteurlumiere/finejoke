@@ -1,0 +1,35 @@
+es:
+  profiles:
+    show:
+      to_lobby: Al lobby
+      jokes: Chistes
+      profile: Perfil
+      jokes_hidden: ¡Los chistes del usuario %{username} están ocultos!
+      no_jokes: No hay chistes
+      no_more_jokes: No hay más chistes
+      get_more_jokes: Obtener más chistes
+    catalogue:
+      best: Mejores
+      recent: Recientes
+      jokes: Chistes
+      setups: Premisas
+      punchlines: Remates
+      downloading_jokes: Solicitando chistes
+    summary:
+      profile: Perfil
+      username: Nombre de usuario
+      in_game_since: En juego desde
+      awards_received: Premios recibidos
+      points_received: Puntos recibidos
+      games_won: Juegos ganados
+      games_finished: Juegos finalizados
+      setups_created: Premisas creadas
+      punchlines_created: Remates creados
+      suggestions_requested: Sugerencias solicitadas
+      profile_settings: Configuraciones
+      sign_out: Cerrar sesión
+      sign_out_confirm: ¿Está seguro de que desea cerrar sesión?
+      sign_up: Registrarse
+    mobile_navigation:
+      jokes: Chistes
+      profile: Perfil

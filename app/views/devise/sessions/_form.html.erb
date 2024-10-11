@@ -26,15 +26,18 @@
       <%= f.hidden_field :remember_me, value: true %>
     <% end %>
   <% end %>
+
   <input type="submit" 
     form="new-session" 
     value="<%= t(:".sign_in") %>" 
     data-turbo-frame="_top">
+
   <%= render "devise/shared/links" %>
   
   <%= button_to t(:".remain_guest"), guests_path(params: { locale: I18n.locale }), 
     params: { referrer: session[:referrer] || games_path }, 
-    data: { turbo_frame: "_top"} %>
+    data: { turbo_frame: "_top"},
+    style: ("white-space: wrap;" if I18n.locale == :es) %>
 
   <%# link_to t(:".remain_guest"), session[:referrer] || root_path, 
     class: "button", 

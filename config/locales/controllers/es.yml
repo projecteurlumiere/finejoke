@@ -1,0 +1,72 @@
+es:
+  application:
+    welcome_title: ¡Bienvenido!
+    welcome_guest: Inicia sesión o sé nuestro invitado
+    not_found: No encontrado
+    forbidden: No tienes derechos para realizar esta acción
+    unacceptable: Formato inaceptable solicitado
+    internal_server_error: Algo salió mal
+  guests:
+    you_are_guest: Has iniciado sesión como invitado
+  awards:
+    award_given: Premio otorgado
+    award_not_given: "No se pudo otorgar un premio"
+  games:
+    index_title: Lobby
+    show_title: En juego %{game_name}
+    cannot_show_game: El juego no está disponible para los espectadores
+    game_created: Su juego ha sido creado
+    game_created_with_virtual_host: Su juego ha sido creado, y el Señor Presentador va a asistir
+    game_created_without_virtual_host: Su juego ha sido creado, pero el Señor Presentador está ocupado ahora
+    game_not_created: No se pudo crear un juego
+    game_destroyed: El juego ha sido eliminado
+    join_game: Se ha unido al juego
+    join_game_failed: No se pudo unir al juego
+    leave_game: Ha salido del juego
+    leave_game_failed: No se pudo salir del juego
+    kick_user: Ha expulsado al usuario
+    kick_user_fail: No se pudo expulsar al usuario
+    game_over: Fin del juego
+    already_in_game: Ya se ha unido a un juego
+  jokes:
+    joke_created: Su chiste ha sido enviada
+    joke_not_created: No se pudo enviar una chiste
+    vote_counted: Ha emitido un voto
+    vote_not_counted: No se pudo emitir un voto
+  messages:
+    message_sent: Su mensaje ha sido enviado
+    message_not_sent: No se pudo enviar el mensaje
+  profiles:
+    show_title: "Perfil de %{username}"
+  rounds:
+    round_created: Ronda creada # ¿el juego comienza/continúa?
+    round_not_created: No se pudo crear una ronda # ¿el juego no pudo comenzar/continuar?
+    setup_created: Su premisa ha sido enviada
+    setup_not_created: No se pudo enviar su premisa
+    you_voted_to_skip_results: Ha votado para omitir los resultados
+  suggestions:
+    setup_suggested: Sugerencia de premisa recibida
+    setup_not_suggested: No se pudo recibir la sugerencia de premisa
+    punchline_suggested: Sugerencia de remate recibida
+    punchline_not_suggested: No se pudo recibir la sugerencia de remate
+  confirmation:
+    # new_title: Reenviar Carta de Confirmación
+    # show_title: Confirmación por Correo Electrónico
+  passwords:
+    new_title: Restablecer Contraseña
+    edit_title: Restablecer Contraseña
+  registrations:
+    new_title: Registrarse
+    edit_title: Editar Perfil
+  sessions:
+    new_title: Iniciar Sesión
+  # unlocks:
+    # new: 
+    # show:
+  errors:
+    not_found_title: 404 No Encontrado
+    not_authorized_title: 403 No Autorizado
+    not_acceptable_title: 406 No Aceptable
+    internal_server_error_title: 500 Error Interno del Servidor
+  root:
+    show_title: Menú

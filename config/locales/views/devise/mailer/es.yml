@@ -1,0 +1,20 @@
+es:
+  devise:
+    mailer:
+      shared:
+        hello: ¡Hola %{username}!
+        sign_off: Atentamente,
+        signature: Finejoke
+      confirmation_instructions:
+        welcome: ¡Bienvenido %{username}!
+        you_can_confirm: "Puede confirmar su dirección de correo electrónico haciendo clic en el siguiente enlace:"
+        confirm_link: Confirmar correo electrónico
+      email_changed:
+        email_is_being_changed: "Su correo electrónico está siendo cambiado a lo siguiente:"
+        email_has_been_changed: "Su correo electrónico ha sido cambiado a lo siguiente:"
+      password_change:
+        password_changed: Su contraseña ha sido cambiada.
+      reset_password_instructions:
+        link_was_requested: "¿Olvidó su contraseña? Puede cambiarla haciendo clic en el siguiente enlace:"
+        reset_link: Restablecer contraseña
+        ignore: Por favor, ignore este correo electrónico si no ha solicitado el restablecimiento. Su contraseña permanecerá intacta.

@@ -1,0 +1,66 @@
+es:
+  rounds:
+    current_round:
+      # game over: 
+      winner_is: El ganador es
+      his_score_is: Con el puntaje
+      game_over: Fin del juego
+      congratulations: ¡Felicidades!
+      # ROUND TASK FOR PLAYER:
+      # FOR SETUP:
+      create_setup: Componer una premisa
+      create_setup_subheading: Un buen chiste necesita un buen comienzo
+      setup_is_being_created: El jugador compone una premisa
+      setup_is_being_created_subheading: Su turno será pronto
+      # FOR PUNCHLINE:
+      create_punchline: Continuar
+      create_punchline_subheading: Un buen remate es todo lo que necesita # unused
+      punchlines_are_being_created: Los jugadores escriben remates
+      punchlines_are_being_created_subheading: La votación comenzará pronto
+      # FOR VOTE:
+      vote_for_joke: Votar
+      players_are_voting: Los jugadores están votando
+      # FOR RESULTS
+      round_results: Resultados
+      # ROUND TASK FOR VIEWER:
+      viewer:
+        # FOR SETUP:
+        setup_is_being_created: El jugador compone una premisa
+        setup_is_being_created_subheading: Esperemos que se le ocurra una bonita
+        # FOR PUNCHLINES
+        punchlines_are_being_created: Los jugadores componen remates
+        # FOR VOTE
+        players_are_voting: Los jugadores están votando
+        vote_for_joke: Votar
+        # FOR RESULTS
+        round_results: Resultados de la ronda
+      anon_host: Señor Presentador
+      # INPUT:
+      rules: Reglas
+      rules_content: Algunas reglas # unused
+      # buttons:
+      start: ¡Comenzar!
+      join: Unirse
+      back: Volver al juego
+      skip_results: Nueva ronda
+      wait: Esperar
+      wait_for_new_round: Esperar la siguiente ronda
+    form:
+      enter_text: Ingrese texto...
+      enter_text_full_for_setup: Ingrese el texto de la premisa
+      enter_text_full_for_punchline: Ingrese el texto del remate
+      done: Hecho
+    suggestion_form:
+      ask_ai: IA, ¡ayúdame!
+    jokes_container:
+      vote: Votar
+      revote: Volver a votar
+      wait: Esperar
+      join: Unirse
+    joke:
+      anon: Anónimo
+      anon_host: Señor Presentador
+    no_jokes:
+      players: Los jugadores
+      join_the_game: se unen al juego
+      and_do_not_play: ¡Y no jueguan! Todos, ríete ahora.

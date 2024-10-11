@@ -1,0 +1,71 @@
+es:
+  games:
+    index:
+      rooms: Salas
+      new_game: Nuevo juego
+      connect: Conectar
+      view: Ver
+      create: Crear
+      new: Nuevo
+    catalogue:
+      rooms: Salas
+      no_games: No hay juegos...
+    game:
+      back_to_lobby: Al lobby
+      game: Juego
+      chat: Chat
+    game_user:
+      to_profile: Al perfil
+      kick: Expulsar
+      empty: Vacío
+    chat:
+      chat: Chat
+      empty: Vacío...
+      empty_short: Vacío
+    chat_form:
+      hello: ¡Hola!
+      message_text: Texto del mensaje
+      send_message: Enviar mensaje
+    form:
+      name: Nombre
+      enter_name: Ingrese el nombre
+      extra_settings: Configuraciones
+      max_players: Máx. jugadores
+      max_round_time: Tiempo de ronda (segundos)
+      victory_conditions: Condiciones de victoria
+      max_rounds: Máx. rondas
+      max_rounds_aria: Habilitar condición de victoria por máximo de rondas
+      max_points: Máx. puntos
+      max_points_aria: Habilitar condición de victoria por máximo de puntos
+      none: "No"
+      access: Acceso
+      private: Privado (no aparece en el lobby)
+      open_for_viewers: Abierto para espectadores
+      viewers_vote: Los espectadores votan
+      ai: Inteligencia Artificial
+      suggestable: Sugerencias de IA
+      virtual_host: Señor Presentador
+    rules:
+      rules: Reglas
+      common: General
+      setup_step: "Un jugador compone el premisa de un chiste;"
+      punchline_step: "Luego, el resto de los jugadores piensa en remates divertidos para el premisa;"
+      vote_step: Cuando los chistes están listos, se realiza una votación para elegir el más divertido. Un voto equivale a un punto.
+      configurable: Configurable
+      host_html: <strong>%{host_link}</strong> es el anfitrión del juego. Puede expulsar a otros jugadores.
+      private_html: >
+        Este juego es <strong>privado</strong>. 
+        No aparece en el lobby. 
+        Los chistes creados en este juego no se añadirán a los perfiles de los jugadores.
+        Comparta el enlace a esta página con sus amigos para invitarlos.
+      public_html: Este juego es <strong>público</strong>. Es visible en el lobby.
+      viewers_vote_html: Los espectadores <strong>pueden</strong> votar.
+      viewers_do_not_vote_html: Los espectadores <strong>no pueden</strong> votar.
+      no_victory_conditions_html: No hay <strong>condiciones</strong> de victoria.
+      victory_conditions_are: "Condiciones de victoria:"
+      max_rounds_html: "Número máximo de rondas: <strong>%{n}</strong>"
+      max_points_html: "Número máximo de puntos: <strong>%{n}</strong>."
+      max_round_time_html: "Duración de la ronda: <strong>%{t} segundos</strong>."
+      suggestable_html: "Las sugerencias de IA son <strong>disponibles</strong> en este juego."
+      virtual_host_html: >
+        Comience su mensaje de chat con <strong>\"Señor Presentador\"</strong> para dirigirse al anfitrión virtual de este juego.
