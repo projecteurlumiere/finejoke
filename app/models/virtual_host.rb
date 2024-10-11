@@ -201,30 +201,31 @@ class VirtualHost < ApplicationRecord
   end
 
   # look for summary
-  # if there is summary, look for everything that is later than summary
-  # if there is summary and summary + the latter >= 10 then make another summary
-  # if there is no summary, give 10 last
+  # if there is no summary, 10 last messages is the context
+  # if among these 10 messages a summary exist that's being requested - use previous summary
+  # if among there these 10 messages no pending summary and there is 10 or more of them - request noew summary
   def prompts_history
-    transaction do
-      summary_prompt = self.prompts.where(summary: true).last
-      prompts = if summary_prompt 
-                  self.prompts.where("id > ?", summary_prompt.id)
-                else
-                  self.prompts.last(10)
-                end
+    # content "0" means prompt is being requested
+    summary_prompt = self.prompts.where(summary: true).where.not(content: "0").last
+    latest_prompts = if summary_prompt 
+                self.prompts.where("id > ?", summary_prompt.id).last(10)
+              else
+                self.prompts.last(10)
+              end
 
-      if prompts.length >= 10
-        messages = summary_messages(prompts)
-        prompts = [ request_summary(messages) ]
-      end
-
-      prompts.map do |p|
-        {
-          role: p.role,
-          content: p.content
-        }
-      end
+    if latest_prompts.length >= 10 && latest_prompts&.none? { |p| pending_summary_request?(p) }
+      messages = summary_messages(prompts)
+      latest_prompts = [ request_summary(messages) ]
     end
+
+    latest_prompts.compact.map do |p|
+      next nil if pending_summary_request?(p)
+
+      {
+        role: p.role,
+        content: p.content
+      }
+    end.compact
   end
 
   def summary_messages(prompts)
@@ -240,14 +241,26 @@ class VirtualHost < ApplicationRecord
     ]
   end
   
+  # consider offloading this to a job
   def request_summary(messages)
+    # content "0" is to signify that prompt is being requested
+    prompt = prompts.create(
+      summary: true,
+      role: "system",
+      content: "0"
+    )
+
     response = request(messages)
     message = response["choices"][0]["message"]
 
-    prompts.create(
-      summary: true,
-      role: "system", 
-      content: "Here is the summary of some previous messages: #{message["content"]}",
-    )
+    prompt.update_attribute(:content, "Here is the summary of some previous messages: #{message["content"]}")
+    prompt
+  rescue
+    logger.error "Failed to request summary!"
+    prompt.destroy if prompt&.content == "0"
+  end
+
+  def pending_summary_request?(prompt)
+    prompt.content == "0"
   end
 end
