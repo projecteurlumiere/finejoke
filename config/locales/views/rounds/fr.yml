@@ -18,7 +18,7 @@ fr:
       punchlines_are_being_created: Les joueurs écrivent des punchlines
       punchlines_are_being_created_subheading: Le vote commencera bientôt
       # FOR VOTE:
-      vote_for_joke: Voter
+      vote_for_joke: Votez
       # vote_for_joke_subheading: 
       players_are_voting: Les joueurs votent
       # players_are_voting_subheading:
@@ -35,7 +35,7 @@ fr:
         # punchlines_are_being_created_subheading: 
         # FOR VOTE
         players_are_voting: Les joueurs votent
-        vote_for_joke: Voter
+        vote_for_joke: Votez
         # players_are_voting_subheading:
         # FOR RESULTS
         round_results: Résultats de la tour
@@ -49,8 +49,8 @@ fr:
       join: Rejoindre
       back: Retour au jeu
       skip_results: Nouvelle tour
-      wait: Attendre
-      wait_for_new_round: Attendre la prochaine ronde
+      wait: Attendez
+      wait_for_new_round: Attendez la prochaine ronde
     form:
       enter_text: Entrez du texte...
       enter_text_full_for_setup: Entrez le texte du setup
@@ -61,7 +61,7 @@ fr:
     jokes_container:
       vote: Voter
       revote: Revoter
-      wait: Attendre
+      wait: Attendez
       join: Rejoindre
     joke:
       anon: Anon

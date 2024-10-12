@@ -8,17 +8,17 @@ es:
       congratulations: ¡Felicidades!
       # ROUND TASK FOR PLAYER:
       # FOR SETUP:
-      create_setup: Componer una premisa
+      create_setup: Componga una premisa
       create_setup_subheading: Un buen chiste necesita un buen comienzo
       setup_is_being_created: El jugador compone una premisa
       setup_is_being_created_subheading: Su turno será pronto
       # FOR PUNCHLINE:
-      create_punchline: Continuar
+      create_punchline: Continúe 
       create_punchline_subheading: Un buen remate es todo lo que necesita # unused
       punchlines_are_being_created: Los jugadores escriben remates
       punchlines_are_being_created_subheading: La votación comenzará pronto
       # FOR VOTE:
-      vote_for_joke: Votar
+      vote_for_joke: Vote
       players_are_voting: Los jugadores están votando
       # FOR RESULTS
       round_results: Resultados
@@ -31,7 +31,7 @@ es:
         punchlines_are_being_created: Los jugadores componen remates
         # FOR VOTE
         players_are_voting: Los jugadores están votando
-        vote_for_joke: Votar
+        vote_for_joke: Vote
         # FOR RESULTS
         round_results: Resultados de la ronda
       anon_host: Señor Presentador
@@ -43,8 +43,8 @@ es:
       join: Unirse
       back: Volver al juego
       skip_results: Nueva ronda
-      wait: Esperar
-      wait_for_new_round: Esperar la siguiente ronda
+      wait: Esperamos
+      wait_for_new_round: Esperamos la siguiente ronda
     form:
       enter_text: Ingrese texto...
       enter_text_full_for_setup: Ingrese el texto de la premisa
@@ -53,8 +53,8 @@ es:
     suggestion_form:
       ask_ai: Una pista
     jokes_container:
-      vote: Votar
-      revote: Volver a votar
+      vote: Vote
+      revote: Re-votar
       wait: Esperar
       join: Unirse
     joke:
