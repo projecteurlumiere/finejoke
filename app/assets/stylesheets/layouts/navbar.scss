@@ -11,6 +11,7 @@ header {
     display: grid;
     align-items: center;
     height: 100%;
+    max-height: 4rem;
 
     .start {
       form {
@@ -20,6 +21,9 @@ header {
       .button,
       button {
         box-sizing: border-box;
+        // 64px/4rem is maximum nav size;
+        // sometimes button gets one pixel taller than it should. 
+        max-height: 4rem; 
       }
     }
 
