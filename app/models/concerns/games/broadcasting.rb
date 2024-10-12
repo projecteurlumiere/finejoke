@@ -34,7 +34,8 @@ module Games
               votes_change: votes_change.transform_keys(&:to_s)
             })
         broadcast_replace_later_to lobby_stream_name,
-          partial: "games/game_entry", 
+          partial: "games/game_entry_n_users",
+          target: "game_#{id}_n_players",
           locals: { game_id: id }
       end
 

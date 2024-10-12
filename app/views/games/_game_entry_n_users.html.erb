@@ -1,0 +1,6 @@
+<% game = Game.find_by(id: game_id) if defined? game_id %>
+<% if game %>
+  <span id="<%= "#{dom_id(game)}_n_players" %>">
+    <%= game.n_players %> / <%= game.max_players %> 
+  </span>
+<% end %>

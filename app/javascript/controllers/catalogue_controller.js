@@ -15,20 +15,30 @@ export default class extends Controller {
     this.formTarget.requestSubmit();
   }
 
+  // the following select-related things work in the lobby game catalogue only
+
+  entryTargetDisconnected(el) {
+    if (el.classList.contains("select")) {
+      this.#deselect(el);
+    }
+  } 
+
   select(e) {
-    if (e.currentTarget.classList.contains("select")) { this.#deselect(e); return }
+    const el = e.currentTarget
+
+    if (el.classList.contains("select")) { this.#deselect(el); return }
     this.#deselectTheRest();
 
-    this.connectTarget.parentNode.action = e.currentTarget.dataset.joinPath;
-    this.viewTarget.href = e.currentTarget.dataset.viewPath;
-    e.currentTarget.classList.add("select")
+    this.connectTarget.parentNode.action = el.dataset.joinPath;
+    this.viewTarget.href = el.dataset.viewPath;
+    el.classList.add("select")
 
     this.#removeDisabled();
   }
 
-  #deselect(e) {
+  #deselect(el) {
     this.#addDisabled();
-    e.currentTarget.classList.remove("select")
+    el.classList.remove("select")
 
     this.connectTarget.parentNode.action = "";
     this.viewTarget.href = "";
