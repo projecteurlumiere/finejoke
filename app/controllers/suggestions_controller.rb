@@ -6,7 +6,7 @@ class SuggestionsController < ApplicationController
   before_action :authenticate_for_ai, if: :authentication_required_for_ai?, except: %i[show_quota]
 
   def suggest_setup
-    if @suggestion.save
+    if @suggestion.output
       flash.now[:notice] = t(:".setup_suggested")
     else
       flash.now[:alert] = t(:".setup_not_suggested")
@@ -15,7 +15,7 @@ class SuggestionsController < ApplicationController
   end
 
   def suggest_punchline
-    if @suggestion.save
+    if @suggestion.output
       flash.now[:notice] = t(:".punchline_suggested")
     else
       flash.now[:alert] = t(:".punchline_not_suggested")
@@ -31,6 +31,9 @@ class SuggestionsController < ApplicationController
 
   def set_suggestion
     @suggestion = Suggestion.new(user: current_or_guest_user, **suggestion_params)
+    return if @suggestion.save
+
+    @suggestion.reuse_previous_suggestion
   end
 
   def suggestion_params

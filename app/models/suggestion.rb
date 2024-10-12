@@ -75,7 +75,7 @@ class Suggestion < ApplicationRecord
     self.output = ai_response["choices"][0]["message"]["content"]
   rescue => e
     self.error = e
-    reuse_previous_suggestion
+    throw :abort
   end
 
   def prepare_params
@@ -153,18 +153,23 @@ class Suggestion < ApplicationRecord
   end
 
   def reuse_previous_suggestion
-    throw :abort unless for_setup?
+    return unless for_setup?
 
     old_suggestion = Suggestion
-                     .where(user_input: nil)
+                     .where(user_input: nil, locale:, target:)
                      .order("RANDOM()")
                      .limit(1)
                      .pluck(:id, :output)[0]
 
-    throw :abort if old_suggestion.none?
+    return if old_suggestion.blank?
 
-    add_suggestion_to_user(old_suggestion[0])
-    self.output = old_suggestion[1]
+    transaction do 
+      charge_user
+      add_suggestion_to_user(old_suggestion[0])
+      self.output = old_suggestion[1]
+    end
+
+    user.reload
   end
 
   def add_suggestion_to_user(id = self.id)
