@@ -45,9 +45,9 @@ class Game < ApplicationRecord
 
   after_create_commit :broadcast_game_start, if: :public?
 
+  before_destroy -> { broadcast_remove_to_lobby }, prepend: true
   before_destroy -> { virtual_host&.destroy }, prepend: true, if: :private?
 
-  after_destroy_commit -> { broadcast_remove_to_lobby }, if: -> { !finished? }
   after_destroy_commit -> { broadcast_redirect_to(game_over_path(self)) }
 
   def set_default_locale

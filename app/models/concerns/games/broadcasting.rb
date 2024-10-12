@@ -33,7 +33,7 @@ module Games
               game_id: self.id, 
               votes_change: votes_change.transform_keys(&:to_s)
             })
-        broadcast_prepend_later_to "lobby", 
+        broadcast_replace_later_to lobby_stream_name,
           partial: "games/game_entry", 
           locals: { game_id: id }
       end
@@ -67,6 +67,8 @@ module Games
       end
       
       def broadcast_remove_to_lobby
+        return if private?
+        
         broadcast_remove_to lobby_stream_name
       end
     end
