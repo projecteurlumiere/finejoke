@@ -57,7 +57,7 @@ fr:
       enter_text_full_for_setup: Entrez le texte de la punchline
       done: Prêt
     suggestion_form:
-      ask_ai: "IA, aide-moi\u00a0!"
+      ask_ai: "Un indice"
     jokes_container:
       vote: Voter
       revote: Revoter

@@ -57,7 +57,7 @@ en:
       enter_text_full_for_setup: Enter punchline text
       done: Done
     suggestion_form:
-      ask_ai: AI, help me!
+      ask_ai: A tip
     jokes_container:
       vote: Vote
       revote: Revote

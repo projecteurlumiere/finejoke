@@ -51,7 +51,7 @@ es:
       enter_text_full_for_punchline: Ingrese el texto del remate
       done: Hecho
     suggestion_form:
-      ask_ai: IA, ¡ayúdame!
+      ask_ai: Una pista
     jokes_container:
       vote: Votar
       revote: Volver a votar
