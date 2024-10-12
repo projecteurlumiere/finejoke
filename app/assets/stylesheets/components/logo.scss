@@ -1,27 +1,37 @@
-.logo,
-.logo * {
-  text-transform: lowercase;
-  text-decoration: none;
-  font-family: var(--press-start-2p);
-  font-size: 1.75rem;
+.logo {
 
-  .full,
-  .short {
-    span:nth-child(odd) {
-      color: var(--accent-alert);
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &, & * {
+    text-transform: lowercase;
+    text-decoration: none;
+    font-family: var(--press-start-2p);
+    font-size: 1.75rem;
+
+
+    .full,
+    .short {
+      span:nth-child(odd) {
+        color: var(--accent-alert);
+      }
+
+      span:nth-child(even) {
+        color: var(--secondary-control-color);
+      }
     }
 
-    span:nth-child(even) {
-      color: var(--secondary-control-color);
+    .short {
+      display: none;
     }
-  }
 
-  .short {
-    display: none;
-  }
-
-  @media(max-width: 700px) {
-    .full { display: none; }
-    .short { display: block; }
+    @media(max-width: 700px) {
+      .full { display: none; }
+      .short { display: block; }
+    }
   }
 }
