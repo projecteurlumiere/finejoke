@@ -24,9 +24,10 @@ header {
     }
 
     .end {
-      display: grid;
-      grid-template-rows: 1fr 1fr 1fr;
-      align-items: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: right;
       position: relative;
       
       > *:not(.notice) {
@@ -61,7 +62,7 @@ header {
       .notice {
         position: absolute;
         right: 0;
-        bottom: 0;
+        top: 100%;
         font-size: 1rem;
         white-space: nowrap;
       }
