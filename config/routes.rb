@@ -23,9 +23,11 @@ Rails.application.routes.draw do
 
   resources :profiles, only: %i[show]
   
+  # devise redirection to beautified links
   devise_scope :user do
     get "/users/sign_in", to: redirect(path: "/sign_in")
     get "/users/sign_up", to: redirect(path: "/sign_up")
+    get "/users/password/new", to: redirect(path: "/forgot_password")
   end
 
   devise_for :users, controllers: {
