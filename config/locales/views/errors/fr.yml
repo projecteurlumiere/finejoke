@@ -1,7 +1,7 @@
 fr:
   errors:
     shared: 
-      to_lobby: Vers le lobby
+      to_lobby: Lobby
     "403":
       unauthorized: "Non autorisé\u00a0!"
       cannot_do_the_impossible: Il semble que vous essayiez de faire quelque chose que vous ne deviez pas faire.

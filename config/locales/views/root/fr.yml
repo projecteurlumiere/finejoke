@@ -9,6 +9,6 @@ fr:
       email_html: "Vous pouvez également nous contacter par\u00a0: <a href=\"%{link}\">email</a>"
     navigation:
       menu: Menu
-      to_lobby: Vers le lobby
+      to_lobby: Lobby
       currently_in_game: En jeu
       my_profile: Mon profil

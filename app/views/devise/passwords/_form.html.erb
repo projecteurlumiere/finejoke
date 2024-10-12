@@ -12,11 +12,11 @@
   <% end %>
 
   <h2 class="wrapper">
-    <button id="password-submit" style="white-space: wrap;" class="selected" type="submit" form="new-password" data-turbo-frame="_top">
+    <button id="password-submit" class="selected wrappable" type="submit" form="new-password" data-turbo-frame="_top">
       <%= t(:".restore_password_html") %>
     </button>
   </h2>
   
   <%= render "devise/shared/links" %>
-  <%= link_to t(:".back"), new_session_path(resource_name, params: { locale: I18n.locale }), class: "button", style: "white-space: wrap;" %>
+  <%= link_to t(:".back"), new_session_path(resource_name, params: { locale: I18n.locale }), class: "button wrappable"" %>
 </turbo-frame>
