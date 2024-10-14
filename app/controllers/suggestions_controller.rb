@@ -1,9 +1,9 @@
 class SuggestionsController < ApplicationController
   before_action :verify_turbo_frame_format, only: %i[show_quota]
   before_action :verify_turbo_stream_format, except: %i[show_quota]
-  before_action :set_suggestion, except: %i[show_quota]
   before_action :authorize_suggestion!
   before_action :authenticate_for_ai, if: :authentication_required_for_ai?, except: %i[show_quota]
+  before_action :set_suggestion, except: %i[show_quota]
 
   def suggest_setup
     if @suggestion.output
