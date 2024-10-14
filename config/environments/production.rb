@@ -89,5 +89,5 @@ Rails.application.configure do
   # TODO
   config.action_mailer.default_url_options = { host: ENV["HOST_NAME"] }
   # config.action_mailer.delivery_method = :letter_opener
-  config.action_mailer.perform_deliveries = false
+  config.action_mailer.perform_deliveries = ENV["STAGING"].present? ? false : true
 end
