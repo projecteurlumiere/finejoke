@@ -172,9 +172,18 @@ class Game < ApplicationRecord
 
   def joinable?(by: nil) # user
     user = by
-    return false if finished?
-    return false if n_players >= max_players
-    return false if user&.game
+    if finished?
+      @unjoinable_reason = :"games.already_finished"
+      return false
+    end
+    if n_players >= max_players
+      @unjoinable_reason = :"games.too_many_players"
+      return false
+    end
+    if user&.game
+      @unjoinable_reason = :"games.already_in_game"
+      return false 
+    end
 
     true
   end

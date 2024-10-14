@@ -27,7 +27,9 @@ en:
     kick_user: You have kicked the user
     kick_user_fail: Failed to kick the user
     game_over: Game over
-    already_in_game: You have already joined a game
+    already_finished: The game has already been finished
+    too_many_players: Too many players in the game
+    already_in_game: You have already joined another game
   jokes:
     joke_created: Your joke has been submitted
     joke_not_created: Failed to submit a joke
@@ -39,8 +41,8 @@ en:
   profiles:
     show_title: "%{username} Profile"
   rounds:
-    round_created: Round created # game starts/continues?
-    round_not_created: Failed to create a round # game failed to start/continue?
+    round_created: Let's go! # game starts/continues
+    round_not_created: The game hasn't started. Are you sure you have enough players?
     setup_created: Your setup has been submitted
     setup_not_created: Failed to submit your setup
     you_voted_to_skip_results: You voted to skip the results

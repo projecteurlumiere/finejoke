@@ -20,7 +20,6 @@ class GamesController < ApplicationController
     end
   end
 
-  # joins game
   def show
     unless user_can_view?
       flash[:alert] = t(:".cannot_show_game")
@@ -56,7 +55,7 @@ class GamesController < ApplicationController
     
     skip_authorization and redirect_to(game_path(@game)) and return if @game.users.include?(current_or_guest_user)
 
-    authorize_game!
+    with_custom_pundit_error_message { authorize_game! }
 
     if @game.add_user(current_or_guest_user)
       redirect_to game_path(@game), notice: t(:".join_game")

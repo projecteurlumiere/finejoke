@@ -27,7 +27,9 @@ fr:
     kick_user: Vous avez expulsé l'utilisateur
     kick_user_fail: Échec de l'expulsion de l'utilisateur
     game_over: Fin du jeu
-    already_in_game: Vous avez déjà rejoint un jeu
+    already_finished: Le jeu est déjà terminé
+    round_created: "Allons-y\u00a0!"
+    round_not_created: Le jeu n'a pas commencé. Avez-vous assez de joueurs ?
   jokes:
     joke_created: Votre blague a été soumise
     joke_not_created: Échec de la soumission d'une blague

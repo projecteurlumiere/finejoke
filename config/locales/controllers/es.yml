@@ -27,7 +27,9 @@ es:
     kick_user: Ha expulsado al usuario
     kick_user_fail: No se pudo expulsar al usuario
     game_over: Fin del juego
-    already_in_game: Ya se ha unido a un juego
+    already_finished: El juego ya ha terminado
+    too_many_players: Hay demasiados jugadores en el juego
+    already_in_game: Ya ha unido a otro juego
   jokes:
     joke_created: Su chiste ha sido enviada
     joke_not_created: No se pudo enviar una chiste
@@ -39,8 +41,8 @@ es:
   profiles:
     show_title: "Perfil de %{username}"
   rounds:
-    round_created: Ronda creada # ¿el juego comienza/continúa?
-    round_not_created: No se pudo crear una ronda # ¿el juego no pudo comenzar/continuar?
+    round_created: ¡Vamos!
+    round_not_created: El juego no ha comenzado. ¿Tienes suficientes jugadores?
     setup_created: Su premisa ha sido enviada
     setup_not_created: No se pudo enviar su premisa
     you_voted_to_skip_results: Ha votado para omitir los resultados

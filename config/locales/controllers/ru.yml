@@ -27,7 +27,9 @@ ru:
     kick_user: Игрок кикнут
     kick_user_fail: Игрок не был кикнут
     game_over: Игра была закрыта
-    already_in_game: Вы уже в игре
+    already_finished: Игра уже окончена
+    too_many_players: В игре слишком много игроков
+    already_in_game: Вы уже присоединились к другой игре
   jokes:
     joke_created: Шутка создана
     joke_not_created: Шутка не создана
@@ -39,8 +41,8 @@ ru:
   profiles:
     show_title: "Профиль %{username}"
   rounds:
-    round_created: Раунд создан # игра началась/продолжилась?
-    round_not_created: Раунд не создан # игра не началась и не продолжилась?
+    round_created: Поехали!
+    round_not_created: Игра не начата. У вас точно достаточно игроков?
     setup_created: Завязка создана
     setup_not_created: Завязка не создана
     you_voted_to_skip_results: Вы проголосовали, что хотите пропустить результаты

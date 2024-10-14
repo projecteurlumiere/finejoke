@@ -25,8 +25,12 @@ class GamePolicy < ApplicationPolicy
   end
 
   def join?
-    @user && has_no_ban?(@user, @game) &&
-      @game.joinable?(by: @user)
+    return false unless @user && has_no_ban?(@user, @game) 
+    
+    return true if @game.joinable?(by: @user)
+    @error_message_key = @game.instance_variable_get(:@unjoinable_reason)
+
+    false
   end
 
   def leave?

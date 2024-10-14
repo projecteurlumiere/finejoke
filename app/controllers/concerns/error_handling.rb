@@ -47,5 +47,12 @@ module ErrorHandling
         render "errors/message", locals: { code: 500 }
       end
     end
+
+    def with_custom_pundit_error_message
+      yield
+    rescue Pundit::NotAuthorizedError => e
+      flash.now[:alert] = t(e.policy.error_message_key, default: t(:"application.forbidden"))
+      raise e
+    end
   end
 end

@@ -27,10 +27,6 @@ class ApplicationController < ActionController::Base
     devise_controller? || current_user || guest_welcomed?
   end
 
-  def authentication_required_for_ai?
-    ENV.fetch("ENABLE_AUTHENTICATION_FOR_AI", "").present?
-  end
-
   # for authentication-related redirection
   def store_referrer
     session[:referrer] = request.path

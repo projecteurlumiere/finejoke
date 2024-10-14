@@ -1,8 +1,8 @@
 class SuggestionsController < ApplicationController
   before_action :verify_turbo_frame_format, only: %i[show_quota]
   before_action :verify_turbo_stream_format, except: %i[show_quota]
-  before_action :authorize_suggestion!
-  before_action :authenticate_for_ai, if: :authentication_required_for_ai?, except: %i[show_quota]
+  before_action :authorize_suggestion!, only: %i[show_quota]
+# before_action :authenticate_for_ai, if: :authentication_required_for_ai?, except: %i[show_quota]
   before_action :set_suggestion, except: %i[show_quota]
 
   def suggest_setup
@@ -31,6 +31,7 @@ class SuggestionsController < ApplicationController
 
   def set_suggestion
     @suggestion = Suggestion.new(user: current_or_guest_user, **suggestion_params)
+    authorize_suggestion!
     return if @suggestion.save
 
     @suggestion.reuse_previous_suggestion
@@ -41,20 +42,6 @@ class SuggestionsController < ApplicationController
   end
   
   def authorize_suggestion!
-    authorize(@suggestion || Suggestion)
-  end
-
-  # this is done because there is no neat way to specify custom error messages from
-  # pundit's poolicies
-  def authenticate_for_ai
-    return if current_user&.confirmed?
-
-    if current_user
-      flash.now[:alert] = t :"devise.failure.unconfirmed"
-    else
-      flash.now[:alert] = t :"devise.failure.unauthenticated"
-    end
-
-    raise Pundit::NotAuthorizedError
+    with_custom_pundit_error_message { authorize(@suggestion || Suggestion) }
   end
 end
