@@ -9,7 +9,7 @@ class MessagesController < ApplicationController
 
     if @message.valid? && @message.broadcast
       response.status = :accepted   
-      flash.now[:notice] = t(:".message_sent")
+      flash.now[:notice] = t(:".message_sent") unless Rails.env.production?
     else
       response.status = :unprocessable_entity
       flash.now[:alert] = t(:".message_not_sent")
