@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     post "rounds/:id/skip_results", to: "rounds#skip_results", as: :round_skip_results
     
     resources :rounds, only: %i[show create update] do
-      resources :jokes, only: %i[index show create]
+      resources :jokes, only: %i[create]
       patch "/jokes/:id/vote", to: "jokes#vote", as: :joke_vote
     end
 

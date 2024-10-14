@@ -6,14 +6,6 @@ class JokesController < ApplicationController
   before_action :set_joke, only: %i[ show vote ]
   before_action :authorize_joke!, only: %i[ show vote ]
 
-  def index
-    raise "not implemented"
-  end
-
-  def show
-    raise "not implemented"
-  end
-
   # creates a joke with punchline
   def create
     @joke = @round.jokes.build(
