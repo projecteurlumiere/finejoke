@@ -30,7 +30,7 @@ module GuestsHandling
     helper_method :new_guest?
 
     def welcome_guest
-      flash[:notice] = t(:"application.welcome_guest")
+      flash.now[:notice] ||= t(:"application.welcome_guest")
 
       store_referrer unless no_authentication_required?
     end
