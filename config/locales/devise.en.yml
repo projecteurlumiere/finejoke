@@ -37,14 +37,16 @@ en:
       updated: "Your password has been changed successfully. You are now signed in."
       updated_not_active: "Your password has been changed successfully."
     registrations:
-      destroyed: "Your account has been successfully deleted."
       signed_up: "Welcome! You have signed up successfully."
       signed_up_but_inactive: "You have signed up successfully. However, your account is not yet activated."
       signed_up_but_locked: "You have signed up successfully. However, your account is locked."
       signed_up_but_unconfirmed: "A message with a confirmation link has been sent to your email address."
       update_needs_confirmation: "You updated your account successfully, but we need to verify your new email address."
       updated: "Your account has been updated successfully."
+      not_updated: "Failed to update account."
       updated_but_not_signed_in: "Your account has been updated successfully, but since your password was changed, you need to sign in again."
+      destroyed: "Your account has been successfully deleted."
+      not_destroyed: "Failed to delete your account. Are you sure you entered the correct password?"
     sessions:
       signed_in: "Signed in successfully."
       signed_out: "Signed out successfully."

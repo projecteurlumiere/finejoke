@@ -25,6 +25,8 @@
     <% if devise_mapping.rememberable? %>
       <%= f.hidden_field :remember_me, value: true %>
     <% end %>
+
+    <input type="hidden" name="locale" value="<%= I18n.locale %>">
   <% end %>
 
   <input type="submit" 

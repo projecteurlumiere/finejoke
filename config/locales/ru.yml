@@ -134,28 +134,28 @@ ru:
   errors:
     format: "%{message}"
     messages:
-      accepted: Нужно подтвердить
-      blank: Не может быть пустым
-      confirmation: Не совпадает с полем выше
-      empty: Не может быть пустым
-      equal_to: Должно быть равным %{count}
-      even: Должно быть чётным
-      exclusion: Имеет зарезервированное значение
-      greater_than: Должно быть больше %{count}
-      greater_than_or_equal_to: Должно быть больше или равно %{count}
-      in: Должно быть в диапазоне %{count}
-      inclusion: Имеет непредусмотренное значение
-      invalid: Имеет неверное значение
-      less_than: Должно быть меньше чем %{count}
-      less_than_or_equal_to: Должно быть меньше или равно %{count}
+      accepted: нужно подтвердить
+      blank: не может быть пустым
+      confirmation: не совпадает с полем выше
+      empty: не может быть пустым
+      equal_to: должно быть равным %{count}
+      even: должно быть чётным
+      exclusion: имеет зарезервированное значение
+      greater_than: должно быть больше %{count}
+      greater_than_or_equal_to: должно быть больше или равно %{count}
+      in: должно быть в диапазоне %{count}
+      inclusion: имеет непредусмотренное значение
+      invalid: имеет неверное значение
+      less_than: должно быть меньше чем %{count}
+      less_than_or_equal_to: должно быть меньше или равно %{count}
       model_invalid: '%{errors}'
-      not_a_number: Не является числом
-      not_an_integer: Не является целым числом
-      odd: Должно быть нечётным
-      other_than: Должно отличаться от %{count}
-      present: Должно быть пустым
-      required: Нужно заполнить
-      taken: Уже сущетсвует
+      not_a_number: не является числом
+      not_an_integer: не является целым числом
+      odd: должно быть нечётным
+      other_than: должно отличаться от %{count}
+      present: должно быть пустым
+      required: нужно заполнить
+      taken: уже существует
       too_long:
         one: Максимум %{count} символ
         few: Максимум %{count} символа

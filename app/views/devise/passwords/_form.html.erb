@@ -9,6 +9,7 @@
         :"aria-label" => t(:".email_aria") %>
       <%= render_errors(resource, :email) %>
     </div>
+    <input type="hidden" name="locale" value="<%= I18n.locale %>">
   <% end %>
 
   <h2 class="wrapper">

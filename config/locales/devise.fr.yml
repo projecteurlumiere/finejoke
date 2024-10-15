@@ -41,8 +41,11 @@ fr:
       signed_up_but_locked: "Vous vous êtes inscrit avec succès. Cependant, votre compte est verrouillé."
       signed_up_but_unconfirmed: "Un message avec un lien de confirmation a été envoyé à votre adresse e-mail."
       update_needs_confirmation: "Vous avez mis à jour votre compte avec succès, mais nous devons vérifier votre nouvelle adresse e-mail."
-      updated: "Votre compte a été mis à jour avec succès."
-      updated_but_not_signed_in: "Votre compte a été mis à jour avec succès, mais comme votre mot de passe a été changé, vous devez vous reconnecter."
+      updated: "Votre compte a été mis à jour avec succès]."
+      not_updated: "Échec de la mise à jour du compte."
+      updated_but_not_signed_in: "Votre compte a été mis à jour avec succès, mais puisque votre mot de passe a été changé, vous devez vous reconnecter."
+      destroyed: "Votre compte a été supprimé avec succès."
+      not_destroyed: "Échec de la suppression de votre compte. Êtes-vous sûr d'avoir entré le bon mot de passe ?"
     sessions:
       signed_in: "Connecté avec succès."
       signed_out: "Déconnecté avec succès."

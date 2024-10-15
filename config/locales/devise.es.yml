@@ -35,14 +35,16 @@ es:
       updated: "Su contraseña ha sido cambiada con éxito. Ahora ha iniciado sesión."
       updated_not_active: "Su contraseña ha sido cambiada con éxito."
     registrations:
-      destroyed: "Su cuenta ha sido eliminada con éxito."
       signed_up: "¡Bienvenido! Se ha registrado con éxito."
       signed_up_but_inactive: "Se ha registrado con éxito. Sin embargo, su cuenta no está activada aún."
       signed_up_but_locked: "Se ha registrado con éxito. Sin embargo, su cuenta está bloqueada."
       signed_up_but_unconfirmed: "Se ha enviado un mensaje con un enlace de confirmación a su dirección de correo electrónico."
       update_needs_confirmation: "Actualizó su cuenta con éxito, pero necesitamos verificar su nueva dirección de correo electrónico."
       updated: "Su cuenta ha sido actualizada con éxito."
+      not_updated: "No se pudo actualizar la cuenta."
       updated_but_not_signed_in: "Su cuenta ha sido actualizada con éxito, pero como se cambió su contraseña, necesita iniciar sesión nuevamente."
+      destroyed: "Su cuenta ha sido eliminada con éxito."
+      not_destroyed: "No se pudo eliminar su cuenta. ¿Está seguro de haber ingresado la contraseña correcta?"
     sessions:
       signed_in: "Inicio de sesión exitoso."
       signed_out: "Cierre de sesión exitoso."
