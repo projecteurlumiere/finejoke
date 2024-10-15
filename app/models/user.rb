@@ -10,6 +10,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :confirmable, :trackable
 
+  validates :username, presence: true, uniqueness: true
+
   before_create :random_name, if: %i[new_record? guest?] 
   has_many :awards, dependent: :destroy
 

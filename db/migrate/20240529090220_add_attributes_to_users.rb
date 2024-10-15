@@ -32,5 +32,7 @@ class AddAttributesToUsers < ActiveRecord::Migration[7.1]
       t.boolean :show_jokes_allowed, default: true
       t.boolean :show_awards_allowed, default: true
     end
+
+    add_index :users, :username, unique: true
   end
 end
