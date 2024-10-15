@@ -2,7 +2,7 @@ ru:
   devise:
     mailer:
       shared:
-        hello: Привет %{username}!
+        hello: Привет, %{username}!
         sign_off: С уважением,
         signature: Файнджоук
       confirmation_instructions:

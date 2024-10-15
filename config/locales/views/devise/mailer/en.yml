@@ -2,7 +2,7 @@ en:
   devise:
     mailer:
       shared:
-        hello: Hi %{username}!
+        hello: Hi, %{username}!
         sign_off: Kind regards,
         signature: Finejoke
       confirmation_instructions:

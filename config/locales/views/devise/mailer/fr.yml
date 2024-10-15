@@ -2,7 +2,7 @@ fr:
   devise:
     mailer:
       shared:
-        hello: "Salut %{username}\u00a0!"
+        hello: "Salut, %{username}\u00a0!"
         sign_off: Cordialement,
         signature: Finejoke
       confirmation_instructions:

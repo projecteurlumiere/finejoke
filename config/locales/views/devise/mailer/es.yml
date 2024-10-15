@@ -2,7 +2,7 @@ es:
   devise:
     mailer:
       shared:
-        hello: ¡Hola %{username}!
+        hello: ¡Hola, %{username}!
         sign_off: Atentamente,
         signature: Finejoke
       confirmation_instructions:
