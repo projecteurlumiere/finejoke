@@ -15,7 +15,8 @@
     <%= form.text_field :name,
       placeholder: t(:".name"), 
       :"aria-label" => t(:".enter_name"), 
-      required: true, 
+      required: true,
+      autocomplete: :off,
       minlength: 1, 
       maxlength: 14, 
       data: { new_game_target: "name" } %>
