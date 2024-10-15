@@ -6,7 +6,7 @@ es:
       no_news: No hay nada realmente...
       how_to_contact: ¿Puedo contactarle?
       source_code_html: "Puede ver el código fuente <a href=\"%{link}\">aquí</a>"
-      email_html: "Además, puede contactar a través de: <a href=\"%{link}\">correo electrónico</a>"
+      email_html: "Además, puede contactar a través de correo electrónico:"
     navigation:
       menu: Menú
       to_lobby: Al lobby

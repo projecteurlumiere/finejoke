@@ -3,7 +3,7 @@ fr:
     application:
       title: Finejoke
       description: >
-        Finejoke est un jeu gratuit, où les joueurs inventent des blagues drôles. 
+        Finejoke est un jeu en ligne gratuit, où les joueurs inventent des blagues drôles. 
         Les blagues les plus comiques obtiennent le plus de points. 
     user_profile:
       you_are_guest: Compte invité

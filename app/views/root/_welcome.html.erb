@@ -17,10 +17,10 @@
       <%= t :".how_to_contact" %>
     </h4>
     <p>
-      <%= t :".source_code_html", link: "" %>
+      <%= t :".source_code_html", link: "https://github.com/projecteurlumiere/finejoke" %>
     </p>
     <p>
-      <%= t :".email_html", link: "" %>
+      <%= t :".email_html" %> <%= contact_email_tag_for(I18n.locale) %>
     </p>
   </section>
 </article>

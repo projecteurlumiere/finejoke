@@ -6,7 +6,7 @@ en:
       no_news: Nothing really...
       how_to_contact: Can I contact you?
       source_code_html: "You can see the source code <a href=\"%{link}\">here</a>"
-      email_html: "Also, you can contact via: <a href=\"%{link}\">email</a>"
+      email_html: "Also, you can contact via email:"
     navigation:
       menu: Menu
       to_lobby: To lobby

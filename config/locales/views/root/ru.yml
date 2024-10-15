@@ -6,7 +6,7 @@ ru:
       no_news: Пока ничего.
       how_to_contact: Как мне связаться?
       source_code_html: "Ознакомиться с исходным кодом можно <a href=\"%{link}\">здесь</a>"
-      email_html: "Также можно связаться по почте: <a href=\"%{link}\">здесь</a>"
+      email_html: "Также можно связаться по электронной почте:"
     navigation:
       menu: Меню
       to_lobby: В лобби

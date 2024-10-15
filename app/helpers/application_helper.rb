@@ -84,4 +84,15 @@ module ApplicationHelper
       <meta name="robots" content="noindex">
     HTML
   end
+
+  EMAILS = {
+    en: "haha@finejoke.lol",
+    ru: "xaxa@finejoke.lol",
+    fr: "hihi@finejoke.lol",
+    es: "jaja@finejoke.lol"
+  }.freeze
+
+  def contact_email_tag_for(locale)
+    link_to EMAILS[locale], "mailto:#{EMAILS[locale]}"
+  end
 end
