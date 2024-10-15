@@ -1,7 +1,13 @@
 class CreateGames < ActiveRecord::Migration[7.1]
+  # requires up/down methods to reverse
   def change
+    execute <<-SQL
+      CREATE SEQUENCE game_seq;
+    SQL
+
     create_table :games, id: false do |t|
       t.string :id, null: false, primary_key: true
+      t.bigint :stat_number, null: false, default: -> { "nextval('game_seq')" } # for statistical purposes
       t.references :host, foreign_key: { to_table: :users }
 
       t.integer :max_players, null: false, default: 10

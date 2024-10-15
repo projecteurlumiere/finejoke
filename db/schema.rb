@@ -39,6 +39,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_05_132159) do
   end
 
   create_table "games", id: :string, force: :cascade do |t|
+    t.bigint "number", default: -> { "nextval('game_seq'::regclass)" }, null: false
     t.bigint "host_id"
     t.integer "max_players", default: 10, null: false
     t.integer "max_round_time", default: 90, null: false
@@ -187,6 +188,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_05_132159) do
     t.integer "locale", default: 0, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["username"], name: "index_users_on_username", unique: true
   end
 
   create_table "virtual_hosts", force: :cascade do |t|
