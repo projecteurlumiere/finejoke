@@ -36,7 +36,7 @@ class RoundsController < ApplicationController
   # PATCH/PUT /rounds/1
   # updates round with setup
   def update
-    if @round.update(round_params)
+    if @round.lock!.update(round_params)
       response.status = :accepted
       flash.now[:notice] = t(:".setup_created")
     else

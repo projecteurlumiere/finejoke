@@ -86,16 +86,18 @@ class Game < ApplicationRecord
     transaction do
       self.users.include?(user) ? self.users.delete(user) : (return false)
       self.decrement!(:n_players)
+      if n_players.zero?
+        user.reset_game_attributes
+        finished!
+        schedule_prematurely_ended_game_destroy
+        return true
+      end
+
       on_halt! if (ongoing? || waiting?) && not_enough_players?
       skip_round if ongoing? && user.lead?
       was_host = user.host?
 
       user.reset_game_attributes
-      if n_players.zero?
-        finished!
-        schedule_prematurely_ended_game_destroy
-        return true
-      end
 
       self.host = users.first; broadcast_current_round if was_host
 

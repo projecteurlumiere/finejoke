@@ -60,6 +60,8 @@ es:
     joke:
       anon: Anónimo
       anon_host: Señor Presentador
+    no_setup:
+      mock: Esta ronda se va a saltar porque he abandonado el juego. ¡Lo siento!
     no_jokes:
       players: Los jugadores
       join_the_game: se unen al juego

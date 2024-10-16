@@ -66,6 +66,8 @@ en:
     joke:
       anon: Anon
       anon_host: Mister Host
+    no_setup:
+      mock: This round is going to be skipped because I have left the game. Sorry! 
     no_jokes:
       players: Players
       join_the_game: Join the game

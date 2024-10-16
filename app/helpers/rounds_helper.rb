@@ -43,7 +43,7 @@ module RoundsHelper
 
     raise "why is it nil?" if messages.nil?
 
-    @setup = messages[2]
+    @render_setup = messages[2]
 
     [
       tag.h2(messages[0]),
@@ -147,21 +147,25 @@ module RoundsHelper
 
   def render_setup_for(round)
     # declared in round_task_for
-    return unless @setup
+    return unless @render_setup
 
-    username = round.setup_model&.user&.username  || t(".anon_host")
+    username = round.setup_model&.user&.username  || t(:".anon_host")
 
+    setup = round.setup || t(:"rounds.no_setup.mock")
+    setup_short = round.setup_short
+
+    # should excavate this into separate a view template
     setup_p = tag.p(class: "bubble top shadow", 
                     data: {
                       action: "mouseup->setup#toggleView"
                     }) do
       [
-        tag.span(round.setup, 
+        tag.span(setup, 
           data: { setup_target: :long },
-          class: ("hidden" if !round.punchline_stage? && round.setup_short)),
-        (tag.span("<...> #{round.setup_short}", 
+          class: ("hidden" if !round.punchline_stage? && setup_short)),
+        (tag.span("<...> #{setup_short}", 
           data: { setup_target: :short },
-          class: ("hidden" if round.punchline_stage?)) if round.setup_short)
+          class: ("hidden" if round.punchline_stage?)) if setup_short)
       ].compact.join(" ").html_safe
     end
 

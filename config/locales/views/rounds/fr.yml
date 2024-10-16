@@ -66,6 +66,8 @@ fr:
     joke:
       anon: Anon
       anon_host: Monsieur l'Animateur
+    no_setup:
+      mock: Ce tour va être sauté car j'ai quitté le jeu. Désolé !
     no_jokes:
       players: Joueurs
       join_the_game: "Rejoignent le jeu et ne jouent pas\u00a0!"
