@@ -1,10 +1,10 @@
 class JokesController < ApplicationController
   before_action :verify_turbo_stream_format
 
-  before_action :set_game, only: %i[ show create vote]
-  before_action :set_round, only: %i[ show create vote ]
-  before_action :set_joke, only: %i[ show vote ]
-  before_action :authorize_joke!, only: %i[ show vote ]
+  before_action :set_game, only: %i[ create vote]
+  before_action :set_round, only: %i[ create vote ]
+  before_action :set_joke, only: %i[ vote ]
+  before_action :authorize_joke!, only: %i[ vote ]
 
   # creates a joke with punchline
   def create
