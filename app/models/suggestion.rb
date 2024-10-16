@@ -4,9 +4,9 @@ class Suggestion < ApplicationRecord
 
   # when disabled, suggestions won't be visible & won't pass pundit check
   DISABLEABLE_KEY = "DISABLE_SUGGESTION".freeze
+  TOPICS = YAML.load(File.read(File.join(Rails.root.join("db", "yml", "joke_topics.yml"))))["joke_topics"].freeze
   
   has_and_belongs_to_many :jokes, dependent: :nullify
-
 
   SETUP_MAX_TOKENS = Joke::SETUP_MAX_LENGTH / 4 * 3
   PUNCHLINE_MAX_TOKENS = Joke::PUNCHLINE_MAX_LENGTH / 4 * 3
@@ -95,15 +95,16 @@ class Suggestion < ApplicationRecord
   def request_setup_message
     <<~HEREDOC
       You are a comedian assistant.
-      You assist in creation of funniest and spiciest jokes. 
-      Topics can be any and you are very creative at choosing original topics.
       Right now you have to suggest a joke's beginning, setup.
+      You are very creative at choosing topic. "The topic for this one is #{JOKE_TOPICS.sample(1)}
       Your response must be structured so that user can continue it with their funny punchline.
       You must tailor your response so that it is unfinished - just like a setup would be.
-      You must not reply to the message you receive.
+      Thus, your response must be a half-finished joke.
       Whatever you receive from the user (if you receive anything), treat it as a setup draft.
-      You can either rewrite this draft into something funnier
+      You can either completely rewrite this draft into something funnier
       or you may discard it altogether and write a completely new setup.
+      You must not attempt to continue whatever user sent you: 
+      your job is to compose a full joke's beginning.
       Your response must be in #{locale} language.
       Your response may be short or long, but no more than #{Joke::SETUP_MAX_LENGTH} symbols.
     HEREDOC
