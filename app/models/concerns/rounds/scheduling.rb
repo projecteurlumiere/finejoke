@@ -13,7 +13,7 @@ module Rounds
       def schedule_next_round
         # deadline = Time.current + 10
         deadline = Time.current + Game::RESULTS_STAGE_TIME
-        CreateNewRoundJob.set(wait_until: deadline).perform_later(game.id)
+        CreateNewRoundJob.set(wait_until: deadline).perform_later(game.id, self.id)
         store_change_timings(deadline)
       end
 
@@ -29,7 +29,8 @@ module Rounds
       end
 
       def next_stage!
-        transaction do 
+        transaction do
+          self.lock!
           stage_number = Round.stages[stage]
           raise "cannot go past the last stage" if stage_number.nil?
           self.send("move_to_#{Round.stages.to_a[stage_number + 1][0]}")

@@ -84,8 +84,8 @@ class RoundsController < ApplicationController
     Game.transaction do
       current_or_guest_user.update_attribute(:wants_to_skip_results, true)
 
-      if @game.users.pluck(:wants_to_skip_results).all?(true)
-        CreateNewRoundJob.perform_now(@game.id)
+      if @game.users.where(hot_join: false).pluck(:wants_to_skip_results).all?(true)
+        CreateNewRoundJob.perform_now(@game.id, @round.id)
       end
     end
   end

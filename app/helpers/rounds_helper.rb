@@ -254,7 +254,7 @@ module RoundsHelper
     return render_exit_from_rules(game) if @attributes[:force_showing_rules]
     return render_game_over_button if game.finished?
     return render_join(game) if game.joinable?(by: user)
-    return render_skip_results(game, round) if round&.results_stage? && !user.wants_to_skip_results?
+    return render_skip_results(game, round) if round&.results_stage? && user.playing?(round) && !user.wants_to_skip_results?
 
     render_wait_for(user, round, game)
   end

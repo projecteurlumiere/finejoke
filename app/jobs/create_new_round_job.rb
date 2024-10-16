@@ -1,13 +1,15 @@
 class CreateNewRoundJob < ApplicationJob
   queue_as :urgent
 
-  def perform(game_id)
+  def perform(game_id, current_round_id)
     # Do something later
+    current_round = Round.find_by(id: current_round_id)
+    return if current_round.passed?
+    
     game = Game.find_by(id: game_id)
-    return unless game
-    return if game.finished? || game.on_halt? || game.waiting?
+    return unless game.ongoing?
 
-    round = game.rounds.build
-    round.save
+    new_round = game.rounds.build
+    new_round.save
   end
 end
