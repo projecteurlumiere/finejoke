@@ -9,6 +9,7 @@ class SuggestionPolicy < ApplicationPolicy
 
   def suggest_setup?
     ai_allowed? && 
+      @user.suggestion_quota.positive? &&
       @user&.playing?(@game) && 
       @game&.current_round.setup_stage? && 
       authenticated_for_ai?
@@ -16,6 +17,7 @@ class SuggestionPolicy < ApplicationPolicy
 
   def suggest_punchline?
     ai_allowed? && 
+      @user.suggestion_quota.positive? &&
       @user&.playing?(@game) && 
       @game&.current_round.punchline_stage? && 
       authenticated_for_ai?
