@@ -12,7 +12,9 @@ module Rounds
 
       def schedule_next_round
         # deadline = Time.current + 10
-        deadline = Time.current + Game::RESULTS_STAGE_TIME
+        time_offset = jokes.present? ? Game::RESULTS_STAGE_TIME : 15
+                    
+        deadline = Time.current + time_offset
         CreateNewRoundJob.set(wait_until: deadline).perform_later(game.id, self.id)
         store_change_timings(deadline)
       end
