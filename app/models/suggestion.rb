@@ -4,7 +4,7 @@ class Suggestion < ApplicationRecord
 
   # when disabled, suggestions won't be visible & won't pass pundit check
   DISABLEABLE_KEY = "DISABLE_SUGGESTION".freeze
-  TOPICS = YAML.load(File.read(File.join(Rails.root.join("db", "yml", "joke_topics.yml"))))["joke_topics"].freeze
+  TOPICS = YAML.load(File.read(File.join(Rails.root.join("db", "yml", "joke_topics.yml")))).freeze
   
   has_and_belongs_to_many :jokes, dependent: :nullify
 
@@ -96,15 +96,17 @@ class Suggestion < ApplicationRecord
     <<~HEREDOC
       You are a comedian assistant.
       Right now you have to suggest a joke's beginning, setup.
-      You are very creative at choosing topic. "The topic for this one is #{JOKE_TOPICS.sample(1)}
-      Your response must be structured so that user can continue it with their funny punchline.
-      You must tailor your response so that it is unfinished - just like a setup would be.
-      Thus, your response must be a half-finished joke.
+      The topic for this one is #{TOPICS.sample(1)}
+      It is mandatory that your response is unfinished and does not contain the funniest part. 
+      Just like a setup would be.
+      You must tailor it so that it finished with "...", 
+      that is expecting the user to continue it with his own punchline.
       Whatever you receive from the user (if you receive anything), treat it as a setup draft.
       You can either completely rewrite this draft into something funnier
       or you may discard it altogether and write a completely new setup.
       You must not attempt to continue whatever user sent you: 
-      your job is to compose a full joke's beginning.
+      your job is to compose a joke's beginning. 
+      Under no circumstances should you response with a finished joke.
       Your response must be in #{locale} language.
       Your response may be short or long, but no more than #{Joke::SETUP_MAX_LENGTH} symbols.
     HEREDOC
@@ -169,7 +171,7 @@ class Suggestion < ApplicationRecord
       add_suggestion_to_user(old_suggestion[0])
       self.output = old_suggestion[1]
     end
-
+    logger.warn "Suggestion with id #{old_suggestion[0]} was reused"
     user.reload
   end
 
