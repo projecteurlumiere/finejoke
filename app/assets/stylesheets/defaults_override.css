@@ -9,6 +9,11 @@
   scrollbar-width: none;  /* Firefox */
 } 
 
+/* remove blue focus color when tapping on button in Chrome */
+html {
+  -webkit-tap-highlight-color: transparent;
+}
+
 p {
   margin: 1rem 0;
 }
