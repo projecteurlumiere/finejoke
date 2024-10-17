@@ -59,7 +59,7 @@ module Users
       end
 
       def voted?(round)
-        round.votes.find_by(user_id: self) ? true : false
+        round.votes.find_by(user_id: self.id) ? true : false
       end
 
       def not_voted?(round)
