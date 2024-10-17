@@ -58,7 +58,7 @@ fr:
         Il n'apparaît pas dans le lobby. 
         Les blagues créées dans ce jeu ne seront pas ajoutées aux profils des joueurs.
         Partagez le lien vers cette page avec vos amis pour les inviter.
-      public_html: Ce jeu est <strong>public</strong>. Il est visible dans le lobby.
+      public_html: Ce jeu est <strong>public</strong>. Il est visible dans le lobby sous le nom <strong>%{name}</strong>.
       viewers_vote_html: Les spectateurs <strong>peuvent</strong> voter.
       viewers_do_not_vote_html: Les spectateurs <strong>ne peuvent pas</strong> voter.
       no_victory_conditions_html: Il n'y a <strong>aucune</strong> condition de victoire.

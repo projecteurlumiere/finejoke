@@ -39,7 +39,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_05_132159) do
   end
 
   create_table "games", id: :string, force: :cascade do |t|
-    t.bigint "number", default: -> { "nextval('game_seq'::regclass)" }, null: false
+    t.bigint "stat_number", default: -> { "nextval('game_seq'::regclass)" }, null: false
     t.bigint "host_id"
     t.integer "max_players", default: 10, null: false
     t.integer "max_round_time", default: 90, null: false
@@ -62,6 +62,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_05_132159) do
     t.integer "locale", default: 0, null: false
     t.index ["host_id"], name: "index_games_on_host_id"
     t.index ["id"], name: "index_games_on_id", unique: true
+    t.index ["name"], name: "index_games_on_name", unique: true
     t.index ["winner_id"], name: "index_games_on_winner_id"
   end
 

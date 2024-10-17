@@ -58,7 +58,7 @@ es:
         No aparece en el lobby. 
         Los chistes creados en este juego no se añadirán a los perfiles de los jugadores.
         Comparta el enlace a esta página con sus amigos para invitarlos.
-      public_html: Este juego es <strong>público</strong>. Es visible en el lobby.
+      public_html: Este juego es <strong>público</strong>. Es visible en el lobby bajo el nombre <strong>%{name}</strong>.
       viewers_vote_html: Los espectadores <strong>pueden</strong> votar.
       viewers_do_not_vote_html: Los espectadores <strong>no pueden</strong> votar.
       no_victory_conditions_html: No hay <strong>condiciones</strong> de victoria.

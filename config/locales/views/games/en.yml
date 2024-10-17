@@ -58,7 +58,7 @@ en:
         It does not show up in the lobby. 
         Jokes created in this game will not be appended to players profiles.
         Share the link to this page with you friends to invite them.
-      public_html: This game is <strong>public</strong>. It is visible in the lobby.
+      public_html: This game is <strong>public</strong>. It is visible in the lobby under the name <strong>%{name}</strong>.
       viewers_vote_html: The viewers <strong>can</strong> vote.
       viewers_do_not_vote_html: The viewers <strong>cannot</strong> vote.
       no_victory_conditions_html: There are <strong>no</strong> victory conditions.

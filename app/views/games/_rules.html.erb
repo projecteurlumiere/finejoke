@@ -23,13 +23,10 @@
   </h3>
   <ul>
     <li>
-      <%= t :".host_html", host_link: link_to(game.host.to_s, profile_path(game.host)) %>
-    </li>
-    <li>
       <% if game.private? %>
         <%= t :".private_html" %>
       <% else %>
-        <%= t :".public_html" %>
+        <%= t :".public_html", name: game.name %>
       <% end %>
     </li>
     <li>

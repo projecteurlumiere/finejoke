@@ -37,5 +37,6 @@ class CreateGames < ActiveRecord::Migration[7.1]
     end
 
     add_index :games, :id, unique: true
+    add_index :games, :name, unique: true
   end
 end

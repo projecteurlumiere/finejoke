@@ -28,7 +28,7 @@ class Game < ApplicationRecord
             MIN_POINTS = 2
             MAX_POINTS = 999
 
-  validates :name, presence: true, length: { in: 1..14 }
+  validates :name, presence: true, length: { in: 1..14 }, uniqueness: true
   validates :max_players, numericality: { only_integer: true },
                           comparison: { greater_than_or_equal_to: MIN_PLAYERS, less_than_or_equal_to: MAX_PLAYERS }
   validates :max_round_time, numericality: { only_integer: true },
