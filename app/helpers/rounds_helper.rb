@@ -232,12 +232,12 @@ module RoundsHelper
   def render_results_for(user, round, game)
     return unless round.results_stage?
 
-    jokes = round.jokes.order(n_votes: :desc)
+    jokes = round.jokes.includes(:user).order(n_votes: :desc)
     render partial: "rounds/jokes_container", locals: { user:, round:, game:, jokes:}
   end
 
   def render_game_over_for(user, round, game)
-    jokes = game.jokes.order(n_votes: :desc).limit(10)
+    jokes = game.jokes.includes(:user, setup_model: [:user]).order(n_votes: :desc).limit(10)
     render partial: "rounds/jokes_container", locals: { user:, round:, game:, jokes:}
   end
   
