@@ -27,8 +27,8 @@ ru:
       message_text: Текст сообщения
       send_message: Отправить сообщение
     form:
-      name: Название
-      enter_name: Введите название
+      name: Название игры
+      enter_name: Введите название игры
       extra_settings: Параметры
       max_players: Макс игроков
       max_round_time: Время раунда, сек

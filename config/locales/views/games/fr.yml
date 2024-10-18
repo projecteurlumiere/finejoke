@@ -27,8 +27,8 @@ fr:
       message_text: Texte du message
       send_message: Envoyer le message
     form:
-      name: Nom
-      enter_name: Entrer le nom
+      name: Nom du jeu
+      enter_name: Entrer le nom de votre jeu
       extra_settings: Paramètres
       max_players: Joueurs max
       max_round_time: Durée de tour (secondes)

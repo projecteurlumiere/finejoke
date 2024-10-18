@@ -15,8 +15,8 @@ fr:
         send_confirmation: Renvoyer
         locale_settings: Paramètres de langue
         language: Langue
-        new_username: "Nouveau nom d'utilisateur\u00a0?"
-        new_username_aria: Entrez un nouveau nom d'utilisateur si vous souhaitez le changer
+        new_username: "Nouveau surnom\u00a0?"
+        new_username_aria: Entrez un nouveau surnom si vous souhaitez le changer
         new_email: "Nouvel email\u00a0?"
         new_email_aria: Entrez une nouvelle adresse e-mail si vous souhaitez la changer
         new_password: "Nouveau mot de passe\u00a0?"
@@ -37,8 +37,8 @@ fr:
         form_aria: Formulaire de nouveau compte
         email: Email
         email_aria: Adresse e-mail
-        username: Nom d'utilisateur
-        username_aria: Nom d'utilisateur
+        username: Surnom
+        username_aria: Surnom
         password: Mot de passe
         password_aria: Mot de passe (minimum %{min_length} symboles)
         password_confirm: Une fois de plus

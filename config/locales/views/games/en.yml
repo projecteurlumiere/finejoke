@@ -27,8 +27,8 @@ en:
       message_text: Message text
       send_message: Send message
     form:
-      name: Name
-      enter_name: Enter name
+      name: Game Name
+      enter_name: Enter your game name
       extra_settings: Settings
       max_players: Max players
       max_round_time: Round time (seconds)
