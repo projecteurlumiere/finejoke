@@ -71,6 +71,7 @@ class Round < ApplicationRecord
 
   def move_to_vote
     handle_no_jokes and return if jokes.none?
+    game.update_attribute(:afk_rounds, 0)
 
     vote_stage!
     broadcast_current_round
