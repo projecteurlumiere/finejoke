@@ -44,7 +44,7 @@ export default class extends Controller {
     const presentHash = this.#digest(presentRoundAttr.outerHTML.replace(/\n/g, ''))
     const incomingHash = this.#digest(incomingRoundAttr.outerHTML.replace(/\n/g, ''))
 
-    presentHash === incomingHash
+    return presentHash === incomingHash
   }
 
   // // this is async digest using browser's in-built crypto api  
