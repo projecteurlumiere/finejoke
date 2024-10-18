@@ -111,7 +111,7 @@ en:
     messages:
       accepted: must be accepted
       blank: can't be blank
-      confirmation: doesn't match %{attribute}
+      confirmation: doesn't match the field above
       empty: can't be empty
       equal_to: must be equal to %{count}
       even: must be even

@@ -115,7 +115,7 @@ fr:
     messages:
       accepted: doit être accepté(e)
       blank: doit être rempli(e)
-      confirmation: ne concorde pas avec %{attribute}
+      confirmation: ne concorde pas au champ ci-dessus
       empty: doit être rempli(e)
       equal_to: doit être égal à %{count}
       even: doit être pair
