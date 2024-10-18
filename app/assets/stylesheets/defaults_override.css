@@ -72,13 +72,9 @@ input::placeholder {
   color: var(--white-dim);
 }
 
-input:invalid:not(:placeholder-shown) {
+input:invalid:not(:placeholder-shown):not(:focus) {
   color: var(--accent-alert);
   border-color: var(--accent-alert);
-}
-
-input:invalid:focus:not(:placeholder-shown) {
-  outline-color: var(--accent-alert);
 }
 
 input[type=image] {
