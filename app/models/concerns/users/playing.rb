@@ -50,7 +50,7 @@ module Users
 
       def finished_turn!
         update_attribute(:finished_turn, true)
-        broadcast_turn_finished
+        @broadcast_turn_finished = true
       end
 
       def can_vote?(round)
@@ -68,7 +68,7 @@ module Users
 
       def voted!
         update_attribute(:voted, true)
-        broadcast_vote_finished
+        @broadcast_vote_finished = true
       end
     end
   end

@@ -3,6 +3,9 @@ module Users
     extend ActiveSupport::Concern
     
     included do 
+      after_commit :broadcast_turn_finished, if: -> { @broadcast_turn_finished }
+      after_commit :broadcast_vote_finished, if: -> { @broadcast_vote_finished }
+
       def broadcast_status_change
         broadcast_render_later_to(["user", self], partial: "layouts/user_status", formats: %i[turbo_stream], locals: { game_id: game&.id || 0 }) 
       end
