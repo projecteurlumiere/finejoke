@@ -94,7 +94,7 @@ class Game < ApplicationRecord
       end
 
       on_halt! if (ongoing? || waiting?) && not_enough_players?
-      skip_round if ongoing? && user.lead?
+      skip_round if ongoing? && user.lead? && current_round.setup_stage?
       was_host = user.host?
 
       user.reset_game_attributes

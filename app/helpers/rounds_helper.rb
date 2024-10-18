@@ -149,7 +149,7 @@ module RoundsHelper
     # declared in round_task_for
     return unless @render_setup
 
-    username = round.setup_model&.user&.username  || t(:".anon_host")
+    username = round.setup_randomized? ? t(:".anon_host") : round.lead.username
 
     setup = round.setup || t(:"rounds.no_setup.mock")
     setup_short = round.setup_short
