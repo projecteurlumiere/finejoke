@@ -6,15 +6,15 @@ en:
       # edit profile:
       edit_form:
         edit: Edit
-        important_settings: Important settings (you can skip them)
-        email_not_confirmed: Email not confirmed! 
+        important_settings: Important Settings (you can skip them)
+        email_not_confirmed: Email Not Confirmed! 
         awaiting_email_confirmation_html: >
           Some features may be unavailable to you!
           If you have not received the confirmation message,
           either press "Resend" button below,
           or update your email address on this page and save the changes.
         send_confirmation: Resend
-        locale_settings: Language settings
+        locale_settings: Language Settings
         language: Language
         new_username: New username?
         new_username_aria: Enter new username if you wish to change it
@@ -26,7 +26,7 @@ en:
         confirm_password_aria: Confirm the password if you wish to change it
         delete_account: Delete account?
         delete_account_prompt: Are you sure you want to delete your account? Statistics and awards will be lost!
-        privacy_settings: Privacy settings
+        privacy_settings: Privacy Settings
         show_jokes: Show jokes
         show_awards: Show awards
         confirm: Confirm the changes by entering your current password

@@ -32,7 +32,7 @@ en:
       extra_settings: Settings
       max_players: Max players
       max_round_time: Round time (seconds)
-      victory_conditions: Victory conditions
+      victory_conditions: Victory Conditions
       max_rounds: Max rounds
       max_rounds_aria: Enable maximum rounds victory condition
       max_points: Max points
