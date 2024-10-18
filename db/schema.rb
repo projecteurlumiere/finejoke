@@ -70,6 +70,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_05_132159) do
     t.bigint "setup_model_id", null: false
     t.string "punchline", null: false
     t.integer "n_votes", default: 0, null: false
+    t.integer "n_players", default: 0, null: false
+    t.boolean "viewers_voted", default: false, null: false
+    t.integer "n_game_viewers", default: 0, null: false
     t.bigint "round_id"
     t.bigint "user_id"
     t.datetime "created_at", null: false

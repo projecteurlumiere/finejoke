@@ -106,6 +106,8 @@ class Round < ApplicationRecord
   end
 
   def count_votes
+    jokes.update_all(**joke_voting_params)
+
     self.votes_change = jokes.map do |joke|
       author = joke.punchline_author
       author.current_score += joke.n_votes
@@ -118,6 +120,14 @@ class Round < ApplicationRecord
 
       [author.id, joke.n_votes]
     end.to_h
+  end
+
+  def joke_voting_params
+    {
+      n_players: game.n_players,
+      viewers_voted: game.viewers_vote?,
+      n_game_viewers: game.n_viewers
+    }
   end
 
   def choose_lead 
