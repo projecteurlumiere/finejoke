@@ -1,9 +1,13 @@
-<div id="user-status">
+<%# do not render it as a part of turbo stream with several actions %>
+<%# because it will prevent render of the entire stream if user-status has unupdatable target %>
+<%# see user-status stimulus controller %>
+<div id="user-status" data-controller="user-status" data-action="turbo:before-stream-render@window->user-status#checkResponse">
   <% if game&.persisted? %>
     <% if current_page?(game_path(game)) %>
       <%= button_to t(:".quit_game"), 
         game_leave_path(game), 
-        class: "button secondary" %>
+        class: "button secondary",
+        data: { user_status_target: "unupdatable" } %>
     <% else %>
       <%= link_to t(:".currently_in_game"), 
         game_path(game), 
