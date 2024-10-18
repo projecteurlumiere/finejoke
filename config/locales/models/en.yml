@@ -1,5 +1,6 @@
 en:
   game:
+    will_terminate_soon: Game will conclude soon
     will_close_soon: Game is closing soon
   round:
     joker: Joker

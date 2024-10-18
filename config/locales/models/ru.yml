@@ -1,5 +1,6 @@
 ru:
   game:
+    will_terminate_soon: Игра будет скоро завершена
     will_close_soon: Игра будет скоро закрыта
   round:
     joker: Шутник
