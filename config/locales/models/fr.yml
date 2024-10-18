@@ -1,4 +1,6 @@
 fr:
+  game:
+    will_close_soon: Le jeu se termine bientôt
   round:
     joker: Blagueur
   message:

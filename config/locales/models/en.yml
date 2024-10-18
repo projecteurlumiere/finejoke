@@ -1,4 +1,6 @@
 en:
+  game:
+    will_close_soon: Game is closing soon
   round:
     joker: Joker
   message:

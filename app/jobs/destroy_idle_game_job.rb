@@ -14,7 +14,7 @@ class DestroyIdleGameJob < ApplicationJob
     end
 
     if notify
-      game.broadcast_flash(alert: "Игра будет скоро закрыта")
+      game.broadcast_flash(alert: I18n.t(:"game.will_close_soon", locale: game.locale))
       self.class.set(wait_until: Time.now + (Game::IDLE_GAME_TIME * 0.25).seconds)
                 .perform_later(game_id, last_updated_at, notify: false, force:)
       return

@@ -1,4 +1,6 @@
 ru:
+  game:
+    will_close_soon: Игра будет скоро закрыта
   round:
     joker: Шутник
   message:
