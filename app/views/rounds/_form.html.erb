@@ -11,6 +11,7 @@
   <%= form.text_area text_for, 
     placeholder: t(:".enter_text"), 
     :"aria-label" => t(:".enter_text_full_for_#{text_for}"),
+    required: true,
     maxlength: Joke.const_get(:"#{text_for.upcase}_MAX_LENGTH"),
     rows: 4,
     data: {
