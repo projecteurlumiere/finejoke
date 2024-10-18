@@ -2,8 +2,8 @@ class GamesController < ApplicationController
   include ActionView::RecordIdentifier
 
   before_action :verify_turbo_stream_format, only: %i[create kick show_rules]
-  before_action :set_game, only: %i[ show destroy ]
-  before_action :authorize_game!, only: %i[ index show destroy leave game_over]
+  before_action :set_game, only: %i[ show ]
+  before_action :authorize_game!, only: %i[ index show leave game_over]
 
   # GET /games
   def index
@@ -41,13 +41,6 @@ class GamesController < ApplicationController
       flash.now[:alert] = t(:".game_not_created")
       render partial: "games/form", formats: [:turbo_stream], status: :unprocessable_entity
     end
-  end
-
-  # DELETE /games/1
-  def destroy
-    @game.destroy!
-
-    redirect_to games_url, notice: t(:".game_destroyed")
   end
 
   def join
@@ -119,7 +112,7 @@ class GamesController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_game
-    @game = Game.includes(:users).find(params[:id])
+    @game = Game.includes(:users, current_round: { jokes: [:setup_model, :user] }).find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.

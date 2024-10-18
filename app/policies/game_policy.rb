@@ -19,11 +19,6 @@ class GamePolicy < ApplicationPolicy
     index?
   end
 
-  def destroy?
-    # @user&.host? && @user.playing?(@game)
-    false
-  end
-
   def join?
     return false unless @user && has_no_ban?(@user, @game) 
     
