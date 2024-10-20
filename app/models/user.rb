@@ -19,7 +19,8 @@ class User < ApplicationRecord
   has_many :setups, dependent: :nullify
 
   validates :username, presence: true, length: { in: 1..14 }
-
+  normalizes :username, with: -> (s) { s.strip }
+  
   def set_default_locale
     self.locale = I18n.locale
   end

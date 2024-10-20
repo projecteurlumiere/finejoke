@@ -16,6 +16,7 @@ class Joke < ApplicationRecord
 
   # validates :setup, length: { in: 1..SETUP_MAX_LENGTH }
   validates :punchline, length: { in: 1..PUNCHLINE_MAX_LENGTH }
+  normalizes :punchline, with: -> (s) { s.strip }
 
   alias_method :punchline_author=, :user=
   alias_method :punchline_author, :user

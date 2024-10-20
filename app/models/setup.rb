@@ -5,6 +5,8 @@ class Setup < ApplicationRecord
   TRUNCATE_LENGTH = Joke::SETUP_TRUNCATE_LENGTH
 
   validates :text, length: { in: 1..MAX_LENGTH }
+  normalizes :text, with: -> (s) { s.strip }
+
   has_one :round, foreign_key: :setup_model_id, dependent: :nullify
   # has_one :game, through: :round
   # has_many :jokes, dependent: :destroy

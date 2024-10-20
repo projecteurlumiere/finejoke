@@ -38,6 +38,8 @@ class Game < ApplicationRecord
   validates :max_points, numericality: { only_integer: true },
                          comparison: { greater_than_or_equal_to: MIN_POINTS, less_than_or_equal_to: MAX_POINTS }, allow_nil: true
   validate -> { errors.add(:viewers_vote, "игра должна быть открыта для зрителей") if !viewable? && viewers_vote? }
+  
+  normalizes :name, with: -> name { name.strip }
 
   before_create :generate_id
 

@@ -7,6 +7,7 @@ class Round < ApplicationRecord
   belongs_to :setup_model, class_name: :Setup, optional: true
   
    validates :setup, length: { in: 1..Joke::SETUP_MAX_LENGTH }, if: :setup_changed?
+   normalizes :setup, with: -> (s) { s.strip }
    # validates :setup_short, length: { in: 1..55 }, if: %i[setup setup_changed?]
    validates :user_id, presence: true, unless: :new_record?
     validate :game_is_ready

@@ -31,7 +31,7 @@ export default class extends Controller {
   }
 
   responseTargetConnected(el) {
-    const suggestion = el.textContent
+    const suggestion = el.textContent.trim();
     el.remove()
 
     this.#toggleInput("disable")
