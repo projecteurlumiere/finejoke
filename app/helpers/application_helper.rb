@@ -18,24 +18,23 @@ module ApplicationHelper
     lock_key = "#{name.instance_of?(String) ? name : name.cache_key}:lock"
 
     20.times do
-      if Rails.cache.exist?(lock_key)
-        logger.info "Cache is locked. Waiting."
-        sleep 0.1
-      else 
-        unless controller.fragment_exist?(cache_key)
-          logger.info "Locking cache"
-          Rails.cache.write(lock_key, true) 
-        end
+      if controller.fragment_exist?(cache_key)
+        cache(name, options, &block)
+        return
+      elsif Rails.cache.write(lock_key, true, unless_exist: true) 
+        logger.info "Obtained cache lock"
+        Rails.cache.write(lock_key, true) 
+
         cache(name, options, &block)
         
-        if Rails.cache.exist?(lock_key)
-          logger.info "Unlocking cache"
-          Rails.cache.delete(lock_key)
-        end
+        logger.info "Releasing cache lock"
+        Rails.cache.delete(lock_key)
 
         return
       end
 
+      logger.info "Cache is locked. Waiting."
+      sleep 0.1
       logger.info "Retrying cache lock"
     end
 
