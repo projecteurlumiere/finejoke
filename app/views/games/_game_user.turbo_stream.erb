@@ -5,6 +5,6 @@
 <% if user && game %>
   <%# ideally, it should be action :morph but it hasn't been released yet... %>
   <%= turbo_stream.action(:replace, dom_id(user)) do %>
-    <%= render partial: "games/game_user", formats: %i[html], locals: { user: user, game: game, votes_change: {} } %>
+    <%= render partial: "games/game_user", formats: %i[html], locals: { user: user, game: game, votes_change: {}, current_round_votes: } %>
   <% end %>
 <% end %>

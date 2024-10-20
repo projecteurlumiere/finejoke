@@ -9,7 +9,7 @@ module RoundsHelper
       game_status: game.status,
       user_playing: user.playing?(game),
       hot_join: user.hot_join?,
-      user_host: game.host == user,
+      user_host: game.host_id == user.id,
       force_showing_rules: round.nil? && game.ongoing?
     }
 

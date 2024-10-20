@@ -1,5 +1,6 @@
 <% if user %>
-  <%= tag.li id: dom_id(user),
+  <% user_model = User.new(id: user[:id]) %>
+  <%= tag.li id: dom_id(user_model),
              class: game_user_class(user, game&.current_round),
              data: { 
                action: "click->game-data#showSettings",
@@ -9,7 +10,7 @@
                vote_change: votes_change.any? ? (votes_change[user.id] || 0) : nil, 
                lead: user.lead?,
                finished_turn: user.finished_turn?,
-               voted: (user.voted?(game.current_round) if game.current_round) } do %>
+               voted: current_round_votes&.include?(user.id) } do %>
     <div class="score press-font" >
       <span class="current"><%= user.current_score %></span>
       <% if votes_change.any? %>

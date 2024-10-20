@@ -11,10 +11,15 @@ module Users
       end
 
       def broadcast_turn_finished
-        broadcast_render_later_to(["game", game], partial: "games/game_user", formats: %i[turbo_stream], locals: { user_id: id, game_id: game.id }) 
+        broadcast_render_later_to(["game", game], partial: "games/game_user", formats: %i[turbo_stream], locals: { 
+          user_id: id, game_id: game.id, current_round_votes: @current_round_votes || [], 
+        }) 
       end
 
-      alias_method :broadcast_vote_finished, :broadcast_turn_finished
+      def broadcast_vote_finished
+        @current_round_votes = [self.id]
+        broadcast_turn_finished
+      end
     end
   end
 end

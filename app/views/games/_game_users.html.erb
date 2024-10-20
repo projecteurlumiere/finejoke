@@ -1,10 +1,16 @@
-<ul id="user-list" data-game-data-target="userList" data-action="scroll->game-data#adjustPaddingForShadows">
-  <% locals = { game: game, votes_change: votes_change.transform_keys(&:to_i) } %>
+<% cache_with_lock game, expires_in: (Game::IDLE_GAME_TIME * 3) do %>
+  <ul id="user-list" data-game-data-target="userList" data-action="scroll->game-data#adjustPaddingForShadows">
+    <% locals = { 
+      game: game, 
+      votes_change: votes_change.transform_keys(&:to_i),
+      current_round_votes: (Vote.where(round_id: game.current_round.id).pluck(:user_id).flatten.to_set if game.current_round) 
+    } %>
 
-  <%= render partial: "games/game_user", 
-             formats: %i[html],
-             collection: game.users.order(current_score: :desc, username: :asc).to_a +
-               Array.new((game.max_players - game.n_players), nil),
-             as: :user, 
-             locals: locals %>
-</ul>
+    <%= render partial: "games/game_user", 
+               formats: %i[html],
+               collection: game.users.order(current_score: :desc, username: :asc).to_a +
+                 Array.new((game.max_players - game.n_players), nil),
+               as: :user, 
+               locals: locals %>
+  </ul>
+<% end %>

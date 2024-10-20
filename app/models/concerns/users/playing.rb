@@ -7,6 +7,7 @@ module Users
       
       # Do not check bans via association commands. only via Ban class methods!
       has_many :bans, dependent: :destroy
+      has_many :votes, dependent: :nullify
 
       def reset_game_attributes
         transaction do
@@ -59,7 +60,7 @@ module Users
       end
 
       def voted?(round)
-        round.votes.find_by(user_id: self.id) ? true : false
+        votes.where(round_id: round.id).any? ? true : false
       end
 
       def not_voted?(round)

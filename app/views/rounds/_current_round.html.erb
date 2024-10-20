@@ -1,4 +1,4 @@
-<% cache round_data_attributes(current_or_guest_user, round, game).values.join("-") do %>
+<% cache_with_lock round_data_attributes(current_or_guest_user, round, game).values.join("-"), expires_in: (game.max_round_time * 3) do %>
   <%= tag.div id: "current-round", 
         data: { 
           controller: "round-refresh jokes suggestion", 

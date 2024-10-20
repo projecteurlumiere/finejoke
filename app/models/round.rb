@@ -109,7 +109,7 @@ class Round < ApplicationRecord
   def count_votes
     jokes.update_all(**joke_voting_params)
 
-    self.votes_change = jokes.map do |joke|
+    self.votes_change = jokes.includes(:user).map do |joke|
       author = joke.punchline_author
       author.current_score += joke.n_votes
       author.total_score += joke.n_votes

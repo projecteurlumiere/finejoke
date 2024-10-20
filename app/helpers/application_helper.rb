@@ -13,6 +13,36 @@ module ApplicationHelper
     end.join(" ").html_safe
   end
 
+  def cache_with_lock(name = {}, options = {}, &block)
+    cache_key = cache_fragment_name(name)
+    lock_key = "#{name.instance_of?(String) ? name : name.cache_key}:lock"
+
+    20.times do
+      if Rails.cache.exist?(lock_key)
+        logger.info "Cache is locked. Waiting."
+        sleep 0.1
+      else 
+        unless controller.fragment_exist?(cache_key)
+          logger.info "Locking cache"
+          Rails.cache.write(lock_key, true) 
+        end
+        cache(name, options, &block)
+        
+        if Rails.cache.exist?(lock_key)
+          logger.info "Unlocking cache"
+          Rails.cache.delete(lock_key)
+        end
+
+        return
+      end
+
+      logger.info "Retrying cache lock"
+    end
+
+    logger.warn "Failed to obtain cache locked - proceeding to render"
+    cache(name, options, &block)
+  end
+
   def render_errors(object, field_name, custom_message = nil)
     # return unless object.errors.any?
 
