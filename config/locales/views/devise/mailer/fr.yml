@@ -6,7 +6,7 @@ fr:
         sign_off: Cordialement,
         signature: Finejoke
       confirmation_instructions:
-        welcome: "Bienvenue %{username}\u00a0!"
+        welcome: "Bienvenue, %{username}\u00a0!"
         you_can_confirm: "Vous pouvez confirmer votre adresse e-mail en cliquant sur le lien suivant\u00a0:"
         confirm_link: Confirmer l'email
       email_changed:

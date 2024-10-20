@@ -114,12 +114,7 @@ module ApplicationHelper
     HTML
   end
 
-  EMAILS = {
-    en: "haha@finejoke.lol",
-    ru: "xaxa@finejoke.lol",
-    fr: "hihi@finejoke.lol",
-    es: "jaja@finejoke.lol"
-  }.freeze
+  EMAILS = UserMailer::SENDERS
 
   def contact_email_tag_for(locale)
     link_to EMAILS[locale], "mailto:#{EMAILS[locale]}"
