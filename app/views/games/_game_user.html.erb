@@ -1,7 +1,14 @@
+<%# expects either user model or nil %>
+<%# if nil - returns empty slot button %>
+<%# other locals: %>
+<%# game %>
+<%# vote_change hash: in case voting took place and we want to show the score change %>
+<%# voted set: contains ids of voted users, which we preload to avoid n+1 %>
+
 <% if user %>
-  <% user_model = User.new(id: user[:id]) %>
-  <%= tag.li id: dom_id(user_model),
-             class: game_user_class(user, game&.current_round),
+  <% voted = current_round_votes&.include?(user.id) %>
+  <%= tag.li id: dom_id(user),
+             class: game_user_class(user, game&.current_round, voted),
              data: { 
                action: "click->game-data#showSettings",
                game_data_target: "user",
@@ -10,7 +17,8 @@
                vote_change: votes_change.any? ? (votes_change[user.id] || 0) : nil, 
                lead: user.lead?,
                finished_turn: user.finished_turn?,
-               voted: current_round_votes&.include?(user.id) } do %>
+               voted: 
+             } do %>
     <div class="score press-font" >
       <span class="current"><%= user.current_score %></span>
       <% if votes_change.any? %>

@@ -8,7 +8,7 @@ module GamesHelper
     }
   end
 
-  def game_user_class(user, round)
+  def game_user_class(user, round, voted)
     default_classes = %i[button]
 
     return default_classes if round.nil?
@@ -26,7 +26,7 @@ module GamesHelper
                       :"accent-alert"
                     end
                   elsif round.vote_stage?
-                    if user.voted?(round)
+                    if voted
                       nil
                     else
                       :"accent-alert"
