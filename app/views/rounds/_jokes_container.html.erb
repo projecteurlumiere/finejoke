@@ -1,19 +1,21 @@
-<div class="jokes-container" data-jokes-target="jokes">
-  <% if jokes.any? %>
-    <div id="swipe" class="swipe">
-      <div class="swipe-wrap" data-jokes-target="swipeWrap">
-        <%= render partial: "rounds/joke", collection: jokes, as: :joke, locals: { game:,  round: } %>
+<% cache_with_lock [game.finished?, round.id, round.vote_stage?, round.results_stage?].join("-"), expires_in: (game.max_round_time * 3) do %>
+  <div class="jokes-container" data-jokes-target="jokes">
+    <% if jokes.any? %>
+      <div id="swipe" class="swipe">
+        <div class="swipe-wrap" data-jokes-target="swipeWrap">
+          <%= render partial: "rounds/joke", collection: jokes, as: :joke, locals: { game:,  round: } %>
+        </div>
       </div>
-    </div>
-  <% else %>
-    <div id="swipe" class="swipe">
-      <div class="swipe-wrap" data-jokes-target="swipeWrap">
-        <%= render partial: "rounds/no_jokes" %>        
+    <% else %>
+      <div id="swipe" class="swipe">
+        <div class="swipe-wrap" data-jokes-target="swipeWrap">
+          <%= render partial: "rounds/no_jokes" %>        
+        </div>
       </div>
-    </div>
-  <% end %>
-  <%= render partial: "rounds/jokes_container_buttons", locals: { jokes: } %>
-</div>
+    <% end %>
+    <%= render partial: "rounds/jokes_container_buttons", locals: { jokes: } %>
+  </div>
+<% end %>
 <% content_for(:action) do %>
   <% if game && 
         !game.finished? && 
