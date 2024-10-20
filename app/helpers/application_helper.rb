@@ -21,7 +21,7 @@ module ApplicationHelper
       if controller.fragment_exist?(cache_key)
         cache(name, options, &block)
         return
-      elsif Rails.cache.write(lock_key, true, unless_exist: true) 
+      elsif Rails.cache.write(lock_key, true, unless_exist: true)
         logger.info "Obtained cache lock"
         Rails.cache.write(lock_key, true) 
 
@@ -34,7 +34,7 @@ module ApplicationHelper
       end
 
       logger.info "Cache is locked. Waiting."
-      sleep 0.1
+      sleep 0.05
       logger.info "Retrying cache lock"
     end
 
