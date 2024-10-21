@@ -30,5 +30,7 @@ fr:
           Si vous vous inscrivez, vous pourrez utiliser des fonctionnalités <strong>d'intelligence artificielle</strong>&nbsp;: 
           ChatGPT peut vous aider à créer une introduction amusante ou à trouver des chutes ridicules. 
           De plus, l'IA peut jouer le rôle d'un animateur virtuel dans votre jeu en commentant le jeu en direct.
+          Au contraire, si vous avez des préoccupations concernant la confidentialité, optez pour des jeux privés et évitez d'utiliser l'IA. 
+          Dans ce cas, aucun historique ne sera enregistré sur le serveur ni envoyé au fournisseur d'IA - OpenAI.
         who_are_authors: "Qui a créé cela\u00a0?"
         authors_html: Vous pouvez trouver le code source <strong><a href="%{link}">ici</a></strong>.

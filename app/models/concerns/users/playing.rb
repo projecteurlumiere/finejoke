@@ -6,7 +6,7 @@ module Users
       belongs_to :game, optional: true
       
       # Do not check bans via association commands. only via Ban class methods!
-      has_many :bans, dependent: :destroy
+      has_many :bans, dependent: :nullify
       has_many :votes, dependent: :nullify
 
       def reset_game_attributes

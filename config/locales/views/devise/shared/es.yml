@@ -30,5 +30,7 @@ es:
           Si se registra, podrá utilizar funciones de <strong>inteligencia artificial</strong>: 
           ChatGPT puede ayudarle a crear un premisa divertido o a pensar en remates ridículos. 
           Además, la IA puede asumir el papel de anfitrión virtual en su juego comentando el juego en vivo.
+          Por el contrario, si tiene preocupaciones sobre la privacidad, opte por juegos privados y evite usar IA. 
+          En este caso, no se guardará ningún historial en el servidor ni se enviará al proveedor de IA - OpenAI.
         who_are_authors: ¿Quiénes hicieron esto?
         authors_html: Puede encontrar el código fuente <strong><a href="%{link}">aquí</a></strong>.

@@ -4,7 +4,25 @@ fr:
       hello_user_html: "Salut, <span>%{username}</span>\u00a0!"
       what_is_new: "Quoi de neuf chez Finejoke\u00a0?"
       no_news: Rien de spécial...
-      how_to_contact: "Puis-je vous contacter\u00a0?"
+      privacy: Сonfidentialité
+      privacy_jokes: >
+        Vos blagues sont sauvegardées sur le serveur dans l'espoir de cataloguer les meilleures un jour.
+        Vous pouvez cacher vos blagues de l'affichage dans les paramètres de votre profil ou jouer à des jeux privés.
+        Rien des jeux privés n'est sauvegardé pour les générations futures, sauf pour les statistiques de profil.
+      privacy_suggestions: >
+        Lors de la demande d'une suggestion d'IA pour le setup, le texte dans votre saisie de setup est utilisé
+        pour que l'IA d'OpenAI en tire des indices. 
+        Lors de la demande d'une suggestion d'IA pour le punchline, votre saisie de punchline est utilisée ainsi que le setup pertinente.
+        Les suggestions peuvent être désactivées lors de la création d'un jeu.
+      privacy_virtual_host: >
+        L'Hôte Virtuel a accès aux informations du jeu, à vos pseudos et à plusieurs derniers messages de chat adressés à l'Hôte Virtuel. 
+        Vous pouvez choisir de ne pas l'utiliser lors de la création d'un jeu.
+      privacy_ip: >
+        Votre adresse IP est stockée pour prévenir les abus.
+        Les profils invités expirent et sont finalement supprimés.
+        Les profils personnels sont supprimables - voir les paramètres.
+        Les blagues des jeux publics ne peuvent pas être supprimées.
+      how_to_contact: Puis-je vous contacter ?
       source_code_html: "Vous pouvez voir le code source <a href=\"%{link}\">ici</a>"
       email_html: "Vous pouvez également nous contacter par email\u00a0:"
     navigation:

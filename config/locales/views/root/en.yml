@@ -4,6 +4,23 @@ en:
       hello_user_html: Hi, <span>%{username}</span>!
       what_is_new: What's new at Finejoke?
       no_news: Nothing really...
+      privacy: I have privacy concerns
+      privacy_jokes: >
+        Your jokes are being saved to the server in the hope of publicly cataloguing the finest ones one day.
+        You may hide your jokes from display in profile settings or play private games.
+        Nothing from private games is saved for the future generations except for the profile statistics.
+      privacy_suggestions: >
+        When requesting an AI suggestion for setup, the text in your setup input is used for OpenAI's AI to take some hints from it.
+        When requesting an AI suggestion for punchline, your punchline input is used as well as the relevant setup.
+        Suggestions may be turned off when creating a game.
+      privacy_virtual_host: >
+        Virtual Host has access to the game information, your nicknames and to several last chat messages addressing the Virtual Host.
+        You may opt out of using it when creating a game.
+      privacy_ip: >
+        Your IP address is stored to prevent abuse. 
+        Guest profiles expire and get deleted eventually. 
+        Personal profiles are deletable - see settings. 
+        Jokes from public games are not deletable.  
       how_to_contact: Can I contact you?
       source_code_html: "You can see the source code <a href=\"%{link}\">here</a>"
       email_html: "Also, you can contact via email:"

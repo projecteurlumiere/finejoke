@@ -1,6 +1,6 @@
 class Ban < ApplicationRecord
   belongs_to :game, optional: true
-  belongs_to :user
+  belongs_to :user, optional: true
 
   KICKS_REQUIRED_UNTIL_ENFORCE = 3
   GLOBAL_BAN_THRESHOLD = 3 # you must be banned in n games until it becomes global

@@ -30,5 +30,7 @@ en:
           If you sign up, you will be able to use <strong>artificial intelligence</strong> features: 
           ChatGPT can help you create an amusing setup entry or come up with some ridiculous punchlines. 
           Moreover, AI can take a role of a virtual host in your game commenting the game live.
+          On the contrary, if you have privacy concerns, opt for private games and out of using AI. 
+          In this case, no history will be saved to the server or sent to the AI provider - OpenAI.
         who_are_authors: Who made this?
         authors_html: You can find source code <strong><a href="%{link}">here</a></strong>.
