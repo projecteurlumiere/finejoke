@@ -11,10 +11,9 @@ class Ban < ApplicationRecord
   }, unless: :new_record?
 
   after_save -> {
-    return if Rails.cache.exist?("clean_up_expired_bans_scheduled")
+    return unless Rails.cache.write("clean_up_expired_bans_scheduled", true, expires_in: EXPIRATION_PERIOD, unless_exist: true)
 
-    Rails.cache.write("clean_up_expired_bans_scheduled", true)
-    ::CleanUpExpiredBansJob.set(wait_until: Time.now + EXPIRATION_PERIOD + 10.minutes).perform_later
+    ::CleanUpExpiredBansJob.set(wait_until: Time.now + EXPIRATION_PERIOD).perform_later
   }
 
   def self.issue(user, game)
@@ -58,6 +57,6 @@ class Ban < ApplicationRecord
   end
 
   def self.clean_up_expired_bans
-    Ban.where("created_at < ?", (Time.now - EXPIRATION_PERIOD)).destroy_all
+    Ban.where("created_at < ?", (Time.now - EXPIRATION_PERIOD)).in_batches.destroy_all
   end
 end
