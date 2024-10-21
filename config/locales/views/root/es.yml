@@ -4,6 +4,7 @@ es:
       hello_user_html: ¡Hola, <span>%{username}</span>!
       what_is_new: ¿Qué hay de nuevo en Finejoke?
       no_news: No hay nada realmente...
+      news: ¡El juego está abierto! Por favor, informe sobre errores y cosas extrañas que deban corregirse.
       privacy: Privacidad
       privacy_jokes: >
         Sus chistes se guardan en el servidor con la esperanza de catalogar los mejores algún día.
@@ -22,7 +23,7 @@ es:
         Los perfiles de invitado expiran y se eliminan con el tiempo.
         Los perfiles personales son eliminables: consulte la configuración.
         Los chistes de los juegos públicos no se pueden eliminar.
-      how_to_contact: ¿Puedo contactarle?
+      how_to_contact: ¿Cómo puedo contactarle?
       source_code_html: "Puede ver el código fuente <a href=\"%{link}\">aquí</a>"
       email_html: "Además, puede contactar a través de correo electrónico:"
     navigation:

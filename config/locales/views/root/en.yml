@@ -4,6 +4,7 @@ en:
       hello_user_html: Hi, <span>%{username}</span>!
       what_is_new: What's new at Finejoke?
       no_news: Nothing really...
+      news: The game is working! Please, report bugs and weird things to fix.
       privacy: I have privacy concerns
       privacy_jokes: >
         Your jokes are being saved to the server in the hope of publicly cataloguing the finest ones one day.
@@ -21,7 +22,7 @@ en:
         Guest profiles expire and get deleted eventually. 
         Personal profiles are deletable - see settings. 
         Jokes from public games are not deletable.  
-      how_to_contact: Can I contact you?
+      how_to_contact: How can I contact you?
       source_code_html: "You can see the source code <a href=\"%{link}\">here</a>"
       email_html: "Also, you can contact via email:"
     navigation:

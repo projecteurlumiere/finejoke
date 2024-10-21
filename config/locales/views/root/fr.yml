@@ -4,6 +4,7 @@ fr:
       hello_user_html: "Salut, <span>%{username}</span>\u00a0!"
       what_is_new: "Quoi de neuf chez Finejoke\u00a0?"
       no_news: Rien de spécial...
+      news: "Le jeu est ouvert\u00a0! Veuillez signaler les bugs et les anomalies à corriger."
       privacy: Сonfidentialité
       privacy_jokes: >
         Vos blagues sont sauvegardées sur le serveur dans l'espoir de cataloguer les meilleures un jour.
@@ -22,7 +23,7 @@ fr:
         Les profils invités expirent et sont finalement supprimés.
         Les profils personnels sont supprimables - voir les paramètres.
         Les blagues des jeux publics ne peuvent pas être supprimées.
-      how_to_contact: Puis-je vous contacter ?
+      how_to_contact: "Comment puis-je vous contacter\u00a0?"
       source_code_html: "Vous pouvez voir le code source <a href=\"%{link}\">ici</a>"
       email_html: "Vous pouvez également nous contacter par email\u00a0:"
     navigation:
