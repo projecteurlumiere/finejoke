@@ -1,6 +1,6 @@
 class Vote < ApplicationRecord
-  belongs_to :user
-  belongs_to :round
+  belongs_to :user, optional: true
+  belongs_to :round, optional: true
   belongs_to :joke, touch: true
 
   validate -> { user.can_vote?(round) }

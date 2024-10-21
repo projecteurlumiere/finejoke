@@ -4,6 +4,8 @@ class User < ApplicationRecord
   include Users::Playing
   include Users::Broadcasting
 
+  INACTIVE_PERIOD_BEFORE_DESTROY_GUEST = 1.week
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,

@@ -205,7 +205,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_05_132159) do
   end
 
   create_table "votes", force: :cascade do |t|
-    t.bigint "user_id", null: false
+    t.bigint "user_id"
     t.bigint "joke_id", null: false
     t.bigint "round_id"
     t.integer "weight", default: 1, null: false

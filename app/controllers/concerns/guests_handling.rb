@@ -49,8 +49,9 @@ module GuestsHandling
     # when guest_user is a host in a game, and he is the last to leave this game
     # the foreign key constaint on host_id raises an error because the game are deleted async
     # Still, we don't care about the destruction because the guest was succesfully merged by this point
-    def skip_destroy_guest_user # TODO: but we will destroy him/her eventually, won't we?
+    def skip_destroy_guest_user 
       Game.find_by(host_id: guest_user.id) || Round.find_by(user_id: guest_user.id)
+      # It will be destroyed later: see GuestsController#schedule_clean_up_guests
     end
   end
 end

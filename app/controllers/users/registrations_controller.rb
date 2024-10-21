@@ -52,8 +52,22 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # DELETE /resource
   def destroy
+    verify_turbo_stream_format
     skip_authorization
-    if resource.destroy_with_password(params[:user][:current_password])
+
+    if resource.valid_password?(params[:user][:current_password])
+      begin 
+        resource.destroy_with_password(params[:user][:current_password])
+      rescue ActiveRecord::InvalidForeignKey
+        logger.info "Failed to destroy user. Marking the user a guest to destroy later"
+        resource.guest = true
+        resource.show_jokes_allowed = false
+        resource.show_awards_allowed = false
+        resource.save(validate: false)
+
+        sign_out resource
+      end
+
       flash[:notice] = t(:"devise.registrations.destroyed")
       turbo_redirect_to root_path
     else
