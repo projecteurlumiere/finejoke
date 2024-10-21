@@ -205,7 +205,7 @@ class Round < ApplicationRecord
       suggestion_ids = j.suggestion_ids
       j.suggestions.destroy_all
       Suggestion.where("id IN (#{suggestion_ids.join(", ")})").destroy_all if suggestion_ids.present?
-      j.setup_model.destroy
+      j.setup_model&.destroy
       j.destroy
     end
   end
