@@ -28,7 +28,7 @@
       <%= t(:".extra_settings") %>  
     </legend>
     <div>
-      <%= form.select :max_players, (2..10), value: 2 %>
+      <%= form.select :max_players, (Rails.env.development? ? (2..10) : (3..10)), value: 2 %>
       <%= form.label :max_players, t(:".max_players"), style: "display: block" %>
     </div>
     
@@ -43,13 +43,11 @@
       <%= t(:".victory_conditions") %>
     </legend>
     <div class="circle-select-container">
-      <%# form.check_box :max_rounds_enabled, :"aria-label" => "Включить условие победы по раундам" %>
       <div class="circle"></div>
       <%= form.label :max_rounds, 
       t(:".max_rounds"), 
       :"aria-label" => t(:".max_rounds_aria"),
       style: "display: block" %>
-      <%# form.number_field :max_rounds, min: 1, max: 42, value: nil, placeholder: "Нет" %>
       <%= form.select :max_rounds, 
         [[t(:".none"), nil], 1, 5, 10, 15, 20, 25, 30, 35, 40, 42], 
         value: t(:".none"), 
@@ -57,13 +55,11 @@
     </div>
     
     <div class="circle-select-container">
-      <%# form.check_box :max_points_enabled :"aria-label" => "Включить условие победы по очкам %>
       <div class="circle"></div>
       <%= form.label :max_points, 
         t(:".max_points"), 
         :"aria-label" => t(:".max_points_aria"), 
         style: "display: block" %>
-      <%# form.number_field :max_points, min: 10, max: 999, value: nil, placeholder: "Нет" %>
       <%= form.select :max_points, 
         [[t(:".none"), nil], 10, 50, 100, 150, 200, 400, 600, 800, 999], 
         value: t(:".none"), 
@@ -96,7 +92,7 @@
           <%= t(:".open_for_viewers") %>
         </div>
         <div class="switch">
-          <%= form.label :viewable, :"aria-label" => "Открыта для зрителей" do %>
+          <%= form.label :viewable, :"aria-label" => t(:".open_for_viewers") do %>
             <%= form.check_box :viewable, 
               data: { 
                 new_game_target: :viewable, 
@@ -150,21 +146,5 @@
         <% end %>
       </div>
     </div>
-
-    <% if false %>
-      <div class="circle-select-container">
-        <%# form.check_box :max_points_enabled :"aria-label" => "Включить условие победы по очкам %>
-        <div class="circle"></div>
-        <%= form.label :max_points, 
-          t(:".max_points"), 
-          :"aria-label" => t(:".max_points_aria"), 
-          style: "display: block" %>
-        <%# form.number_field :max_points, min: 10, max: 999, value: nil, placeholder: "Нет" %>
-        <%= form.select :max_points, 
-          [[t(:".none"), nil], 10, 50, 100, 150, 200, 400, 600, 800, 999], 
-          value: t(:".none"), 
-          placeholder: t(:".none") %>
-      </div>
-    <% end %>
   </fieldset>
 <% end %>

@@ -17,15 +17,15 @@ class Game < ApplicationRecord
   enum status: %i[waiting ongoing on_halt finished]
 
   # time in seconds
-           MIN_PLAYERS = 2
+           MIN_PLAYERS = Rails.env.development? ? 2 : 3
            MAX_PLAYERS = 10
-        MIN_ROUND_TIME = 1
+        MIN_ROUND_TIME = Rails.env.development? ? 1 : 60
         MAX_ROUND_TIME = 180 
   AFK_ROUNDS_THRESHOLD = 3
     RESULTS_STAGE_TIME = 60
     FINISHED_GAME_TIME = 180
         IDLE_GAME_TIME = 600
-            MIN_POINTS = 2
+            MIN_POINTS = Rails.env.development? ? 1 : 10
             MAX_POINTS = 999
 
   validates :name, presence: true, length: { in: 1..14 }, uniqueness: true
