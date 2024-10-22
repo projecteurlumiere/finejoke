@@ -1,0 +1,19 @@
+// used in #current-round only, so not really a component - requires refactor if used elsewhere
+#sound-control {
+  position: absolute;
+  z-index: 10;
+  top: 2.5%;
+  right: 2.5%;
+  width: 32px;
+
+  &.disabled {
+    > div {
+      width: 16px;
+      overflow: hidden;
+    }
+  }
+
+  img {
+    width: 32px;
+  }
+}

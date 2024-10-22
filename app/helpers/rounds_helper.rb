@@ -287,7 +287,10 @@ module RoundsHelper
           data: { 
           controller: "skip-results",
           action: "turbo:submit-end->skip-results#disable",
-          disabled_text: t(:".wait")
+          disabled_text: t(:".wait"),
+          sound_target: "soundable",
+          sound_name: :turn,
+          sound_uniq_identifier: game_round_skip_results_path(game, round),
         }
       }).html_safe
   end

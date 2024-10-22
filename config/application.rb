@@ -40,7 +40,8 @@ module Finejoke
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
     
-    config.assets.paths << Rails.root.join("app", "assets", "fonts") 
+    config.assets.paths << Rails.root.join("app", "assets", "fonts")
+    config.assets.paths << Rails.root.join("app", "assets", "sounds")
 
     config.assets.enabled = true
     config.active_support.isolation_level = :fiber

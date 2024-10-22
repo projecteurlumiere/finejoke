@@ -12,6 +12,11 @@
           containers_target: "container", 
           container_name: "round" 
         } do %>
+    <div id="sound-control" class="hidden" data-sound-target="control" data-action="click->sound#toggle">
+      <div>
+        <%= image_tag("icons/sound.svg") %>
+      </div>  
+    </div>
     <%= tag.div data: round_data_attributes(current_or_guest_user, round, game), id: "round-state", class: "hidden state" %>
     <div class="task" data-jokes-target="task">
       <%# <div class="timer-wrapper"> %>

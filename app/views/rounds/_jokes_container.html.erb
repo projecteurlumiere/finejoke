@@ -27,6 +27,9 @@
           method: :patch, 
           form: { 
             data: { 
+              sound_target: "soundable",
+              sound_name: :turn,
+              sound_uniq_identifier: game_round_joke_vote_path(game, round, jokes.first),
               jokes_target: "action",
               action: "turbo:submit-end->jokes#changeAction",
               disabled_text: t(:".wait"),

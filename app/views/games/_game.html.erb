@@ -5,11 +5,13 @@
           { user_id: current_or_guest_user.id,
             controller: [
                           "containers", 
-                          "timer", 
+                          "timer",
+                          "sound",
                           ("virtual-host" if game.virtual_host)
                         ].compact.join(" "),
             action: "chat:unseen->containers#blink chat:seen->containers#unblink"
-          })) do %>
+          }.merge(sound_controller_values)
+          )) do %>
   <%= content_for(:nav_button) do %>
     <%= link_to t(:".back_to_lobby"), games_path, class: "button secondary" %>
   <% end %>

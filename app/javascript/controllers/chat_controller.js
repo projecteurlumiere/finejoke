@@ -28,6 +28,8 @@ export default class extends Controller {
   }
 
   messageTargetConnected(element) {
+    this.#manageSoundFor(element)
+
     const lastMessage = this.#lastMessage()
     if (lastMessage != element) return
 
@@ -50,7 +52,7 @@ export default class extends Controller {
     }, 100)
 
     this.#insertTime(lastMessage);
-    this.#storeChatHistory()
+    this.#storeChatHistory();
   }
 
   adjustScrollOnResize(e){
@@ -179,5 +181,16 @@ export default class extends Controller {
       if (elements[i].isIntersecting) return false
     }
     return true
+  }
+
+  #manageSoundFor(el) {
+    if (!el.classList.contains("sounded")) { 
+      el.setAttribute("data-sound-target", "soundable"); 
+      el.setAttribute("data-sound-name", "bubble"); 
+      el.classList.add("sounded")
+    } else {
+      el.removeAttribute("data-sound-target")
+      el.removeAttribute("data-sound-name")
+    }
   }
 }

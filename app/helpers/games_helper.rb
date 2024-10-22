@@ -1,4 +1,11 @@
 module GamesHelper
+  def sound_controller_values
+    {
+      sound_turn_url_value: asset_path("turn.mp3"),
+      sound_bubble_url_value: asset_path("bubble.mp3")
+    }
+  end
+
   def game_data_attributes(game)
     { 
       max_players: game.max_players,

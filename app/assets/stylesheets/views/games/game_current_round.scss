@@ -3,6 +3,12 @@
 // *= require_directory ./current_round
 // *= require_self
 
+
+// can be user to wrap anything below
+#current-round {
+  position: relative;
+}
+
 .timer-wrapper {
   display: none;
 }

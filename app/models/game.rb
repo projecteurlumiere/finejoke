@@ -24,7 +24,7 @@ class Game < ApplicationRecord
   AFK_ROUNDS_THRESHOLD = 3
     RESULTS_STAGE_TIME = 60
     FINISHED_GAME_TIME = 180
-        IDLE_GAME_TIME = 180
+        IDLE_GAME_TIME = 600
             MIN_POINTS = 2
             MAX_POINTS = 999
 
