@@ -7,22 +7,17 @@ es:
       news: ¡El juego está abierto! Por favor, informe sobre errores y cosas extrañas que deban corregirse.
       privacy: Privacidad
       privacy_jokes: >
-        Sus chistes se guardan en el servidor con la esperanza de catalogar los mejores algún día.
-        Puede ocultar sus chistes de la visualización en la configuración del perfil o jugar a juegos privados.
-        Nada de los juegos privados se guarda para las futuras generaciones, excepto las estadísticas del perfil.
+        Los chistes de los juegos públicos se guardan permanentemente en el servidor con la esperanza de catalogar algún día los mejores.
+        Puede ocultar estos chistes en su perfil o limitarse a jugar juegos privados con sus amigos.
       privacy_suggestions: >
-        Al solicitar una sugerencia de IA para la premisa, el texto en su entrada de premisa se utiliza
-        para que la IA de OpenAI tome algunas pistas. 
-        Al solicitar una sugerencia de IA para el remate, se utiliza su entrada de remate, así como la premisa relevante.
-        Las sugerencias pueden desactivarse al crear un juego.
+        Al solicitar ayuda de la IA, el texto en el campo de entrada del juego y el contexto relevante del juego se envían a OpenAI para obtener una pista.
       privacy_virtual_host: >
-        El Señor Presentador tiene acceso a la información del juego, a sus apodos y a varios últimos mensajes de chat dirigidos al Señor Presentador. 
-        Puede optar por no usarlo al crear un juego.
+        El Señor Presentador también está impulsado por OpenAI y tiene acceso a la información del juego
+        y a varios últimos mensajes del chat dirigidos al Señor Presentador.
       privacy_ip: >
         Su dirección IP se almacena para prevenir abusos.
-        Los perfiles de invitado expiran y se eliminan con el tiempo.
-        Los perfiles personales son eliminables: consulte la configuración.
-        Los chistes de los juegos públicos no se pueden eliminar.
+        Los perfiles de invitados caducan y eventualmente se eliminan.
+        Los perfiles personales son eliminables - consulte la configuración.
       how_to_contact: ¿Cómo puedo contactarle?
       source_code_html: "Puede ver el código fuente <a href=\"%{link}\">aquí</a>"
       email_html: "Además, puede contactar a través de correo electrónico:"

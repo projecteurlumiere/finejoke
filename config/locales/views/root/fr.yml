@@ -7,22 +7,17 @@ fr:
       news: "Le jeu est ouvert\u00a0! Veuillez signaler les bugs et les anomalies à corriger."
       privacy: Сonfidentialité
       privacy_jokes: >
-        Vos blagues sont sauvegardées sur le serveur dans l'espoir de cataloguer les meilleures un jour.
-        Vous pouvez cacher vos blagues de l'affichage dans les paramètres de votre profil ou jouer à des jeux privés.
-        Rien des jeux privés n'est sauvegardé pour les générations futures, sauf pour les statistiques de profil.
+        Les blagues des jeux publics sont sauvegardées de manière permanente sur le serveur dans l'espoir de cataloguer un jour les meilleures.
+        Vous pouvez masquer ces blagues dans votre profil ou vous en tenir à jouer à des jeux privés avec vos amis.
       privacy_suggestions: >
-        Lors de la demande d'une suggestion d'IA pour le setup, le texte dans votre saisie de setup est utilisé
-        pour que l'IA d'OpenAI en tire des indices. 
-        Lors de la demande d'une suggestion d'IA pour le punchline, votre saisie de punchline est utilisée ainsi que le setup pertinente.
-        Les suggestions peuvent être désactivées lors de la création d'un jeu.
+        Lorsque vous demandez de l'aide à l'IA, le texte dans le champ de saisie du jeu et le contexte pertinent du jeu sont envoyés à OpenAI pour obtenir un indice.
       privacy_virtual_host: >
-        L'Hôte Virtuel a accès aux informations du jeu, à vos pseudos et à plusieurs derniers messages de chat adressés à l'Hôte Virtuel. 
-        Vous pouvez choisir de ne pas l'utiliser lors de la création d'un jeu.
+        Monsieur L'Animateur est également alimenté par OpenAI et a accès aux informations du jeu
+        ainsi qu'à plusieurs derniers messages du chat adressés à Monsieur L'Animateur.
       privacy_ip: >
         Votre adresse IP est stockée pour prévenir les abus.
         Les profils invités expirent et sont finalement supprimés.
-        Les profils personnels sont supprimables - voir les paramètres.
-        Les blagues des jeux publics ne peuvent pas être supprimées.
+        Les profils personnels peuvent être supprimés - voir les paramètres.
       how_to_contact: "Comment puis-je vous contacter\u00a0?"
       source_code_html: "Vous pouvez voir le code source <a href=\"%{link}\">ici</a>"
       email_html: "Vous pouvez également nous contacter par email\u00a0:"

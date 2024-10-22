@@ -4,27 +4,23 @@ en:
       hello_user_html: Hi, <span>%{username}</span>!
       what_is_new: What's new at Finejoke?
       no_news: Nothing really...
-      news: The game is working! Please, report bugs and weird things to fix.
-      privacy: I have privacy concerns
-      privacy_jokes: >
-        Your jokes are being saved to the server in the hope of publicly cataloguing the finest ones one day.
-        You may hide your jokes from display in profile settings or play private games.
-        Nothing from private games is saved for the future generations except for the profile statistics.
-      privacy_suggestions: >
-        When requesting an AI suggestion for setup, the text in your setup input is used for OpenAI's AI to take some hints from it.
-        When requesting an AI suggestion for punchline, your punchline input is used as well as the relevant setup.
-        Suggestions may be turned off when creating a game.
-      privacy_virtual_host: >
-        Virtual Host has access to the game information, your nicknames and to several last chat messages addressing the Virtual Host.
-        You may opt out of using it when creating a game.
-      privacy_ip: >
-        Your IP address is stored to prevent abuse. 
-        Guest profiles expire and get deleted eventually. 
-        Personal profiles are deletable - see settings. 
-        Jokes from public games are not deletable.  
+      news: The gamer is working! Please, report bugs and weird things to fix.
       how_to_contact: How can I contact you?
       source_code_html: "You can see the source code <a href=\"%{link}\">here</a>"
       email_html: "Also, you can contact via email:"
+      privacy: I have privacy concerns
+      privacy_jokes: >
+        Jokes from public games are being saved permanently to the server in the hope of cataloguing the finest ones one day.
+        You may hide these jokes in your profile. Jokes from private games are not being saved.
+      privacy_suggestions: >
+        When requesting AI help, the text in the game's input field and relevant game context is sent to OpenAI to obtain a suggestion.
+      privacy_virtual_host: >
+        Mister Host is also powered by OpenAI and has access to the game information
+        and to several last chat messages addressing Mister Host.
+      privacy_ip: >
+        Your IP address is stored to prevent abuse. 
+        Guest profiles expire and get deleted eventually. 
+        Personal profiles are deletable - see settings.
     navigation:
       menu: Menu
       to_lobby: To lobby
