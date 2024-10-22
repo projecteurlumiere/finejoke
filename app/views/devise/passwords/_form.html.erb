@@ -4,7 +4,7 @@
     <%# render "devise/shared/error_messages", resource: resource %>
     <div>
       <%= f.email_field :email, 
-        autocomplete: "email", 
+        autocomplete: "username", 
         placeholder: t(:".email"), 
         :"aria-label" => t(:".email_aria") %>
       <%= render_errors(resource, :email) %>

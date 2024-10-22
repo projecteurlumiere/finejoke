@@ -5,18 +5,10 @@
       :"aria-label" => t(:".form_aria"), 
       class: "new-registration" }) do |f| %>
     <%# render "devise/shared/error_messages", resource: resource %>
-    <div>
-      <%= f.email_field :email, 
-        autocomplete: "email", 
-        placeholder: t(:".email"), 
-        :"aria-label" => t(:".email_aria"), 
-        required: true %>
-      <%= render_errors(resource, :email) %>
-    </div>
-  
+   
     <div>
       <%= f.text_field :username, 
-        autocomplete: "username", 
+        autocomplete: "off", 
         placeholder: t(:".username"), 
         :"aria-label" => t(:".username_aria"), 
         required: true,
@@ -24,7 +16,16 @@
         maxlength: 14 %>
       <%= render_errors(resource, :username) %>
     </div>
-  
+
+    <div>
+      <%= f.email_field :email, 
+        autocomplete: "username", # so that password managers pick this up, not the username above
+        placeholder: t(:".email"), 
+        :"aria-label" => t(:".email_aria"), 
+        required: true %>
+      <%= render_errors(resource, :email) %>
+    </div>
+
     <div>
       <%= f.password_field :password, 
           autocomplete: "new-password", 
