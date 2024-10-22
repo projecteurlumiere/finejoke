@@ -22,7 +22,7 @@ class MessagesController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_game
-    @game = Game.includes(:users, :virtual_host).find(params[:game_id])
+    @game = Game.includes(:virtual_host).find(params[:game_id])
   end
 
   # Only allow a list of trusted parameters through.
