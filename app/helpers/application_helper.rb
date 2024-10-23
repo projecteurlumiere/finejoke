@@ -22,13 +22,14 @@ module ApplicationHelper
         cache(name, options, &block)
         return
       elsif Rails.cache.write(lock_key, true, unless_exist: true)
-        logger.info "Obtained cache lock"
-        Rails.cache.write(lock_key, true) 
+        begin
+          logger.info "Obtained cache lock"
 
-        cache(name, options, &block)
-        
-        logger.info "Releasing cache lock"
-        Rails.cache.delete(lock_key)
+          cache(name, options, &block)
+        ensure
+          logger.info "Releasing cache lock"
+          Rails.cache.delete(lock_key)
+        end
 
         return
       end
