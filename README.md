@@ -12,7 +12,7 @@ I would not recommend working on any substantial PRs before tests and (more) pro
 
 English is the primary language of the game.
 
-All locale files are stored in yaml files `/app/config/locales` and its subdirectories, and marked by a relevant language code, e.g. `en.yml`.
+All locale files are stored in yaml files `app/config/locales` and its subdirectories, and marked by a relevant language code, e.g. `en.yml`.
 
 Adding a locale not only translates the website, but also separates players, their jokes and their games from the rest of locales. Thus, locales should be as universal and as accessible as possible.
 
@@ -55,4 +55,9 @@ The website uses the Ruby on Rails framework for the backend and the Hotwire sta
 #### Launching dev server
 ```sh
   bundle exec rails s
+```
+
+#### Run tests
+```sh
+  bundle exec rails t
 ```
