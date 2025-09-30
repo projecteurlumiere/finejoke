@@ -43,4 +43,6 @@ es:
         password_aria: Contraseña (mínimo %{min_length} símbolos)
         password_confirm: Una vez más
         password_confirm_aria: Confirmar contraseña
+        captcha: ¿La gallina o el huevo?
+        captcha_aria: ¿La gallina o el huevo?
         create_account: Crear

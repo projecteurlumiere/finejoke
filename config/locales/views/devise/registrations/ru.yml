@@ -43,4 +43,6 @@ ru:
         password_aria: Пароль (минимум %{min_length} знаков)
         password_confirm: Ещё раз
         password_confirm_aria: Подтвердите пароль
+        captcha: Курица или яйцо?
+        captcha_aria: Курица или яйцо?
         create_account: Создать

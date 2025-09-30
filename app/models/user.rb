@@ -4,6 +4,8 @@ class User < ApplicationRecord
   include Users::Playing
   include Users::Broadcasting
 
+  attr_accessor :captcha # unused - solely for the bots and the sign up form
+
   INACTIVE_PERIOD_BEFORE_DESTROY_GUEST = 1.week
 
   # Include default devise modules. Others available are:
@@ -13,6 +15,12 @@ class User < ApplicationRecord
          :confirmable, :trackable
 
   validates :username, presence: true, uniqueness: true
+  validates :captcha,
+    format: { 
+      with: /chicken|egg|куриц|яйц|poule|œuf|oeuf|gallina|huevo|🐔|🥚/i,
+      message: "??? 🐔🥚 ???"
+    },
+    on: :create
 
   before_create :random_name, if: %i[new_record? guest?] 
   has_many :awards, dependent: :destroy

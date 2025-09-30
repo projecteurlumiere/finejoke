@@ -45,11 +45,22 @@
         minlength: @minimum_password_length %>
       <%= render_errors(resource, :password_confirmation) %>
     </div>
+
+    <div>
+      <%= f.text_field :captcha, 
+        autocomplete: "off", 
+        placeholder: t(:".captcha"), 
+        :"aria-label" => t(:".captcha_aria"), 
+        required: true,
+        minlength: 1, 
+        maxlength: 14 %>
+      <%= render_errors(resource, :captcha) %>
+    </div>
     
     <input type="hidden" name="locale" value="<%= I18n.locale %>">
   <% end %>
 
-   <input type="submit" 
+   <input type="submit"
     form="new-registration" 
     value="<%= t(:".create_account") %>" 
     data-turbo-frame="_top">

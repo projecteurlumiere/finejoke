@@ -45,4 +45,6 @@ en:
         password_aria: Password (%{min_length} symbols minimum)
         password_confirm: Once more
         password_confirm_aria: Confirm password
+        captcha: Chicken or egg?
+        captcha_aria: Chicken or egg?
         create_account: Create

@@ -43,4 +43,6 @@ fr:
         password_aria: Mot de passe (minimum %{min_length} symboles)
         password_confirm: Une fois de plus
         password_confirm_aria: Confirmer le mot de passe
+        captcha: Poule ou œuf ?
+        captcha_aria: Poule ou œuf ?
         create_account: Créer
