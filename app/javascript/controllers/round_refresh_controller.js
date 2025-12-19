@@ -25,49 +25,39 @@ export default class extends Controller {
   checkResponse(e) {
     if (e.detail.newStream.target != "current-round") return
 
-    const presentRoundAttr = document.querySelector("#current-round > div");
+    const presentRoundAttr = document.querySelector("#current-round #round-state");
+
+    const stream = e.detail.newStream.querySelector("template").content;
+    const incomingRoundAttr = stream.querySelector("#current-round #round-state");
+
     if (presentRoundAttr.dataset.forceShowingRules === "true") {
       document.querySelector(".action button").classList.add("blinking")
       e.preventDefault()
       return
     }
 
-    const stream = e.detail.newStream.querySelector("template").content;
-    const incomingRoundAttr = stream.querySelector("#current-round > div");
-
     if (this.#attributesEqual(presentRoundAttr, incomingRoundAttr)) {
-      e.preventDefault()
+      e.preventDefault();
+      console.log("Received the same round stream");
+      return
     }
+
+    console.log("Replaced current-round with new stream");
   }
 
   #attributesEqual(presentRoundAttr, incomingRoundAttr) {
-    const presentHash = this.#digest(presentRoundAttr.outerHTML.replace(/\n/g, ''))
-    const incomingHash = this.#digest(incomingRoundAttr.outerHTML.replace(/\n/g, ''))
+    const ds1 = {...presentRoundAttr.dataset};
+    const ds2 = {...incomingRoundAttr.dataset};
 
-    return presentHash === incomingHash
-  }
+    const keys1 = Object.keys(ds1);
+    const keys2 = Object.keys(ds2);
 
-  // // this is async digest using browser's in-built crypto api  
-  // async #digest(string) {
-  //   const msgUint8 = new TextEncoder().encode(string); // encode as (utf-8) Uint8Array
-  //   const hashBuffer = await window.crypto.subtle.digest("SHA-256", msgUint8); // hash the message
-  //   const hashArray = Array.from(new Uint8Array(hashBuffer)); // convert buffer to byte array
-  //   const hashHex = hashArray
-  //     .map((b) => b.toString(16).padStart(2, "0"))
-  //     .join(""); // convert bytes to hex string
-    
-  //   return hashHex
-  // }
+    if (keys1.length !== keys2.length) return false;
 
-  // this is some (more primitive) java implementation without async that ruin
-  // prevent default behaviour
-  #digest(string) {
-    let hash = 0;
-    for (let i = 0, len = string.length; i < len; i++) {
-        let chr = string.charCodeAt(i);
-        hash = (hash << 5) - hash + chr;
-        hash |= 0; // Convert to 32bit integer
+    for (const key of keys1) {
+      if (ds1[key] !== ds2[key]) return false;
     }
-    return hash;
+
+    return true;
   }
 }
